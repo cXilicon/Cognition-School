@@ -1,0 +1,25 @@
+<!--  
+      作者：张帅
+      完成日期：2020/11/1
+      attentionTest-3.wxml
+-->
+<view class="container">
+      <view class="title">
+            数值匹配
+      </view>
+      <!--点击生成随机的题目-->
+      <button bindtap="testStart" wx:if="{{showButton}}">
+             开始挑战
+      </button>
+      <view wx:if="{{showTable}}">
+            <!--渲染4*5的表格，填入生成的随机生成的数值-->
+            <view wx:for="{{height}}" wx:for-index="bindIndex1" wx:key="bindIndex1" class="tableLine">
+                  <view  wx:for="{{width}}" wx:for-index="bindIndex2" wx:key="bindIndex2" style="font-weight:{{question[bindIndex1][bindIndex2].font}}; background-color:{{question[bindIndex1][bindIndex2].color}}" class="numberText" bindtap="clickNumber" data-click1="{{bindIndex1}}" data-click2="{{bindIndex2}}"> 
+                  {{question[bindIndex1][bindIndex2].number}}
+                  </view>
+            </view>
+      </view>
+      <!--计时器-->
+     <view style="margin:30rpx" wx:if="{{showTable}}"> {{timecount}}</view>
+</view>
+

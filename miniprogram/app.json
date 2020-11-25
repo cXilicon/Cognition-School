@@ -1,7 +1,8 @@
 {
   "pages": ["pages/index/index", "pages/mine/mine",
     "pages/examination/examination",
-    "pages/settlement/settlement"
+    "pages/settlement/settlement",
+    "pages/examinations/numbermatch/numbermatch"
   ],
   "tabBar": {
     "custom": true,
