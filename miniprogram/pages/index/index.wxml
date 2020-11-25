@@ -1,0 +1,19 @@
+<!-- pages/index/index.wxml -->
+<view class="page">
+  <view class="main">
+    <view class="logo">
+      <text>认知\n学堂</text>
+    </view>
+    <view class="index-button-container">
+      <view class="index-button index-button-start" bind:tap="startExamination">
+        <iconfont class="index-button-icon" name="start" size="64"></iconfont>
+        <text>开始测试</text>
+      </view>
+      <view class="index-button index-button-help" bind:tap="learnRules">
+        <iconfont class="index-button-icon" name="help" size="64"></iconfont>
+        <text>了解详情</text>
+      </view>
+    </view>
+  </view>
+  <custom-tab-bar></custom-tab-bar>
+</view>

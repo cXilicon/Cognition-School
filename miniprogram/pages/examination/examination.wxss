@@ -1,0 +1,92 @@
+/* pages/index/index.wxss */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.examination-container {
+  width: 100%;
+}
+
+.mask {
+  width: 100%;
+  height: 1000rpx;
+  position: fixed;
+  background-color: #999;
+  z-index: 9999;
+  opacity: 0;
+}
+
+.examination-swiper {
+  width: 100%;
+  height: 1000rpx;
+}
+
+.examination-swiper-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.examination-items-content {
+  height: 900rpx;
+  margin: 10rpx;
+  padding: 10%;
+  overflow: hidden;
+  box-shadow: 0 5rpx 10rpx #aaaaaa;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.examination-swiper-items-image {
+  width: 80%;
+  height: 40%;
+  filter: drop-shadow(0px 5px 10px #aaa);
+  margin-bottom: 10%;
+}
+
+.examination-swiper-items-title {
+  font-size: 72rpx;
+}
+
+.examination-swiper-items-title:first-letter {
+  font-size: 96rpx;
+  font-weight: bold;
+}
+
+.examination-swiper-items-score {
+  font-size: 72rpx;
+  vertical-align: bottom;
+}
+
+.swiper-dots-container {
+  height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-dots {
+  width: 20rpx;
+  height: 20rpx;
+  margin: 0 10rpx;
+  border-radius: 20rpx;
+  background-color: #000000;
+  opacity: 0.2;
+  transition: all 0.6s;
+}
+
+.swiper-dots-selected {
+  opacity: 0.8;
+  width: 30rpx;
+}
+
+.finishExamination {
+  margin: 40rpx 0;
+}

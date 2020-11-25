@@ -1,0 +1,256 @@
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="802" width="1002" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <defs>
+    <path d="m275.869,391.493c0,0 37.19,-40.503 28.742,-67.34c-8.449,-26.836 -41.249,-35.533 -69.824,-27.83c0,0 9.277,-60.548 57.649,-96.33s96.081,-9.939 103.37,-3.313l-17.228,-42.408c0,0 70.404,-41.911 153.398,0c0,0 18.388,8.614 48.703,3.644s95.418,37.273 96.412,56.158c0,0 117.285,89.952 60.63,253.952c0,0 -13.915,52.679 -32.8,71.564c0,0 0,44.85 -32.8,59.201c0,0 8.945,41.684 -10.933,53.612c0,0 -37.77,-34.788 -43.237,22.364c0,0 -6.792,38.101 11.099,67.919c0,0 22.198,-12.259 36.113,23.523c13.915,35.782 29.818,52.679 38.764,83.491l-301.165,0c0,0 6.958,-23.855 27.83,-36.776c20.873,-12.921 5.964,-151.079 -49.697,-140.146s-124.243,13.915 -117.285,-17.891c6.958,-31.806 6.295,-99.063 -6.295,-118.279c0,0 -30.481,-8.614 -31.806,-21.204c0,0 27.83,-43.071 52.348,-74.877c0,0 -21.204,-33.131 -1.988,-49.034z" id="XMLID_65_"/>
+    <linearGradient y2="0.01303" x2="0.5" y1="0.965674" x1="0.5" id="XMLID_2_">
+     <stop stop-color="#4A3844" offset="0"/>
+     <stop stop-color="#EF7476" offset="0.2654"/>
+     <stop stop-color="#E9454E" offset="0.7702"/>
+     <stop stop-color="#3C2C37" offset="0.9604"/>
+    </linearGradient>
+    <linearGradient y2="0.273901" x2="0.5" y1="1.273902" x1="0.5" id="SVGID_1_">
+     <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.6248"/>
+    </linearGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" r="258.7025" cy="509.1514" cx="499.0146" id="SVGID_2_">
+     <stop stop-color="#FFFFFF" offset="0"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </radialGradient>
+    <linearGradient y2="0.871307" x2="0.5" y1="-0.231235" x1="0.5" id="SVGID_11_">
+     <stop stop-color="#FFFFFF" stop-opacity="0.2" offset="0"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient y2="0.990576" x2="0.499131" y1="-0.475686" x1="0.501603" id="SVGID_12_">
+     <stop stop-color="#FFFFFF" stop-opacity="0.3" offset="0"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient y2="0.999994" x2="0.499999" y1="0" x1="0.499999" id="SVGID_13_">
+     <stop stop-color="#FFFFFF" stop-opacity="0.1" offset="0"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient y2="0.645326" x2="0.500001" y1="-0.652924" x1="0.500001" id="SVGID_14_">
+     <stop stop-color="#FFFFFF" stop-opacity="0.2" offset="0"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient y2="1.0178" x2="0.5" y1="-0.280433" x1="0.5" id="SVGID_15_">
+     <stop stop-color="#E2335C" stop-opacity="0.5" offset="0.3324"/>
+     <stop stop-color="#EA5F3B" stop-opacity="0.3" offset="0.6508"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient y2="0.002388" x2="0.999253" y1="0.989765" x1="0.01026" id="SVGID_16_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+    <linearGradient y2="0.002331" x2="0.999206" y1="0.989692" x1="0.010216" id="SVGID_17_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+    <linearGradient y2="0.002428" x2="0.999191" y1="0.989796" x1="0.010209" id="SVGID_18_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+    <linearGradient y2="0.002367" x2="0.999262" y1="0.989743" x1="0.010269" id="SVGID_19_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+    <linearGradient y2="0.997771" x2="0.999253" y1="0.010408" x1="0.010261" id="SVGID_20_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+    <linearGradient y2="0.997948" x2="0.999207" y1="0.010565" x1="0.010216" id="SVGID_21_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+    <linearGradient y2="0.997684" x2="0.999191" y1="0.010325" x1="0.010209" id="SVGID_22_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+    <linearGradient y2="0.997809" x2="0.999262" y1="0.010434" x1="0.010269" id="SVGID_23_">
+     <stop stop-color="#FFA561" offset="0"/>
+     <stop stop-color="#FFA865" stop-opacity="0.8539" offset="0.1339"/>
+     <stop stop-color="#FFAF73" stop-opacity="0.6933" offset="0.2812"/>
+     <stop stop-color="#FFBC89" stop-opacity="0.5257" offset="0.4348"/>
+     <stop stop-color="#FFCDA8" stop-opacity="0.3533" offset="0.5929"/>
+     <stop stop-color="#FFE4CF" stop-opacity="0.1772" offset="0.7543"/>
+     <stop stop-color="#FFFFFF" stop-opacity="0" offset="0.9168"/>
+    </linearGradient>
+   </defs>
+   <use id="svg_2" fill="url(#XMLID_2_)" xlink:href="#XMLID_65_"/>
+   <clipPath id="XMLID_3_">
+    <use id="svg_3" xlink:href="#XMLID_65_"/>
+   </clipPath>
+   <path id="svg_4" clip-path="url(#XMLID_3_)" fill="url(#SVGID_1_)" d="m310.124,568.497c25.04,80.855 100.404,139.588 189.488,139.588s164.448,-58.733 189.488,-139.588l-378.976,0z"/>
+   <circle id="svg_5" clip-path="url(#XMLID_3_)" fill="url(#SVGID_2_)" r="239.557" cy="509.151" cx="499.015"/>
+   <g id="svg_6" clip-path="url(#XMLID_3_)">
+    <defs>
+     <path d="m689.1,568.497c5.749,-18.564 8.848,-38.294 8.848,-58.748c0,-109.538 -88.798,-198.336 -198.336,-198.336s-198.336,88.798 -198.336,198.336c0,20.454 3.099,40.184 8.848,58.748l378.976,0z" id="XMLID_66_"/>
+    </defs>
+    <use id="svg_7" fill="#FFFFFF" xlink:href="#XMLID_66_"/>
+    <clipPath id="XMLID_4_">
+     <use id="svg_8" xlink:href="#XMLID_66_"/>
+    </clipPath>
+    <circle id="svg_9" clip-path="url(#XMLID_4_)" fill="#EFF0E2" r="23.896" cy="384.295" cx="411.197"/>
+    <circle id="svg_10" clip-path="url(#XMLID_4_)" fill="#EFF0E2" r="19.117" cy="454.788" cx="429.119"/>
+    <circle id="svg_11" clip-path="url(#XMLID_4_)" fill="#EFF0E2" r="53.293" cy="439.38" cx="526.022"/>
+   </g>
+   <g id="svg_12" opacity="0.37" clip-path="url(#XMLID_3_)">
+    <g id="svg_13">
+     <defs>
+      <polygon points="219.194,580.521 363.41,687.422 543.931,568.419 199.024,568.419     " id="SVGID_3_"/>
+     </defs>
+     <use id="svg_14" fill="#DF4B6D" xlink:href="#SVGID_3_"/>
+     <clipPath id="SVGID_4_">
+      <use id="svg_15" xlink:href="#SVGID_3_"/>
+     </clipPath>
+     <polygon id="svg_16" clip-path="url(#SVGID_4_)" fill="#FEA7AF" points="274.662,635.989 349.291,643.491 364.418,614.81      385.597,643.491 498.549,619.853 365.427,710.618    "/>
+     <polygon id="svg_17" opacity="0.69" clip-path="url(#SVGID_4_)" fill="#962344" points="363.015,708.169 364.924,534.761 588.103,544.636         "/>
+     <polygon id="svg_18" opacity="0.69" clip-path="url(#SVGID_4_)" fill="#962344" points="358.703,695.827 433.332,555.981 604.778,565.394         "/>
+    </g>
+    <g id="svg_19">
+     <defs>
+      <polygon points="460.155,568.482 624.877,767.493 789.599,568.482     " id="SVGID_5_"/>
+     </defs>
+     <use id="svg_20" fill="#DF4B6D" xlink:href="#SVGID_5_"/>
+     <clipPath id="SVGID_6_">
+      <use id="svg_21" xlink:href="#SVGID_5_"/>
+     </clipPath>
+     <polygon id="svg_22" clip-path="url(#SVGID_6_)" fill="#FEA7AF" points="553.259,702.949 595.617,716.395 611.96,693.383      642.008,721.774 702.518,706.31 618.476,781.612    "/>
+     <polygon id="svg_23" opacity="0.69" clip-path="url(#SVGID_6_)" fill="#962344" points="582.17,522.091 627.889,784.973 820.176,551.674         "/>
+     <polygon id="svg_24" opacity="0.69" clip-path="url(#SVGID_6_)" fill="#962344" points="648.731,774.216 642.008,721.774 727.394,531.504      814.797,556.38    "/>
+    </g>
+   </g>
+   <g id="svg_25" clip-path="url(#XMLID_3_)">
+    <g id="svg_26">
+     <defs>
+      <polygon points="219.183,556.457 363.399,449.556 543.92,568.559 199.013,568.559     " id="SVGID_7_"/>
+     </defs>
+     <use id="svg_27" fill="#DF4B6D" xlink:href="#SVGID_7_"/>
+     <clipPath id="SVGID_8_">
+      <use id="svg_28" xlink:href="#SVGID_7_"/>
+     </clipPath>
+     <polygon id="svg_29" clip-path="url(#SVGID_8_)" fill="#FEA7AF" points="274.651,500.99 349.28,493.488 364.407,522.168      385.586,493.488 498.538,517.126 365.416,426.361    "/>
+     <polygon id="svg_30" opacity="0.69" clip-path="url(#SVGID_8_)" fill="#962344" points="363.004,428.81 364.913,602.218 588.092,592.343         "/>
+     <polygon id="svg_31" opacity="0.69" clip-path="url(#SVGID_8_)" fill="#962344" points="358.692,441.152 433.321,580.998 604.766,571.585         "/>
+    </g>
+    <g id="svg_32">
+     <defs>
+      <polygon points="460.144,568.497 624.866,369.486 789.588,568.497     " id="SVGID_9_"/>
+     </defs>
+     <use id="svg_33" fill="#DF4B6D" xlink:href="#SVGID_9_"/>
+     <clipPath id="SVGID_10_">
+      <use id="svg_34" xlink:href="#SVGID_9_"/>
+     </clipPath>
+     <polygon id="svg_35" clip-path="url(#SVGID_10_)" fill="#FEA7AF" points="553.248,434.03 595.605,420.583 611.949,443.596      641.997,415.205 702.507,430.668 618.465,355.367    "/>
+     <polygon id="svg_36" opacity="0.69" clip-path="url(#SVGID_10_)" fill="#962344" points="582.159,614.888 627.878,352.005      820.165,585.305    "/>
+     <polygon id="svg_37" opacity="0.69" clip-path="url(#SVGID_10_)" fill="#962344" points="648.72,362.763 641.997,415.205 727.383,605.475      814.786,580.599    "/>
+    </g>
+   </g>
+   <g id="svg_38" clip-path="url(#XMLID_3_)">
+    <polygon id="svg_39" fill="url(#SVGID_11_)" points="206.583,628.295 458.64,646.118 314.789,663.94 644.5,703.403 913.106,665.849     429.36,615.565   "/>
+    <polygon id="svg_40" fill="url(#SVGID_12_)" points="258.352,734.38 644.5,703.403 913.106,729.288 626.678,763.235   "/>
+    <polygon id="svg_41" fill="url(#SVGID_13_)" points="418.752,785.301 626.678,763.235 854.972,785.301 626.678,816.702   "/>
+    <polygon id="svg_42" fill="url(#SVGID_14_)" points="422.995,844.708 626.678,816.702 798.11,837.919 650.44,875.26   "/>
+   </g>
+   <polygon id="svg_43" clip-path="url(#XMLID_3_)" fill="url(#SVGID_15_)" points="225.509,568.419 733.792,568.419 795.922,863.409    253.484,884.915  "/>
+   <g id="svg_44" clip-path="url(#XMLID_3_)">
+    <circle id="svg_45" opacity="0.42" fill="#FFFFFF" r="1.245" cy="217.82" cx="314.419"/>
+    <circle id="svg_46" fill="#FFFFFF" r="1.328" cy="210.651" cx="369.379"/>
+    <circle id="svg_47" opacity="0.44" fill="#FFFFFF" r="2.921" cy="294.685" cx="417.968"/>
+    <circle id="svg_48" fill="#FFFFFF" r="0.499" cy="261.531" cx="642.988"/>
+    <circle id="svg_49" opacity="0.22" fill="#FFFFFF" r="1.394" cy="191.535" cx="614.711"/>
+    <circle id="svg_50" fill="#FFFFFF" r="2.157" cy="224.989" cx="515.941"/>
+    <circle id="svg_51" fill="#FFFFFF" r="1.328" cy="198.703" cx="410.799"/>
+    <circle id="svg_52" fill="#FFFFFF" r="0.664" cy="287.517" cx="372.964"/>
+    <circle id="svg_53" fill="#FFFFFF" r="0.947" cy="268.7" cx="265.034"/>
+    <circle id="svg_54" fill="#FFFFFF" r="0.846" cy="395.447" cx="722.242"/>
+    <circle id="svg_55" fill="#FFFFFF" r="1.478" cy="268.7" cx="519.525"/>
+    <circle id="svg_56" fill="#FFFFFF" r="0.797" cy="191.535" cx="551.755"/>
+    <circle id="svg_57" opacity="0.38" fill="#FFFFFF" r="1.096" cy="275.869" cx="689.983"/>
+    <circle id="svg_58" fill="#FFFFFF" r="0.83" cy="344.07" cx="669.671"/>
+    <circle id="svg_59" fill="#FFFFFF" r="1.128" cy="287.517" cx="596.391"/>
+    <circle id="svg_60" fill="#FFFFFF" r="1.555" cy="248.675" cx="456.998"/>
+    <circle id="svg_61" fill="#FFFFFF" r="0.797" cy="221.405" cx="592.806"/>
+    <circle id="svg_62" fill="#FFFFFF" r="2.589" cy="158.479" cx="445.05"/>
+    <circle id="svg_63" opacity="0.63" fill="#FFFFFF" r="0.73" cy="187.95" cx="480.097"/>
+    <circle id="svg_64" opacity="0.5" fill="#FFFFFF" r="1.394" cy="399.031" cx="295.7"/>
+    <circle id="svg_65" fill="#FFFFFF" r="1.245" cy="275.869" cx="314.419"/>
+    <circle id="svg_66" fill="#FFFFFF" r="1.607" cy="245.091" cx="389.72"/>
+    <circle id="svg_67" fill="#FFFFFF" r="1.493" cy="330.928" cx="343.89"/>
+    <path id="svg_68" fill="url(#SVGID_16_)" d="m349.821,250.865l0,0c-0.774,-0.774 -0.774,-2.042 0,-2.816l55.549,-53.484c0.774,-0.774 1.432,-0.117 0.657,0.657l-53.39,55.643c-0.774,0.774 -2.042,0.774 -2.816,0z"/>
+    <path id="svg_69" fill="url(#SVGID_17_)" d="m679.753,320.94l0,0c-0.491,-0.491 -0.491,-1.295 0,-1.786l35.239,-33.929c0.491,-0.491 0.908,-0.074 0.417,0.417l-33.869,35.298c-0.492,0.492 -1.296,0.492 -1.787,0z"/>
+    <path id="svg_70" fill="url(#SVGID_18_)" d="m581.214,229.845l0,0c-1.097,-1.097 -1.097,-2.892 0,-3.989l78.676,-75.751c1.097,-1.097 2.028,-0.166 0.931,0.931l-75.618,78.809c-1.097,1.096 -2.892,1.096 -3.989,0z"/>
+    <path id="svg_71" fill="url(#SVGID_19_)" d="m264.668,411.648l0,0c-0.774,-0.774 -0.774,-2.042 0,-2.816l55.549,-53.484c0.774,-0.774 1.432,-0.117 0.657,0.657l-53.39,55.643c-0.775,0.774 -2.042,0.774 -2.816,0z"/>
+   </g>
+   <g id="svg_72" clip-path="url(#XMLID_3_)">
+    <circle id="svg_73" opacity="0.42" fill="#FFFFFF" r="1.245" cy="683.127" cx="436.733"/>
+    <circle id="svg_74" fill="#FFFFFF" r="1.328" cy="690.296" cx="491.694"/>
+    <circle id="svg_75" opacity="0.44" fill="#FFFFFF" r="2.921" cy="606.262" cx="540.282"/>
+    <circle id="svg_76" fill="#FFFFFF" r="0.499" cy="793.412" cx="642.988"/>
+    <circle id="svg_77" opacity="0.22" fill="#FFFFFF" r="1.394" cy="640.181" cx="591.268"/>
+    <circle id="svg_78" fill="#FFFFFF" r="2.157" cy="829.954" cx="515.941"/>
+    <circle id="svg_79" fill="#FFFFFF" r="1.328" cy="633.012" cx="387.356"/>
+    <circle id="svg_80" fill="#FFFFFF" r="0.664" cy="629.206" cx="531.451"/>
+    <circle id="svg_81" fill="#FFFFFF" r="0.947" cy="648.023" cx="423.521"/>
+    <circle id="svg_82" fill="#FFFFFF" r="0.846" cy="659.497" cx="722.242"/>
+    <circle id="svg_83" fill="#FFFFFF" r="1.478" cy="786.243" cx="519.525"/>
+    <circle id="svg_84" fill="#FFFFFF" r="0.797" cy="863.409" cx="551.755"/>
+    <circle id="svg_85" opacity="0.38" fill="#FFFFFF" r="1.096" cy="779.074" cx="689.983"/>
+    <circle id="svg_86" fill="#FFFFFF" r="0.83" cy="710.873" cx="669.671"/>
+    <circle id="svg_87" fill="#FFFFFF" r="1.128" cy="767.427" cx="596.391"/>
+    <circle id="svg_88" fill="#FFFFFF" r="1.555" cy="806.268" cx="456.998"/>
+    <circle id="svg_89" fill="#FFFFFF" r="0.797" cy="833.539" cx="592.806"/>
+    <circle id="svg_90" fill="#FFFFFF" r="2.589" cy="896.465" cx="445.05"/>
+    <circle id="svg_91" opacity="0.63" fill="#FFFFFF" r="0.73" cy="866.993" cx="480.097"/>
+    <circle id="svg_92" opacity="0.5" fill="#FFFFFF" r="1.394" cy="655.912" cx="295.7"/>
+    <circle id="svg_93" fill="#FFFFFF" r="1.245" cy="779.074" cx="314.419"/>
+    <circle id="svg_94" fill="#FFFFFF" r="1.607" cy="809.853" cx="389.72"/>
+    <circle id="svg_95" fill="#FFFFFF" r="1.493" cy="724.016" cx="343.89"/>
+    <path id="svg_96" fill="url(#SVGID_20_)" d="m349.821,804.079l0,0c-0.774,0.774 -0.774,2.042 0,2.816l55.549,53.484c0.774,0.774 1.432,0.117 0.657,-0.657l-53.39,-55.643c-0.774,-0.775 -2.042,-0.775 -2.816,0z"/>
+    <path id="svg_97" fill="url(#SVGID_21_)" d="m679.753,734.003l0,0c-0.491,0.491 -0.491,1.295 0,1.786l35.239,33.929c0.491,0.491 0.908,0.074 0.417,-0.417l-33.869,-35.298c-0.492,-0.491 -1.296,-0.491 -1.787,0z"/>
+    <path id="svg_98" fill="url(#SVGID_22_)" d="m581.214,825.099l0,0c-1.097,1.097 -1.097,2.892 0,3.989l78.676,75.751c1.097,1.097 2.028,0.166 0.931,-0.931l-75.618,-78.809c-1.097,-1.097 -2.892,-1.097 -3.989,0z"/>
+    <path id="svg_99" fill="url(#SVGID_23_)" d="m264.668,643.295l0,0c-0.774,0.774 -0.774,2.042 0,2.816l55.549,53.484c0.774,0.774 1.432,0.117 0.657,-0.657l-53.39,-55.643c-0.775,-0.774 -2.042,-0.774 -2.816,0z"/>
+   </g>
+  </g>
+ </g>
+</svg>

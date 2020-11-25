@@ -1,0 +1,43 @@
+<van-dialog id="van-dialog_1" />
+<view class="page">
+  <custom-nav-bar navigateBackArea="{{false}}">{{countdownDisplay}}</custom-nav-bar>
+  <view class="main">
+    <view class="examination-container">
+      <view class="mask" hidden="{{examinationSwitchLock}}"></view>
+      <swiper
+              class="examination-swiper"
+              previous-margin="80rpx"
+              next-margin="80rpx"
+              current="{{currentExamination}}"
+              bindtransition="changeExaminationSwiper"
+              bindanimationfinish="examinationSwiperChanged"
+      >
+        <block wx:for="{{examinations}}" wx:key="id">
+          <swiper-item class="examination-swiper-items">
+            <view
+                    class="examination-items-content"
+                    style="{{item.style}} {{item.backgroundStyle}}"
+                    data-swiper-id="{{index}}"
+                    bind:tap="changeExaminationSwiperByTap"
+            >
+              <image class="examination-swiper-items-image" src="/assets/images/{{item.name}}.svg"
+                     mode="aspectFill"></image>
+              <view class="examination-swiper-items-title">{{item.name}}</view>
+              <view>{{item.name_cn}}</view>
+              <view style="flex: 1"></view>
+              <view>得分</view>
+              <view class="examination-swiper-items-score">{{item.score}}</view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="swiper-dots-container">
+        <block wx:for="{{examinations}}" wx:key="id">
+          <view class="swiper-dots{{index===currentDotsIdx ? ' swiper-dots-selected':''}}"></view>
+        </block>
+      </view>
+    </view>
+    <van-button class="finishExamination" custom-style="border-radius: 20rpx;" bind:click="finishExamination">结束测试
+    </van-button>
+  </view>
+</view>
