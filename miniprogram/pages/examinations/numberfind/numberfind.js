@@ -92,31 +92,22 @@ Page({
 clickNumber:function(e){
   //获取点击数值的结构体
   var index=e.currentTarget.dataset.click;
-  var selected=this.data.selectedNumber;
+ 
   //黑体数值则将背景变为橙色
-  if(this.data.array.indexOf(this.data.question[index].number[0])-this.data.array.indexOf(this.data.question[index].number[1])==26&&this.data.question[index].color!="orange"){
+  if(this.data.question[index].color!="orange"){
     this.setData({
       [`question[${index}].color`] : "orange",
-      selectedNumber:selected+1
+    
+    });
+  }else{
+    this.setData({
+      [`question[${index}].color`] : "white",
+    
     });
   }
+  },
   //判断是否全部点击完毕，完毕则停止
-  if(this.data.selectedNumber==this.data.syn){
-    if(this.data.indexq<3)
-    {
-      this.setData({
-        height:this.data.height+1,
-        width:this.data.width+1,
-        syn:this.data.syn+1,
-        indexq:this.data.indexq+1,
-        selectedNumber:0,
-      })
-      this.testStart();
-    }
-    else
-      this.stop();
-    }
-},
+
 
 //开始计时
   start:function () {

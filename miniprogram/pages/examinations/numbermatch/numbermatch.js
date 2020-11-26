@@ -63,7 +63,7 @@ Page({
         }
         var a=Math.floor(Math.random()*this.data.width);
         var b=Math.floor(Math.random()*this.data.width);
-        while(a==b)
+        while(Math.abs(a-b<=1))
         {
            a=Math.floor(Math.random()*this.data.width);
            b=Math.floor(Math.random()*this.data.width);
