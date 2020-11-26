@@ -2,7 +2,10 @@
   "pages": ["pages/index/index", "pages/mine/mine",
     "pages/examination/examination",
     "pages/settlement/settlement",
-    "pages/examinations/numbermatch/numbermatch"
+    "pages/examinations/numbermatch/numbermatch",
+    "pages/examinations/numberfind/numberfind",
+    "pages/examinations/numberfind2/numberfind2",
+    "pages/examinations/colorRemember/colorRemember"
   ],
   "tabBar": {
     "custom": true,

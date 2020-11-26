@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view class="container">
+      <view class="title">
+      第{{indexq+1}}题
+      </view>
+
+      <button bindtap="show" wx:if="{{showbu}}">
+        开始记忆
+      </button>
+      <view wx:for="{{text}}" style="color:{{allcolor[color[index]]}};"  wx:if="{{show}}"
+      class="question">
+            {{alltext[item]}}
+      </view>
+      <view  wx:if="{{showq}}" class="questionq">
+      {{q}}
+      </view>
+      <button wx:for="{{choose}}"  wx:if="{{showq}}"   style="margin:20rpx"  bindtap="click"  
+      data-index="{{item}}"    disabled="{{dis}}"> 
+            {{alltext[item]}}
+      </button>
+      <view style="color:{{askcolor}}">{{ask}}</view>
+      <view style="margin:30rpx"> 共15题,您答对了{{right}}题</view>
+     <view style="margin:30rpx"> {{timecount}}</view>
+
+     
+
+</view>
+
