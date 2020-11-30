@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "description": "项目配置文件",
   "packOptions": {
     "ignore": []
@@ -27,44 +28,67 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
+=======
+    "description": "项目配置文件",
+    "packOptions": {
+        "ignore": []
+>>>>>>> Stashed changes
     },
-    "enableEngineNative": false,
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
-  },
-  "compileType": "miniprogram",
-  "libVersion": "2.14.0",
-  "appid": "wx1eb7867aa42efe8e",
-  "projectname": "miniprogram",
-  "debugOptions": {
-    "hidedInDevtools": []
-  },
-  "scripts": {},
-  "isGameTourist": false,
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/examination/examination",
-          "pathName": "pages/examination/examination",
-          "query": "",
-          "scene": null
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "enhance": false,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": false,
+        "coverView": true,
+        "nodeModules": true,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "uglifyFileName": false,
+        "checkInvalidKey": true,
+        "checkSiteMap": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": false,
+        "useMultiFrameRuntime": false,
+        "useApiHook": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
         },
+        "enableEngineNative": false,
+        "useIsolateContext": true,
+        "useCompilerModule": true,
+        "userConfirmedUseCompilerModuleSwitch": false,
+        "packNpmManually": false,
+        "packNpmRelationList": [],
+        "minifyWXSS": true
+    },
+    "compileType": "miniprogram",
+    "libVersion": "2.14.0",
+    "appid": "wx1eb7867aa42efe8e",
+    "projectname": "miniprogram",
+    "debugOptions": {
+        "hidedInDevtools": []
+    },
+    "scripts": {},
+    "isGameTourist": false,
+    "simulatorType": "wechat",
+    "simulatorPluginLibVersion": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+<<<<<<< Updated upstream
         {
           "name": "pages/settlement/settlement",
           "pathName": "pages/settlement/settlement",
@@ -93,8 +117,23 @@
           "name": "pages/examinations/colorRemember/colorRemember",
           "pathName": "pages/examinations/colorRemember/colorRemember",
           "scene": null
+=======
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/examination/examination",
+                    "pathName": "pages/examination/examination",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/settlement/settlement",
+                    "pathName": "pages/settlement/settlement",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+>>>>>>> Stashed changes
         }
-      ]
     }
-  }
 }
