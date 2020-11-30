@@ -5,7 +5,7 @@
 -->
 <view class="container">
       <view class="title">
-           接受性注意
+           接受性注意--easy版本
       </view>
       <!--点击生成随机的题目-->
       <button bindtap="testStart" wx:if="{{showButton}}">
@@ -19,7 +19,13 @@
                   </view>
             </view>
       </view>
+
+      <button bindtap="testSubmit" wx:if="{{showTable}}" style="margin-top:20rpx;" disabled="{{dis}}">
+            提交
+      </button>
+      <text wx:if="{{showTable}}" >
+      当前得分：{{tips}}
+      </text>
       <!--计时器-->
      <view style="margin:30rpx" wx:if="{{showTable}}"> {{timecount}}</view>
 </view>
-

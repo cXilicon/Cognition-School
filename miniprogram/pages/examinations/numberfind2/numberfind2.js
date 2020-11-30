@@ -13,8 +13,8 @@ Page({
     //页面显示参数
     showButton:true,
     showTable:false,
-    selectedNumber:0,
-
+    selected:[],
+    dis:false,
     //计时器参数
     hour: 0,
     minute: 0,
@@ -35,7 +35,10 @@ Page({
     indexq:0,
     height:3,
     width:4,
-    syn:2
+    syn:1,
+    
+    tips:0,
+   
   },
 
  //测试开始
@@ -63,19 +66,22 @@ Page({
         color:"white"
       }
       questionTemp.push(temp);
-     
+    
     }
+   
     var site=0;
    
-    for(var i=0;i<this.data.syn;i++){
+    for(var i=0;i<this.data.syn*2;i++){
       site=Math.floor(Math.random()*(this.data.height*this.data.width));
-      while(questionTemp[site].number[0]==questionTemp[site].number[1])
+      while(this.data.array.indexOf(questionTemp[site].number[0])==this.data.array.indexOf(questionTemp[site].number[1]))
       {
+     
         site=Math.floor(Math.random()*(this.data.height*this.data.width));
       }
       var fl=Math.floor(Math.random()*26+26);
       questionTemp[site].number=(this.data.array[fl]+this.data.array[fl]);
     }
+  
 
       this.setData({
           question:questionTemp
@@ -92,32 +98,72 @@ Page({
 clickNumber:function(e){
   //获取点击数值的结构体
   var index=e.currentTarget.dataset.click;
-  var selected=this.data.selectedNumber;
+  var selectedTemp=this.data.selected;
   //黑体数值则将背景变为橙色
-  if(this.data.array.indexOf(this.data.question[index].number[0])==this.data.array.indexOf(this.data.question[index].number[1])&&this.data.question[index].color!="orange"){
+  if(this.data.question[index].color!="orange"){
     this.setData({
       [`question[${index}].color`] : "orange",
-      selectedNumber:selected+1
+    });
+    selectedTemp.push(index);
+  }else{
+    this.setData({
+      [`question[${index}].color`] : "white",
+    });
+    selectedTemp.splice(selectedTemp.indexOf(index),1);
+
+    this.setData({
+     selected:selectedTemp
     });
   }
+  },
   //判断是否全部点击完毕，完毕则停止
-  if(this.data.selectedNumber==this.data.syn){
-    if(this.data.indexq<3)
-    {
-      this.setData({
-        height:this.data.height+1,
-        width:this.data.width+1,
-        syn:this.data.syn+1,
-        indexq:this.data.indexq+1,
-        selectedNumber:0,
-      })
-      this.testStart();
-    }
-    else
-      this.stop();
-    }
-},
+  testSubmit:function(){
+    var selectedTemp=this.data.selected;
+   
+      var score=0;
+      for(var i=0;i<selectedTemp.length;i++){
+        if(this.data.array.indexOf(this.data.question[selectedTemp[i]].number[0])==this.data.array.indexOf(this.data.question[selectedTemp[i]].number[1])){
+            score+=5;
 
+        }else{
+          score-=5;
+          
+        }
+      }
+      if(score<0)
+      {
+        score=0;
+      }
+      
+      this.setData({
+          tips:this.data.tips+score,
+        
+      });
+    
+ this.stop();
+  var that=this;
+
+  this.setData({
+      dis:true,
+   });
+  if(this.data.indexq!=3)
+  {
+    setTimeout(function () {
+      that.setData({
+       
+        indexq:that.data.indexq+1,
+        height:that.data.height+1,
+        width:that.data.width+1,
+        syn:that.data.syn+1,
+        selected:[],
+        dis:false
+      });
+    that.testStart();
+     }, 3000) //延迟时间 这里是1秒
+  }
+
+
+  },
 //开始计时
   start:function () {
     var that = this;
@@ -170,4 +216,5 @@ clickNumber:function(e){
 
   
 })
+
 
