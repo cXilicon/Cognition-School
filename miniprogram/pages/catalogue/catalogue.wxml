@@ -1,5 +1,5 @@
 <van-dialog id="van-dialog"/>
-<van-toast id="van-toast" />
+<van-toast id="van-toast"/>
 <view class="page">
   <custom-nav-bar navigateBackArea="{{false}}">{{countdownDisplay}}</custom-nav-bar>
   <view class="main">
@@ -21,7 +21,7 @@
                     data-swiper-id="{{index}}"
                     bind:tap="tapExamination"
             >
-              <image class="examination-swiper-items-image" src="/assets/images/{{item.image}}"
+              <image class="examination-swiper-items-image" src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/{{item.image}}"
                      mode="aspectFill"></image>
               <view class="examination-swiper-items-title">{{item.name}}</view>
               <view class="examination-swiper-items-tag">{{item.tag}}</view>
@@ -38,7 +38,8 @@
         </block>
       </view>
     </view>
-    <van-button class="finishExamination" custom-style="border-radius: 20rpx;" bind:click="finishExamination">结束测试
+    <van-button class="finishExamination" custom-style="border-radius: 20rpx;" bind:click="finishExamination">
+      退出测试
     </van-button>
   </view>
 </view>

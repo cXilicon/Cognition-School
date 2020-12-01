@@ -165,7 +165,7 @@ Page({
                     } else {
                         clearInterval(tapControl)
                     }
-                }, 500)
+                }, 300)
             },
             playtime: 3000
         }

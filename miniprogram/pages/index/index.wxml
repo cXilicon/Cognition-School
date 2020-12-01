@@ -2,6 +2,7 @@
 <view class="page">
   <view class="main">
     <view class="logo">
+      <image src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/Galaxy.svg"></image>
       <text>认知\n学堂</text>
     </view>
     <view class="index-button-container">
