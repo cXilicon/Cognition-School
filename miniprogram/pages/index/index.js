@@ -3,8 +3,8 @@ Page({
     data: {},
 
     startExamination: function () {
-        wx.navigateTo({
-            url: '/pages/examination/examination',
+        wx.redirectTo({
+            url: '/pages/catalogue/catalogue',
         })
     },
 

@@ -33,9 +33,10 @@ Page({
             console.log(data)
             let totalScore = 0
             for (let i = 0; i < 4; i++) {
-                reportDataOption.dataset.source[i][1] = data.score[i]
-                totalScore += data.score[i]
+                reportDataOption.dataset.source[i][1] = data.score[i * 2] + data.score[i * 2 + 1]
+                totalScore += data.score[i * 2] + data.score[i * 2 + 1]
             }
+            console.log(totalScore)
             that.setData({
                 name: data.name,
                 age: data.age,
@@ -53,10 +54,10 @@ let reportDataOption = {
     dataset: {
         dimensions: ["item", "score", "max"],
         source: [
-            ["计划", 0, 100],
-            ["注意", 0, 100],
-            ["同时性加工", 0, 100],
-            ["继时性加工", 0, 100],
+            ["计划", 0, 20],
+            ["注意", 0, 20],
+            ["同时性加工", 0, 20],
+            ["继时性加工", 0, 20],
         ],
     },
     grid: {
@@ -87,26 +88,9 @@ let reportDataOption = {
     xAxis: {
         type: 'value',
         show: false,
-        max: 100
+        max: 20
     },
     series: [{
-        encode: {
-            x: 'score',
-            y: 'item'
-        },
-        barMaxWidth: 20,
-        type: 'bar',
-        showBackground: true,
-        roundCap: true,
-        itemStyle: {
-            barBorderRadius: 40,
-            color: function (params) {
-                return colorList[params.dataIndex];
-            },
-        },
-        animationEasing: "bounceOut", //初始动画
-        z: 0
-    }, {
         encode: {
             x: 'max',
             y: 'item'
@@ -119,7 +103,35 @@ let reportDataOption = {
         },
         barMaxWidth: 20,
         type: 'bar',
-        showBackground: true,
+        itemStyle: {
+            barBorderRadius: 40,
+            color: 'transparent'
+        },
+        barGap: "-100%",
+        z: 10,
+    }, {
+        encode: {
+            x: 'score',
+            y: 'item'
+        },
+        barMaxWidth: 20,
+        type: 'bar',
+        roundCap: true,
+        itemStyle: {
+            barBorderRadius: 40,
+            color: function (params) {
+                return colorList[params.dataIndex];
+            },
+        },
+        animationEasing: "bounceOut",
+        z: 0
+    }, {
+        encode: {
+            x: 'max',
+            y: 'item'
+        },
+        barMaxWidth: 20,
+        type: 'bar',
         roundCap: true,
         itemStyle: {
             barBorderRadius: 40,

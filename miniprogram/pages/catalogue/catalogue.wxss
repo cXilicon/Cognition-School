@@ -34,7 +34,7 @@
 .examination-items-content {
   height: 900rpx;
   margin: 10rpx;
-  padding: 10%;
+  padding: 40rpx 40rpx 80rpx;
   overflow: hidden;
   box-shadow: 0 5rpx 10rpx #aaaaaa;
   border-radius: 20rpx;
@@ -45,23 +45,21 @@
 
 .examination-swiper-items-image {
   width: 80%;
-  height: 40%;
-  filter: drop-shadow(0px 5px 10px #aaa);
-  margin-bottom: 10%;
+  height: 50%;
+  filter: drop-shadow(0px 5px 10px rgba(170, 170, 170, 0.5));
 }
 
 .examination-swiper-items-title {
   font-size: 72rpx;
-}
-
-.examination-swiper-items-title:first-letter {
-  font-size: 96rpx;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .examination-swiper-items-score {
   font-size: 72rpx;
-  vertical-align: bottom;
+}
+
+.examination-swiper-items-tag {
+  margin-top: 20rpx;
 }
 
 .swiper-dots-container {
