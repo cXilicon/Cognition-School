@@ -3,7 +3,7 @@ package com.ash.softwareback.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Test6", schema = "softwareWX", catalog = "")
+@Table(name = "test6", schema = "softwareWX", catalog = "")
 public class Test6Entity {
     private int id;
     private String questionImgAddress;
@@ -27,7 +27,7 @@ public class Test6Entity {
     }
 
     @Basic
-    @Column(name = "question_img_address")
+    @Column(name = "questionImgAddress")
     public String getQuestionImgAddress() {
         return questionImgAddress;
     }
@@ -107,7 +107,7 @@ public class Test6Entity {
     }
 
     @Basic
-    @Column(name = "delete_flag")
+    @Column(name = "deleteFlag")
     public int getDeleteFlag() {
         return deleteFlag;
     }
