@@ -40,8 +40,9 @@
 
                   <!-- 按钮 -->
                   <el-form-item>
-                      <el-button type="primary" @click="submitForm()">提交</el-button>
-                      <el-button @click="resetForm('nameValidateForm')">重置</el-button>
+                      <el-button type="primary" @click="submitForm(
+                      )">提交</el-button>
+                      <el-button @click="resetForm()">重置</el-button>
                   </el-form-item>
                 </el-form>
 
@@ -93,8 +94,9 @@ import axios from 'axios';
                                 }
                                 else if(response.data.port=="200"){
                                     this.$message.success('登录成功');
-                                    // localStorage.setItem('ms_username', this.param.username);
-                                    this.$router.push('/helloWorld');
+                                    localStorage.setItem('ms_username', this.param.username);
+                                    this.$cookies.set("token",response.data.token);
+                                    this.$router.push('/');
                                 }
                             })
                             .catch(function(error) {
