@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "user", schema = "softwareWX", catalog = "")
+@Table(name = "User", schema = "softwareWX", catalog = "")
 public class UserEntity {
     private int id;
     private String openid;
@@ -37,7 +37,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "userName")
+    @Column(name = "user_name")
     public String getUserName() {
         return userName;
     }
@@ -97,7 +97,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "deleteFlag")
+    @Column(name = "Delete_flag")
     public String getDeleteFlag() {
         return deleteFlag;
     }
