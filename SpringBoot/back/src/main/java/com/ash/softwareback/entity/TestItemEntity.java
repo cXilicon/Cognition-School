@@ -3,7 +3,7 @@ package com.ash.softwareback.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "testItem", schema = "softwareWX", catalog = "")
+@Table(name = "Test_item", schema = "softwareWX", catalog = "")
 public class TestItemEntity {
     private int testItemId;
     private String testName;
@@ -11,7 +11,7 @@ public class TestItemEntity {
     private String deleteFlag;
 
     @Id
-    @Column(name = "testItemId")
+    @Column(name = "Test_item_id")
     public int getTestItemId() {
         return testItemId;
     }
@@ -21,7 +21,7 @@ public class TestItemEntity {
     }
 
     @Basic
-    @Column(name = "testName")
+    @Column(name = "Test_name")
     public String getTestName() {
         return testName;
     }
@@ -31,7 +31,7 @@ public class TestItemEntity {
     }
 
     @Basic
-    @Column(name = "testType")
+    @Column(name = "test_type")
     public String getTestType() {
         return testType;
     }
@@ -41,7 +41,7 @@ public class TestItemEntity {
     }
 
     @Basic
-    @Column(name = "deleteFlag")
+    @Column(name = "delete_flag")
     public String getDeleteFlag() {
         return deleteFlag;
     }

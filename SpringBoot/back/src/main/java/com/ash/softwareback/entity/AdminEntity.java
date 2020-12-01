@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "admin", schema = "softwareWX", catalog = "")
 public class AdminEntity {
     private int id;
-    private String adminAccout;
+    private String adminAccount;
     private String password;
     private String deleteFlag;
 
@@ -21,13 +21,13 @@ public class AdminEntity {
     }
 
     @Basic
-    @Column(name = "adminAccout")
-    public String getAdminAccout() {
-        return adminAccout;
+    @Column(name = "admin_account")
+    public String getAdminAccount() {
+        return adminAccount;
     }
 
-    public void setAdminAccout(String adminAccout) {
-        this.adminAccout = adminAccout;
+    public void setAdminAccount(String adminAccount) {
+        this.adminAccount = adminAccount;
     }
 
     @Basic
@@ -41,7 +41,7 @@ public class AdminEntity {
     }
 
     @Basic
-    @Column(name = "deleteFlag")
+    @Column(name = "delete_flag")
     public String getDeleteFlag() {
         return deleteFlag;
     }
@@ -58,7 +58,7 @@ public class AdminEntity {
         AdminEntity that = (AdminEntity) o;
 
         if (id != that.id) return false;
-        if (adminAccout != null ? !adminAccout.equals(that.adminAccout) : that.adminAccout != null) return false;
+        if (adminAccount != null ? !adminAccount.equals(that.adminAccount) : that.adminAccount != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (deleteFlag != null ? !deleteFlag.equals(that.deleteFlag) : that.deleteFlag != null) return false;
 
@@ -68,7 +68,7 @@ public class AdminEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (adminAccout != null ? adminAccout.hashCode() : 0);
+        result = 31 * result + (adminAccount != null ? adminAccount.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (deleteFlag != null ? deleteFlag.hashCode() : 0);
         return result;

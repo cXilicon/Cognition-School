@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "userToTest", schema = "softwareWX", catalog = "")
+@Table(name = "User_to_Test", schema = "softwareWX", catalog = "")
 public class UserToTestEntity {
     private int id;
     private int userId;
@@ -26,7 +26,7 @@ public class UserToTestEntity {
     }
 
     @Basic
-    @Column(name = "userId")
+    @Column(name = "user_id")
     public int getUserId() {
         return userId;
     }
@@ -36,7 +36,7 @@ public class UserToTestEntity {
     }
 
     @Basic
-    @Column(name = "testNumber")
+    @Column(name = "test_number")
     public int getTestNumber() {
         return testNumber;
     }
@@ -46,7 +46,7 @@ public class UserToTestEntity {
     }
 
     @Basic
-    @Column(name = "testId")
+    @Column(name = "test_id")
     public int getTestId() {
         return testId;
     }
@@ -66,7 +66,7 @@ public class UserToTestEntity {
     }
 
     @Basic
-    @Column(name = "finishTime")
+    @Column(name = "finish_time")
     public Timestamp getFinishTime() {
         return finishTime;
     }
@@ -76,7 +76,7 @@ public class UserToTestEntity {
     }
 
     @Basic
-    @Column(name = "deleteFlag")
+    @Column(name = "delete_flag")
     public String getDeleteFlag() {
         return deleteFlag;
     }
