@@ -1,107 +1,107 @@
 {
-    "description": "项目配置文件",
-    "packOptions": {
-        "ignore": []
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
     },
-    "setting": {
-        "urlCheck": false,
-        "es6": true,
-        "enhance": false,
-        "postcss": true,
-        "preloadBackgroundData": false,
-        "minified": true,
-        "newFeature": false,
-        "coverView": true,
-        "nodeModules": true,
-        "autoAudits": false,
-        "showShadowRootInWxmlPanel": true,
-        "scopeDataCheck": false,
-        "uglifyFileName": false,
-        "checkInvalidKey": true,
-        "checkSiteMap": true,
-        "uploadWithSourceMap": true,
-        "compileHotReLoad": false,
-        "useMultiFrameRuntime": false,
-        "useApiHook": true,
-        "babelSetting": {
-            "ignore": [],
-            "disablePlugins": [],
-            "outputPath": ""
-        },
-        "enableEngineNative": false,
-        "useIsolateContext": true,
-        "useCompilerModule": true,
-        "userConfirmedUseCompilerModuleSwitch": false,
-        "packNpmManually": false,
-        "packNpmRelationList": [],
-        "minifyWXSS": true
+    "enableEngineNative": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.14.0",
+  "appid": "wx1eb7867aa42efe8e",
+  "projectname": "miniprogram",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "scripts": {},
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "plugin": {
+      "list": []
     },
-    "compileType": "miniprogram",
-    "libVersion": "2.14.0",
-    "appid": "wx1eb7867aa42efe8e",
-    "projectname": "miniprogram",
-    "debugOptions": {
-        "hidedInDevtools": []
+    "game": {
+      "list": []
     },
-    "scripts": {},
-    "isGameTourist": false,
-    "simulatorType": "wechat",
-    "simulatorPluginLibVersion": {},
-    "condition": {
-        "plugin": {
-            "list": []
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/catalogue/catalogue",
+          "pathName": "pages/catalogue/catalogue",
+          "query": "",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "name": "pages/settlement/settlement",
+          "pathName": "pages/settlement/settlement",
+          "query": "",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
+        {
+          "name": "pages/examinations/numbermatch/numbermatch",
+          "pathName": "pages/examinations/numbermatch/numbermatch",
+          "query": "",
+          "scene": null
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "pages/catalogue/catalogue",
-                    "pathName": "pages/catalogue/catalogue",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/settlement/settlement",
-                    "pathName": "pages/settlement/settlement",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/numbermatch/numbermatch",
-                    "pathName": "pages/examinations/numbermatch/numbermatch",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/numberfind/numberfind",
-                    "pathName": "pages/examinations/numberfind/numberfind",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/numberfind2/numberfind2",
-                    "pathName": "pages/examinations/numberfind2/numberfind2",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/colorRemember/colorRemember",
-                    "pathName": "pages/examinations/colorRemember/colorRemember",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/schulte_grid/schulte_grid",
-                    "pathName": "pages/examinations/schulte_grid/schulte_grid",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "pages/examinations/numberfind/numberfind",
+          "pathName": "pages/examinations/numberfind/numberfind",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/examinations/numberfind2/numberfind2",
+          "pathName": "pages/examinations/numberfind2/numberfind2",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/examinations/colorRemember/colorRemember",
+          "pathName": "pages/examinations/colorRemember/colorRemember",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/examinations/schulte_grid/schulte_grid",
+          "pathName": "pages/examinations/schulte_grid/schulte_grid",
+          "query": "",
+          "scene": null
         }
+      ]
     }
+  }
 }
