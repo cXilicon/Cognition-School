@@ -15,6 +15,7 @@ Page({
         millisecond: 0, // 计时器 - 毫秒
         startCountDownState: false,
         startCountDown: 3,
+        highlight: 0,
     },
 
     onLoad: function () { // 页面加载
@@ -141,24 +142,77 @@ Page({
             ruleState: false,
             demoState: true,
         })
-        let notify = Notify({
-            type: 'success',
-            message: '第一步\n等待提示结束后开始测试',
-            duration: 0,
-            safeAreaInsetTop: true,
-        });
         let step0 = {
             func: () => {
-                that.prepare()
+                Toast('等待提示结束后开始测试');
+                setTimeout(() => {
+                    that.prepare()
+                }, 2000)
             },
-            playtime: 3000
+            playtime: 5000
         }
         let step1 = {
             func: () => {
-                notify.setData({
-                    message: '第二步\n1-25依次点击数字方块'
+                Toast('点击含有数字1的方块');
+            },
+            playtime: 2000
+        }
+        let step2 = {
+            func: () => {
+                that.setData({
+                    highlight: 1,
                 })
-                let numNow = 0;
+                setTimeout(() => {
+                        that.setData({
+                            highlight: 0,
+                        })
+                    }
+                    , 400
+                )
+            },
+            playtime: 800
+        }
+        let step3 = {
+            func: () => {
+                that.triggerNum(0)
+            },
+            playtime: 1000
+        }
+        let step4 = {
+            func: () => {
+                Toast('点击含有数字2的方块');
+            },
+            playtime: 2000
+        }
+        let step5 = {
+            func: () => {
+                that.setData({
+                    highlight: 2,
+                })
+                setTimeout(() => {
+                        that.setData({
+                            highlight: 0,
+                        })
+                    }, 400
+                )
+            },
+            playtime: 800
+        }
+        let step6 = {
+            func: () => {
+                that.triggerNum(1)
+            },
+            playtime: 1000
+        }
+        let step7 = {
+            func: () => {
+                Toast('依次点击剩下的数字方块');
+            },
+            playtime: 2000
+        }
+        let step8 = {
+            func: () => {
+                let numNow = 2;
                 let tapControl = setInterval(() => {
                     if (numNow < 25) {
                         that.triggerNum(numNow++)
@@ -167,13 +221,12 @@ Page({
                     }
                 }, 300)
             },
-            playtime: 3000
+            playtime: 3500
         }
         let stepIdx = 0
-        let steps = [step0, step1]
+        let steps = [step0, step1, step2, step2, step3, step4, step5, step5, step6, step7, step8]
         setTimeout(function play() {
             if (stepIdx < steps.length) {
-                console.log(stepIdx)
                 steps[stepIdx].func()
                 setTimeout(play, steps[stepIdx++].playtime);
             }

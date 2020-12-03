@@ -19,7 +19,7 @@ page {
   width: 100%;
 }
 
-.exam-control van-button{
+.exam-control van-button {
   flex: 1;
 }
 
@@ -60,7 +60,7 @@ page {
   color: #bbbbbb;
 }
 
-.game {
+.gird {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,11 +72,20 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5rpx;
-  text-align: center;
+  margin: 14rpx 10rpx;
+  border-radius: 10rpx;
   font-size: 48rpx;
+  text-align: center;
   background-color: #ffffff;
-  transition: all 1s;
+  box-shadow: 0 10rpx 0 #aaa, 0 10rpx 10rpx #aaa;
+  transition: all .1s ease-in;
+}
+
+.cell:active {
+  position: relative;
+  top: 5rpx;
+  background-color: #dddddd;
+  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
 }
 
 .cell:after {
@@ -85,8 +94,15 @@ page {
 }
 
 .cell_clicked {
-  background-color: #aaa;
-  color: #ffffff;
+  position: relative;
+  top: 5rpx;
+  background-color: #dddddd;
+  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
+}
+
+.highlight{
+  background-color: #db5705;
+  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
 }
 
 .row {

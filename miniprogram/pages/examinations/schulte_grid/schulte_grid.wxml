@@ -22,16 +22,16 @@
 </van-overlay>
 <van-overlay show="{{demoState}}" custom-style="background-color: transparent">
 </van-overlay>
-<van-notify id="van-notify" />
+<van-notify id="van-notify"/>
 <van-toast id="van-toast"/>
 <view class="page">
   <view class="main">
     <view class="target-now">{{flag + 1 <= 25 ? flag + 1 : 25}}</view>
     <view class="target-now-title">当前目标</view>
-    <view class="game">
+    <view class="gird">
       <view class="row" wx:for="{{array}}" wx:for-item="row" wx:key="*this">
-        <view class="cell {{num>=flag+1?'':'cell_clicked'}}" wx:for="{{row}}" wx:for-item="num" wx:key="*this"
-              bindtap="tapNum" data-num="{{num}}">
+        <view class="cell {{num>=flag+1?'':'cell_clicked'}} {{num!==highlight?'':'highlight'}}" wx:for="{{row}}" wx:for-item="num" wx:key="*this"
+              bind:touchend="tapNum" data-num="{{num}}">
           <view hidden="{{!examState}}">{{num}}</view>
         </view>
       </view>

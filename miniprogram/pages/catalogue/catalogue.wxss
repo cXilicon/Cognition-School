@@ -36,11 +36,17 @@
   margin: 10rpx;
   padding: 40rpx 40rpx 80rpx;
   overflow: hidden;
-  box-shadow: 0 5rpx 10rpx #aaaaaa;
+  box-shadow: 0 10rpx 10rpx #aaaaaa;
   border-radius: 20rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.examination-items-content:active{
+  position: relative;
+  box-shadow: 0 5rpx 5rpx #aaaaaa;
+  top: 5rpx;
 }
 
 .examination-swiper-items-image {
