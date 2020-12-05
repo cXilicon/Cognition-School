@@ -8,7 +8,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/login',
+      path: '/',
           component:resolve => require(['../pages/login.vue'],resolve),
           meta: { title: '登录' }
     },
