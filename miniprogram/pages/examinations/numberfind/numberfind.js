@@ -172,7 +172,7 @@ clickNumber:function(e){
       }
       
       this.setData({
-          tips:this.data.tips+score,
+          tips:score,
         
       });
     
@@ -182,21 +182,16 @@ clickNumber:function(e){
     });
     var that=this;
     var finMessage="";
-    if(this.data.tip>=90)
-    {
-        finMessage= '你获得了'+that.data.tips+'分!你所向披靡！';
-    }else  if(this.data.tip>=70)
-    { 
-        finMessage ='你获得了'+that.data.tips+'分!太棒了！';
-    }else  if(this.data.tip>=50)
-    { 
-      finMessage='你获得了'+that.data.tips+'分!做的不错！';
-    }else  if(this.data.tip>=30)
-    { 
-      finMessage= '你获得了'+that.data.tips+'分!再接再厉！';
-    }else 
-    { 
-      finMessage= '你获得了'+that.data.tips+'分!继续努力！';
+    if(this.data.tips>=90){
+        finMessage= '本次得分:'+that.data.tips+'\n你所向披靡！';
+    }else  if(this.data.tips>=70){ 
+        finMessage ='本次得分:'+that.data.tips+'\n你真棒！';
+    }else  if(this.data.tips>=50){ 
+      finMessage='本次得分:'+that.data.tips+'\n做的不错！';
+    }else  if(this.data.tips>=30){ 
+      finMessage= '本次得分:'+that.data.tips+'\n再接再厉！';
+    }else { 
+      finMessage= '本次得分:'+that.data.tips+'\n继续努力！';
     }
 
 
