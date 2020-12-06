@@ -201,6 +201,7 @@ clickNumber:function(e){
       });
     }
   }
+  let that=this;
   //判断是否全部点击完毕，完毕则停止
   if(this.data.selectedNumber==this.data.height){
 
@@ -212,7 +213,24 @@ clickNumber:function(e){
               message: '恭喜你，完成了全部测试！',
               forbidClick: true,
               onClose: () => {
-             
+                var alltime=this.data.minute*60+this.data.second;
+                var score=""
+                if(alltime<40)
+                score="A"
+                else   if(alltime<60)
+                score="B"
+                else   if(alltime<80)
+                score="C"
+                else   if(alltime<100)
+                score="D"
+                else   
+                score="E"
+                let pages = getCurrentPages();
+                let prevPage = pages[pages.length - 2];
+                prevPage.setData({
+                    ['examinations[1].score']: score
+                })
+                wx.navigateBack()
               
             }
           });

@@ -182,16 +182,23 @@ clickNumber:function(e){
     });
     var that=this;
     var finMessage="";
+    var score='';
     if(this.data.tips>=90){
         finMessage= '本次得分:'+that.data.tips+'\n你所向披靡！';
+        score="A";
     }else  if(this.data.tips>=70){ 
         finMessage ='本次得分:'+that.data.tips+'\n你真棒！';
+        score="B";
     }else  if(this.data.tips>=50){ 
       finMessage='本次得分:'+that.data.tips+'\n做的不错！';
+      score="C";
     }else  if(this.data.tips>=30){ 
       finMessage= '本次得分:'+that.data.tips+'\n再接再厉！';
+      score="D";
     }else { 
       finMessage= '本次得分:'+that.data.tips+'\n继续努力！';
+      score="E";
+   
     }
 
 
@@ -199,7 +206,12 @@ clickNumber:function(e){
       message: finMessage,
       forbidClick: true,
       onClose: () => {
-        this.initGame();
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2];
+        prevPage.setData({
+            ['examinations[3].score']: score
+        })
+        wx.navigateBack()
     }})
 
 
