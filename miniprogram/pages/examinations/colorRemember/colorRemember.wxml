@@ -1,12 +1,42 @@
 <!--index.wxml-->
+<van-popup show="{{ruleState}}" position="bottom"
+           round close-on-click-overlay="{{false}}">
+  <view class="popup-content">
+    <view class="exam-rule-title">
+      测试规则
+    </view>
+    <view>
+      规定时间内记忆出现的内容，按要求回答问题
+    </view>
+    <view class="exam-control">
+      <van-button plain block type="primary" bind:tap="viewDemo">查看演示</van-button>
+      <view style="width: 20rpx"></view>
+      <van-button plain block type="primary" bind:tap="testStart">开始测试</van-button>
+    </view>
+  </view>
+</van-popup>
+
+<van-overlay show="{{startCountDownState}}" custom-style="background-color: transparent">
+  <view class="wrapper">
+    <view class="countdown">{{startCountDown}}</view>
+  </view>
+</van-overlay>
+
+<van-overlay show="{{demoState}}" custom-style="background-color: transparent">
+</van-overlay>
+
+<van-notify id="van-notify" />
+
+<van-toast id="van-toast"/>
 <view class="container">
       <view class="title">
-      第{{indexq+1}}题
+      第{{indexq+1}}/5题
       </view>
+      <view class='out' style='margin-top:10px'>
+ <view class="{{inshow}}" style='width:{{progressWidth}}%'></view>
+</view>
 
-      <button bindtap="show" wx:if="{{showbu}}">
-        开始记忆
-      </button>
+
       <view wx:for="{{text}}" style="color:{{allcolor[color[index]]}};"  wx:if="{{show}}"
       class="question">
             {{alltext[item]}}
@@ -14,15 +44,13 @@
       <view  wx:if="{{showq}}" class="questionq">
       {{q}}
       </view>
-      <button wx:for="{{choose}}"  wx:if="{{showq}}"   style="margin:20rpx"  bindtap="click"  
-      data-index="{{item}}"    disabled="{{dis}}"> 
-            {{alltext[item]}}
+      <button wx:for="{{choose}}"  wx:if="{{showq}}"   class="{{item.style}}"  bindtap="click"  
+      wx:for-index="bindIndex"
+      data-index="{{bindIndex}}"    disabled="{{dis}}"> 
+            {{alltext[item.number]}}
       </button>
-      <view style="color:{{askcolor}}">{{ask}}</view>
-      <view style="margin:30rpx"> 共15题,您答对了{{right}}题</view>
-     <view style="margin:30rpx"> {{timecount}}</view>
-
-     
+  
+    
 
 </view>
 

@@ -3,13 +3,36 @@
 *   完成日期：2020/11/1
 *   attentionTest-3.css
 */
+Page{
+  background-color: #eeeeee;
+}
+
+
+.btn{
+  background-color: white;
+  margin-left:290rpx; 
+  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
+}
+
+.btn-tips{
+  background-color: #db5705!important;
+  margin-left:290rpx; 
+  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
+}
+
+button[disabled]{
+  color:#000!important;
+  
+}
+
+
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 150rpx 0 50rpx 0;
   box-sizing: border-box;
 } 
 /*标题*/
@@ -25,19 +48,126 @@
 }
 /*表格内每一格*/
 .numberText{
-  border: 1rpx solid black;
-  height: 100rpx;
-  width: 100rpx;
+  background-color: white;
+  margin: 0rpx 5rpx;
+  height: 70rpx;
+  width: 90rpx;
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
+  font-size: 35rpx; 
+  font-weight:800;
+  
+  background-color: #ffffff;
+  box-shadow: 0 10rpx 0 #aaa, 0 10rpx 10rpx #aaa;
+  transition: all .1s ease-in;
 }
+
+
+.numberText-active{
+
+  margin: 0rpx 5rpx;
+  height: 70rpx;
+  width: 90rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 35rpx; 
+
+  font-weight:800;
+  background-color: #dddddd;
+  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
+  color: white;
+}
+
+
+.numberText-tips{
+
+  margin: 0rpx 5rpx;
+  height: 70rpx;
+  width: 90rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 35rpx; 
+
+  background-color: #db5705;
+  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
+  font-weight:800;
+  transition: all .1s ease-in;
+}
+
 /*表格-行*/
 .tableLine{
-  height: 100rpx;
+  height: 70rpx;
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.header{
+
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content:space-around;
+  align-items: center;
+}
+
+
+.timer{
+width: 240rpx;
+
+}
+
+.timer-active{
+  width: 240rpx;
+  color: #db1f05;
+  font-size: 40rpx;
+  }
+
+
+.popup-content {
+  padding: 40rpx;
+}
+
+.exam-rule-title {
+  margin-bottom: 10rpx;
+  color: #aaaaaa;
+  font-size: 28rpx;
+}
+
+.exam-control {
+  display: flex;
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+.exam-control van-button{
+  flex: 1;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+  font-size: 96rpx;
+  color: #ffffff;
+  background-color: #000000;
+  opacity: 0.7;
 }

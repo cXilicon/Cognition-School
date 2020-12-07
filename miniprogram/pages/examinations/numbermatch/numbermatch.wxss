@@ -72,16 +72,50 @@ Page {
 } 
 /*表格内每一格*/
 .numberText{
-  background-color: white;
-  margin: 0rpx 5rpx;
+  font-weight:800;
+  background-color: #ffffff;
+  box-shadow: 0 10rpx 0 #aaa, 0 10rpx 10rpx #aaa;
+  transition: all .1s ease-in;
+  margin: 0rpx 7rpx;
   height: 75rpx;
-  width: 140rpx;
+  width: 125rpx;
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
   font-size: 35rpx; 
 }
+.numberText-active{
+  font-weight:800;
+  background-color: #dddddd;
+  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
+  color: white;
+  margin: 0rpx 7rpx;
+  height: 75rpx;
+  width: 125rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 35rpx; 
+  transition: all .1s ease-in;
+}
+
+.numberText-tips{
+  background-color: #db5705;
+  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
+  font-weight:800;
+  transition: all .1s ease-in;
+  margin: 0rpx 7rpx;
+  height: 75rpx;
+  width: 125rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 35rpx; 
+}
+
 /*表格-行*/
 .tableLine{
   height: 75rpx;

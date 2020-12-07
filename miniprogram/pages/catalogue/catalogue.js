@@ -142,6 +142,18 @@ Page({
                     wx.navigateTo({
                         url: '/pages/examinations/schulte_grid/schulte_grid'
                     })
+                }else if (event.currentTarget.dataset.swiperId === 1){
+                    wx.navigateTo({
+                        url: '/pages/examinations/numbermatch/numbermatch'
+                    })
+                }else if (event.currentTarget.dataset.swiperId === 2){
+                    wx.navigateTo({
+                        url: '/pages/examinations/colorRemember/colorRemember'
+                    })
+                }else if (event.currentTarget.dataset.swiperId === 3){
+                    wx.navigateTo({
+                        url: '/pages/examinations/numberfind/numberfind'
+                    })
                 }else {
                     let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
                     this.setData({

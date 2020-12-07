@@ -38,7 +38,7 @@
       <view wx:if="{{showTable}}">
             <!--渲染4*5的表格，填入生成的随机生成的数值-->
             <view wx:for="{{height}}" wx:for-index="bindIndex1" wx:key="bindIndex1" class="tableLine">
-                  <view  wx:for="{{width}}" wx:for-index="bindIndex2" wx:key="bindIndex2" style="font-weight:800; background-color:{{question[bindIndex1][bindIndex2].color}};color:{{question[bindIndex1][bindIndex2].text}}" class="numberText" bindtap="clickNumber" data-click1="{{bindIndex1}}" data-click2="{{bindIndex2}}"> 
+                  <view  wx:for="{{width}}" wx:for-index="bindIndex2" wx:key="bindIndex2" class="{{question[bindIndex1][bindIndex2].style}}?{{question[bindIndex1][bindIndex2].style}}:numberText"  bindtap="clickNumber" data-click1="{{bindIndex1}}" data-click2="{{bindIndex2}}"> 
                   {{question[bindIndex1][bindIndex2].number}}
                   </view>
             </view>
