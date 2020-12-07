@@ -1,7 +1,7 @@
 <van-dialog id="van-dialog"/>
 <van-toast id="van-toast"/>
 <view class="page">
-  <custom-nav-bar navigateBackArea="{{false}}">{{countdownDisplay}}</custom-nav-bar>
+  <van-nav-bar title="{{countdownDisplay}}"/>
   <view class="main">
     <view class="examination-container">
       <view class="mask" hidden="{{examinationSwitchLock}}"></view>

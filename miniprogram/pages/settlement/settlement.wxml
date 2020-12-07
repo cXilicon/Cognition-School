@@ -1,5 +1,5 @@
 <view class="page">
-  <custom-nav-bar navigateBackArea="{{false}}">成绩单</custom-nav-bar>
+  <van-nav-bar title="成绩单" fixed="{{true}}" placeholder="{{true}}"/>
   <view class="main">
     <view class="report-title">PASS 测试报告</view>
     <view class="header-information">

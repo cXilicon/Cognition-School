@@ -1,7 +1,9 @@
 /* components/custom-nav-bar/custom-nav-bar.wxss */
 
 .custom-nav-bar {
-  /*background-color: white;*/
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
 
 .status-bar {

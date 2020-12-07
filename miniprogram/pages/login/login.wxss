@@ -1,0 +1,51 @@
+.page {
+  background-color: #eeeeee;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block {
+  width: 120px;
+  height: 120px;
+  background-color: #fff;
+}
+
+.header {
+  margin: 32rpx 32rpx 0 32rpx;
+  background-color: #ffffff;
+}
+
+.info-form {
+  display: flex;
+  flex-direction: column;
+  padding: 32rpx;
+}
+
+van-cell van-radio-group {
+  display: flex;
+  flex-direction: row;
+}
+
+van-cell van-radio-group van-radio {
+  margin-left: 20rpx;
+}
+
+.avatar {
+  height: 120rpx;
+  width: 120rpx;
+  background-color: rosybrown;
+  border-radius: 60rpx;
+}
+
+.avatar {
+  display: block !important;
+}
+
+.submit {
+  margin: auto 32rpx 32rpx;
+}

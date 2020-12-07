@@ -1,11 +1,10 @@
 <!--pages/mine/mine.wxml-->
 <view class="page">
-  <custom-nav-bar></custom-nav-bar>
   <view class="main">
     <view class="header"></view>
     <view class="account-info">
       <text class="account-title">个人信息</text>
-      <view class="card account-content">
+      <view class="account-content">
         <view class="account-avatar"></view>
         <view class="account-description">
           <text class="account-id">阿巴阿巴</text>
@@ -18,7 +17,7 @@
     </view>
     <view class="card">
       <text class="card-title">数据展示</text>
-      <ec-canvas wx:if="{{true}}" class="data-chart" ec="{{ ecBar }}"></ec-canvas>
+      <ec-canvas class="data-chart" ec="{{ ecBar }}"></ec-canvas>
     </view>
     <view class="card">
       <text class="card-title">历史测试</text>

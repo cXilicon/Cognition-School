@@ -4,7 +4,7 @@ Component({
         selected: 0,
         list: [
             {
-                pagePath: "/pages/index/index",
+                pagePath: "/pages/training/training",
                 iconName: "degree",
             },
             {

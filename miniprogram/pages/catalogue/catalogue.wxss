@@ -32,7 +32,7 @@
 }
 
 .examination-items-content {
-  height: 900rpx;
+  height: 800rpx;
   margin: 10rpx;
   padding: 40rpx 40rpx 80rpx;
   overflow: hidden;

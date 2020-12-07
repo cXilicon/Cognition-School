@@ -1,6 +1,6 @@
 import * as echarts from "../../components/ec-canvas/echarts";
 
-let dateFormat = require('dateformat');
+const dateFormat = require('dateformat');
 
 Page({
     data: {

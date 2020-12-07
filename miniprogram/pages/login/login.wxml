@@ -1,0 +1,75 @@
+<!--index.wxml-->
+<van-popup show="{{areaSelector}}" position="bottom" round>
+  <van-area title="地区"
+            area-list="{{areaList}}"
+            columns-num="{{2}}"
+            visible-item-count="5"
+            bind:confirm="selectArea"
+            data-selector="areaSelector"
+            bind:cancel="changeSelectorState"
+            value="100100"
+  />
+</van-popup>
+<van-popup show="{{eduSelector}}" position="bottom" round>
+  <van-picker
+          show-toolbar
+          title="学历"
+          columns="{{ columns }}"
+          visible-item-count="5"
+          data-selector="eduSelector"
+          bind:confirm="selectEdu"
+          bind:cancel="changeSelectorState"
+  />
+</van-popup>
+<van-popup show="{{birthSelector}}" position="bottom" round>
+  <van-datetime-picker
+          type="date"
+          min-date="{{minDate}}"
+          max-date="{{maxDate}}"
+          visible-item-count="5"
+          data-selector="birthSelector"
+          bind:confirm="selectBirth"
+          bind:cancel="changeSelectorState"
+  />
+</van-popup>
+<van-overlay show="{{!hasUserInfo && canIUse}}">
+  <view class="wrapper">
+    <van-button type="primary" open-type="getUserInfo" bind:tap="getUserInfo">
+      获取基本信息
+    </van-button>
+  </view>
+</van-overlay>
+<view class="page">
+  <van-nav-bar title="注册" fixed="{{true}}" placeholder="{{true}}"/>
+  <van-cell-group class="info-form">
+    <van-cell title="头像" center>
+      <van-image slot="extra"
+                 round
+                 width="120rpx"
+                 height="120rpx"
+                 custom-class="avatar"
+                 src="{{avatarUrl}}"
+      />
+    </van-cell>
+    <van-cell title="性别" center>
+      <view slot="extra">
+        <van-radio-group value="{{gender}}" bind:change="selectGender">
+          <van-radio name="male">男</van-radio>
+          <van-radio name="female">女</van-radio>
+        </van-radio-group>
+      </view>
+    </van-cell>
+    <van-cell title="地区" value="{{area}}" is-link
+              data-selector="areaSelector"
+              bind:tap="changeSelectorState"/>
+    <van-cell title="学历" value="{{edu}}" is-link
+              data-selector="eduSelector"
+              bind:tap="changeSelectorState"/>
+    <van-cell title="出生年月" value="{{birth}}" is-link
+              data-selector="birthSelector"
+              bind:tap="changeSelectorState"/>
+  </van-cell-group>
+  <van-button class="submit" type="primary" block bind:tap="getUserInfo">
+    提交
+  </van-button>
+</view>

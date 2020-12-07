@@ -1,0 +1,20 @@
+<!--pages/training/training.wxml-->
+<view class="page">
+  <van-nav-bar title="训练" fixed="{{true}}" placeholder="{{true}}"/>
+  <view class="main">
+    <block wx:for="{{examinations}}" wx:key="id">
+      <view class="training-item">
+        <image src="{{'cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/'+ item.image}}"
+               mode="heightFix"></image>
+        <view class="training-info">
+          <text class="item-title">{{item.name}}</text>
+          <view class="item-tags">
+            <text>{{item.tag}}</text>
+          </view>
+        </view>
+        <view class="training-score">{{item.score}}</view>
+      </view>
+    </block>
+  </view>
+  <custom-tab-bar></custom-tab-bar>
+</view>

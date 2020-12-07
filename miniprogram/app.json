@@ -1,18 +1,22 @@
 {
-  "pages": ["pages/index/index", "pages/mine/mine",
+  "pages": [
+    "pages/index/index",
+    "pages/mine/mine",
     "pages/catalogue/catalogue",
     "pages/settlement/settlement",
     "pages/examinations/numbermatch/numbermatch",
     "pages/examinations/numberfind/numberfind",
     "pages/examinations/numberfind2/numberfind2",
     "pages/examinations/colorRemember/colorRemember",
-    "pages/examinations/schulte_grid/schulte_grid"
+    "pages/examinations/schulte_grid/schulte_grid",
+    "pages/training/training",
+    "pages/login/login"
   ],
   "tabBar": {
     "custom": true,
     "list": [
       {
-        "pagePath": "pages/index/index"
+        "pagePath": "pages/training/training"
       },
       {
         "pagePath": "pages/index/index"
@@ -39,6 +43,15 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-button": "@vant/weapp/button/index",
     "van-toast": "@vant/weapp/toast/index",
-    "van-notify": "@vant/weapp/notify/index"
+    "van-notify": "@vant/weapp/notify/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-area": "@vant/weapp/area/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-image": "@vant/weapp/image/index"
   }
 }
