@@ -1,0 +1,31 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 560rpx;
+  width: 560rpx;
+  margin-top: 160rpx;
+  font-size: 96rpx;
+  font-weight: bold;
+  letter-spacing: 8rpx;
+  font-family: 幼圆, sans-serif;
+}
+
+.logo > image{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.login-button{
+  margin-top: auto;
+  margin-bottom: 280rpx;
+}

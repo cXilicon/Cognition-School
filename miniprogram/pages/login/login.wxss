@@ -2,19 +2,6 @@
   background-color: #eeeeee;
 }
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.block {
-  width: 120px;
-  height: 120px;
-  background-color: #fff;
-}
-
 .header {
   margin: 32rpx 32rpx 0 32rpx;
   background-color: #ffffff;
@@ -36,16 +23,13 @@ van-cell van-radio-group van-radio {
 }
 
 .avatar {
-  height: 120rpx;
-  width: 120rpx;
-  background-color: rosybrown;
-  border-radius: 60rpx;
-}
-
-.avatar {
   display: block !important;
 }
 
 .submit {
   margin: auto 32rpx 32rpx;
+}
+
+.font-color{
+  color: #333333 !important;
 }

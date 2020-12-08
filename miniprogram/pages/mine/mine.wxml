@@ -5,13 +5,18 @@
     <view class="account-info">
       <text class="account-title">个人信息</text>
       <view class="account-content">
-        <view class="account-avatar"></view>
+        <van-image round
+                   width="120rpx"
+                   height="120rpx"
+                   custom-class="account-avatar"
+                   src="{{userInfo.avatarUrl}}"
+        />
         <view class="account-description">
-          <text class="account-id">阿巴阿巴</text>
+          <text class="account-id">{{userInfo.nickName}}</text>
           <text
-            class="account-tags"
-            space="false"
-          >14岁 | 学生 | 智商高达50</text>
+                  class="account-tags"
+                  space="false"
+          >{{userInfo.tags}}</text>
         </view>
       </view>
     </view>

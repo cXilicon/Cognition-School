@@ -4,70 +4,54 @@ import area from "../../utils/area";
 
 Page({
     data: {
-        gender: 'male',
-        userInfo: {},
-        hasUserInfo: false,
-        canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        avatarUrl: "",
+        userInfo: {
+            avatarUrl: null,
+            nickName: null,
+            gender: null,
+            areaValue: null,
+            areaView: null,
+            birthValue: null,
+            birthView: null,
+            edu: null,
+        },
         areaList: area,
         areaSelector: false,
-        area: "保密 保密",
         eduSelector: false,
-        edu: "保密",
-        columns: ['保密', '学龄前', '小学', '初中', '高中', '大学', '研究生'],
         birthSelector: false,
-        birth: "1900-01-01",
-        minDate: new Date(1900, 1, 1).getTime(),
+        eduList: ['保密', '学龄前', '小学', '初中', '高中', '大学', '研究生'],
+        minDate: new Date(1900, 0, 1).getTime(),
         maxDate: new Date().getTime()
     },
 
     //事件处理函数
     onLoad: function () {
-        if (app.globalData.userInfo) {
-            console.log(1)
-            this.setData({
-                userInfo: app.globalData.userInfo,
-                hasUserInfo: true
-            })
-            this.setData({
-                avatarUrl: this.data.userInfo.avatarUrl
-            })
-        } else if (this.data.canIUse) {
-            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-            // 所以此处加入 callback 以防止这种情况
-            app.userInfoReadyCallback = res => {
-                this.setData({
-                    userInfo: res.userInfo,
-                    hasUserInfo: true
-                })
-                this.setData({
-                    avatarUrl: this.data.userInfo.avatarUrl
-                })
-            }
-        } else {
-            // 在没有 open-type=getUserInfo 版本的兼容处理
-            wx.getUserInfo({
-                success: res => {
-                    app.globalData.userInfo = res.userInfo
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    })
-                }
-            })
+        const eventChannel = this.getOpenerEventChannel()
+        let wxUserInfo = null
+        eventChannel.on('wxUserInfo', function (data) {
+            wxUserInfo = data
+        })
+        console.log('获得数据:', wxUserInfo)
+        let genderDic = ['none', 'male', 'female']
+        let userInfo = {
+            avatarUrl: wxUserInfo.avatarUrl,
+            nickName: wxUserInfo.nickName,
+            gender: genderDic[wxUserInfo.gender],
+            areaView: [wxUserInfo.province, wxUserInfo.city].join(' '),
+            birthValue: new Date(2010, 1, 1).getTime(),
+            birthView: dateFormat(new Date(2010, 0, 1), 'yyyy-mm-dd'),
+            edu: '保密',
         }
-    },
-
-    getUserInfo: function (e) {
-        app.globalData.userInfo = e.detail.userInfo
+        for (let city in area.city_list) {
+            if (area.city_list[city] === wxUserInfo.city)
+                userInfo.areaValue = city
+        }
         this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true
+            userInfo: userInfo,
         })
     },
 
     changeSelectorState: function (e) {
-        let selector = null
+        let selector
         if (e.currentTarget)
             selector = e.currentTarget.dataset.selector
         else
@@ -79,14 +63,16 @@ Page({
 
     selectGender: function (e) {
         this.setData({
-            gender: e.detail
+            'userInfo.gender': e.detail
         })
     },
 
     selectArea: function (e) {
-        let data = e.detail.values
+        let code = e.detail.code
+        let name = e.detail.values
         this.setData({
-            area: data[0].name + ' ' + data[1].name,
+            'userInfo.areaView': [name[0].name, name[1].name].join(' '),
+            'userInfo.areaValue': code
         })
         this.changeSelectorState('areaSelector')
     },
@@ -94,7 +80,7 @@ Page({
     selectEdu: function (e) {
         let data = e.detail.value
         this.setData({
-            edu: data
+            'userInfo.edu': data
         })
         this.changeSelectorState('eduSelector')
     },
@@ -102,10 +88,37 @@ Page({
     selectBirth: function (e) {
         let data = e.detail
         this.setData({
-            birth: dateFormat(new Date(data), 'yyyy-mm-dd')
-
+            'userInfo.birthValue': data,
+            'userInfo.birthView': dateFormat(new Date(data), 'yyyy-mm-dd'),
         })
         this.changeSelectorState('birthSelector')
     },
 
+    commitData: function () {
+        let that = this
+        let userInfo = {
+            nickName: that.data.userInfo.nickName,
+            gender: that.data.userInfo.gender,
+            birth: new Date(that.data.userInfo.birthValue),
+            edu: that.data.userInfo.edu,
+            area: that.data.userInfo.areaView
+        }
+
+        const db = wx.cloud.database()
+        db.collection('user').add({
+            data: userInfo,
+        }).then(() => {
+            console.log('数据已上传')
+            userInfo['avatarUrl'] = that.data.userInfo.avatarUrl
+            app.globalData.userInfo = userInfo
+            wx.navigateBack()
+        }).catch((res) => {
+            console.log(res)
+            console.log('上传失败')
+        })
+    },
+
+    backToLaunch: function () {
+        wx.navigateBack()
+    }
 });

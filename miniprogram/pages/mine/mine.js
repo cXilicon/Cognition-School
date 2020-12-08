@@ -1,6 +1,7 @@
 // pages/mine/mine.js
 import * as echarts from "../../components/ec-canvas/echarts";
 
+let app = getApp()
 Page({
     data: {
         ecBar: {
@@ -17,9 +18,24 @@ Page({
             },
         },
         examinationInfoShowFlag: false,
+        userInfo: {
+            avatarUrl: null,
+            nickName: null,
+            tags: null,
+        },
     },
-    onLoad(query) {
 
+    onLoad(query) {
+        let userInfo = app.globalData.userInfo
+        let age = new Date(new Date().getTime() - userInfo.birth.getTime()).getFullYear() - 1970
+        let edu = userInfo.edu
+        let tags = [age + '岁', '学历: ' + edu].join(' | ')
+        console.log(tags)
+        this.setData({
+            ['userInfo.avatarUrl']: userInfo.avatarUrl,
+            ['userInfo.nickName']: userInfo.nickName,
+            ['userInfo.tags']: tags,
+        })
     },
 
     switchExaminationInfo: function () {
@@ -29,9 +45,9 @@ Page({
     },
 });
 
-var colorList = ["#ec524b", "#f5b461", "#f3eac2", "#9ad3bc"];
+let colorList = ["#ec524b", "#f5b461", "#f3eac2", "#9ad3bc"];
 
-var getAbilityChart = {
+let getAbilityChart = {
     dataset: {
         dimensions: ["item", "score", "max"],
         source: [

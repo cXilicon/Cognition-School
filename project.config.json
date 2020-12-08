@@ -51,21 +51,44 @@
     "isGameTourist": false,
     "simulatorType": "wechat",
     "simulatorPluginLibVersion": {},
+    "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
     "condition": {
-        "search": {
-            "list": []
-        },
-        "conversation": {
-            "list": []
-        },
         "plugin": {
             "list": []
         },
         "game": {
             "list": []
         },
-        "miniprogram": {
+        "gamePlugin": {
             "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/login/login",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/test/test",
+                    "pathName": "pages/test/test",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/launch/launch",
+                    "pathName": "pages/launch/launch",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/examinations/schulte_grid/schulte_grid",
+                    "pathName": "pages/examinations/schulte_grid/schulte_grid",
+                    "query": "",
+                    "scene": null
+                }
+            ]
         }
     }
 }

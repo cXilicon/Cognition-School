@@ -6,11 +6,12 @@
     "pages/settlement/settlement",
     "pages/examinations/numbermatch/numbermatch",
     "pages/examinations/numberfind/numberfind",
-    
     "pages/examinations/colorRemember/colorRemember",
     "pages/examinations/schulte_grid/schulte_grid",
     "pages/training/training",
-    "pages/login/login"
+    "pages/launch/launch",
+    "pages/login/login",
+    "pages/test/test"
   ],
   "tabBar": {
     "custom": true,
@@ -38,7 +39,6 @@
     "ec-canvas": "components/ec-canvas/ec-canvas",
     "iconfont": "components/iconfont/iconfont",
     "custom-tab-bar": "components/custom-tab-bar/custom-tab-bar",
-    "custom-nav-bar": "components/custom-nav-bar/custom-nav-bar",
     "van-overlay": "@vant/weapp/overlay/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-button": "@vant/weapp/button/index",
@@ -52,6 +52,7 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-picker": "@vant/weapp/picker/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-image": "@vant/weapp/image/index"
+    "van-image": "@vant/weapp/image/index",
+    "van-field": "@vant/weapp/field/index"
   }
 }

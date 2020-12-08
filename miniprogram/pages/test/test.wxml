@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<van-nav-bar></van-nav-bar>
+
+<view>{{display}}</view>
+<van-button block type="primary">111</van-button>
