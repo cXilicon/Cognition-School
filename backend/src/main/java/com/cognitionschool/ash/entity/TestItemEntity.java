@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "test_item", schema = "softwareWX", catalog = "")
 public class TestItemEntity {
     private int testItemId;
-    private String deleteFlag;
+    private Integer deleteFlag;
     private String testName;
     private String testType;
 
@@ -22,11 +22,11 @@ public class TestItemEntity {
 
     @Basic
     @Column(name = "delete_flag")
-    public String getDeleteFlag() {
+    public Integer getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 

@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 @Table(name = "user_to_test", schema = "softwareWX", catalog = "")
 public class UserToTestEntity {
     private int id;
-    private String deleteFlag;
-    private Timestamp finishTime;
+    private Integer deleteFlag;
+    private String finishTime;
     private BigDecimal score;
     private Integer testId;
     private Integer testNumber;
@@ -27,21 +27,21 @@ public class UserToTestEntity {
 
     @Basic
     @Column(name = "delete_flag")
-    public String getDeleteFlag() {
+    public Integer getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
     @Basic
     @Column(name = "finish_time")
-    public Timestamp getFinishTime() {
+    public String getFinishTime() {
         return finishTime;
     }
 
-    public void setFinishTime(Timestamp finishTime) {
+    public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
     }
 

@@ -4,8 +4,9 @@ import com.cognitionschool.ash.Service.TblAdminService;
 import com.alibaba.fastjson.JSONObject;
 import com.cognitionschool.ash.entity.AdminEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
+@Transactional
 @RestController
 @CrossOrigin
 @RequestMapping(value="/admin")

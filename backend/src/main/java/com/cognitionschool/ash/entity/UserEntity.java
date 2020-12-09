@@ -8,8 +8,8 @@ import java.sql.Date;
 public class UserEntity {
     private int id;
     private String area;
-    private Date birthday;
-    private String deleteFlag;
+    private String birthday;
+    private Integer deleteFlag;
     private String education;
     private String openid;
     private String sex;
@@ -38,21 +38,21 @@ public class UserEntity {
 
     @Basic
     @Column(name = "birthday")
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
     @Basic
     @Column(name = "delete_flag")
-    public String getDeleteFlag() {
+    public Integer getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 

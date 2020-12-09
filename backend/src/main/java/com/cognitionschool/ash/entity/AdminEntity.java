@@ -8,7 +8,7 @@ public class AdminEntity {
     private int id;
     private String adminAccount;
     private String password;
-    private String deleteFlag;
+    private Integer deleteFlag;
 
     @Id
     @Column(name = "id")
@@ -42,11 +42,11 @@ public class AdminEntity {
 
     @Basic
     @Column(name = "delete_flag")
-    public String getDeleteFlag() {
+    public Integer getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
