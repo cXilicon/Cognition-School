@@ -53,13 +53,13 @@ public class TblUserToTestController {
     }
 
     @RequestMapping(value="/add",method= RequestMethod.POST)
-    public JSONObject addUser(@RequestParam(value = "userID")int userID,
+    public JSONObject addUserRecord(@RequestParam(value = "userID")int userID,
                               @RequestParam(value = "testID")int testID,
-                              @RequestParam(value = "testNumber")int testNumber,
                               @RequestParam(value = "score")double score,
                               @RequestParam(value = "finishTime")String finishTime)
     {
         JSONObject result=new JSONObject();
+        int testNumber = tblUserToTestService.findMaxTestNumber(userID,testID);
         tblUserToTestService.addRecord(userID, testID, testNumber, score, finishTime);
         result.put("port","200");
         return result;

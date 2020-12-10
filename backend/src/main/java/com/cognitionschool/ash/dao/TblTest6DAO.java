@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-public interface TblTest6DAO extends JpaRepository<AdminEntity,Integer> {
+public interface TblTest6DAO extends JpaRepository<Test6Entity,Integer> {
 
     @Query(value = "select * from test6 where id = ? and delete_flag = 0 ",nativeQuery = true)
     Test6Entity findByID(int id);
@@ -27,6 +27,6 @@ public interface TblTest6DAO extends JpaRepository<AdminEntity,Integer> {
     void deleteTest(int id);
 
     @Modifying
-    @Query(value = "update test6 set question_img_address = ?, choice1=?,choice2=?,choice3=?,choice4=?,choice5=?  choice6=? level = ? where id=?",nativeQuery = true)
+    @Query(value = "update test6 set question_img_address = ?, choice1=?,choice2=?,choice3=?,choice4=?,choice5=?,choice6=?,level = ? where id=?",nativeQuery = true)
     void modifyTest(String questionImgAddress,String choice1,String choice2,String choice3,String choice4,String choice5,String choice6,int level,int id);
 }

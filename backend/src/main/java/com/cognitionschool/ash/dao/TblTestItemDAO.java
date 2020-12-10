@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public interface TblTestItemDAO extends JpaRepository<AdminEntity,Integer> {
+public interface TblTestItemDAO extends JpaRepository<TestItemEntity,Integer> {
 
     @Query(value = "select * from test_item where test_item_id = ? and delete_flag = 0 ",nativeQuery = true)
     TestItemEntity findByTestItemId(int testItemID);

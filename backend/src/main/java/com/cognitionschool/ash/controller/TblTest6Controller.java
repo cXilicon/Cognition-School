@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,7 +21,7 @@ public class TblTest6Controller {
     @Autowired
     TblTest6Service tblTest6Service;
         @RequestMapping(value="/gebyid",method= RequestMethod.GET)
-        public JSONObject getByID(@RequestParam(value = "ID") int ID){
+        public JSONObject getByID(@RequestParam(value = "id") int ID){
             Test6Entity test6Entity= tblTest6Service.findByID(ID);
             JSONObject result=new JSONObject();
             if (test6Entity== null)
@@ -29,14 +30,7 @@ public class TblTest6Controller {
                 return result;
             }
             else{
-                result.put("questionImgAddress",test6Entity.getQuestionImgAddress());
-                result.put("choice1",test6Entity.getChoice1());
-                result.put("choice2",test6Entity.getChoice2());
-                result.put("choice3",test6Entity.getChoice3());
-                result.put("choice4",test6Entity.getChoice4());
-                result.put("choice5",test6Entity.getChoice5());
-                result.put("choice6",test6Entity.getChoice6());
-                result.put("level",test6Entity.getLevel());
+                result.put("data",test6Entity);
                 return result;
             }
     }
@@ -51,16 +45,30 @@ public class TblTest6Controller {
             return result;
         }
         else{
-            Random rand = new Random();
-            Test6Entity test6Entity = test6EntityList.get(rand.nextInt(test6EntityList.size()));
-            result.put("questionImgAddress",test6Entity.getQuestionImgAddress());
-            result.put("choice1",test6Entity.getChoice1());
-            result.put("choice2",test6Entity.getChoice2());
-            result.put("choice3",test6Entity.getChoice3());
-            result.put("choice4",test6Entity.getChoice4());
-            result.put("choice5",test6Entity.getChoice5());
-            result.put("choice6",test6Entity.getChoice6());
-            result.put("level",test6Entity.getLevel());
+            int time;
+            if(level == 1 || level == 2)
+            {
+                 time = 2;
+            }
+            else
+            {
+                time = 1;
+            }
+            ArrayList<Test6Entity> test6EntityArrayList = new ArrayList<>();
+            int oldTest = -1;
+            for (int i = 0;i<time;i++)
+            {
+                Random rand = new Random();
+                int randomNum = rand.nextInt(test6EntityList.size());
+                while (randomNum == oldTest)
+                {
+                    randomNum = rand.nextInt(test6EntityList.size());
+                }
+                oldTest = randomNum;
+                Test6Entity test6Entity = test6EntityList.get(randomNum);
+                test6EntityArrayList.add(test6Entity);
+            }
+            result.put("data",test6EntityArrayList);
             return result;
         }
     }
@@ -100,7 +108,7 @@ public class TblTest6Controller {
                                  @RequestParam(value = "choice5")String choice5,
                                  @RequestParam(value = "choice6")String choice6,
                                  @RequestParam(value = "level")int level,
-                                 @RequestParam(value = "ID")int ID)
+                                 @RequestParam(value = "id")int ID)
     {
         JSONObject result=new JSONObject();
         tblTest6Service.modifyTest(questionImgAddress, choice1, choice2, choice3, choice4, choice5, choice6, level,ID);

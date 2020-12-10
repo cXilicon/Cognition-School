@@ -27,6 +27,17 @@ public class TblUserToTestImpl implements TblUserToTestService {
     }
 
     @Override
+    public Integer findMaxTestNumber(int userID, int test_id) {
+        Integer num = tblUserToTestDAO.findMaxTestNumber(userID,test_id);
+        if (num == null)
+            return 1;
+        else
+        {
+            return  num + 1;
+        }
+    }
+
+    @Override
     public void addRecord(int userID, int testID, int testNumber, double score, String finishTime) {
         tblUserToTestDAO.addRecord(userID, testID, testNumber, score, finishTime);
     }

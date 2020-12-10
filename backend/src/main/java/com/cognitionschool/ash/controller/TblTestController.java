@@ -26,8 +26,7 @@ public class TblTestController {
             return result;
         }
         else{
-            result.put("testName",testItemEntity.getTestName());
-            result.put("testType",testItemEntity.getTestType());
+            result.put("data",testItemEntity);
             return result;
         }
     }

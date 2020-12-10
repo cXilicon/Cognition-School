@@ -27,13 +27,8 @@ public class TblUserController {
             return result;
         }
         else{
-            result.put("id",userEntity.getId());
-            result.put("area",userEntity.getArea());
-            result.put("birthday",userEntity.getBirthday());
-            result.put("education",userEntity.getEducation());
-            result.put("sex",userEntity.getSex());
-            result.put("sign",userEntity.getSign());
-            result.put("userName",userEntity.getUserName());
+            result.put("port","200");
+            result.put("data",userEntity);
             return result;
         }
     }
@@ -63,7 +58,7 @@ public class TblUserController {
     }
 
     @RequestMapping(value="/modify",method= RequestMethod.POST)
-    public JSONObject modifyUser(@RequestParam(value = "openID")String openID,
+    public JSONObject modifyUser(@RequestParam(value = "openid")String openID,
                               @RequestParam(value = "userName")String userName,
                               @RequestParam(value = "area")String area,
                               @RequestParam(value = "birthday")String birthday,
