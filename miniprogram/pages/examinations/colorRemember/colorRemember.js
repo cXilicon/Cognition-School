@@ -312,7 +312,7 @@ initGame: function () { // 游戏初始化
             that.testStart();
         }, 2000)
       },
-      playtime: 2500
+      playtime: 2100
   }
 
   let step1 = {
@@ -321,7 +321,7 @@ initGame: function () { // 游戏初始化
         Toast('例如本题中，记住'+that.data.alltext[that.data.color[0]]+"的文字"+that.data.alltext[that.data.text[0]]);
        
     },
-    playtime: 3000
+    playtime: 2500
 }
 
   let step2 = {
@@ -371,7 +371,7 @@ initGame: function () { // 游戏初始化
         }, 2000)
 
     },
-    playtime: 3000
+    playtime: 2500
 }
 
 
