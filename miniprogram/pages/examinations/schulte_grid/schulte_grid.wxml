@@ -26,15 +26,25 @@
 <van-toast id="van-toast"/>
 <view class="page">
   <view class="main">
+    <van-image class="background-image" height="100%" width="100%" fit="cover"
+               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png"/>
+
     <view class="gird">
-      <van-image class="background-image" height="100%" width="100%" fit="cover"
-                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png"/>
+      <view class="progress-container">
+        <view class="progress">
+          <view class="progress-content" style="width: {{percent}}%;"></view>
+          <van-image class="progress-arrow" style="left: {{percent}}%;" height="100%" width="100%"
+                     fit="cover"
+                     src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
+        </view>
+      </view>
+
       <view class="row" wx:for="{{array}}" wx:for-item="row" wx:key="*this">
         <view class="cell {{num>=flag+1?'':'cell-clicked'}} {{num!==highlight?'':'highlight'}}" wx:for="{{row}}"
               wx:for-item="num" wx:key="*this"
               bind:touchend="tapNum" data-num="{{num}}">
           <view class="cell-num">{{!examState ? '' : num}}</view>
-          <view class="cell-bottom" ></view>
+          <view class="cell-bottom"></view>
         </view>
       </view>
     </view>

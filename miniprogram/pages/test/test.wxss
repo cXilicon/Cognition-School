@@ -61,7 +61,7 @@ page {
   right: -40rpx;
 }
 
-.countdown {
+.progress {
   position: relative;
   display: flex;
   align-items: center;
@@ -70,7 +70,7 @@ page {
   margin: 40rpx auto;
 }
 
-.countdown:after{
+.progress:after {
   content: '';
   position: absolute;
   box-sizing: border-box;
@@ -82,14 +82,14 @@ page {
   z-index: -1;
 }
 
-.countdown-content{
+.progress-content {
   height: 30rpx;
   border: 2px solid #333333;
   border-radius: 10rpx;
   background-color: wheat;
 }
 
-.countdown-arrow{
+.progress-arrow {
   position: absolute;
   left: 80%;
   transform: translate(-50%);

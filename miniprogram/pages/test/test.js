@@ -3,27 +3,36 @@ let init = null
 Page({
     data: {
         percent: 0,
-        countTime: 0,
+        timeTarget: 10000,
+        timeNow: 0,
     },
     onLoad: function (options) {
 
     },
 
-    reset: function (){
+    reset: function () {
+        clearInterval(init)
         this.setData({
-            countTime: 0
-        })
-        this.setData({
+            timeNow: 0,
             percent: 0,
         })
     },
 
     start: function () {
-        this.setData({
-            countTime: 1
-        })
-        this.setData({
-            percent: 100,
-        })
+        this.reset()
+        init = setInterval(
+            () => {
+                this.setData({
+                    timeNow: this.data.timeNow + 10,
+                    percent: 100 * (this.data.timeNow + 10) / this.data.timeTarget
+                })
+                if (this.data.timeNow >= this.data.timeTarget) {
+                    clearInterval(init)
+                }
+            }, 10)
+    },
+
+    stop: function () {
+        clearInterval(init)
     }
 });
