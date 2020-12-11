@@ -10,7 +10,7 @@
     "pages/examinations/schulte_grid/schulte_grid",
     "pages/training/training",
     "pages/launch/launch",
-    "pages/login/login",
+    "pages/userInfo/userInfo",
     "pages/test/test"
   ],
   "tabBar": {

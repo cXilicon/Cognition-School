@@ -26,7 +26,7 @@ Page({
     },
 
     onLoad(query) {
-        let userInfo = app.globalData.userInfo
+        let userInfo = app.globalData.user.information
         let age = new Date(new Date().getTime() - userInfo.birth.getTime()).getFullYear() - 1970
         let edu = userInfo.edu
         let tags = [age + '岁', '学历: ' + edu].join(' | ')

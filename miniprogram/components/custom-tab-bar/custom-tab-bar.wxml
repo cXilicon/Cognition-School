@@ -1,5 +1,5 @@
 <!--component/customTabBar/customTabBar.wxml-->
-<view class="tabbar">
+<view class="tab-bar custom-class">
   <view
     wx:for="{{list}}"
     wx:key="index"

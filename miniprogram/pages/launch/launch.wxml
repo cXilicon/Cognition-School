@@ -4,7 +4,7 @@
     <text>认知\n学堂</text>
   </view>
   <van-button wx:if="{{!hasUserInfo}}" class="login-button" type="primary" open-type="getUserInfo" lang="zh_CN" block
-              bind:getuserinfo="login">
+              bind:getuserinfo="signUp">
     微信一键登陆
   </van-button>
 </view>

@@ -28,6 +28,7 @@ Page({
                             })
                         })
                 } else {
+                    console.log('用户未授权')
                     that.setData({
                         hasUserInfo: false
                     })
@@ -36,39 +37,44 @@ Page({
         })
     },
 
-    login: function (e) {
-        if (e.detail.userInfo)
+    signUp: function (e) {
+        if (e.detail.userInfo) {
+            console.log('用户完成授权')
             this.getUserInfoFromDatabase()
-                .then((res) => {
+                .then(() => {
                     console.log('未查询到用户数据，前往注册')
                     wx.navigateTo({
-                        url: '/pages/login/login',
+                        url: '/pages/userInfo/userInfo',
                         success: res => {
-                            res.eventChannel.emit('wxUserInfo', e.detail.userInfo)
+                            res.eventChannel.emit('wxUserInfo', {
+                                type: 'signUp',
+                                userInfo: e.detail.userInfo,
+                            })
                         }
                     })
                 })
                 .catch(() => {
                     console.log('数据库读取错误')
                 })
-        else
+        } else
             console.log('用户取消授权')
     },
 
+    // 查询数据库
     getUserInfoFromDatabase: function () {
         return new Promise((success, fail) => {
                 const db = wx.cloud.database()
                 db.collection('user').where({
                     _openid: '{openid}',
                 }).get().then(res => {
-                    console.log('用户已授权')
                     if (res.data.length !== 0) {
-                        console.log('查询到用户数据，前往主页面')
-                        let userInfo = res.data[0]
+                        // 查询到数据
+                        let user = res.data[0]
                         wx.getUserInfo({
                             success: res => {
-                                userInfo['avatarUrl'] = res.userInfo.avatarUrl
-                                app.globalData.userInfo = userInfo
+                                user.information['avatarUrl'] = res.userInfo.avatarUrl
+                                app.globalData.user = user
+                                console.log('查询到用户数据，前往主页面')
                                 wx.switchTab({
                                     url: '/pages/index/index'
                                 })

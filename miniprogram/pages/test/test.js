@@ -1,17 +1,29 @@
-//index.js
-import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
-import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
-
-let app = getApp()
+let init = null
 
 Page({
     data: {
-        display: null
+        percent: 0,
+        countTime: 0,
+    },
+    onLoad: function (options) {
+
     },
 
-    onLoad(query) {
-        let userInfo = app.globalData.userInfo
-        [userInfo.avatarUrl, userInfo.nickName, userInfo.gender, userInfo.birth, userInfo.edu] = []
-        console.log(app.globalData.userInfo)
+    reset: function (){
+        this.setData({
+            countTime: 0
+        })
+        this.setData({
+            percent: 0,
+        })
+    },
+
+    start: function () {
+        this.setData({
+            countTime: 1
+        })
+        this.setData({
+            percent: 100,
+        })
     }
-})
+});

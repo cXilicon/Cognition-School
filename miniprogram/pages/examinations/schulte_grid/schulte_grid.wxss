@@ -1,6 +1,8 @@
 /**index.wxss**/
-page {
-  background-color: #eeeeee;
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .popup-content {
@@ -43,6 +45,11 @@ page {
   opacity: 0.7;
 }
 
+.background-image{
+  height: 220rpx;
+  width: 360rpx;
+}
+
 .main {
   flex: 1;
   display: flex;
@@ -53,6 +60,7 @@ page {
 
 .target-now {
   font-size: 72rpx;
+  color: #cccccc;
 }
 
 .target-now-title {
@@ -68,41 +76,54 @@ page {
 }
 
 .cell {
-  flex: 1;
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  height: 112rpx;
+  width: 120rpx;
   margin: 14rpx 10rpx;
-  border-radius: 10rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
   font-size: 48rpx;
   text-align: center;
   background-color: #ffffff;
-  box-shadow: 0 10rpx 0 #aaa, 0 10rpx 10rpx #aaa;
+  overflow: hidden;
   transition: all .1s ease-in;
 }
 
+.cell-num {
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 2px solid #333333;
+  border-top: none;
+  border-radius: 4px;
+  transition: all .1s ease-in;
+}
+
+.cell-bottom {
+  flex: 1;
+  width: 100%;
+  background-color: #e3a92e;
+}
+
 .cell:active {
-  position: relative;
-  top: 5rpx;
-  background-color: #dddddd;
-  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
+  margin-top: 18rpx;
+  height: 108rpx;
+  background-color: #cccccc;
 }
 
-.cell:after {
-  content: '';
-  padding-top: 100%;
+.cell-clicked {
+  margin-top: 18rpx;
+  height: 108rpx;
+  background-color: #cccccc;
 }
 
-.cell_clicked {
-  position: relative;
-  top: 5rpx;
-  background-color: #dddddd;
-  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
-}
-
-.highlight{
-  background-color: #db5705;
-  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
+.highlight {
+  background-color: #f0cf1a;
 }
 
 .row {

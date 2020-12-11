@@ -31,7 +31,7 @@
   />
 </van-popup>
 <view class="page">
-  <van-nav-bar left-arrow title="注册" left-text="返回" fixed="{{true}}" placeholder="{{true}}"
+  <van-nav-bar left-arrow title="{{isNew?'注册':'个人信息'}}" left-text="返回" fixed="{{true}}" placeholder="{{true}}"
                bind:click-left="backToLaunch"/>
   <van-cell-group class="info-form">
     <van-cell title="头像" center>

@@ -4,6 +4,7 @@ import area from "../../utils/area";
 
 Page({
     data: {
+        isSignUp: true,
         userInfo: {
             avatarUrl: null,
             nickName: null,
@@ -23,30 +24,34 @@ Page({
         maxDate: new Date().getTime()
     },
 
-    //事件处理函数
     onLoad: function () {
         const eventChannel = this.getOpenerEventChannel()
-        let wxUserInfo = null
+        let rawUserInfo = null
+        let isSignUp = null
         eventChannel.on('wxUserInfo', function (data) {
-            wxUserInfo = data
+            isSignUp = (data.type === 'signUp')
+            rawUserInfo = data.userInfo
         })
-        console.log('获得数据:', wxUserInfo)
+        console.log('获得数据:', rawUserInfo)
         let genderDic = ['none', 'male', 'female']
-        let userInfo = {
-            avatarUrl: wxUserInfo.avatarUrl,
-            nickName: wxUserInfo.nickName,
-            gender: genderDic[wxUserInfo.gender],
-            areaView: [wxUserInfo.province, wxUserInfo.city].join(' '),
-            birthValue: new Date(2010, 1, 1).getTime(),
-            birthView: dateFormat(new Date(2010, 0, 1), 'yyyy-mm-dd'),
-            edu: '保密',
+
+        let initialedUserInfo = {
+            avatarUrl: rawUserInfo.avatarUrl,
+            nickName: rawUserInfo.nickName,
+            gender: isSignUp ? genderDic[rawUserInfo.gender] : rawUserInfo.gender,
+            areaView: isSignUp ? [rawUserInfo.province, rawUserInfo.city].join(' ') : rawUserInfo.area,
+            birthValue: isSignUp ? new Date(2010, 0, 1).getTime() : rawUserInfo.birth.getTime(),
+            birthView: dateFormat(isSignUp ? new Date(2010, 0, 1).getTime() : rawUserInfo.birth.getTime(), 'yyyy-mm-dd'),
+            edu: isSignUp ? '保密' : rawUserInfo.edu
         }
+        let cityName = isSignUp ? rawUserInfo.city : rawUserInfo.area.split(' ')[1]
         for (let city in area.city_list) {
-            if (area.city_list[city] === wxUserInfo.city)
-                userInfo.areaValue = city
+            if (area.city_list[city] === cityName)
+                rawUserInfo.areaValue = city
         }
         this.setData({
-            userInfo: userInfo,
+            userInfo: initialedUserInfo,
+            isSignUp: isSignUp
         })
     },
 
@@ -97,11 +102,14 @@ Page({
     commitData: function () {
         let that = this
         let userInfo = {
-            nickName: that.data.userInfo.nickName,
-            gender: that.data.userInfo.gender,
-            birth: new Date(that.data.userInfo.birthValue),
-            edu: that.data.userInfo.edu,
-            area: that.data.userInfo.areaView
+            information: {
+                nickName: that.data.userInfo.nickName,
+                gender: that.data.userInfo.gender,
+                birth: new Date(that.data.userInfo.birthValue),
+                edu: that.data.userInfo.edu,
+                area: that.data.userInfo.areaView
+            },
+            history: []
         }
 
         const db = wx.cloud.database()
@@ -112,8 +120,7 @@ Page({
             userInfo['avatarUrl'] = that.data.userInfo.avatarUrl
             app.globalData.userInfo = userInfo
             wx.navigateBack()
-        }).catch((res) => {
-            console.log(res)
+        }).catch(() => {
             console.log('上传失败')
         })
     },

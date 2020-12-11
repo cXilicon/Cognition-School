@@ -65,8 +65,8 @@
         "miniprogram": {
             "list": [
                 {
-                    "name": "pages/login/login",
-                    "pathName": "pages/login/login",
+                    "name": "pages/userInfo/userInfo",
+                    "pathName": "pages/userInfo/userInfo",
                     "query": "",
                     "scene": null
                 },
@@ -79,6 +79,12 @@
                 {
                     "name": "pages/launch/launch",
                     "pathName": "pages/launch/launch",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/examinations/schulte_grid/schulte_grid",
+                    "pathName": "pages/examinations/schulte_grid/schulte_grid",
                     "query": "",
                     "scene": null
                 },

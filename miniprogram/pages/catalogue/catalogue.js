@@ -25,83 +25,92 @@ Page({
         examinations: [
             {
                 id: 0,
-                image: 'Mercury.svg',
+                frontImage: 'exam-0.png',
+                backgroundImage: 'Mercury.jpeg',
                 tag: 'Planning',
                 name: '舒尔特方格',
                 score: '--',
-                style: "transform: scale(1); opacity: 1; ",
+                style: "transform: scale(1);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #707070);'
             },
             {
                 id: 1,
-                image: 'Venus.svg',
+                frontImage: 'exam-1.png',
+                backgroundImage: 'Venus.jpeg',
                 tag: 'Planning',
                 name: '数字匹配',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #329084);'
             },
             {
                 id: 2,
-                image: 'Earth.svg',
+                frontImage: 'exam-2.png',
+                backgroundImage: 'Earth.jpeg',
                 tag: 'Attention',
                 name: '表达性注意',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #0e6575);'
             },
             {
                 id: 3,
-                image: 'Mars.svg',
+                frontImage: 'exam-3.png',
+                backgroundImage: 'Mars.jpeg',
                 tag: 'Attention',
                 name: '注意力保持',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #fc4927);'
             },
             {
                 id: 4,
-                image: 'Jupiter.svg',
+                frontImage: 'exam-4.png',
+                backgroundImage: 'Jupiter.jpeg',
                 tag: 'Simultaneous',
                 name: '图形记忆',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #21b0c0);'
             },
             {
                 id: 5,
-                image: 'Saturn.svg',
+                frontImage: 'exam-5.png',
+                backgroundImage: 'Saturn.jpeg',
                 tag: 'Simultaneous',
                 name: '矩阵问题',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #9d713f);'
             },
             {
                 id: 6,
-                image: 'Uranus.svg',
+                frontImage: 'exam-6.png',
+                backgroundImage: 'Uranus.jpeg',
                 tag: 'Successive',
                 name: '颜色记忆',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #3a72c1);'
             },
             {
                 id: 7,
-                image: 'Neptune.svg',
+                frontImage: 'exam-7.png',
+                backgroundImage: 'Neptune.jpeg',
                 tag: 'Successive',
                 name: '数字回忆',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #80619f);'
             },
             {
                 id: 8,
-                image: 'Sun.svg',
+                frontImage: 'exam-8.png',
+                backgroundImage: 'Pluto.jpeg',
                 tag: 'Report',
                 name: '生成报告',
                 score: '--',
-                style: "transform: scale(0.9); opacity: 0.6; ",
+                style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #aaaaaa'
             },
         ],
@@ -232,15 +241,11 @@ Page({
         let slideOutContent =
             "transform: scale(" +
             (1 - 0.1 * absOffset) +
-            "); opacity: " +
-            (1 - 0.4 * absOffset) +
-            ";";
+            "); "
         let slideInContent =
             "transform: scale(" +
             (0.9 + 0.1 * absOffset) +
-            "); opacity: " +
-            (0.6 + 0.4 * absOffset) +
-            ";";
+            "); "
         if (slideInId < 0 || slideInId > this.data.examinations.length - 1) {
             this.setData({
                 currentDotsIdx: Math.round(lastExamination + offset),

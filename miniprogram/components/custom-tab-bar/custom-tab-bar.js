@@ -17,6 +17,13 @@ Component({
             },
         ],
     },
+    externalClasses: ['custom-class'],
+    properties: {
+        innerText: {
+            type: String,
+            value: 'default value',
+        }
+    },
     attached() {
     },
     methods: {

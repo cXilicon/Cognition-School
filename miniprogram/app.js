@@ -16,13 +16,6 @@ App({
     },
 
     globalData: {
-        userInfo: {
-            avatarUrl: "null",
-            nickName: null,
-            gender: null,
-            birth: null,
-            edu: null,
-            area: null,
-        }
+        user: null,
     }
 })

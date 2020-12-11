@@ -15,24 +15,26 @@
     </view>
   </view>
 </van-popup>
-<van-overlay show="{{startCountDownState}}" custom-style="background-color: transparent">
+<van-overlay show="{{startCountDownState}}" custom-style="background-color: transparent; z-index: 10;">
   <view class="wrapper">
     <view class="countdown">{{startCountDown}}</view>
   </view>
 </van-overlay>
-<van-overlay show="{{demoState}}" custom-style="background-color: transparent">
+<van-overlay show="{{demoState}}" custom-style="background-color: transparent; z-index: 10;">
 </van-overlay>
 <van-notify id="van-notify"/>
 <van-toast id="van-toast"/>
 <view class="page">
   <view class="main">
-    <view class="target-now">{{flag + 1 <= 25 ? flag + 1 : 25}}</view>
-    <view class="target-now-title">当前目标</view>
     <view class="gird">
+      <van-image class="background-image" height="100%" width="100%" fit="cover"
+                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png"/>
       <view class="row" wx:for="{{array}}" wx:for-item="row" wx:key="*this">
-        <view class="cell {{num>=flag+1?'':'cell_clicked'}} {{num!==highlight?'':'highlight'}}" wx:for="{{row}}" wx:for-item="num" wx:key="*this"
+        <view class="cell {{num>=flag+1?'':'cell-clicked'}} {{num!==highlight?'':'highlight'}}" wx:for="{{row}}"
+              wx:for-item="num" wx:key="*this"
               bind:touchend="tapNum" data-num="{{num}}">
-          <view hidden="{{!examState}}">{{num}}</view>
+          <view class="cell-num">{{!examState ? '' : num}}</view>
+          <view class="cell-bottom" ></view>
         </view>
       </view>
     </view>

@@ -15,42 +15,31 @@
     </view>
   </view>
 </van-popup>
-
 <van-overlay show="{{startCountDownState}}" custom-style="background-color: transparent">
   <view class="wrapper">
     <view class="countdown">{{startCountDown}}</view>
   </view>
 </van-overlay>
-
 <van-overlay show="{{demoState}}" custom-style="background-color: transparent">
 </van-overlay>
-
-<van-notify id="van-notify" />
-
+<van-notify id="van-notify"/>
 <van-toast id="van-toast"/>
 <view class="container">
-      <view class="title">
-      第{{indexq+1}}/5题
-      </view>
-      <view class='out' style='margin-top:10px'>
- <view class="{{inshow}}" style='width:{{progressWidth}}%'></view>
-</view>
-
-
-      <view wx:for="{{text}}" style="color:{{allcolor[color[index]]}};"  wx:if="{{show}}"
-      class="question">
-            {{alltext[item]}}
-      </view>
-      <view  wx:if="{{showq}}" class="questionq">
-      {{q}}
-      </view>
-      <button wx:for="{{choose}}"  wx:if="{{showq}}"   class="{{item.style}}"  bindtap="click"  
-      wx:for-index="bindIndex"
-      data-index="{{bindIndex}}"    disabled="{{dis}}"> 
-            {{alltext[item.number]}}
-      </button>
-  
-    
-
+  <view class="title">
+    第{{indexq + 1}}/5题
+  </view>
+  <view class='out' style='margin-top:10px'>
+    <view class="{{inshow}}" style='width:{{progressWidth}}%'></view>
+  </view>
+  <view wx:for="{{text}}" style="color:{{allcolor[color[index]]}};" wx:if="{{show}}"
+        class="question">
+    {{alltext[item]}}
+  </view>
+  <view wx:if="{{showq}}" class="questionq">{{q}}</view>
+  <button wx:for="{{choose}}" wx:if="{{showq}}" class="{{item.style}}" bindtap="click"
+          wx:for-index="bindIndex"
+          data-index="{{bindIndex}}" disabled="{{dis}}">
+    {{alltext[item.number]}}
+  </button>
 </view>
 

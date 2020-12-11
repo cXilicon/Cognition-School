@@ -1,33 +1,27 @@
 <van-dialog id="van-dialog"/>
 <van-toast id="van-toast"/>
 <view class="page">
-  <van-nav-bar title="{{countdownDisplay}}"/>
+  <van-image height="100%" width="100%" fit="cover"
+             src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/test-5.jfif"></van-image>
+  <van-nav-bar custom-class="custom-nav-bar" title="{{countdownDisplay}}" border="{{false}}"/>
   <view class="main">
     <view class="examination-container">
       <view class="mask" hidden="{{examinationSwitchLock}}"></view>
-      <swiper
-              class="examination-swiper"
-              previous-margin="80rpx"
-              next-margin="80rpx"
-              current="{{currentExamination}}"
-              bindtransition="changeExaminationSwiper"
-              bindanimationfinish="examinationSwiperChanged"
-      >
+      <swiper class="examination-swiper" previous-margin="80rpx" next-margin="80rpx" current="{{currentExamination}}"
+              bindtransition="changeExaminationSwiper" bindanimationfinish="examinationSwiperChanged">
         <block wx:for="{{examinations}}" wx:key="id">
           <swiper-item class="examination-swiper-items">
-            <view
-                    class="examination-items-content"
-                    style="{{item.style}} {{item.backgroundStyle}}"
-                    data-swiper-id="{{index}}"
-                    bind:tap="tapExamination"
-            >
-              <image class="examination-swiper-items-image" src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/{{item.image}}"
-                     mode="aspectFill"></image>
-              <view class="examination-swiper-items-title">{{item.name}}</view>
-              <view class="examination-swiper-items-tag">{{item.tag}}</view>
-              <view style="flex: 1"></view>
-              <view>评分</view>
-              <view class="examination-swiper-items-score">{{item.score}}</view>
+            <view class="examination-items-content" style="{{item.style}} "
+                  data-swiper-id="{{index}}" bind:tap="tapExamination">
+              <van-image height="100%" width="100%" fit="cover" class="examination-items-background"
+                         src="{{'cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/' + item.backgroundImage}}">
+              </van-image>
+              <view class="examination-items-name">{{item.name}}</view>
+              <van-image height="100%" width="100%" fit="cover" class="examination-items-image"
+                         src="{{'cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/' + item.frontImage}}">
+              </van-image>
+              <view class="examination-items-score-label">评分</view>
+              <view class="examination-items-score">{{item.score}}</view>
             </view>
           </swiper-item>
         </block>
@@ -43,3 +37,4 @@
     </van-button>
   </view>
 </view>
+
