@@ -3,16 +3,18 @@
 const app = getApp()
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
-let timer;
+
+let init;
 Page({
     data: {
+        timershow:"timer",
         ruleState: true,
         show: false,
         showq: false,
         showbu: true,
         dis: false,
-        alltext: ["红色", "蓝色", "紫色", "绿色", "橙色", "黄色", "棕色", "白色", "黑色", "灰色"],
-        allcolor: ["#FF0000", "#1E90FF", "#8B008B", "#00FF00", "#FF8C00", "#FFFF00", "#A0522D", "#FFFFFF", "#000000", "#A9A9A9"],
+        alltext: ["红色", "蓝色", "紫色", "绿色", "橙色", "黄色", "白色",  "灰色"],
+        allcolor: ["#FF0000", "#1E90FF", "#8B008B", "#00FF00", "#FF8C00", "#FFFF00",  "#ffffff", "#A9A9A9"],
         allq: ["之前出现的文字是什么？", "之前出现的文字是什么颜色？"],
         text: [],
         color: [],
@@ -21,100 +23,108 @@ Page({
         true: 0,
         indexq: 0,
         right: 0,
-        inshow: "in",
-        totalProgressTime: 5,
-        progressWidth: 0,
-        progressTime: 5,
+
+        percent: 0,
+        timeTarget: 5000,
+        timeNow: 0,
     },
 
-    playbtn() {
-        let that = this;
-        clearInterval(timer);
-        timer = setInterval(that.run, 25); //that.timer关键点
-    },
 
-    run() {
-        let that = this;
-        let totalProgressTime = that.data.totalProgressTime;
-        let progressWidth = that.data.progressWidth;
-        let progressTime = that.data.progressTime;
-        if (progressWidth === 100) {
-            if (!that.data.showq) {
-                clearInterval(timer);
-                that.setData({
-                    progressWidth: 0,
-                    progressTime: totalProgressTime + 3,
-                    totalProgressTime: totalProgressTime + 3,
-                    show: false,
-                    showq: true
-                })
-                this.playbtn()
-            } else {
-                clearInterval(timer);
-                this.setData({
-                    dis: true,
-                });
-
-                let msg = "";
-                if (that.data.indexq === 0) {
-                    msg = "注意时间哦！"
-                } else if (that.data.indexq === 1) {
-                    msg = "难度提升了!注意时间哦！"
-                } else if (that.data.indexq === 2) {
-                    msg = "注意时间哦！"
-                } else if (that.data.indexq === 3) {
-                    msg = "难度提升了!注意时间哦！"
-                } else {
-                    msg = "测试完成！你的得分是" + (this.data.right * 20)
-                }
-                Toast({
-                    message: msg,
-
-                    onClose: () => {
-                        if (that.data.indexq < 4) {
-                            that.setData({
-                                show: false,
-                                showq: false,
-
-                                dis: false,
-                                ask: "",
-                                indexq: that.data.indexq + 1
-                            });
-                            that.testStart();
-                        } else {
-                            let score = "";
-                            if (this.data.right === 5) {
-                                score = "A"
-                            } else if (this.data.right === 4) {
-                                score = "B"
-                            } else if (this.data.right === 3) {
-                                score = "C"
-                            } else if (this.data.right === 2) {
-                                score = "D"
-                            } else {
-                                score = "E"
-                            }
-                            let pages = getCurrentPages();
-                            let prevPage = pages[pages.length - 2];
-                            prevPage.setData({
-                                ['examinations[2].score']: score
-                            })
-                            wx.navigateBack()
-                        }
-
-                    }
-                })
-
-
-            }
-            return;
-        }
-        progressTime--;
-        progressWidth = (totalProgressTime - progressTime) * (100 / (totalProgressTime * 40))
-        that.setData({
-            progressWidth: progressWidth,
-            progressTime: progressTime
+    reset: function () {
+        clearInterval(init)
+        this.setData({
+            timeNow: 0,
+            percent: 0,
         })
+    },
+
+    start: function () {
+        let that=this;
+        this.reset();
+        init = setInterval(
+            () => {
+                this.setData({
+                    timeNow: this.data.timeNow + 10,
+                    percent: 100 * (this.data.timeNow + 10) / this.data.timeTarget
+                })
+                if (this.data.percent == 100) {
+                  
+             
+                        if (!this.data.showq) {
+                            clearInterval(init);
+                            that.setData({
+                                percent: 0,
+                                timeTarget: this.data.timeTarget+2000,
+                                timeNow: 0,
+                                show: false,
+                                showq: true,
+                                dis:false
+                            })
+                            this.start();
+                         
+                        } else {
+                            clearInterval(init);
+                            this.setData({
+                                dis: true,
+                            });
+            
+                            let msg = "";
+                            if (that.data.indexq === 0) {
+                                msg = "注意时间哦！"
+                            } else if (that.data.indexq === 1) {
+                                msg = "难度提升了!注意时间哦！"
+                            } else if (that.data.indexq === 2) {
+                                msg = "注意时间哦！"
+                            } else if (that.data.indexq === 3) {
+                                msg = "难度提升了!注意时间哦！"
+                            } else {
+                                msg = "测试完成！你的得分是" + (this.data.right * 20)
+                            }
+                            Toast({
+                                message: msg,
+            
+                                onClose: () => {
+                                    if (that.data.indexq < 4) {
+                                        that.setData({
+                                            show: false,
+                                            showq: false,
+            
+                                          
+                                            ask: "",
+                                            indexq: that.data.indexq + 1
+                                        });
+                                        that.testStart();
+                                    } else {
+                                        let score = "";
+                                        if (this.data.right === 5) {
+                                            score = "A"
+                                        } else if (this.data.right === 4) {
+                                            score = "B"
+                                        } else if (this.data.right === 3) {
+                                            score = "C"
+                                        } else if (this.data.right === 2) {
+                                            score = "D"
+                                        } else if(this.data.right === 2){
+                                            score = "E"
+                                        } else {
+                                            score = "F"
+                                        }
+                                        let pages = getCurrentPages();
+                                        let prevPage = pages[pages.length - 2];
+                                        prevPage.setData({
+                                            ['examinations[2].score']: score
+                                        })
+                                        wx.navigateBack()
+                                    }
+                                }
+                            })
+                    }
+                }
+            }, 10);
+    },
+
+    stop: function () {
+        clearInterval(init)
     },
 
     onLoad: function () { // 页面加载
@@ -122,6 +132,7 @@ Page({
     },
 
     initGame: function () { // 游戏初始化
+        clearInterval(init)
         this.setData({ // 更新数据
             ruleState: true,
             dis: false,
@@ -135,10 +146,9 @@ Page({
             indexq: 0,
             right: 0,
             inshow: "in",
-            totalProgressTime: 5,
-            progressWidth: 0,
-            progressTime: 5,
-
+            percent: 0,
+            timeTarget: 5000,
+            timeNow: 0,
         })
 
     },
@@ -147,32 +157,31 @@ Page({
         if (this.data.indexq < 2) {
             this.setData({ // 更新数据
                 ruleState: false,
-                progressWidth: 0,
-                progressTime: 3,
-                totalProgressTime: 3,
+                timeTarget:5000,
+                timeNow:0,
+                percent:0,
             })
         } else if (this.data.indexq < 4) {
             this.setData({ // 更新数据
                 ruleState: false,
-                progressWidth: 0,
-                progressTime: 2,
-                totalProgressTime: 2,
+                timeTarget:4000,
+                timeNow:0,
+                percent:0,
             })
         } else {
             this.setData({ // 更新数据
                 ruleState: false,
-                progressWidth: 0,
-                progressTime: 1,
-                totalProgressTime: 1,
+                timeTarget:2000,
+                timeNow:0,
+                percent:0,
             })
         }
-
-        this.playbtn();
-        let a = Math.floor(Math.random() * 10);
-        let b = Math.floor(Math.random() * 10);
+        this. start();
+        let a = Math.floor(Math.random() * 8);
+        let b = Math.floor(Math.random() *8);
         while (a === b) {
-            a = Math.floor(Math.random() * 10);
-            b = Math.floor(Math.random() * 10);
+            a = Math.floor(Math.random() * 8);
+            b = Math.floor(Math.random() * 8);
         }
         let texttemp = [];
         texttemp.push(a);
@@ -180,10 +189,9 @@ Page({
         colortemp.push(b);
         let choosetemp = [];
         let qindex = Math.floor(Math.random() * 2);
-
         if (qindex === 0) {
             for (let i = 0; i < 4;) {
-                let num = Math.floor(Math.random() * 10);
+                let num = Math.floor(Math.random() * 8);
                 let f = 0;
                 for (let j = 0; j < choosetemp.length; j++) {
                     if (choosetemp[j].number === num || num === texttemp[0] || num === colortemp[0]) {
@@ -194,22 +202,20 @@ Page({
                 if (f === 0) {
                     let t = {
                         number: num,
-                        style: "btn"
+                        style: "item"
                     }
                     choosetemp.push(t);
                     i++;
                 }
             }
-
             let key1 = {
                 number: texttemp[0],
-                style: "btn"
+                style: "item"
             }
             let key2 = {
                 number: colortemp[0],
-                style: "btn"
+                style: "item"
             }
-
             let c = Math.floor(Math.random() * 4);
             let d = Math.floor(Math.random() * 4);
             while (c === d) {
@@ -221,11 +227,9 @@ Page({
             this.setData({
                 ans: texttemp[0],
             });
-
-
         } else if (qindex === 1) {
             for (let i = 0; i < 4;) {
-                let num = Math.floor(Math.random() * 10);
+                let num = Math.floor(Math.random() * 8);
                 let f = 0;
                 for (let j = 0; j < choosetemp.length; j++) {
                     if (choosetemp[j].number === num || num === texttemp[0] || num === colortemp[0]) {
@@ -236,22 +240,20 @@ Page({
                 if (f === 0) {
                     let t = {
                         number: num,
-                        style: "btn"
+                        style: "item"
                     }
                     choosetemp.push(t);
                     i++;
                 }
             }
-
             let key1 = {
                 number: texttemp[0],
-                style: "btn"
+                style: "item"
             }
             let key2 = {
                 number: colortemp[0],
-                style: "btn"
+                style: "item"
             }
-
             let c = Math.floor(Math.random() * 4);
             let d = Math.floor(Math.random() * 4);
             while (c === d) {
@@ -264,7 +266,6 @@ Page({
                 ans: colortemp[0],
             });
         }
-
         this.setData({
             show: true,
             showbu: false,
@@ -274,7 +275,6 @@ Page({
             q: this.data.allq[qindex]
         });
     },
-
 
     viewDemo: function () {
         let that = this;
@@ -302,7 +302,7 @@ Page({
 
         let step2 = {
             func: () => {
-                clearInterval(timer);
+              this.stop();
                 Toast('进度条表示你剩余的时间');
             }, playtime: 2000
         }
@@ -310,11 +310,11 @@ Page({
         let step3 = {
             func: () => {
                 that.setData({
-                    inshow: "in-red",
+                    timershow:"timer-tips",
                 })
                 setTimeout(() => {
                     that.setData({
-                        inshow: "in",
+                        timershow:"timer",
                     })
                 }, 400)
             }, playtime: 800
@@ -323,24 +323,27 @@ Page({
 
         let step4 = {
             func: () => {
-                let totalProgressTime = that.data.totalProgressTime;
+                let targetTime = that.data.timeTarget;
                 Toast('进度条充满则开始答题');
                 setTimeout(() => {
                     that.setData({
-                        progressWidth: 0,
-                        progressTime: totalProgressTime + 3,
-                        totalProgressTime: totalProgressTime + 3,
+                       timeNow:0,
+                       timeTarget: targetTime + 2000,
+                        percent:0,
                         show: false,
                         showq: true
                     })
-                    that.playbtn();
+                    that.start();
                 }, 2000)
+            
             }, playtime: 3000
         }
 
         let step6 = {
+         
             func: () => {
-                clearInterval(timer);
+             
+                clearInterval(init);
                 Toast('你答题的时间也是有限的');
             },
             playtime: 2000
@@ -349,13 +352,14 @@ Page({
         let step7 = {
             func: () => {
                 that.setData({
-                    inshow: "in-red",
+                    timershow:"timer-tips",
                 })
                 setTimeout(() => {
                     that.setData({
-                        inshow: "in",
+                        timershow:"timer",
                     })
                 }, 400)
+             
             }, playtime: 800
         }
 
@@ -381,11 +385,11 @@ Page({
                     }
                 }
                 that.setData({
-                    [`choose[${index}].style`]: "btn-tips",
+                    [`choose[${index}].style`]: "item-tips",
                 })
                 setTimeout(() => {
                     that.setData({
-                        [`choose[${index}].style`]: "btn",
+                        [`choose[${index}].style`]: "item",
                     })
                 }, 400)
             },
@@ -393,22 +397,8 @@ Page({
         }
 
 
-        let step11 = {
-            func: () => {
-                that.setData({
-                    [`choose[${index}].style`]: "btn-active",
-                })
-            },
-            playtime: 400
-        }
 
-        let step12 = {
-            func: () => {
-                Toast('尝试所有题目，完成本项测试');
-            },
-            playtime: 3000
-        }
-
+     
 
         let step13 = {
             func: () => {
@@ -424,8 +414,7 @@ Page({
         }
 
         let stepIdx = 0
-        let steps = [step0, step1, step2, step3, step3, step4, step6, step7, step7, step8, step9, step10, step10, step11,
-            step12, step13]
+        let steps = [step0, step1, step2, step3, step3, step4, step6, step7, step7, step8, step9, step10, step10, step13]
         setTimeout(function play() {
             if (stepIdx < steps.length) {
                 steps[stepIdx].func()
@@ -435,12 +424,10 @@ Page({
     },
 
     click: function (e) {
+        if(this.data.dis===false)
+        {
         let index = e.currentTarget.dataset.index;
-        this.setData({
-            [`choose[${index}].style`]: "btn-active"
-        });
-
-
+   
         if (this.data.ans === this.data.choose[index].number) {
             this.setData({
                 right: this.data.right + 1
@@ -452,7 +439,7 @@ Page({
         });
 
         let that = this
-        clearInterval(timer);
+        clearInterval(init);
 
         let msg = "";
         if (that.data.indexq === 0) {
@@ -475,7 +462,7 @@ Page({
                         show: false,
                         showq: false,
                         showbu: true,
-                        dis: false,
+                     
                         ask: "",
                         indexq: that.data.indexq + 1
                     });
@@ -490,8 +477,10 @@ Page({
                         score = "C"
                     } else if (this.data.right === 2) {
                         score = "D"
-                    } else {
+                    } else if (this.data.right === 1){
                         score = "E"
+                    }else{
+                        score = "F"
                     }
                     let pages = getCurrentPages();
                     let prevPage = pages[pages.length - 2];
@@ -502,7 +491,9 @@ Page({
                 }
 
             }
+        
         })
+    }
     },
 
 })

@@ -7,9 +7,9 @@
 //获取应用实例
 const app = getApp()  
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
-import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
+
 //计时器初始化文件
-var intt;
+let init;
 Page({
   data:{
     //页面显示参数
@@ -17,14 +17,14 @@ Page({
     selected:[],
     dis:false,
     //计时器参数
-  
-    btnShow:"btn",
-   
-    timecount: 90,
-    cost: 0,
-    flag: 1,
-    endtime: "",
 
+    btnShow:"btn",
+ 
+    //计时器参数
+    second: 0,
+    millisecond: 0,
+    percent: 0,
+    cost: 0,
     array : ['a', 'b', 'c', 'd', 'e', 
   'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 
   'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 
@@ -51,7 +51,7 @@ onLoad: function () { // 页面加载
     this.initGame();
 },
 initGame: function () { // 游戏初始化
-  this.stop();
+  clearInterval(init);
   this.setData({ // 更新数据
       ruleState: true,
       dis:false,
@@ -59,7 +59,9 @@ initGame: function () { // 游戏初始化
       question:[],
       timershow:"timer",
       selected:[],
-      timecount: 90,
+      second: 0,
+      millisecond: 0,
+      percent: 0,
   })
  
 },
@@ -120,8 +122,9 @@ initGame: function () { // 游戏初始化
                   question:questionTemp,
                  
               });
+              clearInterval(init);
+              init = setInterval(that.timer, 10);
               clearInterval(countdown);
-              this.start();  
           }
       }, 1000);
         //开始计时
@@ -152,7 +155,7 @@ clickNumber:function(e){
   }
   
   },
-  //判断是否全部点击完毕，完毕则停止
+
   testSubmit:function(){
     var selectedTemp=this.data.selected;
    
@@ -176,7 +179,7 @@ clickNumber:function(e){
         
       });
     
-    this.stop();
+    
     this.setData({
        dis:true,
     });
@@ -195,9 +198,13 @@ clickNumber:function(e){
     }else  if(this.data.tips>=30){ 
       finMessage= '本次得分:'+that.data.tips+'\n再接再厉！';
       score="D";
-    }else { 
+    }else if(this.data.tips>=10){ 
       finMessage= '本次得分:'+that.data.tips+'\n继续努力！';
       score="E";
+   
+    }else{ 
+      finMessage= '本次得分:'+that.data.tips+'\n继续努力！';
+      score="F";
    
     }
 
@@ -218,37 +225,27 @@ clickNumber:function(e){
 
     },
 
-//开始计时
-  start:function () {
-    var that = this;
-    //停止（暂停）
-    clearInterval(intt);
-    //时间重置
-    that.setData({
-        timecount:90
-    })
-    intt = setInterval(function () { that.timer() }, 1000);
-  },
-  //暂停计时
-  stop: function () {
-    clearInterval(intt);
-  },
-  
-  //计时运行程序
-  timer: function () {
-    this.setData({
-      timecount:this.data.timecount-1
-  })
-  if(this.data.timecount==10){
-    this.setData({
-      timershow:"timer-active"
-  })
-  }
-    if(this.data.timecount==0){
-      this.testSubmit()
-    }
-  },
-
+    timer: function () {
+      const targetTime = 90 * 100;
+      let percent = 100 * (this.data.millisecond + this.data.second * 100 + 1) / targetTime
+      this.setData({
+          millisecond: this.data.millisecond + 1,
+          percent: percent
+      })
+    
+      if (this.data.millisecond >= 100) {
+          this.setData({
+              millisecond: 0,
+              second: this.data.second + 1,
+          })
+      }
+     
+      if (this.data.second * 100 >= targetTime) {
+          clearInterval(init);
+           
+          this.testSubmit();
+      }
+    },
 
 
 
@@ -430,7 +427,7 @@ let step13 = {
 let step14 = {
   func: () => {
     that.setData({
-      timershow : "timer-active",
+      timershow : "timer-tips",
     })
       setTimeout(() => {
         that.setData({
@@ -445,10 +442,7 @@ let step14 = {
 let step15 = {
   func: () => {
       Toast('当时间归0，系统将自动提交你的选择');
-      that.setData({
-        timecount:4,
-        timershow:"timer-active"
-        })
+   
   },
   playtime: 3000
 }
@@ -456,11 +450,7 @@ let step15 = {
 
 let step16 = {
   func: () => {
-    that.setData({
-      timecount:0,
-      
-      })
-      this.stop();
+    
     Toast.success({
       message: '演示完成！',
       forbidClick: true,

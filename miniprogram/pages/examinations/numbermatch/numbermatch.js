@@ -5,15 +5,15 @@
 */
 
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
-import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
+
 //获取应用实例
-const app = getApp()
+const app = getApp();
 //计时器初始化文件
-var intt;
+let init;
 Page({
   data:{
     //页面显示参数
-   
+    timershow:"timer",
     showTable:true,
     selectedNumber:0,
     first:0,
@@ -21,14 +21,10 @@ Page({
     ruleState: true,
 
     //计时器参数
-    hour: 0,
-    minute: 0,
     second: 0,
     millisecond: 0,
-    timecount: '00:00:00',
-    cost: 0,
-    flag: 1,
-    endtime: "",
+
+    percent: 0,
 
     //游戏数据
     question:[],
@@ -48,19 +44,52 @@ Page({
     this.initGame();
 },
 initGame: function () { // 游戏初始化
-  this.stop();
+  clearInterval(init);
   this.setData({ // 更新数据
       ruleState: true,
       fin:[-1,-1,-1,-1,-1,-1,-1],
       question:[],
-      hour: 0,
-      minute: 0,
       second: 0,
       millisecond: 0,
-      timecount: '00:00:00',
+      percent: 0,
   })
  
 },
+
+timer: function () {
+  const targetTime = 180 * 100;
+  let percent = 100 * (this.data.millisecond + this.data.second * 100 + 1) / targetTime
+  this.setData({
+      millisecond: this.data.millisecond + 1,
+      percent: percent
+  })
+
+  if (this.data.millisecond >= 100) {
+      this.setData({
+          millisecond: 0,
+          second: this.data.second + 1,
+      })
+  }
+  
+  if (this.data.second * 100 >= targetTime) {
+      clearInterval(init);
+      Toast.success({
+        message: '时间到！很遗憾你没有完成测试',
+        forbidClick: true,
+        onClose: () => {
+    
+          let pages = getCurrentPages();
+          let prevPage = pages[pages.length - 2];
+         prevPage.setData({
+              ['examinations[1].score']: "F"
+          })
+          wx.navigateBack();
+      }
+    
+    })
+  }
+},
+
 
 
 
@@ -146,10 +175,15 @@ initGame: function () { // 游戏初始化
               that.setData({
                   startCountDownState: false,
                   question:allnumber,
-                  showTable:true
+                  showTable:true,
+                 
+                
+                  countTime: 180,
               });
+              clearInterval(init);
+              init = setInterval(that.timer, 10);
               clearInterval(countdown);
-              this.start();  
+
           }
       }, 1000);
         //开始计时
@@ -201,19 +235,17 @@ clickNumber:function(e){
       });
     }
   }
-  let that=this;
+
   //判断是否全部点击完毕，完毕则停止
   if(this.data.selectedNumber==this.data.height){
-
+        clearInterval(init);
         if(this.data.indexq==3)
         {
-            this.stop();
-            
             Toast.success({
               message: '恭喜你，完成了全部测试！',
               forbidClick: true,
               onClose: () => {
-                var alltime=this.data.minute*60+this.data.second;
+                var alltime=this.data.second;
                 var score=""
                 if(alltime<40)
                 score="A"
@@ -258,34 +290,37 @@ clickNumber:function(e){
               showTable:false
               })
           }
-          this.stop();
+      
           let that = this
           if(this.data.indexq==1){
-        
+            clearInterval(init);
             Toast.success({
                 message: '你成功了！试试更进一步！',
                 forbidClick: true,
                 onClose: () => {
+                 
                   this.testStart();
                 }
                 
             });
           }else  if(this.data.indexq==2){
-         
+            clearInterval(init);
             Toast.success({
                 message: '太强了！继续努力！',
                 forbidClick: true,
                 onClose: () => {
+                 
                   this.testStart();
                 }
                 
             });
           }else  if(this.data.indexq==3){
-          
+            clearInterval(init);
             Toast.success({
                 message: '加油！胜利近在咫尺！',
                 forbidClick: true,
                 onClose: () => {
+                 
                   this.testStart();
                 }
                 
@@ -303,7 +338,9 @@ clickNumber:function(e){
       fin:[1,1,1,1,1,1,1]
   })
   let step0 = {
+   
       func: () => {
+        var that=this;
           Toast('等待提示结束后开始测试');
           setTimeout(() => {
             that.setData({
@@ -327,22 +364,30 @@ clickNumber:function(e){
         allnumber.push(line);
       }
       
-          const countdown = setInterval(() => {
-              if (that.data.startCountDown - 1) {
-                  that.setData({
-                      startCountDown: that.data.startCountDown - 1,
-                  });
-              } else {
-                  that.setData({
-                      startCountDownState: false,
-                      question:allnumber,
-                      showTable:true
-                  });
-                
-                  clearInterval(countdown);
-                  that.start();  
-              }
-          }, 1000);
+    
+      const countdown = setInterval(() => {
+          if (that.data.startCountDown - 1) {
+              that.setData({
+                  startCountDown: that.data.startCountDown - 1,
+              });
+          } else {
+              that.setData({
+                  startCountDownState: false,
+                  question:allnumber,
+                  showTable:true,
+                  percent: 100,
+                  
+                  second: 0,
+                  millisecond:0,
+                  countTime: 90,
+              });
+              clearInterval(init);
+              init = setInterval(that.timer, 10);
+              clearInterval(countdown);
+           
+             
+          }
+      }, 1000);
             //开始计时
           }, 2000)
       },
@@ -486,8 +531,38 @@ let step15 = {
 
   playtime: 1000
 }
-
 let step16 = {
+  func: () => {
+      Toast('你必须在规定的时间内完成测试');
+  },
+  playtime: 2000
+}
+
+let step17 = {
+  func: () => {
+    that.setData({
+      timershow : "timer-tips",
+    })
+      setTimeout(() => {
+        that.setData({
+          timershow : "timer",
+          })
+          }, 400
+      )
+  },
+  playtime: 800
+}
+
+let step18 = {
+  func: () => {
+      Toast('当时间归0你本次测试将不得分');
+   
+  },
+  playtime: 3000
+}
+
+
+let step19 = {
   func: () => {
     Toast.success({
       message: '演示完成！',
@@ -513,7 +588,7 @@ let step11 = {
 
 
   let stepIdx = 0
-  let steps = [step0, step1, step2, step2, step3, step4, step5, step5, step6, step7, step8,step9, step10, step11,step12,step13,step14,step15,step16]
+  let steps = [step0, step1, step2, step2, step3, step4, step5, step5, step6, step7, step8,step9, step10, step11,step12,step13,step14,step15,step16,step17,step17,step18,step19]
   setTimeout(function play() {
       if (stepIdx < steps.length) {
           steps[stepIdx].func()
@@ -526,49 +601,7 @@ let step11 = {
 
 
 
-//开始计时
-  start:function () {
-    var that = this;
-    //停止（暂停）
-    clearInterval(intt);
-    //时间重置
-   
-    intt = setInterval(function () { that.timer() }, 50);
-  },
-  //暂停计时
-  stop: function () {
-    clearInterval(intt);
-  },
-  
-  //计时运行程序
-  timer: function () {
-    var that = this;
-    that.setData({
-      millisecond: that.data.millisecond + 5
-    })
-    if (that.data.millisecond >= 100) {
-      that.setData({
-        millisecond: 0,
-        second: that.data.second + 1
-      })
-    }
-    if (that.data.second >= 60) {
-      that.setData({
-        second: 0,
-        minute: that.data.minute + 1
-      })
-    }
- 
-    if (that.data.minute >= 60) {
-      that.setData({
-        minute: 0,
-        hour: that.data.hour + 1
-      })
-    }
-    that.setData({
-      timecount: that.data.hour + ":" + that.data.minute + ":" + that.data.second + ":" + that.data.millisecond
-    })
-  },
+
 
 
   

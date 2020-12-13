@@ -35,17 +35,30 @@
 <view class="container">
    
      <view class="header" >
-      <view class="{{timershow}}"> 剩余：{{timecount}} s</view>
-      <button bindtap="testSubmit" class="{{btnShow}}" disabled="{{dis}}" id="but">
-            提交
-      </button>
+        <van-image class="background-image" height="100%" width="100%" fit="cover"
+               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png">
+        </van-image>
+        <button bindtap="testSubmit" class="{{btnShow}}" disabled="{{dis}}" id="but">
+          <view class="btn-num">提交</view>
+          <view class="btn-bottom"></view>
+        </button>
+      </view>
+   
+      <view class="progress-container">
+        <view class="progress">
+            <view class="{{timershow}}" style="width: {{percent}}%;"></view>
+            <van-image class="progress-arrow" style="left: {{percent}}%;" height="100%" width="100%"
+                     fit="cover"
+                     src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
+        </view>
       </view>
     
       <view>
             <!--渲染4*5的表格，填入生成的随机生成的数值-->
             <view wx:for="{{height}}" wx:for-index="bindIndex1" wx:key="bindIndex1" class="tableLine">
                   <view  wx:for="{{width}}" wx:for-index="bindIndex2" wx:key="bindIndex2" class="{{question[bindIndex1*width+bindIndex2].style}}?{{question[bindIndex1*width+bindIndex2].style}}:numberText"  bindtap="clickNumber" data-click="{{bindIndex1*width+bindIndex2}}"> 
-                  {{question[bindIndex1*width+bindIndex2].number}}
+                    <view class="cell-num">{{question[bindIndex1*width+bindIndex2].number}}</view>
+                      <view class="cell-bottom"></view>
                   </view>
             </view>
       </view>

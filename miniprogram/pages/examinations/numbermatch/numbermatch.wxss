@@ -5,6 +5,7 @@
 */
 Page {
   background-color: #eeeeee;
+
 }
 
 .popup-content {
@@ -49,7 +50,6 @@ Page {
 
 
 
-
 /*标题*/
 .title{
   font-size: 50rpx;
@@ -62,63 +62,151 @@ Page {
   font-weight: 800;
 }
 .container {
-  height: 100%;
+  height:100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
+  justify-content: center;
+  padding: 50px 0;
+
+ 
+ 
 } 
 /*表格内每一格*/
 .numberText{
-  font-weight:800;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100rpx;
+  width: 120rpx;
+  margin: 7rpx 7rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 40rpx;
+  text-align: center;
   background-color: #ffffff;
-  box-shadow: 0 10rpx 0 #aaa, 0 10rpx 10rpx #aaa;
+  overflow: hidden;
   transition: all .1s ease-in;
-  margin: 0rpx 7rpx;
-  height: 75rpx;
-  width: 125rpx;
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 35rpx; 
+  
+ 
 }
-.numberText-active{
-  font-weight:800;
-  background-color: #dddddd;
-  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
-  color: white;
-  margin: 0rpx 7rpx;
-  height: 75rpx;
-  width: 125rpx;
+
+.cell-num {
+  height: 85rpx;
   display: flex;
-  flex-flow: row;
-  justify-content: center;
   align-items: center;
-  font-size: 35rpx; 
+  justify-content: center;
+  width: 100%;
+  border: 2px solid #333333;
+  border-top: none;
+
+  border-radius: 4px;
   transition: all .1s ease-in;
 }
 
-.numberText-tips{
-  background-color: #db5705;
-  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
-  font-weight:800;
-  transition: all .1s ease-in;
-  margin: 0rpx 7rpx;
-  height: 75rpx;
-  width: 125rpx;
+.cell-bottom {
+  flex: 1;
+  width: 100%;
+  background-color: #e3a92e;
+}
+
+
+
+.numberText-active{
+  position: relative;
   display: flex;
-  flex-flow: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-size: 35rpx; 
+  height: 100rpx;
+  width: 120rpx;
+  margin: 7rpx 7rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 40rpx;
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  margin-top: 18rpx;
+  height: 95rpx;
+  background-color: #cccccc;
+}
+.background-image {
+  height: 220rpx;
+  width: 360rpx;
+}
+.progress-container{
+  width: 90%;
+}
+
+.progress {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  margin: 0 10rpx;
+}
+
+.progress:after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38rpx;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  z-index: -1;
+}
+
+.timer{
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: wheat;
+}
+
+.timer-tips {
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #f0cf1a;
+}
+
+.progress-arrow {
+  position: absolute;
+  left: 80%;
+  transform: translate(-50%);
+  height: 80rpx;
+  width: 10%;
+}
+
+.numberText-tips{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100rpx;
+  width: 120rpx;
+  margin: 7rpx 7rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 40rpx;
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all .1s ease-in;
+ 
+  background-color: #f0cf1a;
 }
 
 /*表格-行*/
 .tableLine{
-  height: 75rpx;
+  flex-direction: row;
+  height: 100rpx;
   display: flex;
   flex-flow: row;
   justify-content: center;

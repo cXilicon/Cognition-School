@@ -9,15 +9,62 @@ Page{
 
 
 .btn{
-  background-color: white;
-  margin-left:290rpx; 
-  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:110rpx;
+  width:180rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  
+  margin-left:160rpx; 
+ 
+}
+
+
+.btn-num {
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180rpx;
+  height:90rpx;
+  font-weight: 800;
+  border: 2px solid #333333;
+  border-top: none;
+  border-radius: 4px;
+  transition: all .1s ease-in;
+}
+
+.btn-bottom {
+  flex: 1;
+  width: 180rpx;
+  background-color: #e3a92e;
 }
 
 .btn-tips{
-  background-color: #db5705!important;
-  margin-left:290rpx; 
-  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:110rpx;
+  width:180rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  
+  text-align: center;
+  background-color: #e3a92e!important;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  
+  margin-left:160rpx; 
+ 
 }
 
 button[disabled]{
@@ -48,56 +95,84 @@ button[disabled]{
 }
 /*表格内每一格*/
 .numberText{
-  background-color: white;
-  margin: 0rpx 5rpx;
-  height: 70rpx;
-  width: 90rpx;
+  position: relative;
   display: flex;
-  flex-flow: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-size: 35rpx; 
-  font-weight:800;
-  
+  height: 65rpx;
+  width: 90rpx;
+  margin: 3rpx 3rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 36rpx;
+  text-align: center;
   background-color: #ffffff;
-  box-shadow: 0 10rpx 0 #aaa, 0 10rpx 10rpx #aaa;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  
+ 
+}
+
+.cell-num {
+  height: 55rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 800;
+  border: 2px solid #333333;
+  border-top: none;
+
+  border-radius: 4px;
   transition: all .1s ease-in;
 }
+
+.cell-bottom {
+  flex: 1;
+  width: 100%;
+  background-color: #e3a92e;
+}
+
 
 
 .numberText-active{
-
-  margin: 0rpx 5rpx;
-  height: 70rpx;
-  width: 90rpx;
+  position: relative;
   display: flex;
-  flex-flow: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  font-size: 35rpx; 
-
-  font-weight:800;
-  background-color: #dddddd;
-  box-shadow: 0 5rpx 0 #aaa, 0 5rpx 5rpx #ccc;
-  color: white;
-}
-
-
-.numberText-tips{
-
-  margin: 0rpx 5rpx;
-  height: 70rpx;
+  height: 60rpx;
   width: 90rpx;
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 35rpx; 
+  margin: 3rpx 3rpx;
+  border: 2px solid #333333;
+  
+  border-radius: 4px;
+  font-size: 36rpx;
+  text-align: center;
 
-  background-color: #db5705;
-  box-shadow: 0 10rpx 0 #db1f05, 0 10rpx 10rpx #aaa;
-  font-weight:800;
+  overflow: hidden;
   transition: all .1s ease-in;
+  margin-top: 5rpx;
+
+  background-color: #cccccc;
+}
+.numberText-tips{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 65rpx;
+  width: 90rpx;
+  margin: 3rpx 3rpx;
+
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 36rpx;
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all .1s ease-in;
+ 
+  background-color: #f0cf1a;
 }
 
 /*表格-行*/
@@ -115,21 +190,26 @@ button[disabled]{
   margin-bottom: 20rpx;
   display: flex;
   flex-flow: row;
-  justify-content:space-around;
+  justify-content:space-between;
   align-items: center;
 }
 
 
 .timer{
-width: 240rpx;
-
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: wheat;
 }
 
-.timer-active{
-  width: 240rpx;
-  color: #db1f05;
-  font-size: 40rpx;
-  }
+.timer-tips {
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #f0cf1a;
+}
 
 
 .popup-content {
@@ -170,4 +250,49 @@ width: 240rpx;
   color: #ffffff;
   background-color: #000000;
   opacity: 0.7;
+}
+
+
+.background-image {
+  height: 220rpx;
+  width: 360rpx;
+}
+.progress-container{
+  width: 90%;
+}
+
+.progress {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  margin: 0 10rpx;
+}
+
+.progress:after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38rpx;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  z-index: -1;
+}
+
+.progress-content {
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: wheat;
+}
+
+.progress-arrow {
+  position: absolute;
+  left: 80%;
+  transform: translate(-50%);
+  height: 80rpx;
+  width: 10%;
 }

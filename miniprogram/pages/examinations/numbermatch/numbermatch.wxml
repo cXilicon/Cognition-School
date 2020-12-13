@@ -1,8 +1,3 @@
-<!--  
-      作者：张帅
-      完成日期：2020/11/1
-      attentionTest-3.wxml
--->
 <van-popup show="{{ruleState}}" position="bottom"
            round close-on-click-overlay="{{false}}">
   <view class="popup-content">
@@ -20,30 +15,41 @@
   </view>
 </van-popup>
 
+
 <van-overlay show="{{startCountDownState}}" custom-style="background-color: transparent">
   <view class="wrapper">
     <view class="countdown">{{startCountDown}}</view>
   </view>
 </van-overlay>
-
 <van-overlay show="{{demoState}}" custom-style="background-color: transparent">
 </van-overlay>
-
 <van-notify id="van-notify" />
-
 <van-toast id="van-toast"/>
+ 
+
 <view class="container">
-     <view class="title" wx:if="{{showTable}}">第 {{indexq+1}} / 4 关</view>
-   
+   <van-image class="background-image" height="100%" width="100%" fit="cover"
+               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png">
+  </van-image>
+      <view class="title" wx:if="{{showTable}}">第 {{indexq+1}} / 4 关</view>
+      <view class="progress-container">
+        <view class="progress">
+            <view class="{{timershow}}" style="width: {{percent}}%;"></view>
+            <van-image class="progress-arrow" style="left: {{percent}}%;" height="100%" width="100%"
+                     fit="cover"
+                     src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
+        </view>
+      </view>
       <view wx:if="{{showTable}}">
             <!--渲染4*5的表格，填入生成的随机生成的数值-->
             <view wx:for="{{height}}" wx:for-index="bindIndex1" wx:key="bindIndex1" class="tableLine">
                   <view  wx:for="{{width}}" wx:for-index="bindIndex2" wx:key="bindIndex2" class="{{question[bindIndex1][bindIndex2].style}}?{{question[bindIndex1][bindIndex2].style}}:numberText"  bindtap="clickNumber" data-click1="{{bindIndex1}}" data-click2="{{bindIndex2}}"> 
-                  {{question[bindIndex1][bindIndex2].number}}
+                      <view class="cell-num">{{question[bindIndex1][bindIndex2].number}}</view>
+                      <view class="cell-bottom"></view>
                   </view>
             </view>
+           
       </view>
-      <!--计时器-->
-     <view style="margin:30rpx" wx:if="{{showTable}}"> {{timecount}}</view>
+   
 </view>
 
