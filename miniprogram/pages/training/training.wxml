@@ -1,22 +1,24 @@
 <!--pages/training/training.wxml-->
+<van-popup show="{{lockShow}}" custom-class="lock-tag" round overlay="{{false}}">
+  <iconfont name="lock" size="96"></iconfont>
+  训练功能将在完成一次测试后解锁
+</van-popup>
 <view class="page">
   <van-image height="100%" width="100%" fit="cover"
-             src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/training_back.jfif">
-  </van-image>
+             src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/training_back.jfif"/>
   <van-nav-bar custom-class="nav-bar" title-class="nav-bar" title="训练" fixed="{{true}}" placeholder="{{true}}"
                border="{{false}}"/>
-  <scroll-view class="main" scroll-y="{{true}}" >
+  <scroll-view class="main" scroll-y="{{true}}">
     <block wx:for="{{examinations}}" wx:key="id">
-      <view class="training-item">
-        <image src="{{'cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/'+ item.image}}"
-               mode="heightFix"></image>
+      <view class="training-item" bind:tap="navigateToExam">
+        <van-image height="100%" width="100%" fit="cover"
+                   src="{{'cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/'+ item.image}}"/>
         <view class="training-info">
           <text class="item-title">{{item.name}}</text>
-          <view class="item-tags">
-            <text>{{item.tag}}</text>
+          <view>
+            <text class="item-tag">{{item.tag}}</text>
           </view>
         </view>
-        <view class="training-score">{{item.score}}</view>
       </view>
     </block>
   </scroll-view>

@@ -3,7 +3,7 @@
 <view class="page">
   <van-image height="100%" width="100%" fit="cover"
              src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/test-5.jfif"></van-image>
-  <van-nav-bar custom-class="custom-nav-bar" title="{{countdownDisplay}}" border="{{false}}"/>
+  <van-nav-bar  custom-class="custom-nav-bar" left-text="返回" left-arrow title="认知学堂" border="{{false}}" bind:click-left="exitExamination"/>
   <view class="main">
     <view class="examination-container">
       <view class="mask" hidden="{{examinationSwitchLock}}"></view>
@@ -32,9 +32,6 @@
         </block>
       </view>
     </view>
-    <van-button class="finishExamination" custom-style="border-radius: 20rpx;" bind:click="finishExamination">
-      退出测试
-    </van-button>
   </view>
 </view>
 

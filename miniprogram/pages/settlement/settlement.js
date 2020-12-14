@@ -1,5 +1,6 @@
 import * as echarts from "../../components/ec-canvas/echarts";
 
+let app = getApp()
 const dateFormat = require('dateformat');
 
 Page({
@@ -11,38 +12,74 @@ Page({
         totalScore: 0,
         ecBar: {
             disableTouch: true,
-            onInit: function initChart(canvas, width, height, dpr) {
-                const barChart = echarts.init(canvas, null, {
-                    width: width,
-                    height: height,
-                    devicePixelRatio: dpr, // new
-                });
-                canvas.setChart(barChart);
-                // reportDataOption.dataset.source =
-                barChart.setOption(reportDataOption);
-                return barChart;
-            }
+            onInit: null
         },
     },
 
+    onInit: function initChart(canvas, width, height, dpr) {
+        const barChart = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr,
+        });
+        canvas.setChart(barChart);
+        barChart.setOption(reportDataOption);
+        return barChart;
+    },
+
     onLoad: function (option) {
-        let that = this
-        console.log(option.query)
         const eventChannel = this.getOpenerEventChannel()
-        eventChannel.on('reportData', function (data) {
-            console.log(data)
+        eventChannel.on('reportData', data => {
             let totalScore = 0
-            for (let i = 0; i < 4; i++) {
-                reportDataOption.dataset.source[i][1] = data.score[i * 2] + data.score[i * 2 + 1]
-                totalScore += data.score[i * 2] + data.score[i * 2 + 1]
+            for (let key in data.score) {
+                let item = data.score[key]
+                totalScore += item.score
+                switch (item.category) {
+                    case "plan":
+                        reportDataOption.dataset.source[0][1] += item.score;
+                        break;
+                    case "attention":
+                        reportDataOption.dataset.source[1][1] += item.score;
+                        break;
+                    case "simultaneous":
+                        reportDataOption.dataset.source[2][1] += item.score;
+                        break;
+                    case "successive":
+                        reportDataOption.dataset.source[3][1] += item.score;
+                        break;
+                }
             }
-            console.log(totalScore)
-            that.setData({
-                name: data.name,
-                age: data.age,
+
+            this.setData({
+                name: app.globalData.user.information.userName,
+                age: app.globalData.user.information.age,
                 totalScore: totalScore,
                 finishDate: dateFormat(data.finishTime, "yyyy-mm-dd"),
-                finishTime: dateFormat(data.finishTime, "HH:MM")
+                finishTime: dateFormat(data.finishTime, "HH:MM"),
+                ecBar: {
+                    disableTouch: true,
+                    onInit: this.onInit
+                },
+            })
+
+            let examRecord = {
+                score: data.score,
+                totalScore: totalScore,
+                date: dateFormat(data.finishTime, "yyyy-mm-dd HH:MM"),
+            }
+
+            const db = wx.cloud.database()
+            const _ = db.command
+            db.collection('user').where({
+                _openid: '{openid}',
+            }).update({
+                data: {
+                    history: _.unshift(examRecord)
+                },
+            }).then(res => {
+                console.log('测试记录已上传')
+            }).catch(res => {
+                console.log('上传失败')
             })
         })
     }

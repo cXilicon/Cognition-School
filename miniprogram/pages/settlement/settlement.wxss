@@ -37,6 +37,10 @@
   z-index:0;
 }
 
+.user-information text{
+  font-size: 16px;
+}
+
 .user-information:after{
   content: '';
   position: absolute;
@@ -49,8 +53,8 @@
   border-radius : 10px;
 }
 
-.score-image{
-  width: 50%;
+.settlement_illus{
+  width: 40%;
 }
 
 .data-chart{
@@ -59,8 +63,9 @@
 }
 
 .finish-date{
-  width: 100%;
-  padding: 40rpx;
+  align-self: flex-end;
+  padding: 20rpx 40rpx;
   font-size: 14px;
   text-align: right;
 }
+

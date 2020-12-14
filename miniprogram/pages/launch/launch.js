@@ -40,6 +40,7 @@ Page({
     signUp: function (e) {
         if (e.detail.userInfo) {
             console.log('用户完成授权')
+            console.log(e.detail)
             this.getUserInfoFromDatabase()
                 .then(() => {
                     console.log('未查询到用户数据，前往注册')
@@ -73,6 +74,7 @@ Page({
                         wx.getUserInfo({
                             success: res => {
                                 user.information['avatarUrl'] = res.userInfo.avatarUrl
+                                user.information['age'] = new Date(new Date().getTime() - user.information.birth.getTime()).getFullYear() - 1970
                                 app.globalData.user = user
                                 console.log('查询到用户数据，前往主页面')
                                 wx.switchTab({

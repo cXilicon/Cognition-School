@@ -2,47 +2,150 @@
 import * as echarts from "../../components/ec-canvas/echarts";
 
 let app = getApp()
+const dateFormat = require('dateformat');
+
 Page({
     data: {
         ecBar: {
             disableTouch: true,
-            onInit: function (canvas, width, height, dpr) {
-                const barChart = echarts.init(canvas, null, {
-                    width: width,
-                    height: height,
-                    devicePixelRatio: dpr, // new
-                });
-                canvas.setChart(barChart);
-                barChart.setOption(getAbilityChart);
-                return barChart;
-            },
+            onInit: null
         },
-        examinationInfoShowFlag: false,
+        examinationDetailShow: false,
         userInfo: {
             avatarUrl: null,
             nickName: null,
+            age: null,
             tags: null,
         },
+        history: [],
+        detail: {
+            total: 0,
+            plan: 0,
+            attention: 0,
+            simultaneous: 0,
+            successive: 0,
+            finishDate: null,
+        }
     },
 
-    onLoad(query) {
+    onInit: function (canvas, width, height, dpr) {
+        const barChart = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr, // new
+        });
+        canvas.setChart(barChart);
+        barChart.setOption(getAbilityChart);
+        return barChart;
+    },
+
+    onShow: function () {
+        let that = this
         let userInfo = app.globalData.user.information
-        let age = new Date(new Date().getTime() - userInfo.birth.getTime()).getFullYear() - 1970
+        let age = userInfo.age
         let edu = userInfo.edu
         let tags = [age + '岁', '学历: ' + edu].join(' | ')
         console.log(tags)
         this.setData({
-            ['userInfo.avatarUrl']: userInfo.avatarUrl,
-            ['userInfo.nickName']: userInfo.nickName,
-            ['userInfo.tags']: tags,
+            userInfo: {
+                avatarUrl: userInfo.avatarUrl,
+                nickName: userInfo.userName,
+                age: userInfo.age,
+                tags: tags,
+            }
+        })
+
+        const db = wx.cloud.database()
+        db.collection('user').where({
+            _openid: '{openid}',
+        }).get().then(res => {
+            console.log('成功获取记录', res.data[0])
+            let history = res.data[0].history
+            let recent = history[0]
+            for (let key in recent.score) {
+                let item = recent.score[key]
+                switch (item.category) {
+                    case "plan":
+                        getAbilityChart.dataset.source[0][1] += item.score;
+                        break;
+                    case "attention":
+                        getAbilityChart.dataset.source[1][1] += item.score;
+                        break;
+                    case "simultaneous":
+                        getAbilityChart.dataset.source[2][1] += item.score;
+                        break;
+                    case "successive":
+                        getAbilityChart.dataset.source[3][1] += item.score;
+                        break;
+                }
+            }
+            that.setData({
+                ecBar: {
+                    disableTouch: true,
+                    onInit: that.onInit
+                },
+                history: history
+            })
+        }).catch(() => {
+            console.log('获取失败')
         })
     },
 
-    switchExaminationInfo: function () {
+    showExaminationDetail: function (e) {
+        let data = e.currentTarget.dataset.exam
+        let total = 0
+        let plan = 0
+        let attention = 0
+        let simultaneous = 0
+        let successive = 0
+        for (let key in data.score) {
+            let item = data.score[key]
+            total += item.score
+            switch (item.category) {
+                case "plan":
+                    plan += item.score;
+                    break;
+                case "attention":
+                    attention += item.score;
+                    break;
+                case "simultaneous":
+                    simultaneous += item.score;
+                    break;
+                case "successive":
+                    successive += item.score;
+                    break;
+            }
+        }
         this.setData({
-            examinationInfoShowFlag: !this.data.examinationInfoShowFlag,
+            detail: {
+                total: total,
+                plan: plan,
+                attention: attention,
+                simultaneous: simultaneous,
+                successive: successive,
+                finishDate: data.date,
+            },
+            examinationDetailShow: true,
         });
     },
+
+    closeExamDetail: function () {
+        this.setData({
+            examinationDetailShow: false,
+        });
+    },
+
+    editUserInfo: function () {
+        wx.navigateTo({
+            url: '/pages/userInfo/userInfo',
+            success: res => {
+                res.eventChannel.emit('wxUserInfo', {
+                    type: 'edit',
+                    userInfo: app.globalData.user.information,
+                })
+            }
+        })
+    }
 });
 
 let colorList = ["#ec524b", "#f5b461", "#f3eac2", "#9ad3bc"];
@@ -51,10 +154,10 @@ let getAbilityChart = {
     dataset: {
         dimensions: ["item", "score", "max"],
         source: [
-            ["P", 64, 100],
-            ["A", 34, 100],
-            ["S1", 52, 100],
-            ["S2", 65, 100],
+            ["计划", 0, 20],
+            ["注意", 0, 20],
+            ["同时性加工", 0, 20],
+            ["继时性加工", 0, 20],
         ],
     },
     color: ["#9ad3bc", "#ec524b", "#f5b461", "#f3eac2"],
@@ -67,7 +170,7 @@ let getAbilityChart = {
     },
     angleAxis: {
         show: false, //隐藏角度轴（圆心角）
-        max: 100,
+        max: 20,
         startAngle: 90, //极坐标从第一象限开始，即平面直角坐标系,用时钟理解，0就是三点钟方向，这里我们从12点钟方向开始，也就是3点钟方向加90度
         splitLine: {
             show: false, //隐藏分隔线

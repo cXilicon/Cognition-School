@@ -31,7 +31,7 @@
   />
 </van-popup>
 <view class="page">
-  <van-nav-bar left-arrow title="{{isNew?'注册':'个人信息'}}" left-text="返回" fixed="{{true}}" placeholder="{{true}}"
+  <van-nav-bar left-arrow title="{{isSignUp?'注册':'个人信息'}}" left-text="返回" fixed="{{true}}" placeholder="{{true}}"
                bind:click-left="backToLaunch"/>
   <van-cell-group class="info-form">
     <van-cell title="头像" center>
@@ -44,7 +44,7 @@
       />
     </van-cell>
     <van-field label-class="font-color"
-               value="{{userInfo.nickName}}"
+               value="{{userInfo.userName}}"
                label="昵称"
                input-align="right"
     />
@@ -67,7 +67,8 @@
               data-selector="birthSelector"
               bind:tap="changeSelectorState"/>
   </van-cell-group>
-  <van-button class="submit" type="primary" block bind:tap="commitData">
-    提交
+  <van-button disabled="{{posting}}" class="submit" custom-style="border-radius: 16px !important;" type="primary" block
+              bind:tap="commitData">
+    {{isSignUp ? '提交' : '修改'}}
   </van-button>
 </view>

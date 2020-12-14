@@ -1,10 +1,13 @@
 <view class="page">
+  <van-image height="100%" width="100%" fit="cover"
+             src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/index_back_1.jpg"></van-image>
   <view class="logo">
-    <image src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/Galaxy.svg"></image>
     <text>认知\n学堂</text>
   </view>
-  <van-button wx:if="{{!hasUserInfo}}" class="login-button" type="primary" open-type="getUserInfo" lang="zh_CN" block
-              bind:getuserinfo="signUp">
-    微信一键登陆
+  <van-button block custom-class="login-button" type="primary" lang="zh_CN" open-type="getUserInfo" bind:getuserinfo="signUp">
+    <view class="login-button-content">
+      <iconfont name="wechat" size="64"></iconfont>
+      <text>一键登陆</text>
+    </view>
   </van-button>
 </view>

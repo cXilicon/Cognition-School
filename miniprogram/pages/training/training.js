@@ -1,4 +1,6 @@
 // pages/training/training.js
+let app = getApp()
+
 Page({
     data: {
         examinations: [
@@ -58,6 +60,36 @@ Page({
                 name: '数字回忆',
                 score: '-',
             },
-        ]
+        ],
+        isTested: false,
+        lockShow: false,
     },
+
+    onShow: function () {
+        if (!this.data.isTested) {
+            let that = this
+            const db = wx.cloud.database()
+            db.collection('user').where({
+                _openid: '{openid}',
+            }).get().then(res => {
+                let history = res.data[0].history
+                if (history.length !== 0) {
+                    that.setData({
+                        isTested: true,
+                        lockShow: false
+                    })
+                } else {
+                    that.setData({
+                        lockShow: true,
+                    })
+                }
+            }).catch(() => {
+                console.log('获取失败')
+            })
+        }
+    },
+
+    navigateToExam: function () {
+
+    }
 })

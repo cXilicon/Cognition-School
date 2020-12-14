@@ -1,6 +1,6 @@
 Component({
   properties: {
-    // arrow-left-bold | help | start | degree | project | user-boy
+    // lock | wechat | arrow-left-bold | help | start | degree | project | user-boy
     name: {
       type: String,
     },

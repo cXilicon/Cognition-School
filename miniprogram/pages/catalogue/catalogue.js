@@ -20,15 +20,15 @@ Page({
         currentDotsIdx: 0,
         examinationSwitchLock: true,
         countdownMillisecond: 0,
-        countdownDisplay: '',
         finishedItemCount: 0,
         examinations: [
             {
                 id: 0,
                 frontImage: 'exam-0.png',
                 backgroundImage: 'Mercury.jpeg',
-                tag: 'Planning',
+                category: 'plan',
                 name: '舒尔特方格',
+                name_en: 'schulteGrid',
                 score: '--',
                 style: "transform: scale(1);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #707070);'
@@ -37,8 +37,9 @@ Page({
                 id: 1,
                 frontImage: 'exam-1.png',
                 backgroundImage: 'Venus.jpeg',
-                tag: 'Planning',
+                category: 'plan',
                 name: '数字匹配',
+                name_en: 'numberMatching',
                 score: '--',
                 style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #329084);'
@@ -47,8 +48,9 @@ Page({
                 id: 2,
                 frontImage: 'exam-2.png',
                 backgroundImage: 'Earth.jpeg',
-                tag: 'Attention',
+                category: 'attention',
                 name: '表达性注意',
+                name_en: 'expressionAttention',
                 score: '--',
                 style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #0e6575);'
@@ -57,8 +59,9 @@ Page({
                 id: 3,
                 frontImage: 'exam-3.png',
                 backgroundImage: 'Mars.jpeg',
-                tag: 'Attention',
+                category: 'attention',
                 name: '注意力保持',
+                name_en: 'attentionRetention',
                 score: '--',
                 style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #fc4927);'
@@ -67,8 +70,9 @@ Page({
                 id: 4,
                 frontImage: 'exam-4.png',
                 backgroundImage: 'Jupiter.jpeg',
-                tag: 'Simultaneous',
+                category: 'simultaneous',
                 name: '图形记忆',
+                name_en: 'graphicMemory',
                 score: '--',
                 style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #21b0c0);'
@@ -77,8 +81,9 @@ Page({
                 id: 5,
                 frontImage: 'exam-5.png',
                 backgroundImage: 'Saturn.jpeg',
-                tag: 'Simultaneous',
+                category: 'simultaneous',
                 name: '矩阵问题',
+                name_en: 'matrixProblem',
                 score: '--',
                 style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #9d713f);'
@@ -87,8 +92,9 @@ Page({
                 id: 6,
                 frontImage: 'exam-6.png',
                 backgroundImage: 'Uranus.jpeg',
-                tag: 'Successive',
+                category: 'successive',
                 name: '颜色记忆',
+                name_en: 'colorMemory',
                 score: '--',
                 style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #3a72c1);'
@@ -97,8 +103,9 @@ Page({
                 id: 7,
                 frontImage: 'exam-7.png',
                 backgroundImage: 'Neptune.jpeg',
-                tag: 'Successive',
+                category: 'successive',
                 name: '数字回忆',
+                name_en: 'numberMemory',
                 score: '--',
                 style: "transform: scale(0.9);",
                 backgroundStyle: 'background-image: linear-gradient(#eeeeee, #80619f);'
@@ -107,7 +114,6 @@ Page({
                 id: 8,
                 frontImage: 'exam-8.png',
                 backgroundImage: 'Pluto.jpeg',
-                tag: 'Report',
                 name: '生成报告',
                 score: '--',
                 style: "transform: scale(0.9);",
@@ -147,23 +153,30 @@ Page({
                 Toast('该测试已完成');
             } else {
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
-                if (event.currentTarget.dataset.swiperId === 0){
-                    wx.navigateTo({
-                        url: '/pages/examinations/schulte_grid/schulte_grid'
-                    })
-                }else if (event.currentTarget.dataset.swiperId === 1){
-                    wx.navigateTo({
-                        url: '/pages/examinations/numbermatch/numbermatch'
-                    })
-                }else if (event.currentTarget.dataset.swiperId === 2){
-                    wx.navigateTo({
-                        url: '/pages/examinations/colorRemember/colorRemember'
-                    })
-                }else if (event.currentTarget.dataset.swiperId === 3){
-                    wx.navigateTo({
-                        url: '/pages/examinations/numberfind/numberfind'
-                    })
-                }else {
+                if (false) {
+                    if (event.currentTarget.dataset.swiperId === 0) {
+                        wx.navigateTo({
+                            url: '/pages/examinations/schulte_grid/schulte_grid'
+                        })
+                    } else if (event.currentTarget.dataset.swiperId === 1) {
+                        wx.navigateTo({
+                            url: '/pages/examinations/numbermatch/numbermatch'
+                        })
+                    } else if (event.currentTarget.dataset.swiperId === 2) {
+                        wx.navigateTo({
+                            url: '/pages/examinations/colorRemember/colorRemember'
+                        })
+                    } else if (event.currentTarget.dataset.swiperId === 3) {
+                        wx.navigateTo({
+                            url: '/pages/examinations/numberfind/numberfind'
+                        })
+                    } else {
+                        let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
+                        this.setData({
+                            ['examinations[' + currentExamination + '].score']: test_score,
+                        })
+                    }
+                } else {
                     let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
                     this.setData({
                         ['examinations[' + currentExamination + '].score']: test_score,
@@ -201,16 +214,19 @@ Page({
             if (this.data.finishedItemCount === 8) {
                 let examInfo = this.data.examinations
                 let reportData = {
-                    name: '张三',
-                    age: '14',
-                    score: [],
+                    score: {},
+                    level: examInfo[8].score,
                     finishTime: new Date()
                 }
                 examInfo.forEach(function (item) {
-                    if (item.id !== 8)
-                        reportData.score.push(level[item.score])
+                    if (item.id !== 8) {
+                        reportData.score[item.name_en] = {
+                            score: level[item.score],
+                            category: item.category
+                        }
+                    }
                 })
-                console.log(reportData)
+                // console.log(reportData)
                 wx.navigateTo({
                     url: '/pages/settlement/settlement',
                     success: function (res) {
@@ -260,26 +276,10 @@ Page({
         }
     },
 
-    countDown: function () {
-        let countdownSecond = this.data.countdownSecond - 1000
-        this.setData({
-            isTesting: true,
-            countdownSecond: countdownSecond,
-            countdownDisplay: dateFormat(countdownSecond, 'isoTime')
-        })
-    },
-
     onLoad: function (option) {
-        let countdown = new Date(0, 0, 0, 1, 0, 0)
-        this.setData({
-            countdownSecond: countdown,
-            countdownDisplay: dateFormat(countdown, 'isoTime'),
-            isTesting: true,
-        })
-        setInterval(this.countDown, 1000)
     },
 
-    finishExamination: function () {
+    exitExamination: function () {
         Dialog.confirm({
             title: '是否终止测试',
             selector: '#van-dialog',
@@ -288,7 +288,6 @@ Page({
         }).catch(() => {
             Dialog.close()
         })
-
     }
 });
 

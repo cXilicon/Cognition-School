@@ -1,31 +1,43 @@
+/* pages/index/index.wxss */
 .page {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
+}
+
+.page > van-image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 560rpx;
-  width: 560rpx;
-  margin-top: 160rpx;
+  margin-top: 240rpx;
+  margin-bottom: auto;
+  color: #ffffff;
   font-size: 96rpx;
   font-weight: bold;
   letter-spacing: 8rpx;
   font-family: 幼圆, sans-serif;
 }
 
-.logo > image{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+.login-button{
+  width: 360rpx !important;
+  height: 120rpx !important;
+  margin-bottom: 80rpx;
+  border-radius: 16px !important;
 }
 
-.login-button{
-  margin-top: auto;
-  margin-bottom: 280rpx;
+.login-button-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42rpx;
+}
+
+.login-button-content > text{
+  margin-left: 20rpx;
 }

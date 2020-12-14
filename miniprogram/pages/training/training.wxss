@@ -17,20 +17,25 @@
   color: #ffffff !important;
 }
 
-
-.custom-tab-bar {
-  /*background-color: #ffffff;*/
+.lock-tag{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 300rpx;
+  width: 300rpx;
+  padding: 20rpx;
+  color: #ffffff;
+  text-align: center;
+  background-color: #000000 !important;
+  opacity: 0.8;
+  z-index: 10;
 }
 
 .main {
   flex: 1;
   height: 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   box-sizing: border-box;
-  /*padding: 20rpx 40rpx;*/
 }
 
 .training-item {
@@ -39,13 +44,12 @@
   height: 180rpx;
   margin: 40rpx;
   border-radius: 10rpx;
-  /*box-shadow: 5rpx 5rpx 20rpx #cccccc;*/
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.training-item > image {
+.training-item > van-image {
   height: 100%;
-  width: 150rpx;
+  width: 160rpx;
 }
 
 .training-info {
@@ -61,7 +65,8 @@
   font-weight: 700;
 }
 
-.item-tags > text {
+.item-tag {
+  margin-right: 6px;
   border-radius: 6rpx;
   padding: 2rpx 8rpx;
   color: #ec6666;
