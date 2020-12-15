@@ -139,6 +139,30 @@ Page({
                     })
                 })
 
+                wx.cloud.callFunction({
+                    name: 'login',
+                }).then(res => {
+                    console.log(res)
+                    wx.request({
+                        url: 'http://xiangxc.ink:8080/user/add',
+                        method: 'POST',
+                        data: {
+                            area: user.information.area,
+                            birthday: dateFormat(user.information.birth, "yyyy-mm-dd"),
+                            education: user.information.edu,
+                            openID: res.result.openid,
+                            sex: user.information.gender,
+                            sign: '',
+                            userName: user.information.userName,
+                        },
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded' // 默认值
+                        },
+                        success: res => {
+                            console.log(res.data)
+                        }
+                    })
+                })
             } else {
                 db.collection('user').where({
                     _openid: '{openid}',
@@ -165,24 +189,6 @@ Page({
         }
 
 
-        // wx.request({
-        //     url: 'http://xiangxc.ink:8080/test/add',
-        //     method: 'POST',
-        //     data: {
-        //         testName: '111111',
-        //         testType: 'abab1',
-        //         // sex: that.data.userInfo.gender,
-        //         // birth: new Date(that.data.userInfo.birthValue).toUTCString(),
-        //         // edu: that.data.userInfo.edu,
-        //         // area: that.data.userInfo.areaView,
-        //     },
-        //     header: {
-        //         'content-type': 'application/x-www-form-urlencoded' // 默认值
-        //     },
-        //     success(res) {
-        //         console.log(res.data)
-        //     }
-        // })
     },
 
     backToLaunch: function () {

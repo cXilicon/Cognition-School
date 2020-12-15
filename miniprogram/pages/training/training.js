@@ -17,6 +17,7 @@ Page({
                 image: 'Venus.svg',
                 tag: '计划',
                 name: '数字匹配',
+                name_en: 'numberMatching',
                 score: '-',
             },
             {
@@ -24,6 +25,7 @@ Page({
                 image: 'Earth.svg',
                 tag: '注意',
                 name: '表达性注意',
+                name_en: 'expressionAttention',
                 score: '-'
             },
             {
@@ -31,6 +33,7 @@ Page({
                 image: 'Mars.svg',
                 tag: '注意',
                 name: '注意力保持',
+                name_en: 'attentionRetention',
                 score: '-',
             },
             {
@@ -38,6 +41,7 @@ Page({
                 image: 'Jupiter.svg',
                 tag: '同时性加工',
                 name: '图形记忆',
+                name_en: 'graphicMemory',
                 score: '-',
             },
             {
@@ -45,6 +49,7 @@ Page({
                 image: 'Saturn.svg',
                 tag: '同时性加工',
                 name: '矩阵问题',
+                name_en: 'matrixProblem',
                 score: '-',
             },
             {
@@ -52,6 +57,7 @@ Page({
                 image: 'Uranus.svg',
                 tag: '继时性加工',
                 name: '颜色记忆',
+                name_en: 'colorMemory',
                 score: '-',
             },
             {
@@ -59,6 +65,7 @@ Page({
                 image: 'Neptune.svg',
                 tag: '继时性加工',
                 name: '数字回忆',
+                name_en: 'numberMemory',
                 score: '-',
             },
         ],
