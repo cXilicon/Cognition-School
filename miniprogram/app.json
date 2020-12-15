@@ -7,7 +7,7 @@
     "pages/examinations/numbermatch/numbermatch",
     "pages/examinations/numberfind/numberfind",
     "pages/examinations/colorRemember/colorRemember",
-    "pages/examinations/schulte_grid/schulte_grid",
+    "pages/examinations/schulteGrid/schulteGrid",
     "pages/training/training",
     "pages/launch/launch",
     "pages/userInfo/userInfo",

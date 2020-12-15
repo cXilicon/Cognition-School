@@ -1,13 +1,18 @@
 //index.js
+import area from "../../../utils/area";
+
 let init;
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
+import Dialog from "../../../miniprogram_npm/@vant/weapp/dialog/dialog";
 
 Page({
     data: {
+        entrance: null,
         ruleState: false,
         examState: false,
         demoState: false,
+        againState: false,
         array: [], // 用于生成方块的数组
         flag: 0, // 标记已选方块
         timeCount: "0:00", // 计时器文字
@@ -17,10 +22,19 @@ Page({
         startCountDown: 3,
         highlight: 0,
         percent: 0,
+        lastScore: '',
+        lastTimeCount: '',
     },
 
     onLoad: function () { // 页面加载
         this.initGame();
+        const eventChannel = this.getOpenerEventChannel()
+        eventChannel.on('entrance', data => {
+            this.setData({
+                entrance: data.entrance,
+            })
+            console.log(data)
+        })
     },
 
     onUnload() { // 页面退出 - 清空计时器
@@ -28,10 +42,11 @@ Page({
     },
 
     startExam: function () {
+        this.prepare()
         this.setData({
             ruleState: false,
+            againState: false,
         })
-        this.prepare()
     },
 
     initGame: function () { // 游戏初始化
@@ -256,23 +271,36 @@ Page({
             onClose: () => {
                 let second = that.data.second
                 let score;
-                if (second < 15)
+                if (second < 20)
                     score = 'A'
-                else if (second < 25)
-                    score = 'B'
                 else if (second < 35)
+                    score = 'B'
+                else if (second < 50)
                     score = 'C'
-                else if (second < 45)
+                else if (second < 60)
                     score = 'D'
                 else
                     score = 'F'
-                let pages = getCurrentPages();
-                let prevPage = pages[pages.length - 2];
-                prevPage.setData({
-                    ['examinations[0].score']: score
-                })
-                wx.navigateBack()
+                if (that.data.entrance === 'exam') {
+                    let pages = getCurrentPages();
+                    let prevPage = pages[pages.length - 2];
+                    prevPage.setData({
+                        ['examinations[0].score']: score
+                    })
+                    wx.navigateBack()
+                } else {
+                    that.setData({
+                        againState: true,
+                        lastScore: score,
+                        lastTimeCount: that.data.timeCount
+                    })
+                    that.initGame()
+                }
             }
         });
+    },
+
+    exitExamination: function () {
+        wx.navigateBack()
     }
 })

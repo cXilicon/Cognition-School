@@ -10,7 +10,7 @@
                border="{{false}}"/>
   <scroll-view class="main" scroll-y="{{true}}">
     <block wx:for="{{examinations}}" wx:key="id">
-      <view class="training-item" bind:tap="navigateToExam">
+      <view class="training-item" data-item="{{item}}" bind:tap="navigateToExam">
         <van-image height="100%" width="100%" fit="cover"
                    src="{{'cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/'+ item.image}}"/>
         <view class="training-info">

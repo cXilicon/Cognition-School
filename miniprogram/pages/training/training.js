@@ -9,6 +9,7 @@ Page({
                 image: 'Mercury.svg',
                 tag: '计划',
                 name: '舒尔特方格',
+                name_en: 'schulteGrid',
                 score: 'A',
             },
             {
@@ -89,7 +90,19 @@ Page({
         }
     },
 
-    navigateToExam: function () {
+    navigateToExam: function (e) {
+        if (this.data.isTested) {
+            let target = e.currentTarget.dataset.item
+            wx.navigateTo({
+                url: '/pages/examinations/' + target.name_en + '/' + target.name_en,
+                success: res => {
+                    res.eventChannel.emit('entrance', {
+                        entrance: 'training',
+                    })
+                }
+            })
+        } else {
 
+        }
     }
 })

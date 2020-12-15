@@ -12,7 +12,7 @@
 .exam-rule-title {
   margin-bottom: 10rpx;
   color: #aaaaaa;
-  font-size: 28rpx;
+  font-size: 16px;
 }
 
 .exam-control {
@@ -23,6 +23,35 @@
 
 .exam-control van-button {
   flex: 1;
+}
+
+.settlement-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.settlement-info > view {
+  text-align: center;
+}
+
+.settlement-info > view > text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settlement-info > view > text:first-child {
+  font-size: 16px;
+  color: #888888;
+}
+
+.settlement-info > view > text:last-child {
+  font-size: 24px;
+}
+
+.last-score {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 36px;
 }
 
 .wrapper {
@@ -68,7 +97,7 @@
   color: #bbbbbb;
 }
 
-.progress-container{
+.progress-container {
   width: 100%;
 }
 

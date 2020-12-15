@@ -15,6 +15,26 @@
     </view>
   </view>
 </van-popup>
+<van-popup show="{{againState}}" position="bottom"
+           round close-on-click-overlay="{{false}}">
+  <view class="popup-content">
+    <view class="settlement-info">
+      <view>
+        <text>得分</text>
+        <text>{{lastScore}}</text>
+      </view>
+      <view>
+        <text>用时</text>
+        <text>{{lastTimeCount}}</text>
+      </view>
+    </view>
+    <view class="exam-control">
+      <van-button plain block type="primary" bind:tap="startExam">再来一次</van-button>
+      <view style="width: 20rpx"></view>
+      <van-button plain block type="primary" bind:tap="exitExamination">退出测试</van-button>
+    </view>
+  </view>
+</van-popup>
 <van-overlay show="{{startCountDownState}}" custom-style="background-color: transparent; z-index: 10;">
   <view class="wrapper">
     <view class="countdown">{{startCountDown}}</view>
@@ -25,6 +45,10 @@
 <van-notify id="van-notify"/>
 <van-toast id="van-toast"/>
 <view class="page">
+  <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="舒尔特方格"
+               bind:click-left="exitExamination"
+               border="{{false}}"/>
+  <van-nav-bar wx:else title="舒尔特方格" border="{{false}}"/>
   <view class="main">
     <van-image class="background-image" height="100%" width="100%" fit="cover"
                src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png"/>
