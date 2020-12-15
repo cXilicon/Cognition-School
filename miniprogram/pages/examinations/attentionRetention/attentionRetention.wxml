@@ -54,7 +54,7 @@
 
 <van-toast id="van-toast"/>
 <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="注意力保持"
-               bind:click-left="exitExamination"
+               bind:click-left="exitExamination" 
                border="{{false}}"/>
   <van-nav-bar wx:else title="注意力保持" border="{{false}}"/>
 <view class="container">

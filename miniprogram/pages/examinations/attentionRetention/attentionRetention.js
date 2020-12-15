@@ -17,7 +17,7 @@ Page({
     selected:[],
     dis:false,
     //计时器参数
-
+    demoShow:false,
     btnShow:"btn",
  
     //计时器参数
@@ -50,6 +50,11 @@ Page({
   },
 
 
+  onUnload() { // 页面退出 - 清空计时器
+    clearInterval(init);
+},
+
+
 onLoad: function () { // 页面加载
     this.initGame();
     
@@ -74,12 +79,14 @@ initGame: function () { // 游戏初始化
       second: 0,
       millisecond: 0,
       percent: 0,
+      demoShow:false,
   })
  
 },
 
 
 exitExamination: function () {
+  if(this.data.demoShow===false)
   wx.navigateBack()
 },
  //测试开始
@@ -285,7 +292,8 @@ clickNumber:function(e){
 
   this.setData({
       ruleState: false,
-      dis:true
+      dis:true,
+      demoShow:true,
   })
   let step0 = {
       func: () => {

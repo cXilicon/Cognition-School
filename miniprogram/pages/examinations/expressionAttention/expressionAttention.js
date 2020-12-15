@@ -11,7 +11,7 @@ Page({
         lastScore: '',
         lastTimeCount: '',
         againState: false,
-
+        demoShow:false,
         timershow:"timer",
         ruleState: true,
         show: false,
@@ -42,6 +42,11 @@ Page({
             percent: 0,
         })
     },
+
+    onUnload() { // 页面退出 - 清空计时器
+        clearInterval(init);
+    },
+
 
     start: function () {
         let that=this;
@@ -146,7 +151,7 @@ Page({
 
     onLoad: function () { // 页面加载
         this.initGame();
-        /*
+      
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('entrance', data => {
             this.setData({
@@ -154,14 +159,12 @@ Page({
             })
             console.log(data)
         })
-        */
-          this.setData({
-                entrance: "training",
-            })
+     
 
     },
 
     exitExamination: function () {
+        if(this.data.demoShow===false)
         wx.navigateBack()
       },
 
@@ -183,6 +186,7 @@ Page({
             percent: 0,
             timeTarget: 5000,
             timeNow: 0,
+            demoShow:false,
         })
 
     },
@@ -318,7 +322,8 @@ Page({
         let index = 0;
         this.setData({
             ruleState: false,
-            dis: true
+            dis: true,
+            demoShow:true
         })
 
         let step0 = {

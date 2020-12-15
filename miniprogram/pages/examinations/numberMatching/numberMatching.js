@@ -26,7 +26,7 @@ Page({
     lastScore: '',
     lastTimeCount: '',
     percent: 0,
-
+    demoShow:false,
     //游戏数据
     question:[],
     startCountDown: 3,
@@ -62,7 +62,7 @@ initGame: function () { // 游戏初始化
       selectedNumber:0,
       second: 0,
       millisecond: 0,
-     
+      demoShow:false,
       percent: 0,
       question:[],
       startCountDown: 3,
@@ -76,8 +76,13 @@ initGame: function () { // 游戏初始化
   })
  
 },
+onUnload() { // 页面退出 - 清空计时器
+  clearInterval(init);
+},
+
 
 exitExamination: function () {
+  if(this.data.demoShow===false)
   wx.navigateBack()
 },
 
@@ -382,7 +387,8 @@ let that=this
   let that = this
   this.setData({
       ruleState: false,
-      fin:[1,1,1,1,1,1,1]
+      fin:[1,1,1,1,1,1,1],
+      demoShow:true,
   })
   let step0 = {
    
