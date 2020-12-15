@@ -29,9 +29,34 @@
 <van-overlay show="{{demoState}}" custom-style="background-color: transparent">
 </van-overlay>
 
+<van-popup show="{{againState}}" position="bottom"
+           round close-on-click-overlay="{{false}}">
+  <view class="popup-content">
+    <view class="settlement-info">
+      <view>
+        <text>等级</text>
+        <text>{{lastScore}}</text>
+      </view>
+      <view>
+        <text>得分</text>
+        <text>{{lastTimeCount}}</text>
+      </view>
+    </view>
+    <view class="exam-control">
+      <van-button plain block type="primary" bind:tap="testStart">再来一次</van-button>
+      <view style="width: 20rpx"></view>
+      <van-button plain block type="primary" bind:tap="exitExamination">退出测试</van-button>
+    </view>
+  </view>
+</van-popup>
+
 <van-notify id="van-notify" />
 
 <van-toast id="van-toast"/>
+<van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="注意力保持"
+               bind:click-left="exitExamination"
+               border="{{false}}"/>
+  <van-nav-bar wx:else title="注意力保持" border="{{false}}"/>
 <view class="container">
    
      <view class="header" >

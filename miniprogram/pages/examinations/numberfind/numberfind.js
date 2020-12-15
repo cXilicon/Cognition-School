@@ -38,7 +38,10 @@ Page({
     syn:10,
 
     tips:0,
-
+    entrance:'',
+    lastScore: '',
+    lastTimeCount: '',
+    againState: false,
     demoState: false,
     ruleState: true,
     startCountDown: 3,
@@ -49,6 +52,15 @@ Page({
 
 onLoad: function () { // 页面加载
     this.initGame();
+    
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.on('entrance', data => {
+        this.setData({
+            entrance: data.entrance,
+        })
+        console.log(data)
+    })
+   
 },
 initGame: function () { // 游戏初始化
   clearInterval(init);
@@ -66,6 +78,10 @@ initGame: function () { // 游戏初始化
  
 },
 
+
+exitExamination: function () {
+  wx.navigateBack()
+},
  //测试开始
   testStart:function() {
 
@@ -106,6 +122,7 @@ initGame: function () { // 游戏初始化
     }
 
         this.setData({
+          againState: false,
           ruleState: false,
           startCountDown: 3,
           startCountDownState: true
@@ -213,12 +230,23 @@ clickNumber:function(e){
       message: finMessage,
       forbidClick: true,
       onClose: () => {
-        let pages = getCurrentPages();
-        let prevPage = pages[pages.length - 2];
-        prevPage.setData({
-            ['examinations[3].score']: score
-        })
-        wx.navigateBack()
+
+        if (that.data.entrance === 'exam') {
+          let pages = getCurrentPages();
+          let prevPage = pages[pages.length - 2];
+          prevPage.setData({
+              ['examinations[3].score']: score
+          })
+         wx.navigateBack()
+        }else{
+          that.initGame()
+          that.setData({
+              ruleState:false,
+              againState: true,
+              lastScore: score,
+              lastTimeCount: that.data.tips
+          })
+        }
     }})
 
 

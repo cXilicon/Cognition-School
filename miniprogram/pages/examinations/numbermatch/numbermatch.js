@@ -17,20 +17,21 @@ Page({
     showTable:true,
     selectedNumber:0,
     first:0,
-
+    entrance:'',
     ruleState: true,
 
     //计时器参数
     second: 0,
     millisecond: 0,
-
+    lastScore: '',
+    lastTimeCount: '',
     percent: 0,
 
     //游戏数据
     question:[],
     startCountDown: 3,
     startCountDownState: false,
-
+    againState: false,
     //点击
     index:[-1,-1,-1,-1,-1,-1,-1,-1],
     fin:[-1,-1,-1,-1,-1,-1,-1,-1],
@@ -42,18 +43,42 @@ Page({
 
  onLoad: function () { // 页面加载
     this.initGame();
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.on('entrance', data => {
+        this.setData({
+            entrance: data.entrance,
+        })
+        console.log(data)
+    })
+   
+
 },
 initGame: function () { // 游戏初始化
   clearInterval(init);
   this.setData({ // 更新数据
       ruleState: true,
-      fin:[-1,-1,-1,-1,-1,-1,-1],
-      question:[],
+      timershow:"timer",
+      showTable:true,
+      selectedNumber:0,
       second: 0,
       millisecond: 0,
+     
       percent: 0,
+      question:[],
+      startCountDown: 3,
+      startCountDownState: false,
+      index:[-1,-1,-1,-1,-1,-1,-1,-1],
+      fin:[-1,-1,-1,-1,-1,-1,-1,-1],
+      randomsize:5,
+      width:5,
+      height:4,
+      indexq:0
   })
  
+},
+
+exitExamination: function () {
+  wx.navigateBack()
 },
 
 timer: function () {
@@ -70,7 +95,7 @@ timer: function () {
           second: this.data.second + 1,
       })
   }
-  
+  let that=this
   if (this.data.second * 100 >= targetTime) {
       clearInterval(init);
       Toast.success({
@@ -78,12 +103,23 @@ timer: function () {
         forbidClick: true,
         onClose: () => {
     
-          let pages = getCurrentPages();
-          let prevPage = pages[pages.length - 2];
-         prevPage.setData({
-              ['examinations[1].score']: "F"
-          })
-          wx.navigateBack();
+          if (that.data.entrance === 'exam') {
+            let pages = getCurrentPages();
+            let prevPage = pages[pages.length - 2];
+            prevPage.setData({
+                ['examinations[1].score']: "F"
+            })
+            wx.navigateBack()
+          }else{
+            that.initGame()
+            that.setData({
+                ruleState:false,
+                againState: true,
+                lastScore: "F",
+                lastTimeCount: 180
+            })
+            
+          }
       }
     
     })
@@ -161,6 +197,7 @@ timer: function () {
       }
 
         this.setData({
+          againState: false,
           ruleState: false,
           startCountDown: 3,
           startCountDownState: true
@@ -235,7 +272,7 @@ clickNumber:function(e){
       });
     }
   }
-
+let that=this
   //判断是否全部点击完毕，完毕则停止
   if(this.data.selectedNumber==this.data.height){
         clearInterval(init);
@@ -257,12 +294,22 @@ clickNumber:function(e){
                 score="D"
                 else   
                 score="E"
+                if (that.data.entrance === 'exam') {
                 let pages = getCurrentPages();
                 let prevPage = pages[pages.length - 2];
                 prevPage.setData({
                     ['examinations[1].score']: score
                 })
                 wx.navigateBack()
+              }else{
+                that.setData({
+                  ruleState:false,
+                  againState: true,
+                  lastScore: score,
+                  lastTimeCount: that.data.second+":"+that.data.millisecond
+               })
+                that.initGame()
+              }
               
             }
           });

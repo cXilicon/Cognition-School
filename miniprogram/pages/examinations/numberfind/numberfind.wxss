@@ -1,11 +1,4 @@
-/*
-*   作者：张帅
-*   完成日期：2020/11/1
-*   attentionTest-3.css
-*/
-Page{
-  background-color: #eeeeee;
-}
+
 
 
 .btn{
@@ -79,7 +72,7 @@ button[disabled]{
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 150rpx 0 50rpx 0;
+
   box-sizing: border-box;
 } 
 /*标题*/
@@ -295,4 +288,54 @@ button[disabled]{
   transform: translate(-50%);
   height: 80rpx;
   width: 10%;
+}
+
+
+.popup-content {
+  padding: 40rpx;
+}
+
+.exam-rule-title {
+  margin-bottom: 10rpx;
+  color: #aaaaaa;
+  font-size: 16px;
+}
+
+.exam-control {
+  display: flex;
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+.exam-control van-button {
+  flex: 1;
+}
+
+.settlement-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.settlement-info > view {
+  text-align: center;
+}
+
+.settlement-info > view > text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settlement-info > view > text:first-child {
+  font-size: 16px;
+  color: #888888;
+}
+
+.settlement-info > view > text:last-child {
+  font-size: 24px;
+}
+
+.last-score {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 36px;
 }

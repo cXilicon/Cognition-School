@@ -7,6 +7,11 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 let init;
 Page({
     data: {
+        entrance:'',
+        lastScore: '',
+        lastTimeCount: '',
+        againState: false,
+
         timershow:"timer",
         ruleState: true,
         show: false,
@@ -80,6 +85,7 @@ Page({
                             } else {
                                 msg = "测试完成！你的得分是" + (this.data.right * 20)
                             }
+                            
                             Toast({
                                 message: msg,
             
@@ -96,25 +102,36 @@ Page({
                                         that.testStart();
                                     } else {
                                         let score = "";
-                                        if (this.data.right === 5) {
+                                        let right=that.data.right;
+                                        if (that.data.right === 5) {
                                             score = "A"
-                                        } else if (this.data.right === 4) {
+                                        } else if (that.data.right === 4) {
                                             score = "B"
-                                        } else if (this.data.right === 3) {
+                                        } else if (that.data.right === 3) {
                                             score = "C"
-                                        } else if (this.data.right === 2) {
+                                        } else if (that.data.right === 2) {
                                             score = "D"
-                                        } else if(this.data.right === 2){
+                                        } else if(that.data.right === 2){
                                             score = "E"
                                         } else {
                                             score = "F"
                                         }
-                                        let pages = getCurrentPages();
-                                        let prevPage = pages[pages.length - 2];
-                                        prevPage.setData({
-                                            ['examinations[2].score']: score
-                                        })
-                                        wx.navigateBack()
+                                        if (that.data.entrance === 'exam') {
+                                            let pages = getCurrentPages();
+                                            let prevPage = pages[pages.length - 2];
+                                            prevPage.setData({
+                                                ['examinations[2].score']: score
+                                            })
+                                           wx.navigateBack()
+                                          }else{
+                                            that.initGame()
+                                            that.setData({
+                                                ruleState:false,
+                                                againState: true,
+                                                lastScore: score,
+                                                lastTimeCount: right
+                                            })
+                                          }
                                     }
                                 }
                             })
@@ -129,7 +146,24 @@ Page({
 
     onLoad: function () { // 页面加载
         this.initGame();
+        /*
+        const eventChannel = this.getOpenerEventChannel()
+        eventChannel.on('entrance', data => {
+            this.setData({
+                entrance: data.entrance,
+            })
+            console.log(data)
+        })
+        */
+          this.setData({
+                entrance: "training",
+            })
+
     },
+
+    exitExamination: function () {
+        wx.navigateBack()
+      },
 
     initGame: function () { // 游戏初始化
         clearInterval(init)
@@ -170,6 +204,7 @@ Page({
             })
         } else {
             this.setData({ // 更新数据
+              
                 ruleState: false,
                 timeTarget:2000,
                 timeNow:0,
@@ -263,10 +298,12 @@ Page({
             choosetemp[c] = key1;
             choosetemp[d] = key2;
             this.setData({
+              
                 ans: colortemp[0],
             });
         }
         this.setData({
+            againState: false,
             show: true,
             showbu: false,
             text: texttemp,
@@ -469,6 +506,8 @@ Page({
                     that.testStart();
                 } else {
                     let score;
+                    let right=this.data.right;
+
                     if (this.data.right === 5) {
                         score = "A"
                     } else if (this.data.right === 4) {
@@ -482,12 +521,22 @@ Page({
                     }else{
                         score = "F"
                     }
-                    let pages = getCurrentPages();
-                    let prevPage = pages[pages.length - 2];
-                    prevPage.setData({
-                        ['examinations[2].score']: score
-                    })
-                    wx.navigateBack()
+                    if (that.data.entrance === 'exam') {
+                        let pages = getCurrentPages();
+                        let prevPage = pages[pages.length - 2];
+                        prevPage.setData({
+                            ['examinations[2].score']: score
+                        })
+                       wx.navigateBack()
+                      }else{
+                        that.initGame()
+                        that.setData({
+                            ruleState:false,
+                            againState: true,
+                            lastScore: score,
+                            lastTimeCount: right
+                        })
+                      }
                 }
 
             }
