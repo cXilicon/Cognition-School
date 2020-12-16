@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
@@ -22,13 +23,13 @@ public class TblUserToTestImpl implements TblUserToTestService {
     }
 
     @Override
-    public List<UserToTestEntity> findByUserID(String userID) {
-        return tblUserToTestDAO.findByUserID(userID);
+    public List<UserToTestEntity> findByUserID(String userOpenID) {
+        return tblUserToTestDAO.findByUserID(userOpenID);
     }
 
     @Override
-    public Integer findMaxTestNumber(String userID, int test_id) {
-        Integer num = tblUserToTestDAO.findMaxTestNumber(userID,test_id);
+    public Integer findMaxTestNumber(String userOpenID, int test_id) {
+        Integer num = tblUserToTestDAO.findMaxTestNumber(userOpenID,test_id);
         if (num == null)
             return 1;
         else
@@ -38,7 +39,7 @@ public class TblUserToTestImpl implements TblUserToTestService {
     }
 
     @Override
-    public void addRecord(String userID, int testID, int testNumber, double score, String finishTime) {
-        tblUserToTestDAO.addRecord(userID, testID, testNumber, score, finishTime);
+    public void addRecord(String userOpenID, int testID, int testNumber, int score, String finishTime) {
+        tblUserToTestDAO.addRecord(userOpenID, testID, testNumber, score, finishTime);
     }
 }

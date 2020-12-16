@@ -9,7 +9,7 @@ public class UserToTestEntity {
     private int id;
     private String userId;
     private int testId;
-    private BigInteger score;
+    private int score;
     private int testNumber;
     private String finishTime;
     private int deleteFlag;
@@ -46,11 +46,11 @@ public class UserToTestEntity {
 
     @Basic
     @Column(name = "score")
-    public BigInteger getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(BigInteger score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
@@ -96,7 +96,7 @@ public class UserToTestEntity {
         if (testId != that.testId) return false;
         if (testNumber != that.testNumber) return false;
         if (deleteFlag != that.deleteFlag) return false;
-        if (score != null ? !score.equals(that.score) : that.score != null) return false;
+        if (score != that.score) return false;
         if (finishTime != null ? !finishTime.equals(that.finishTime) : that.finishTime != null) return false;
 
         return true;
@@ -107,7 +107,7 @@ public class UserToTestEntity {
         int result = id;
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + testId;
-        result = 31 * result + (score != null ? score.hashCode() : 0);
+        result = 31 * result + score;
         result = 31 * result + testNumber;
         result = 31 * result + (finishTime != null ? finishTime.hashCode() : 0);
         result = 31 * result + deleteFlag;

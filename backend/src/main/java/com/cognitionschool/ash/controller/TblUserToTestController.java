@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -52,13 +53,15 @@ public class TblUserToTestController {
 
     @RequestMapping(value="/add",method= RequestMethod.POST)
     public JSONObject addUserRecord(@RequestParam(value = "userID")String userID,
-                              @RequestParam(value = "testID")int testID,
-                              @RequestParam(value = "score")double score,
+                              @RequestParam(value = "scores") ArrayList<Integer> scores,
                               @RequestParam(value = "finishTime")String finishTime)
     {
         JSONObject result=new JSONObject();
-        int testNumber = tblUserToTestService.findMaxTestNumber(userID,testID);
-        tblUserToTestService.addRecord(userID, testID, testNumber, score, finishTime);
+        int testNumber = tblUserToTestService.findMaxTestNumber(userID,1);
+        for (int i = 0;i<scores.size();i++)
+        {
+            tblUserToTestService.addRecord(userID, i+1, testNumber, scores.get(i), finishTime);
+        }
         result.put("port","200");
         return result;
     }

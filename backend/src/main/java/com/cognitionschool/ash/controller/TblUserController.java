@@ -42,11 +42,11 @@ public class TblUserController {
     @RequestMapping(value="/add",method= RequestMethod.POST)
     public JSONObject addUser(@RequestParam(value = "openID")String openID,
                               @RequestParam(value = "userName")String userName,
-                              @RequestParam(value = "area")String area,
-                              @RequestParam(value = "birthday")String birthday,
-                              @RequestParam(value = "education")String education,
-                              @RequestParam(value = "sex")String sex,
-                              @RequestParam(value = "sign")String sign)
+                              @RequestParam(value = "area",required=false)String area,
+                              @RequestParam(value = "birthday",required=false)String birthday,
+                              @RequestParam(value = "education",required=false)String education,
+                              @RequestParam(value = "sex",required=false)String sex,
+                              @RequestParam(value = "sign",required=false)String sign)
     {
         JSONObject result=new JSONObject();
         tblUserService.addUser(openID,userName,area,birthday,education,sex,sign);
