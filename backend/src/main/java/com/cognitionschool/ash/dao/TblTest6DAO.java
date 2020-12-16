@@ -1,6 +1,5 @@
 package com.cognitionschool.ash.dao;
 
-import com.cognitionschool.ash.entity.AdminEntity;
 import com.cognitionschool.ash.entity.Test6Entity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

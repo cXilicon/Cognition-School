@@ -2,9 +2,7 @@ package com.cognitionschool.ash.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cognitionschool.ash.Service.TblTestItemService;
-import com.cognitionschool.ash.dao.TblTestItemDAO;
 import com.cognitionschool.ash.entity.TestItemEntity;
-import com.cognitionschool.ash.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

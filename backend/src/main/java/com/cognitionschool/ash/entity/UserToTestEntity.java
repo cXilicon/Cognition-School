@@ -1,19 +1,18 @@
 package com.cognitionschool.ash.entity;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "user_to_test", schema = "softwareWX", catalog = "")
 public class UserToTestEntity {
     private int id;
-    private Integer deleteFlag;
+    private String userId;
+    private int testId;
+    private BigInteger score;
+    private int testNumber;
     private String finishTime;
-    private BigDecimal score;
-    private Integer testId;
-    private Integer testNumber;
-    private Integer userId;
+    private int deleteFlag;
 
     @Id
     @Column(name = "id")
@@ -26,13 +25,43 @@ public class UserToTestEntity {
     }
 
     @Basic
-    @Column(name = "delete_flag")
-    public Integer getDeleteFlag() {
-        return deleteFlag;
+    @Column(name = "user_openid")
+    public String getUserId() {
+        return userId;
     }
 
-    public void setDeleteFlag(Integer deleteFlag) {
-        this.deleteFlag = deleteFlag;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "test_id")
+    public int getTestId() {
+        return testId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    @Basic
+    @Column(name = "score")
+    public BigInteger getScore() {
+        return score;
+    }
+
+    public void setScore(BigInteger score) {
+        this.score = score;
+    }
+
+    @Basic
+    @Column(name = "test_number")
+    public int getTestNumber() {
+        return testNumber;
+    }
+
+    public void setTestNumber(int testNumber) {
+        this.testNumber = testNumber;
     }
 
     @Basic
@@ -46,43 +75,13 @@ public class UserToTestEntity {
     }
 
     @Basic
-    @Column(name = "score")
-    public BigDecimal getScore() {
-        return score;
+    @Column(name = "delete_flag")
+    public int getDeleteFlag() {
+        return deleteFlag;
     }
 
-    public void setScore(BigDecimal score) {
-        this.score = score;
-    }
-
-    @Basic
-    @Column(name = "test_id")
-    public Integer getTestId() {
-        return testId;
-    }
-
-    public void setTestId(Integer testId) {
-        this.testId = testId;
-    }
-
-    @Basic
-    @Column(name = "test_number")
-    public Integer getTestNumber() {
-        return testNumber;
-    }
-
-    public void setTestNumber(Integer testNumber) {
-        this.testNumber = testNumber;
-    }
-
-    @Basic
-    @Column(name = "user_id")
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setDeleteFlag(int deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     @Override
@@ -93,12 +92,12 @@ public class UserToTestEntity {
         UserToTestEntity that = (UserToTestEntity) o;
 
         if (id != that.id) return false;
-        if (deleteFlag != null ? !deleteFlag.equals(that.deleteFlag) : that.deleteFlag != null) return false;
-        if (finishTime != null ? !finishTime.equals(that.finishTime) : that.finishTime != null) return false;
+        if (userId != null ? !userId .equals(that.userId ) : that.userId != null) return false;
+        if (testId != that.testId) return false;
+        if (testNumber != that.testNumber) return false;
+        if (deleteFlag != that.deleteFlag) return false;
         if (score != null ? !score.equals(that.score) : that.score != null) return false;
-        if (testId != null ? !testId.equals(that.testId) : that.testId != null) return false;
-        if (testNumber != null ? !testNumber.equals(that.testNumber) : that.testNumber != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (finishTime != null ? !finishTime.equals(that.finishTime) : that.finishTime != null) return false;
 
         return true;
     }
@@ -106,12 +105,12 @@ public class UserToTestEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (deleteFlag != null ? deleteFlag.hashCode() : 0);
-        result = 31 * result + (finishTime != null ? finishTime.hashCode() : 0);
-        result = 31 * result + (score != null ? score.hashCode() : 0);
-        result = 31 * result + (testId != null ? testId.hashCode() : 0);
-        result = 31 * result + (testNumber != null ? testNumber.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + testId;
+        result = 31 * result + (score != null ? score.hashCode() : 0);
+        result = 31 * result + testNumber;
+        result = 31 * result + (finishTime != null ? finishTime.hashCode() : 0);
+        result = 31 * result + deleteFlag;
         return result;
     }
 }

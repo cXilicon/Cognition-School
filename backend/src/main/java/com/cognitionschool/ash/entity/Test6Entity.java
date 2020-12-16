@@ -6,15 +6,15 @@ import javax.persistence.*;
 @Table(name = "test6", schema = "softwareWX", catalog = "")
 public class Test6Entity {
     private int id;
+    private String questionImgAddress;
     private String choice1;
     private String choice2;
     private String choice3;
     private String choice4;
     private String choice5;
     private String choice6;
-    private Integer deleteFlag;
-    private Integer level;
-    private String questionImgAddress;
+    private int deleteFlag;
+    private int level;
 
     @Id
     @Column(name = "id")
@@ -24,6 +24,16 @@ public class Test6Entity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "question_img_address")
+    public String getQuestionImgAddress() {
+        return questionImgAddress;
+    }
+
+    public void setQuestionImgAddress(String questionImgAddress) {
+        this.questionImgAddress = questionImgAddress;
     }
 
     @Basic
@@ -88,32 +98,22 @@ public class Test6Entity {
 
     @Basic
     @Column(name = "delete_flag")
-    public Integer getDeleteFlag() {
+    public int getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(Integer deleteFlag) {
+    public void setDeleteFlag(int deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
     @Basic
     @Column(name = "level")
-    public Integer getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(int level) {
         this.level = level;
-    }
-
-    @Basic
-    @Column(name = "question_img_address")
-    public String getQuestionImgAddress() {
-        return questionImgAddress;
-    }
-
-    public void setQuestionImgAddress(String questionImgAddress) {
-        this.questionImgAddress = questionImgAddress;
     }
 
     @Override
@@ -124,16 +124,16 @@ public class Test6Entity {
         Test6Entity that = (Test6Entity) o;
 
         if (id != that.id) return false;
+        if (deleteFlag != that.deleteFlag) return false;
+        if (level != that.level) return false;
+        if (questionImgAddress != null ? !questionImgAddress.equals(that.questionImgAddress) : that.questionImgAddress != null)
+            return false;
         if (choice1 != null ? !choice1.equals(that.choice1) : that.choice1 != null) return false;
         if (choice2 != null ? !choice2.equals(that.choice2) : that.choice2 != null) return false;
         if (choice3 != null ? !choice3.equals(that.choice3) : that.choice3 != null) return false;
         if (choice4 != null ? !choice4.equals(that.choice4) : that.choice4 != null) return false;
         if (choice5 != null ? !choice5.equals(that.choice5) : that.choice5 != null) return false;
         if (choice6 != null ? !choice6.equals(that.choice6) : that.choice6 != null) return false;
-        if (deleteFlag != null ? !deleteFlag.equals(that.deleteFlag) : that.deleteFlag != null) return false;
-        if (level != null ? !level.equals(that.level) : that.level != null) return false;
-        if (questionImgAddress != null ? !questionImgAddress.equals(that.questionImgAddress) : that.questionImgAddress != null)
-            return false;
 
         return true;
     }
@@ -141,15 +141,15 @@ public class Test6Entity {
     @Override
     public int hashCode() {
         int result = id;
+        result = 31 * result + (questionImgAddress != null ? questionImgAddress.hashCode() : 0);
         result = 31 * result + (choice1 != null ? choice1.hashCode() : 0);
         result = 31 * result + (choice2 != null ? choice2.hashCode() : 0);
         result = 31 * result + (choice3 != null ? choice3.hashCode() : 0);
         result = 31 * result + (choice4 != null ? choice4.hashCode() : 0);
         result = 31 * result + (choice5 != null ? choice5.hashCode() : 0);
         result = 31 * result + (choice6 != null ? choice6.hashCode() : 0);
-        result = 31 * result + (deleteFlag != null ? deleteFlag.hashCode() : 0);
-        result = 31 * result + (level != null ? level.hashCode() : 0);
-        result = 31 * result + (questionImgAddress != null ? questionImgAddress.hashCode() : 0);
+        result = 31 * result + deleteFlag;
+        result = 31 * result + level;
         return result;
     }
 }

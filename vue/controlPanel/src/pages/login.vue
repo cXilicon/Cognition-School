@@ -71,7 +71,7 @@ import axios from 'axios';
         },
         methods: {
            submitForm(){
-                	this.$axios.get('http://localhost:8080/admin/login',{
+                	this.$axios.get('http://101.37.64.59:8080/admin/login',{
 								params: {
                                     adminAccount:this.nameValidateForm.adminAccount,
                                     adminPassword:this.nameValidateForm.adminPassword,

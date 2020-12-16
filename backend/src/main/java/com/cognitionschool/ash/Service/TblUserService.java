@@ -2,8 +2,6 @@ package com.cognitionschool.ash.Service;
 
 import com.cognitionschool.ash.entity.UserEntity;
 
-import java.util.Date;
-
 public interface TblUserService {
     UserEntity findByOpenID(String openID);
     void deleteUser(String openID);

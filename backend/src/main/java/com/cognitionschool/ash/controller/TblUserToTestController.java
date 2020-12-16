@@ -1,9 +1,7 @@
 package com.cognitionschool.ash.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cognitionschool.ash.Service.TblUserService;
 import com.cognitionschool.ash.Service.TblUserToTestService;
-import com.cognitionschool.ash.entity.UserEntity;
 import com.cognitionschool.ash.entity.UserToTestEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +36,7 @@ public class TblUserToTestController {
     }
 
     @RequestMapping(value="/findbyuserid",method= RequestMethod.GET)
-    public JSONObject findByUserID(@RequestParam(value = "userID") int userID){
+    public JSONObject findByUserID(@RequestParam(value = "userID") String userID){
         List<UserToTestEntity> userToTestEntity  = tblUserToTestService.findByUserID(userID);
         JSONObject result=new JSONObject();
         if (userToTestEntity== null)
@@ -53,7 +51,7 @@ public class TblUserToTestController {
     }
 
     @RequestMapping(value="/add",method= RequestMethod.POST)
-    public JSONObject addUserRecord(@RequestParam(value = "userID")int userID,
+    public JSONObject addUserRecord(@RequestParam(value = "userID")String userID,
                               @RequestParam(value = "testID")int testID,
                               @RequestParam(value = "score")double score,
                               @RequestParam(value = "finishTime")String finishTime)

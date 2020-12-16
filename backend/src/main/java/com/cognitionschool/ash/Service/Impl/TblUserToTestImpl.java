@@ -22,12 +22,12 @@ public class TblUserToTestImpl implements TblUserToTestService {
     }
 
     @Override
-    public List<UserToTestEntity> findByUserID(int userID) {
+    public List<UserToTestEntity> findByUserID(String userID) {
         return tblUserToTestDAO.findByUserID(userID);
     }
 
     @Override
-    public Integer findMaxTestNumber(int userID, int test_id) {
+    public Integer findMaxTestNumber(String userID, int test_id) {
         Integer num = tblUserToTestDAO.findMaxTestNumber(userID,test_id);
         if (num == null)
             return 1;
@@ -38,7 +38,7 @@ public class TblUserToTestImpl implements TblUserToTestService {
     }
 
     @Override
-    public void addRecord(int userID, int testID, int testNumber, double score, String finishTime) {
+    public void addRecord(String userID, int testID, int testNumber, double score, String finishTime) {
         tblUserToTestDAO.addRecord(userID, testID, testNumber, score, finishTime);
     }
 }

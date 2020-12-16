@@ -8,7 +8,7 @@ public class AdminEntity {
     private int id;
     private String adminAccount;
     private String password;
-    private Integer deleteFlag;
+    private int deleteFlag;
 
     @Id
     @Column(name = "id")
@@ -42,11 +42,11 @@ public class AdminEntity {
 
     @Basic
     @Column(name = "delete_flag")
-    public Integer getDeleteFlag() {
+    public int getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(Integer deleteFlag) {
+    public void setDeleteFlag(int deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
@@ -58,9 +58,9 @@ public class AdminEntity {
         AdminEntity that = (AdminEntity) o;
 
         if (id != that.id) return false;
+        if (deleteFlag != that.deleteFlag) return false;
         if (adminAccount != null ? !adminAccount.equals(that.adminAccount) : that.adminAccount != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (deleteFlag != null ? !deleteFlag.equals(that.deleteFlag) : that.deleteFlag != null) return false;
 
         return true;
     }
@@ -70,7 +70,7 @@ public class AdminEntity {
         int result = id;
         result = 31 * result + (adminAccount != null ? adminAccount.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (deleteFlag != null ? deleteFlag.hashCode() : 0);
+        result = 31 * result + deleteFlag;
         return result;
     }
 }
