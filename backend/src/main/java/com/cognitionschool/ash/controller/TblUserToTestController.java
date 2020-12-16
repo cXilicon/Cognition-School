@@ -37,7 +37,7 @@ public class TblUserToTestController {
     }
 
     @RequestMapping(value="/findbyuserid",method= RequestMethod.GET)
-    public JSONObject findByUserID(@RequestParam(value = "userOpenID") String userID){
+    public JSONObject findByUserOpenID(@RequestParam(value = "userOpenID") String userID){
         List<UserToTestEntity> userToTestEntity  = tblUserToTestService.findByUserID(userID);
         JSONObject result=new JSONObject();
         if (userToTestEntity== null)
