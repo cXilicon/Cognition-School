@@ -37,7 +37,7 @@ public class TblUserToTestController {
     }
 
     @RequestMapping(value="/findbyuserid",method= RequestMethod.GET)
-    public JSONObject findByUserID(@RequestParam(value = "userID") String userID){
+    public JSONObject findByUserID(@RequestParam(value = "userOpenID") String userID){
         List<UserToTestEntity> userToTestEntity  = tblUserToTestService.findByUserID(userID);
         JSONObject result=new JSONObject();
         if (userToTestEntity== null)
@@ -52,7 +52,7 @@ public class TblUserToTestController {
     }
 
     @RequestMapping(value="/add",method= RequestMethod.POST)
-    public JSONObject addUserRecord(@RequestParam(value = "userID")String userID,
+    public JSONObject addUserRecord(@RequestParam(value = "userOpenID")String userID,
                               @RequestParam(value = "scores") ArrayList<Integer> scores,
                               @RequestParam(value = "finishTime")String finishTime)
     {
