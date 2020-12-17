@@ -39,7 +39,6 @@
 }
 
 
-
 /*标题*/
 .title{
   font-size: 50rpx;
@@ -57,8 +56,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-
 } 
 /*表格内每一格*/
 .numberText{
@@ -67,8 +64,8 @@
   flex-direction: column;
   align-items: center;
   height: 100rpx;
-  width: 120rpx;
-  margin: 7rpx 7rpx;
+  width: 110rpx;
+  margin: 8rpx;
   border: 2px solid #333333;
   border-radius: 4px;
   font-size: 40rpx;
@@ -76,8 +73,6 @@
   background-color: #ffffff;
   overflow: hidden;
   transition: all .1s ease-in;
-  
- 
 }
 
 .popup-content {
@@ -148,33 +143,26 @@
   background-color: #e3a92e;
 }
 
-
-
 .numberText-active{
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100rpx;
-  width: 120rpx;
-  margin: 7rpx 7rpx;
+  width: 110rpx;
   border: 2px solid #333333;
   border-radius: 4px;
   font-size: 40rpx;
   text-align: center;
-  background-color: #ffffff;
   overflow: hidden;
   transition: all .1s ease-in;
-  margin-top: 18rpx;
+  margin: 18rpx 8rpx 8rpx;
   height: 95rpx;
   background-color: #cccccc;
 }
-.background-image {
-  height: 220rpx;
-  width: 360rpx;
-}
+
 .progress-container{
-  width: 90%;
+  width: 100%;
+  margin: 20rpx 0;
 }
 
 .progress {
@@ -227,16 +215,14 @@
   flex-direction: column;
   align-items: center;
   height: 100rpx;
-  width: 120rpx;
-  margin: 7rpx 7rpx;
+  width: 110rpx;
+  margin: 8rpx 8rpx;
   border: 2px solid #333333;
   border-radius: 4px;
   font-size: 40rpx;
   text-align: center;
-  background-color: #ffffff;
   overflow: hidden;
   transition: all .1s ease-in;
- 
   background-color: #f0cf1a;
 }
 
@@ -249,4 +235,15 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 20rpx;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  height: 240rpx;
+}
+
+.background-image {
+  height: 100%;
+  width: 360rpx;
 }

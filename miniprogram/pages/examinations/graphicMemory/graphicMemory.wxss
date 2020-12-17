@@ -1,0 +1,84 @@
+.page {
+  padding: 0 40rpx;
+  background-color: #eeeeee;
+}
+
+.info {
+  display: flex;
+}
+
+.info > view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 10px;
+  font-size: 18px;
+  /*background-color: lightskyblue;*/
+}
+
+.life-tags {
+  display: flex;
+}
+
+.life-tags:before {
+  content: '生命:';
+  margin-right: 6px;
+}
+
+.info > van-image {
+  align-self: center;
+  width: 40%;
+  height: 300rpx;
+}
+
+
+.main {
+
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0
+}
+
+.cell:before {
+  content: '';
+  padding-top: 90%;
+}
+
+.cell {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10rpx;
+  border-radius: 16px;
+  background-color: #cccccc;
+}
+
+
+.cell-content {
+  position: relative;
+  height: 90%;
+  width: 80%;
+  top: -12%;
+  /*border: solid 4px #333333;*/
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  background-color: #aaaaaa;
+  transition: all .5s ease-out;
+}
+
+.target-cell {
+  background-color: #ffffff;
+  transform: rotateX(180deg);
+}
+
+.other-cell {
+  background-color: #666666;
+  transform: rotateX(180deg);
+}

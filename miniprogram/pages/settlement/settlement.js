@@ -31,6 +31,12 @@ Page({
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('reportData', data => {
             let totalScore = 0
+            reportDataOption.dataset.source = [
+                ["计划", 0, 20],
+                ["注意", 0, 20],
+                ["同时性加工", 0, 20],
+                ["继时性加工", 0, 20],
+            ]
             for (let key in data.score) {
                 let item = data.score[key]
                 totalScore += item.score

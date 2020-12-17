@@ -93,6 +93,12 @@
                     "pathName": "pages/catalogue/catalogue",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "pages/examinations/graphicMemory/graphicMemory",
+                    "pathName": "pages/examinations/graphicMemory/graphicMemory",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }
