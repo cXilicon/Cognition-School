@@ -11,7 +11,7 @@
     "pages/training/training",
     "pages/launch/launch",
     "pages/userInfo/userInfo",
-    "pages/test/test"
+    "pages/test/test"   
   ],
   "tabBar": {
     "custom": true,
