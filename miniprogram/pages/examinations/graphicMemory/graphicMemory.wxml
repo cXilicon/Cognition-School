@@ -1,0 +1,30 @@
+<view class="page">
+  <van-nav-bar custom-style="background-color: transparent;" title="图形记忆"/>
+  <view class="header">
+    <view class="info">
+      <view>
+        <view>关卡: {{currentCheckpoint + 1}}</view>
+        <view class="life-tags">
+          <block wx:for="{{currentChance}}" wx:key="*this">
+            <iconfont name="heart" size="64"/>
+          </block>
+        </view>
+        <view>剩余方块: {{checkPoints[currentCheckpoint][1] - correctCount}}</view>
+        <view>state: {{examState}}</view>
+      </view>
+      <van-image width="100%" height="100%" fit="cover"
+                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/graphic_memory_life_3.png"/>
+    </view>
+    <van-button bind:tap="initExam">initExam</van-button>
+    <custom-progress custom-class="progress" percent="{{40}}" />
+  </view>
+  <view class="main">
+    <view wx:for="{{examMatrix}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">
+      <view wx:for="{{rowItem}}" wx:for-item="cellItem" wx:for-index="cellIdx" class="cell" wx:key="cellItem"
+            data-x="{{rowIdx}}" data-y="{{cellIdx}}" bind:tap="activeCell">
+        <view class="cell-content {{cellItem.isActive?(cellItem.isTarget?'target-cell':'other-cell'):''}}">
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

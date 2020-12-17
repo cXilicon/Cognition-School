@@ -172,6 +172,7 @@ Page({
                     }
                 } else {
                     let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
+                    test_score = 'F'
                     this.setData({
                         ['examinations[' + currentExamination + '].score']: test_score,
                     })

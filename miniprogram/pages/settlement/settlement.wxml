@@ -4,9 +4,9 @@
     <view class="report-title">PASS 测试报告</view>
     <view class="header-information">
       <view class="user-information-container">
-        <view class="user-information">姓名: <text>{{name}}</text></view>
-        <view class="user-information">年龄: <text>{{age}}</text></view>
-        <view class="user-information">得分: <text>{{totalScore}} / 80</text></view>
+        <view class="user-information">姓名: hhhhhh{{name}}</view>
+        <view class="user-information">年龄: {{age}}</view>
+        <view class="user-information">得分: {{totalScore}} / 80</view>
       </view>
       <van-image class="settlement_illus" height="100%" width="100%" fit="cover"
                  src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/settlement_illus.png"/>

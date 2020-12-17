@@ -100,6 +100,13 @@ Page({
         this.changeSelectorState('birthSelector')
     },
 
+    editUserName: function (e) {
+        let data = e.detail
+        this.setData({
+            'userInfo.userName': data,
+        })
+    },
+
     commitData: function () {
         if (!this.data.posting) {
             this.setData({
@@ -184,7 +191,6 @@ Page({
                         posting: false
                     })
                 })
-
             }
         }
 

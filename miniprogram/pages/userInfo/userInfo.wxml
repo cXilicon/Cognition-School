@@ -47,6 +47,7 @@
                value="{{userInfo.userName}}"
                label="昵称"
                input-align="right"
+               bind:change="editUserName"
     />
     <van-cell title="性别" center>
       <view slot="extra">

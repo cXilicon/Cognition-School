@@ -45,37 +45,36 @@
 <van-notify id="van-notify"/>
 <van-toast id="van-toast"/>
 <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="表达性注意"
-               bind:click-left="exitExamination"
-               border="{{false}}"/>
-  <van-nav-bar wx:else title="表达性注意" border="{{false}}"/>
+             bind:click-left="exitExamination"
+             border="{{false}}"/>
+<van-nav-bar wx:else title="表达性注意" border="{{false}}"/>
 <view class="container">
- 
-<view class="black-board">
-  <van-image class="teacher" height="100%" width="100%" fit="cover"
-             src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/teacher.png"></van-image>
-  <view class="question-title">题目{{indexq+1}}</view>
-  <view class="question-content">
-    <view wx:for="{{text}}" style="color:{{allcolor[color[index]]}};" wx:if="{{show}}"
-        class="question" wx:key="index">
-    {{alltext[item]}}
-  </view>
-  <view wx:if="{{showq}}" class="questionq">{{q}}</view>
-  </view>
-</view>
-<view class="progress">
-  <view class="{{timershow}}" style="width: {{percent}}%;"></view>
-  <van-image class="progress-arrow" style="left: {{percent}}%;" height="100%" width="100%"
-             fit="cover"
-             src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
-</view>
 
+  <view class="black-board">
+    <van-image class="teacher" height="100%" width="100%" fit="cover"
+               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/teacher.png"></van-image>
+    <view class="question-title">题目{{indexq + 1}}</view>
+    <view class="question-content">
+      <view wx:for="{{text}}" style="color:{{allcolor[color[index]]}};" wx:if="{{show}}"
+            class="question" wx:key="index">
+        {{alltext[item]}}
+      </view>
+      <view wx:if="{{showq}}" class="questionq">{{q}}</view>
+    </view>
+  </view>
+  <view class="progress">
+    <view class="{{timershow}}" style="width: {{percent}}%;"></view>
+    <van-image class="progress-arrow" style="left: {{percent}}%;" height="100%" width="100%"
+               fit="cover"
+               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
+  </view>
   <view class="items">
     <view wx:for="{{choose}}" wx:if="{{showq}}" class="{{item.style}}" bindtap="click"
           wx:for-index="bindIndex" wx:key="index"
-          data-index="{{bindIndex}}" >
+          data-index="{{bindIndex}}">
       {{alltext[item.number]}}
+    </view>
   </view>
-  </view>
- 
+
 </view>
 

@@ -8,9 +8,10 @@
   border: solid 20rpx #3d3d63;
   border-radius: 50rpx;
   box-shadow: 0 10rpx 20rpx 10rpx #aaaaaa;
+
 }
 
-.report-title{
+.report-title {
   margin: 20rpx 0;
   font-size: 24px;
   font-weight: bold;
@@ -23,25 +24,25 @@
   flex-direction: row;
 }
 
-.user-information-container{
-  flex: 1;
+.user-information-container {
+  width: 50%;
   padding: 40rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.user-information{
-  font-size: 20px;
+.user-information {
   position: relative;
-  z-index:0;
-}
-
-.user-information text{
+  z-index: 0;
+  width: 100%;
   font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.user-information:after{
+.user-information:after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -50,19 +51,19 @@
   bottom: -5rpx;
   height: 0;
   border: 10px solid #eeeeee;
-  border-radius : 10px;
+  border-radius: 10px;
 }
 
-.settlement_illus{
+.settlement_illus {
   width: 40%;
 }
 
-.data-chart{
+.data-chart {
   flex: 1;
   width: 100%;
 }
 
-.finish-date{
+.finish-date {
   align-self: flex-end;
   padding: 20rpx 40rpx;
   font-size: 14px;

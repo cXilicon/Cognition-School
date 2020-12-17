@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/launch/launch",
     "pages/index/index",
     "pages/mine/mine",
     "pages/catalogue/catalogue",
@@ -9,7 +10,6 @@
     "pages/examinations/expressionAttention/expressionAttention",
     "pages/examinations/schulteGrid/schulteGrid",
     "pages/training/training",
-    "pages/launch/launch",
     "pages/userInfo/userInfo",
     "pages/test/test"   
   ],
@@ -53,6 +53,7 @@
     "van-picker": "@vant/weapp/picker/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-image": "@vant/weapp/image/index",
-    "van-field": "@vant/weapp/field/index"
+    "van-field": "@vant/weapp/field/index",
+    "custom-progress": "components/custom-progress/custom-progress"
   }
 }

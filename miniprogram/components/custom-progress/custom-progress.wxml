@@ -1,0 +1,6 @@
+<view class="progress custom-class">
+  <view class="progress-content" style="width: {{percent}}%;"></view>
+  <van-image class="progress-arrow" style="left: {{percent}}%;" height="100%" width="100%"
+             fit="cover"
+             src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
+</view>
