@@ -36,9 +36,24 @@ public class TblUserToTestController {
         }
     }
 
-    @RequestMapping(value="/findbyuserid",method= RequestMethod.GET)
+    @RequestMapping(value="/findbyuseropenid",method= RequestMethod.GET)
     public JSONObject findByUserOpenID(@RequestParam(value = "userOpenID") String userID){
         List<UserToTestEntity> userToTestEntity  = tblUserToTestService.findByUserID(userID);
+        JSONObject result=new JSONObject();
+        if (userToTestEntity== null)
+        {
+            result.put("port","500");
+            return result;
+        }
+        else{
+            result.put("data",userToTestEntity);
+            return result;
+        }
+    }
+
+    @RequestMapping(value="/findbytestid",method= RequestMethod.GET)
+    public JSONObject findByTestID(@RequestParam(value = "testID") int testID){
+        List<UserToTestEntity> userToTestEntity  = tblUserToTestService.findByTestID(testID);
         JSONObject result=new JSONObject();
         if (userToTestEntity== null)
         {

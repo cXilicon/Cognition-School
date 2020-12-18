@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 public interface TblUserDAO extends JpaRepository<UserEntity,Integer> {
 
@@ -19,6 +21,10 @@ public interface TblUserDAO extends JpaRepository<UserEntity,Integer> {
 
     @Query(value = "select * from user where openid = ? and delete_flag = 0",nativeQuery = true)
     UserEntity findByOpenid(String openID);
+
+
+    List<UserEntity> findByUserNameContaining(String userID);
+
 
     @Modifying
     @Query(value = "update user set user_name = ?, area=?,birthday=?,education=?,sex=?,sign=? where openid=?",nativeQuery = true)

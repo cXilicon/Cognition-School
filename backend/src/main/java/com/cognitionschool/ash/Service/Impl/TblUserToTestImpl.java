@@ -28,6 +28,11 @@ public class TblUserToTestImpl implements TblUserToTestService {
     }
 
     @Override
+    public List<UserToTestEntity> findByTestID(int testID) {
+        return tblUserToTestDAO.findByTestID(testID);
+    }
+
+    @Override
     public Integer findMaxTestNumber(String userOpenID, int test_id) {
         Integer num = tblUserToTestDAO.findMaxTestNumber(userOpenID,test_id);
         if (num == null)

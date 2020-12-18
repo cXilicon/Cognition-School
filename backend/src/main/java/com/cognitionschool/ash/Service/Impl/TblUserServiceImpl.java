@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @Component
@@ -16,9 +18,16 @@ public class TblUserServiceImpl implements TblUserService {
     TblUserDAO tblUserDAO;
 
     @Override
+    public List<UserEntity> findByAll(String userID) {
+        return tblUserDAO.findByUserNameContaining(userID);
+    }
+
+    @Override
     public UserEntity findByOpenID(String openID) {
         return tblUserDAO.findByOpenid(openID);
     }
+
+
 
     @Override
     public void deleteUser(String openID) {

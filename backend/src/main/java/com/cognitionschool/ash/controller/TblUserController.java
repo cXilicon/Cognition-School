@@ -3,9 +3,13 @@ package com.cognitionschool.ash.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cognitionschool.ash.Service.TblUserService;
 import com.cognitionschool.ash.entity.UserEntity;
+import com.cognitionschool.ash.entity.UserToTestEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @RestController
@@ -29,6 +33,36 @@ public class TblUserController {
             return result;
         }
     }
+
+
+
+
+    @RequestMapping(value="/findbypage",method= RequestMethod.GET)
+    public JSONObject findByPage(@RequestParam(value = "page")int page,
+                                 @RequestParam(value = "size")int size,
+                                 @RequestParam(value = "userID")String userID)
+    {
+        List<UserEntity> userEntityList  = tblUserService.findByAll(userID);
+        List<UserEntity> newUserList = new ArrayList<>();
+        int begin = (page-1)*size;
+        int end = page * size;
+        JSONObject result=new JSONObject();
+        if (begin >= userEntityList.size())
+        {
+            result.put("port","500");
+            return result;
+        }
+        if (end > userEntityList.size())
+            end = userEntityList.size();
+        for (int i = begin ; i< end ; i++)
+        {
+            newUserList.add(userEntityList.get(i));
+        }
+        result.put("data",newUserList);
+        result.put("size",userEntityList.size());
+        return result;
+    }
+
 
     @RequestMapping(value="/delete",method= RequestMethod.GET)
     public JSONObject deleteUser(@RequestParam(value = "openid") String openID)

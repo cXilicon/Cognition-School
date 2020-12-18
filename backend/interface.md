@@ -63,7 +63,7 @@
 
 ## 删除用户
 
-请求地址：http://101.37.64.59:8080/user/delete
+## 请求地址：http://101.37.64.59:8080/user/delete
 
 请求参数：
 
@@ -101,6 +101,48 @@
 {
   "port": "200"
 }
+```
+
+## 分页查找用户
+
+请求地址：http://101.37.64.59:8080/user/findbypage
+
+请求参数：
+
+| 变量名 | 说明           | 是否允许为空 |
+| ------ | -------------- | ------------ |
+| page   | 页数           | 否           |
+| size   | 页面显示数     | 否           |
+| userID | 模糊查询用户名 | 是           |
+
+查询成功返回参数：
+
+```
+{
+  "data": [
+    {
+      "id": 8,
+      "userName": "Ash",
+      "openid": "oTLOr5VlplqFA0qmibi-Gick5rLPGKl",
+      "area": "浙江 台州",
+      "birthday": "2010-01-01",
+      "education": "保密",
+      "sex": "male",
+      "sign": null,
+      "deleteFlag": 0
+    },
+    {
+      "id": 9,
+      "userName": "hsA",
+      "openid": "oTlOrOTRiV0zx-GigBitsLof_MpZy",
+      "area": "浙江 台州",
+      "birthday": "2010-01-01",
+      "education": "保密",
+      "sex": "female",
+      "sign": null,
+      "deleteFlag": 0
+    }
+  ],
 ```
 
 # 测试管理
@@ -388,6 +430,52 @@
       "testId": 2,
       "testNumber": 1,
       "userId": 1
+    }
+  ]
+}
+```
+
+## 根据用户openID查询
+
+请求地址：http://101.37.64.59:8080/usertotest/findbyopenid
+
+请求参数：
+
+| 变量名     | 说明       | 是否允许为空 |
+| ---------- | ---------- | ------------ |
+| userOpenID | 用户openID | 否           |
+
+返回参数：
+
+```
+{
+  "data": [
+    {
+      "id": 2,
+      "userId": "453534",
+      "testId": 1,
+      "score": 23432,
+      "testNumber": 1,
+      "finishTime": "2343",
+      "deleteFlag": 0
+    },
+    {
+      "id": 3,
+      "userId": "453534",
+      "testId": 1,
+      "score": 23,
+      "testNumber": 2,
+      "finishTime": "dfssdfdsf",
+      "deleteFlag": 0
+    },
+    {
+      "id": 4,
+      "userId": "453534",
+      "testId": 2,
+      "score": 23,
+      "testNumber": 1,
+      "finishTime": "dfssdfdsf",
+      "deleteFlag": 0
     }
   ]
 }

@@ -8,6 +8,7 @@ import java.util.List;
 public interface TblUserToTestService {
     UserToTestEntity findByID(int id);
     List<UserToTestEntity> findByUserID(String userOpenID);
+    List<UserToTestEntity> findByTestID(int testID);
     Integer findMaxTestNumber(String userOpenID,int test_id);
     void addRecord(String  userOpenID,int testID,int testNumber,int score,String finishTime);
 }
