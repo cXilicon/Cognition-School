@@ -20,21 +20,23 @@ Page({
         dis: false,
         alltext: ["红色", "蓝色", "紫色", "绿色", "橙色", "黄色", "白色",  "灰色"],
         allcolor: ["#FF0000", "#1E90FF", "#8B008B", "#00FF00", "#FF8C00", "#FFFF00",  "#ffffff", "#A9A9A9"],
-        allq: ["之前出现的文字是什么？", "之前出现的文字是什么颜色？"],
-        text: [],
-        
-        
-        q: '',
-        choose: [],
-        true: 0,
+        startCountDown: 3,
+        tartCountDownState: true,
+       
+        //关卡数
         indexq: 0,
+        //正确的数目
         right: 0,
 
+        //进度条和计时系统
         percent: 0,
-        timeTarget: 2000,
+        timeTarget: 4500,
         timeNow: 0,
 
+        //当前颜色数目
         qNum:3,
+        //当前的题目数目
+        testNum:1
     },
 
 
@@ -52,16 +54,23 @@ Page({
 
 
     start: function () {
+        this.setData({
+            dis: false,
+        });
         let that=this;
-        this.reset();
+     
         init = setInterval(
             () => {
                 this.setData({
                     timeNow: this.data.timeNow + 10,
-                    percent: 100 * (this.data.timeNow + 10) / this.data.timeTarget
+                    percent: 100 * (this.data.timeNow + 10) / (this.data.timeTarget)
                 })
-                if(this.data.timeNow==2000){
-                    
+              
+                if(this.data.timeNow%1500==0&&this.data.percent != 100){
+                    this.setData({
+                        text:this.data.text+1,
+                      
+                    })
                 }
                 if (this.data.percent == 100) {
                   
@@ -70,7 +79,7 @@ Page({
                             clearInterval(init);
                             that.setData({
                                 percent: 0,
-                                timeTarget: this.data.timeTarget+2000,
+                                timeTarget: 10000,
                                 timeNow: 0,
                                 show: false,
                                 showq: true,
@@ -79,73 +88,9 @@ Page({
                             this.start();
                          
                         } else {
-                            clearInterval(init);
-                            this.setData({
-                                dis: true,
-                            });
-            
-                            let msg = "";
-                            if (that.data.indexq === 0) {
-                                msg = "注意时间哦！"
-                            } else if (that.data.indexq === 1) {
-                                msg = "难度提升了!注意时间哦！"
-                            } else if (that.data.indexq === 2) {
-                                msg = "注意时间哦！"
-                            } else if (that.data.indexq === 3) {
-                                msg = "难度提升了!注意时间哦！"
-                            } else {
-                                msg = "测试完成！你的得分是" + (this.data.right * 20)
-                            }
-                            
-                            Toast({
-                                message: msg,
-            
-                                onClose: () => {
-                                    if (that.data.indexq < 4) {
-                                        that.setData({
-                                            show: false,
-                                            showq: false,
-            
-                                          
-                                            ask: "",
-                                            indexq: that.data.indexq + 1
-                                        });
-                                        that.testStart();
-                                    } else {
-                                        let score = "";
-                                        let right=that.data.right;
-                                        if (that.data.right === 5) {
-                                            score = "A"
-                                        } else if (that.data.right === 4) {
-                                            score = "B"
-                                        } else if (that.data.right === 3) {
-                                            score = "C"
-                                        } else if (that.data.right === 2) {
-                                            score = "D"
-                                        } else if(that.data.right === 2){
-                                            score = "E"
-                                        } else {
-                                            score = "F"
-                                        }
-                                        if (that.data.entrance === 'exam') {
-                                            let pages = getCurrentPages();
-                                            let prevPage = pages[pages.length - 2];
-                                            prevPage.setData({
-                                                ['examinations[2].score']: score
-                                            })
-                                           wx.navigateBack()
-                                          }else{
-                                            that.initGame()
-                                            that.setData({
-                                                ruleState:false,
-                                                againState: true,
-                                                lastScore: score,
-                                                lastTimeCount: right
-                                            })
-                                          }
-                                    }
-                                }
-                            })
+                         clearInterval(init);
+                          this.finishGame();
+ 
                     }
                 }
             }, 10);
@@ -158,7 +103,7 @@ Page({
 
     onLoad: function () { // 页面加载
         this.initGame();
-      /*
+      
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('entrance', data => {
             this.setData({
@@ -167,13 +112,7 @@ Page({
             console.log(data)
         })
 
-        */
-        this.setData({
-          entrance: "training",
-      })
-
      
-
     },
 
     exitExamination: function () {
@@ -192,70 +131,268 @@ Page({
             color: [],
             q: '',
             choose: [],
+            ans:[],
             true: 0,
             indexq: 0,
             right: 0,
             inshow: "in",
             percent: 0,
-            timeTarget: 5000,
+            timeTarget: 6000,
             timeNow: 0,
+            text:0,
             demoShow:false,
             qNum:3,
+            allq:[],
+            startCountDown: 3,
+            startCountDownState: false
         })
 
     },
 
+    finishGame:function(){
+        this.setData({
+            dis: true,
+        });
+        let msg="";
+        if(this.data.percent == 100)
+        {
+            msg="注意时间哦！" 
+        }
+        if(this.data.testNum-1===this.data.testindex)
+        {
+            msg+="进入下一关卡，再接再厉！"
+        }else{
+            msg+="继续前进！"
+        }
+
+        if(this.data.indexq===4&&this.data.testNum-1===this.data.testindex)
+        msg="恭喜你完成测试！你的得分是"+this.data.right*10
+
+
+        let that=this;
+        Toast({
+            message: msg,
+
+            onClose: () => {
+                if(this.data.testNum-1===this.data.testindex){
+                    if (that.data.indexq < 4) {
+                        that.setData({
+                            show: false,
+                            showq: false,
+                            ask: "",
+                            testindex:0,
+                            text:0,
+                            indexq: that.data.indexq + 1
+                        });
+                        that.testStart();
+                    } else {
+                        let score = "";
+                        let right=that.data.right;
+                        if (that.data.right >=9) {
+                            score = "A"
+                        } else if (that.data.right >=7) {
+                            score = "B"
+                        } else if (that.data.right >=5) {
+                            score = "C"
+                        } else if (that.data.right >=3) {
+                            score = "D"
+                        } else if(that.data.right >=1){
+                            score = "E"
+                        } else {
+                            score = "F"
+                        }
+                        if (that.data.entrance === 'exam') {
+                            let pages = getCurrentPages();
+                            let prevPage = pages[pages.length - 2];
+                            prevPage.setData({
+                                ['examinations[6].score']: score
+                            })
+                           wx.navigateBack()
+                          }else{
+                            that.initGame()
+                            that.setData({
+                                ruleState:false,
+                                againState: true,
+                                lastScore: score,
+                                lastTimeCount: right
+                            })
+                          }
+                    }
+                }else{
+                    that.setData({
+                       testindex:this.data.testindex+1,
+                       timeTarget:10000,
+                       percent:0,
+                       timeNow:0
+                    });
+                    this.start()
+                }
+
+            }
+        })
+    },
+
     testStart: function () {
-        if (this.data.indexq < 2) {
+        this.setData({
+            choose: [],
+            startCountDown: 3,
+            startCountDownState: true,
+            ruleState: false,
+            againState: false,
+            text:0,
+            allq:[],
+            test:[],
+            testindex:0,
+            choose: [],
+            ans:[],
+        })
+        if (this.data.indexq==0) {
             this.setData({ // 更新数据
-                ruleState: false,
-                timeTarget:5000,
+             
+                testNum:1,
+                timeNow:0,
+                percent:0,
+                qNum:3,
+                
+            })
+        } else if (this.data.indexq==1) {
+            this.setData({ // 更新数据
+                
+                testNum:2,
                 timeNow:0,
                 percent:0,
                 qNum:3
             })
-        } else if (this.data.indexq < 4) {
+        } else if (this.data.indexq==2) {
             this.setData({ // 更新数据
-                ruleState: false,
-                timeTarget:4000,
+               
+                testNum:2,
                 timeNow:0,
                 percent:0,
                 qNum:4
             })
-        } else {
+        } else if (this.data.indexq==3) {
             this.setData({ // 更新数据
               
-                ruleState: false,
-                timeTarget:2000,
+                testNum:2,
+                timeNow:0,
+                percent:0,
+                qNum:5
+            })
+        } else {
+            this.setData({ // 更新数据
+            
+                testNum:3,
                 timeNow:0,
                 percent:0,
                 qNum:5
              })
         }
-        var qNumTemp=[];
+
+
+
+        let qNumTemp=[];
         for(var i=0;i<this.data.qNum;)
         {
             let a = Math.floor(Math.random() * 8);
-            if(qNumber.indexof(a)==-1)
+            if(qNumTemp.indexOf(a)==-1)
             {
                qNumTemp.push(a);
                 i++;
             }
         }
 
+        let testTemp=[];
+        let forward="";
+        let chooseTemp=[];
+        let chooseItem=[];
+        let ansTemp=[];
+        for(var i=0;i<this.data.testNum;)
+        {
+            chooseItem=[];
+            let a = Math.floor(Math.random() * this.data.qNum);
+            if(a==0)
+                forward="之后"
+            else if(a==this.data.qNum-1)
+                forward="之前"
+            else {
+
+                if(Math.floor(Math.random() * 2)==0)
+                forward="之前"
+                else
+                forward="之后"
+            }
+            var testItem="出现在"+this.data.alltext[qNumTemp[a]]+forward+"的是什么颜色？"
+
+            if(testTemp.indexOf(testItem)==-1)
+            {
+                testTemp.push(testItem)
+                i++;
+                
+            }else{
+
+                continue;
+
+            }
+            let key;
+
+            if(forward=="之后")
+                key=a+1
+            else
+                key=a-1
 
 
-        this. start();
-     
-        this.setData({
-            againState: false,
-            show: true,
-            showbu: false,
-            text: texttemp,
-            color: colortemp,
-            choose: choosetemp,
-            q: this.data.allq[qindex]
-        });
+            for(var j=0;j<4;){
+                let b = Math.floor(Math.random() * 8);
+                if(b!=this.data.alltext.indexOf(this.data.alltext[qNumTemp[key]])
+                &&chooseItem.indexOf(b)==-1&&b!=this.data.alltext.indexOf(this.data.alltext[qNumTemp[a]])){
+                    chooseItem.push(b);
+                    j++;
+                } 
+            }
+            
+            chooseItem[Math.floor(Math.random() * 4)] = this.data.alltext.indexOf(this.data.alltext[qNumTemp[key]])
+
+
+            ansTemp.push(this.data.alltext.indexOf(this.data.alltext[qNumTemp[key]]));
+            let chooseItemTemp=[];
+            for(var j=0;j<4;j++){
+                let temp={
+                    number:chooseItem[j],
+                    style:"item"
+                }
+                chooseItemTemp.push(temp);
+            }
+            
+            chooseTemp.push(chooseItemTemp);
+        }
+
+        var that = this;
+        const countdown = setInterval(() => {
+            if (that.data.startCountDown - 1) {
+                that.setData({
+                    startCountDown: that.data.startCountDown - 1,
+                });
+            } else {
+                this.setData({
+                    againState: false,
+                    show: true,
+                    showbu: false,
+                    timeTarget:this.data.qNum*1500,
+                    allq:qNumTemp,
+                    test:testTemp,
+                    choose:chooseTemp,
+                    ans:ansTemp,
+                    startCountDownState: false,
+                });
+
+                this. start();
+                clearInterval(countdown);
+
+            }
+        }, 1000);
+
+       
     },
 
     viewDemo: function () {
@@ -269,28 +406,71 @@ Page({
 
         let step0 = {
             func: () => {
-                Toast('本测试需要你记忆看到的内容');
-                setTimeout(() => {
-                    that.testStart();
-                }, 2000)
+                Toast('本测试需要你按顺序记忆看到的内容');
+              
             }, playtime: 2500
         }
 
         let step1 = {
             func: () => {
-                Toast('例如本题中，记住' + that.data.alltext[that.data.color[0]] + "的文字" + that.data.alltext[that.data.text[0]]);
-            },
-            playtime: 3000
+                Toast('等待提示结束后开始测试');
+                setTimeout(() => {
+                    that.testStart();
+                }, 2000)
+            }, playtime:5500
         }
 
         let step2 = {
+           
             func: () => {
-              this.stop();
-                Toast('进度条表示你剩余的时间');
-            }, playtime: 2000
+                this.stop();
+                Toast('首先记住第一个颜色' + this.data.alltext[this.data.allq[ this.data.text ]]);
+            },
+            playtime: 2500
+        }
+
+        let step2of1 = {
+           
+            func: () => {
+                this.start();
+            },
+            playtime: 1500
+        }
+
+        
+        let step2of2 = {
+            func: () => {
+                this.stop();
+                Toast('记住第二个颜色' + this.data.alltext[this.data.allq[ this.data.text ]]);
+            },
+            playtime: 2500
+        }
+
+        let step2of3 = {
+           
+            func: () => {
+                this.start();
+            },
+            playtime: 1500
+        }
+
+        let step2of4 = {
+         
+            func: () => {
+                this.stop();
+                Toast('记住第三个颜色' + this.data.alltext[this.data.allq[ this.data.text ]]);
+            },
+            playtime: 1500
         }
 
         let step3 = {
+            func: () => {
+              this.stop();
+                Toast('进度条表示你剩余的时间');
+            }, playtime: 2500
+        }
+
+        let step4 = {
             func: () => {
                 that.setData({
                     timershow:"timer-tips",
@@ -304,14 +484,14 @@ Page({
         }
 
 
-        let step4 = {
+        let step5 = {
             func: () => {
                 let targetTime = that.data.timeTarget;
                 Toast('进度条充满则开始答题');
                 setTimeout(() => {
                     that.setData({
                        timeNow:0,
-                       timeTarget: targetTime + 2000,
+                       timeTarget: 10000,
                         percent:0,
                         show: false,
                         showq: true
@@ -345,8 +525,6 @@ Page({
              
             }, playtime: 800
         }
-
-
         let step8 = {
             func: () => {
                 Toast('如果进度条充满，则你答题失败');
@@ -362,17 +540,17 @@ Page({
         let step10 = {
             func: () => {
                 for (let i = 0; i < 4; i++) {
-                    if (that.data.choose[i].number === this.data.ans) {
+                    if (that.data.choose[0][i].number === this.data.ans[0]) {
                         index = i;
                         break;
                     }
                 }
                 that.setData({
-                    [`choose[${index}].style`]: "item-tips",
+                    [`choose[0][${index}].style`]: "item-tips",
                 })
                 setTimeout(() => {
                     that.setData({
-                        [`choose[${index}].style`]: "item",
+                        [`choose[0][${index}].style`]: "item",
                     })
                 }, 400)
             },
@@ -380,8 +558,11 @@ Page({
         }
 
 
-
-     
+        let step11 = {
+            func: () => {
+                Toast('每个关卡中，你将回答1-3题类似的题目');
+            }, playtime: 3000
+        }
 
         let step13 = {
             func: () => {
@@ -397,7 +578,8 @@ Page({
         }
 
         let stepIdx = 0
-        let steps = [step0, step1, step2, step3, step3, step4, step6, step7, step7, step8, step9, step10, step10, step13]
+        let steps = [step0, step1, step2, step2of1,step2of2,step2of3, step2of4,
+            step3, step4, step4,step5, step6,step7, step7, step8, step9, step10, step10, step11,step13]
         setTimeout(function play() {
             if (stepIdx < steps.length) {
                 steps[stepIdx].func()
@@ -411,7 +593,7 @@ Page({
         {
         let index = e.currentTarget.dataset.index;
    
-        if (this.data.ans === this.data.choose[index].number) {
+        if (this.data.ans[this.data.testindex] === this.data.choose[this.data.testindex][index].number) {
             this.setData({
                 right: this.data.right + 1
             });
@@ -424,70 +606,7 @@ Page({
         let that = this
         clearInterval(init);
 
-        let msg = "";
-        if (that.data.indexq === 0) {
-            msg = "继续前进!"
-        } else if (that.data.indexq === 1) {
-            msg = "难度提升了!"
-        } else if (that.data.indexq === 2) {
-            msg = "继续前进!"
-        } else if (that.data.indexq === 3) {
-            msg = "加油，胜利就在眼前!"
-        } else {
-            msg = "测试完成！你的得分是" + (this.data.right * 20)
-        }
-
-        Toast({
-            message: msg,
-            onClose: () => {
-                if (that.data.indexq < 4) {
-                    that.setData({
-                        show: false,
-                        showq: false,
-                        showbu: true,
-                     
-                        ask: "",
-                        indexq: that.data.indexq + 1
-                    });
-                    that.testStart();
-                } else {
-                    let score;
-                    let right=this.data.right;
-
-                    if (this.data.right === 5) {
-                        score = "A"
-                    } else if (this.data.right === 4) {
-                        score = "B"
-                    } else if (this.data.right === 3) {
-                        score = "C"
-                    } else if (this.data.right === 2) {
-                        score = "D"
-                    } else if (this.data.right === 1){
-                        score = "E"
-                    }else{
-                        score = "F"
-                    }
-                    if (that.data.entrance === 'exam') {
-                        let pages = getCurrentPages();
-                        let prevPage = pages[pages.length - 2];
-                        prevPage.setData({
-                            ['examinations[2].score']: score
-                        })
-                       wx.navigateBack()
-                      }else{
-                        that.initGame()
-                        that.setData({
-                            ruleState:false,
-                            againState: true,
-                            lastScore: score,
-                            lastTimeCount: right
-                        })
-                      }
-                }
-
-            }
-        
-        })
+        this.finishGame();
     }
     },
 

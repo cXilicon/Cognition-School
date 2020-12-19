@@ -117,7 +117,7 @@ Page({
                 name: '生成报告',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #aaaaaa'
+                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #aaaaaa);'
             },
         ],
     },
@@ -155,7 +155,7 @@ Page({
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
                 if (true) {
                     let examId = event.currentTarget.dataset.swiperId
-                    if (examId <= 3) {
+                    if (examId <= 3||examId ===6) {
                         wx.navigateTo({
                             url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
                             success: res => {

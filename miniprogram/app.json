@@ -7,11 +7,13 @@
     "pages/settlement/settlement",
     "pages/examinations/numberMatching/numberMatching",
     "pages/examinations/attentionRetention/attentionRetention",
+    "pages/examinations/colorMemory/colorMemory",
     "pages/examinations/expressionAttention/expressionAttention",
     "pages/examinations/schulteGrid/schulteGrid",
     "pages/training/training",
     "pages/userInfo/userInfo",
     "pages/test/test"   
+    
   ],
   "tabBar": {
     "custom": true,

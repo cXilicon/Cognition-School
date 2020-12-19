@@ -6,7 +6,7 @@
       测试规则
     </view>
     <view>
-      在规定时间内记忆出现的内容，按要求回答问题
+      在规定时间内按顺序记忆出现的内容，按要求回答若干问题
     </view>
     <view class="exam-control">
       <van-button plain block type="primary" bind:tap="viewDemo">查看演示</van-button>
@@ -44,22 +44,23 @@
 </van-overlay>
 <van-notify id="van-notify"/>
 <van-toast id="van-toast"/>
-<van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="表达性注意"
+<van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="颜色记忆"
              bind:click-left="exitExamination"
              border="{{false}}"/>
-<van-nav-bar wx:else title="表达性注意" border="{{false}}"/>
+<van-nav-bar wx:else title="颜色记忆" border="{{false}}"/>
 <view class="container">
 
   <view class="black-board">
     <van-image class="teacher" height="100%" width="100%" fit="cover"
                src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/teacher.png"></van-image>
-    <view class="question-title">题目{{indexq + 1}}</view>
+    <view class="question-title" wx:if="{{!showq}}">关卡{{indexq + 1}}</view>
+    <view class="question-title" wx:else>题目{{indexq + 1}}-{{testindex + 1}}</view>
     <view class="question-content">
-      <view  style="color:{{allcolor[text]}};" wx:if="{{show}}"
+      <view  style="color:{{allcolor[allq[text]]}};" wx:if="{{show}}"
             class="question" wx:key="index">
-        {{text}}
+        {{alltext[allq[text]]}}
       </view>
-      <view wx:if="{{showq}}" class="questionq">{{q}}</view>
+      <view wx:if="{{showq}}" class="questionq">{{test[testindex]}}</view>
     </view>
   </view>
   <view class="progress">
@@ -69,7 +70,7 @@
                src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
   </view>
   <view class="items">
-    <view wx:for="{{choose}}" wx:if="{{showq}}" class="{{item.style}}" bindtap="click"
+    <view wx:for="{{choose[testindex]}}" wx:if="{{showq}}" class="{{item.style}}" bindtap="click"
           wx:for-index="bindIndex" wx:key="index"
           data-index="{{bindIndex}}">
       {{alltext[item.number]}}
