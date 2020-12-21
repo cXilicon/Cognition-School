@@ -35,7 +35,7 @@ Page({
   
     height:14,
     width:7,
-    syn:10,
+    syn:20,
 
     tips:0,
     entrance:'',
@@ -186,10 +186,10 @@ clickNumber:function(e){
       var score=0;
       for(var i=0;i<selectedTemp.length;i++){
         if(this.data.array.indexOf(this.data.question[selectedTemp[i]].number[0])-this.data.array.indexOf(this.data.question[selectedTemp[i]].number[1])==26){
-            score+=10;
+            score+=5;
 
         }else{
-          score-=10;
+          score-=5;
           
         }
       }
@@ -261,7 +261,7 @@ clickNumber:function(e){
     },
 
     timer: function () {
-      const targetTime = 90 * 100;
+      const targetTime = 60 * 100;
       let percent = 100 * (this.data.millisecond + this.data.second * 100 + 1) / targetTime
       this.setData({
           millisecond: this.data.millisecond + 1,
@@ -423,13 +423,13 @@ let step10 = {
             break;
         }
 
-        if(sum==9){
+        if(sum==19){
           clearInterval(time);
         }
       }
     }, 300)
 },
-playtime: 3000
+playtime: 6000
 }
 let step11 = {
   func: () => {

@@ -30,8 +30,10 @@ Page({
         right: 0,
 
         percent: 0,
-        timeTarget: 5000,
+        timeTarget: 4000,
         timeNow: 0,
+        startCountDown: 3,
+        startCountDownState: false
     },
 
 
@@ -184,9 +186,11 @@ Page({
             right: 0,
             inshow: "in",
             percent: 0,
-            timeTarget: 5000,
+            timeTarget: 4000,
             timeNow: 0,
             demoShow:false,
+            startCountDown: 3,
+            startCountDownState: false
         })
 
     },
@@ -195,14 +199,14 @@ Page({
         if (this.data.indexq < 2) {
             this.setData({ // 更新数据
                 ruleState: false,
-                timeTarget:5000,
+                timeTarget:4000,
                 timeNow:0,
                 percent:0,
             })
         } else if (this.data.indexq < 4) {
             this.setData({ // 更新数据
                 ruleState: false,
-                timeTarget:4000,
+                timeTarget:3000,
                 timeNow:0,
                 percent:0,
             })
@@ -215,7 +219,7 @@ Page({
                 percent:0,
             })
         }
-        this. start();
+     
         let a = Math.floor(Math.random() * 8);
         let b = Math.floor(Math.random() *8);
         while (a === b) {
@@ -306,15 +310,50 @@ Page({
                 ans: colortemp[0],
             });
         }
+       
         this.setData({
+           
             againState: false,
-            show: true,
             showbu: false,
+        })
+
+        var that = this;
+        if(this.data.indexq==0){
+            this.setData({
+                startCountDown: 3,
+                startCountDownState: true,
+           
+            })
+        const countdown = setInterval(() => {
+            if (that.data.startCountDown - 1) {
+                that.setData({
+                    startCountDown: that.data.startCountDown - 1,
+                });
+            } else {
+                this.setData({
+                    show: true,
+                    text: texttemp,
+                    color: colortemp,
+                    choose: choosetemp,
+                    q: this.data.allq[qindex],
+                    startCountDownState:false
+                });
+                this.start();
+                clearInterval(countdown);
+
+            }
+        }, 1000);
+    }else{
+        this.setData({
+            
+            show: true,
             text: texttemp,
             color: colortemp,
             choose: choosetemp,
             q: this.data.allq[qindex]
         });
+        this.start();
+    }
     },
 
     viewDemo: function () {
@@ -329,10 +368,18 @@ Page({
         let step0 = {
             func: () => {
                 Toast('本测试需要你记忆看到的内容');
+              
+            }, playtime: 2500
+        }
+
+
+        let stepCount = {
+            func: () => {
+                Toast('等待提示结束后开始测试');
                 setTimeout(() => {
                     that.testStart();
                 }, 2000)
-            }, playtime: 2500
+            }, playtime: 5500
         }
 
         let step1 = {
@@ -456,7 +503,7 @@ Page({
         }
 
         let stepIdx = 0
-        let steps = [step0, step1, step2, step3, step3, step4, step6, step7, step7, step8, step9, step10, step10, step13]
+        let steps = [step0, stepCount,step1, step2, step3, step3, step4, step6, step7, step7, step8, step9, step10, step10, step13]
         setTimeout(function play() {
             if (stepIdx < steps.length) {
                 steps[stepIdx].func()
