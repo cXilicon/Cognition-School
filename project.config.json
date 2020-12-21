@@ -99,6 +99,12 @@
                     "pathName": "pages/examinations/graphicMemory/graphicMemory",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "pages/examinations/matrixProblem/matrixProblem",
+                    "pathName": "pages/examinations/matrixProblem/matrixProblem",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

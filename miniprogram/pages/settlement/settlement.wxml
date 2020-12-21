@@ -4,7 +4,7 @@
     <view class="report-title">PASS 测试报告</view>
     <view class="header-information">
       <view class="user-information-container">
-        <view class="user-information">姓名: hhhhhh{{name}}</view>
+        <view class="user-information">姓名: {{name}}</view>
         <view class="user-information">年龄: {{age}}</view>
         <view class="user-information">得分: {{totalScore}} / 80</view>
       </view>

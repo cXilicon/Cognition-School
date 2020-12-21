@@ -155,7 +155,7 @@ Page({
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
                 if (true) {
                     let examId = event.currentTarget.dataset.swiperId
-                    if (examId <= 3) {
+                    if (examId <= 4) {
                         wx.navigateTo({
                             url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
                             success: res => {
@@ -172,7 +172,7 @@ Page({
                     }
                 } else {
                     let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
-                    test_score = 'F'
+                    // test_score = 'F'
                     this.setData({
                         ['examinations[' + currentExamination + '].score']: test_score,
                     })

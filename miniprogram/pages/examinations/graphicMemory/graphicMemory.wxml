@@ -1,5 +1,42 @@
+<van-popup show="{{examState==='START'}}" position="bottom" round
+           custom-class="exam-controller">
+  <view class="exam-rule">
+    <text>测试规则</text>
+    <text>在尽可能短的时间内依次点击数字</text>
+  </view>
+  <view class="exam-control-container">
+    <van-button plain block type="primary" bind:tap="viewDemo">查看演示</van-button>
+    <view style="width: 10px"></view>
+    <van-button plain block type="primary" bind:tap="startExam">开始测试</van-button>
+  </view>
+</van-popup>
+<van-popup show="{{examState==='AGAIN'}}" position="bottom" round
+           custom-class="exam-controller">
+  <view class="settlement-info">
+    <view>
+      <text>得分</text>
+      <text>{{lastScore}}</text>
+    </view>
+    <view>
+      <text>通过关卡数</text>
+      <text>{{lastCheckPoint}}</text>
+    </view>
+  </view>
+  <view class="exam-control-container">
+    <van-button plain block type="primary" bind:tap="startExam">再来一次</van-button>
+    <view style="width: 10px"></view>
+    <van-button plain block type="primary" bind:tap="">退出测试</van-button>
+  </view>
+</van-popup>
+<van-toast id="van-toast"/>
+<van-popup show="{{readyState}}" overlay-style="background: transparent;" custom-class="ready">{{readyTime}}</van-popup>
+<van-overlay show="{{examState==='DEMO'}}" z-index="2000" custom-style="background-color: transparent;"
+             bind:click="stopDemo"/>
 <view class="page">
-  <van-nav-bar custom-style="background-color: transparent;" title="图形记忆"/>
+  <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="图形记忆"
+               bind:click-left="exitExamination"
+               border="{{false}}" custom-style="background-color: transparent;"/>
+  <van-nav-bar wx:else title="图形记忆" custom-style="background-color: transparent;" border="{{false}}"/>
   <view class="header">
     <view class="info">
       <view>
@@ -10,13 +47,11 @@
           </block>
         </view>
         <view>剩余方块: {{checkPoints[currentCheckpoint][1] - correctCount}}</view>
-        <view>state: {{examState}}</view>
       </view>
       <van-image width="100%" height="100%" fit="cover"
                  src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/graphic_memory_life_3.png"/>
     </view>
-    <van-button bind:tap="initExam">initExam</van-button>
-    <custom-progress custom-class="progress" percent="{{40}}" />
+    <custom-progress custom-class="progress" percent="{{currentTime * 100 / maxTime}}"/>
   </view>
   <view class="main">
     <view wx:for="{{examMatrix}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">

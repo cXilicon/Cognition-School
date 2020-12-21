@@ -1,6 +1,67 @@
+
+.exam-controller {
+  padding: 20px;
+}
+
+.exam-rule > text:first-child {
+  display: block;
+  margin-bottom: 10px;
+  color: #aaaaaa;
+}
+
+.exam-rule {
+  margin-bottom: 10px;
+}
+
+.exam-control-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.exam-control-container > van-button {
+  flex: 1;
+}
+
+.settlement-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.settlement-info > view {
+  text-align: center;
+}
+
+.settlement-info > view > text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settlement-info > view > text:first-child {
+  color: #888888;
+}
+
+.settlement-info > view > text:last-child {
+  font-size: 24px;
+}
+
+.ready {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  color: #fff;
+  font-size: 48px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, .7) !important;
+}
+
 .page {
-  padding: 0 40rpx;
   background-color: #eeeeee;
+}
+
+.header{
+  padding: 0 40rpx;
 }
 
 .info {
@@ -14,7 +75,6 @@
   justify-content: space-evenly;
   padding: 0 10px;
   font-size: 18px;
-  /*background-color: lightskyblue;*/
 }
 
 .life-tags {
@@ -23,6 +83,8 @@
 
 .life-tags:before {
   content: '生命:';
+  display: flex;
+  align-items: center;
   margin-right: 6px;
 }
 
@@ -32,9 +94,12 @@
   height: 300rpx;
 }
 
+.progress {
+  margin: 0 20rpx;
+}
 
 .main {
-
+  padding: 0 40rpx;
 }
 
 .row {
@@ -65,12 +130,11 @@
   height: 90%;
   width: 80%;
   top: -12%;
-  /*border: solid 4px #333333;*/
   border-radius: 8px;
   color: white;
   text-align: center;
   background-color: #aaaaaa;
-  transition: all .5s ease-out;
+  transition: transform .5s ease-out;
 }
 
 .target-cell {
@@ -81,4 +145,8 @@
 .other-cell {
   background-color: #666666;
   transform: rotateX(180deg);
+}
+
+.highlight {
+  background-color: #ffcc00;
 }

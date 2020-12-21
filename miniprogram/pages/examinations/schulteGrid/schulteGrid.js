@@ -118,6 +118,7 @@ Page({
             }
             this.setData({
                 flag: this.data.flag + 1,
+
             })
         }
     },
@@ -271,16 +272,11 @@ Page({
             onClose: () => {
                 let second = that.data.second
                 let score;
-                if (second < 20)
-                    score = 'A'
-                else if (second < 35)
-                    score = 'B'
-                else if (second < 50)
-                    score = 'C'
-                else if (second < 60)
-                    score = 'D'
-                else
-                    score = 'F'
+                if (second < 20) score = 'A'
+                else if (second < 35) score = 'B'
+                else if (second < 50) score = 'C'
+                else if (second < 60) score = 'D'
+                else score = 'F'
                 if (that.data.entrance === 'exam') {
                     let pages = getCurrentPages();
                     let prevPage = pages[pages.length - 2];
@@ -302,5 +298,9 @@ Page({
 
     exitExamination: function () {
         wx.navigateBack()
-    }
+    },
+
+    // activeCell: function(){
+
+    // }
 })

@@ -64,7 +64,7 @@
       </view>
 
       <view class="row" wx:for="{{array}}" wx:for-item="row" wx:key="*this">
-        <view class="cell {{num>=flag+1?'':'cell-clicked'}} {{num!==highlight?'':'highlight'}}" wx:for="{{row}}"
+        <view class="cell {{demoState&&num==flag?'cell-clicked':''}} {{num!==highlight?'':'highlight'}}" wx:for="{{row}}"
               wx:for-item="num" wx:key="*this"
               bind:touchend="tapNum" data-num="{{num}}">
           <view class="cell-num">{{!examState ? '' : num}}</view>
@@ -72,6 +72,6 @@
         </view>
       </view>
     </view>
-    <view class="timer">{{timeCount}}</view>
+    <!-- <view class="timer">{{timeCount}}</view> -->
   </view>
 </view>
