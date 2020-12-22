@@ -117,7 +117,7 @@ Page({
                 name: '生成报告',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #aaaaaa);'
+                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #aaaaaa'
             },
         ],
     },

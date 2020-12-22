@@ -6,14 +6,12 @@ export default {
         if (op && op.steps) {
             let stepIdx = 0;
             clearTimeout(op.controller);
-
             function play() {
                 if (stepIdx < op.steps.length) {
                     op.steps[stepIdx].func();
                     op.controller = setTimeout(play, op.steps[stepIdx++].playtime);
                 }
             }
-
             play();
         }
     }

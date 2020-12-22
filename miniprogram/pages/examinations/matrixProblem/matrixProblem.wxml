@@ -1,12 +1,17 @@
-<!--miniprogram/pages/examinations/matrixProblem/matrixProblem.wxml-->
 <view class="page">
   <van-nav-bar title="矩阵问题" custom-style="background-color: transparent;" border="{{false}}"/>
+  <view>
+    <van-button bind:tap="onLoad">onLoad</van-button>
+    <van-button bind:tap="show">show</van-button>
+    <van-button bind:tap="clear">clear</van-button>
+  </view>
+
   <view class="main">
-    <view wx:for="{{3}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">
-      <view wx:for="{{3}}" wx:for-item="cellItem" wx:for-index="cellIdx" class="cell" wx:key="cellItem"
-            data-x="{{rowIdx}}" data-y="{{cellIdx}}" bind:tap="activeCell">
-        <view class="cell-content {{cellItem.isActive?(cellItem.isTarget?'target-cell':'other-cell'):''}}">
-        </view>
+    <view wx:for="{{[[0, 1, 2], [3, 4, 5], [6, 7, 8]]}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">
+      <view wx:for="{{rowItem}}" wx:for-item="cellItem" wx:for-index="cellIdx" class="cell" wx:key="cellItem"
+            bind:tap="activeCell">
+
+        <canvas class="cell-content matrix" type="2d" id="matrix-{{cellItem}}"></canvas>
       </view>
     </view>
   </view>
