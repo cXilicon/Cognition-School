@@ -1,52 +1,60 @@
 <template>
-    <el-row class="container">
-        <el-col :span="24" class="header">
-            <el-col :span="5" class="logo" :class="isCollapse?'logo-collapse-width':'logo-width'">
+  <el-row class="container">
+    <el-col :span="24"
+            class="header">
+      <el-col :span="5"
+              class="logo"
+              :class="isCollapse?'logo-collapse-width':'logo-width'">
         <img :src="this.logo" /> {{isCollapse?sysName:sysName}}
-            </el-col>
-        </el-col>
-        <el-col :span="24" class="main">
-            <aside class="aside">
-                <!--导航菜单-->
-        <el-menu  default-active="1" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect" :collapse="isCollapse">
-          <el-menu-item index="1" @click="$router.push('user')">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">用户管理</span>
+      </el-col>
+    </el-col>
+    <el-col :span="24"
+            class="main">
+      <aside class="aside">
+        <!--导航菜单-->
+        <el-menu default-active="1"
+                 class="el-menu-vertical-demo"
+                 @open="handleopen"
+                 @close="handleclose"
+                 @select="handleselect"
+                 :collapse="isCollapse">
+
+          <el-menu-item index="1"
+                        @click="$router.push('user')">
+            <i class="el-icon-user-solid"></i>
+            <span slot="title">用户管理</span>
           </el-menu-item>
-          <el-menu-item index="2" @click="$router.push('test')">
-              <i class="el-icon-s-data"></i>
-              <span slot="title">测试管理</span>
+          <el-menu-item index="2"
+                        @click="$router.push('test')">
+            <i class="el-icon-s-data"></i>
+            <span slot="title">测试管理</span>
           </el-menu-item>
-          <el-menu-item index="3" @click="$router.push('questionbank')">
-              <i class="el-icon-files"></i>
-              <span slot="title">题库管理</span>
+          <el-menu-item index="3"
+                        @click="$router.push('questionbank')">
+            <i class="el-icon-files"></i>
+            <span slot="title">题库管理</span>
           </el-menu-item>
         </el-menu>
-            </aside>
-            <section class="content-container">
-                <div class="grid-content bg-purple-light">
-                    <el-col :span="24" class="breadcrumb-container">
-                        <el-breadcrumb separator="/" class="breadcrumb-inner">
-                            <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
-                                {{ item.name }}
-                            </el-breadcrumb-item>
-                        </el-breadcrumb>
-                    </el-col>
-                    <el-col :span="24" class="content-wrapper">
-                        <transition name="fade" mode="out-in">
-                            <router-view></router-view>
-                        </transition>
-                    </el-col>
-                </div>
-            </section>
-        </el-col>
-    </el-row>
+      </aside>
+      <section class="content-container">
+        <div class="grid-content bg-purple-light">
+          <el-col :span="24"
+                  class="content-wrapper">
+            <transition name="fade"
+                        mode="out-in">
+              <router-view></router-view>
+            </transition>
+          </el-col>
+        </div>
+      </section>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
 export default {
   name: "Home",
-  data() {
+  data () {
     return {
       isCollapse: false,
       sysName: "kitty",
@@ -57,24 +65,24 @@ export default {
     };
   },
   methods: {
-    handleopen() {
+    handleopen () {
       console.log('handleopen');
     },
-    handleclose() {
+    handleclose () {
       console.log('handleclose');
     },
-    handleselect(a, b) {
+    handleselect (a, b) {
       console.log('handleselect');
     },
-    handleSelectHearNavBar(key, keyPath) {
+    handleSelectHearNavBar (key, keyPath) {
       console.log(key, keyPath)
     },
     //折叠导航栏
-    collapse: function() {
+    collapse: function () {
       this.isCollapse = !this.isCollapse;
     },
     //退出登录
-    logout: function() {
+    logout: function () {
       var _this = this;
       this.$confirm("确认退出吗?", "提示", {
         type: "warning"
@@ -83,12 +91,13 @@ export default {
           sessionStorage.removeItem("user");
           this.$router.push("/login");
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   },
-  mounted() {
+  mounted () {
     this.sysName = "认知学堂后台系统";
     this.logo = require("@/assets/Earth.svg");
+    this.$router.push('user');
   }
 };
 </script>
@@ -135,11 +144,11 @@ export default {
       text-align: left;
       font-size: 18px;
       img {
-          width: 40px;
-          height: 40px;
-          border-radius: 0px;
-          margin: 10px 10px 10px 10px;
-          float: left;
+        width: 40px;
+        height: 40px;
+        border-radius: 0px;
+        margin: 10px 10px 10px 10px;
+        float: left;
       }
       .txt {
         color: #fff;
@@ -173,9 +182,8 @@ export default {
   .main {
     display: flex;
     position: absolute;
-    top: 60px;  
+    top: 60px;
     bottom: 0px;
-    overflow: hidden;
     aside {
       flex: 0 0 230px;
       width: 230px;
@@ -212,5 +220,6 @@ export default {
         box-sizing: border-box;
       }
     }
-  }}
+  }
+}
 </style>

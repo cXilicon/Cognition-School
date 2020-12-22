@@ -28,8 +28,18 @@ public class TblUserToTestImpl implements TblUserToTestService {
     }
 
     @Override
+    public List<UserToTestEntity> findByUserIDAndTestNumber(String userOpenID, int testNumber) {
+        return tblUserToTestDAO.findByUserOpenidAndTestNumber(userOpenID,testNumber);
+    }
+
+    @Override
     public List<UserToTestEntity> findByTestID(int testID) {
         return tblUserToTestDAO.findByTestID(testID);
+    }
+
+    @Override
+    public int findByTestIDAndScore(int testID, int score) {
+        return tblUserToTestDAO.findByTestIDAndScore(testID,score);
     }
 
     @Override

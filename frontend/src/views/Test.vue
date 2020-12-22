@@ -1,20 +1,122 @@
 <template>
-  <div class="site-wrapper site-page--not-found">
-    <div class="site-content__wrapper">
-      <div class="site-content">
-        <h2 class="not-found-title">测试管理</h2>
-        <p class="not-found-desc">这是测试管理页面 ...</p>
-        <el-button @click="$router.go(-1)">返回上一页</el-button>
-        <el-button type="primary" class="not-found-btn-gohome" @click="$router.push({ name: 'home' })">进入首页</el-button>
-      </div>
+  <div class="container"
+       style="width:100%;">
+    <!--表格内容栏-->
+    <el-table :data="pageResult"
+              stripe
+              highlight-current-row
+              border
+              class="myTable"
+              style="width: 90% "
+              header-cell-class-name="myTable">
+
+      <el-table-column prop="testItemId"
+                       label="测试ID"
+                       align="center"></el-table-column>
+      <el-table-column prop="testName"
+                       label="测试名称"
+                       align="center"></el-table-column>
+      <el-table-column prop="testType"
+                       label="测试类型"
+                       align="center"></el-table-column>
+      <el-table-column label="操作"
+                       align="center">
+        <template slot-scope="scope">
+          <el-button size="mini"
+                     @click="handleLook(scope.$index, scope.row)">查看测试情况</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="pagination">
+      <el-pagination background
+                     layout="prev, pager, next"
+                     :current-page="pageRequest.pageNum"
+                     :page-size="pageRequest.pageSize"
+                     :total="totalPage"
+                     @current-change="load">
+      </el-pagination>
+
     </div>
   </div>
 </template>
 
 <script>
-  export default {
+import PopupTreeInput from "@/components/PopupTreeInput"
+import KtTable from "@/utils/KtTable"
+import KtButton from "@/utils/KtButton"
+export default {
+
+  components: {
+    PopupTreeInput,
+    KtTable,
+    KtButton
+  },
+  data () {
+    return {
+      filters: {
+        name: ''
+      },
+      pageRequest: { pageNum: 1, pageSize: 8 },
+      pageResult: [],
+      totalPage: 0,
+      deptData: [],
+      deptTreeProps: {
+        label: 'name',
+        children: 'children'
+      }
+    }
+  },
+
+
+  methods: {
+    Search () {
+      this.$set(this.pageRequest, 'pageNum', 1);
+      this.findPage();
+
+    },
+
+    load (val) {
+      this.$set(this.pageRequest, 'pageNum', val);
+      this.findPage();
+    },
+    // 获取分页数据
+    findPage: function () {
+
+      this.$axios.get('http://localhost:8080/test/findall', {
+        params: {
+        }, headers: {
+          "Content-Type": "application/json;charset=utf-8" //头部信息
+        }
+      })
+        .then((res) => {
+          this.pageResult = res.data.data
+        })
+    },
+    handleLook (index, row) {
+      this.$router.push({
+        path: '/testdetail', query: {
+          testid: row.testItemId,
+          testName: row.testName
+        }
+      })
+    }
+  },
+  created () {
+    this.findPage()
   }
+
+}
 </script>
 
-<style lang="scss">
+<style  scoped>
+.container {
+  position: relative;
+  top: 80px;
+  left: 5%;
+}
+.pagination {
+  position: relative;
+  left: 36.6%;
+  margin-top: 10px;
+}
 </style>

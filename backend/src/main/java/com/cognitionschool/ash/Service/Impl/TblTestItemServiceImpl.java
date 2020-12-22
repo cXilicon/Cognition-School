@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @Component
@@ -30,5 +32,10 @@ public class TblTestItemServiceImpl implements TblTestItemService {
     @Override
     public void modifyUser(String testName, String testType, int testItemID) {
         tblTestItemDAO.modifyUser(testName,testType,testItemID);
+    }
+
+    @Override
+    public List<TestItemEntity> findAll() {
+        return tblTestItemDAO.findAll();
     }
 }

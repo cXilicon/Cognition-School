@@ -40,8 +40,10 @@ public class TblUserController {
     @RequestMapping(value="/findbypage",method= RequestMethod.GET)
     public JSONObject findByPage(@RequestParam(value = "page")int page,
                                  @RequestParam(value = "size")int size,
-                                 @RequestParam(value = "userID")String userID)
+                                 @RequestParam(value = "userID",required=false)String userID)
     {
+        if (userID == null)
+            userID = "";
         List<UserEntity> userEntityList  = tblUserService.findByAll(userID);
         List<UserEntity> newUserList = new ArrayList<>();
         int begin = (page-1)*size;

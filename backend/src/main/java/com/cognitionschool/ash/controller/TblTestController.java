@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Transactional
 @RestController
 @CrossOrigin
@@ -38,6 +40,15 @@ public class TblTestController {
         return result;
     }
 
+    @RequestMapping(value="/findall",method= RequestMethod.GET)
+    public JSONObject deleteUser()
+    {
+        JSONObject result=new JSONObject();
+        List<TestItemEntity>  testList = tblTestItemService.findAll();
+        result.put("data",testList);
+        return result;
+    }
+
     @RequestMapping(value="/add",method= RequestMethod.POST)
     public JSONObject addUser(@RequestParam(value = "testName")String testName,
                               @RequestParam(value = "testType")String testType)
@@ -58,4 +69,6 @@ public class TblTestController {
         result.put("port","200");
         return result;
     }
+
+
 }
