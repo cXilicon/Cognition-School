@@ -4,6 +4,7 @@ import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 const START = "START"
 const DEMO = 'DEMO'
 const EXECUTE = 'EXECUTE'
+const AGAIN = 'AGAIN'
 
 let countDownTimer = null
 let subOp = null
@@ -16,25 +17,26 @@ let demoOp = {
     controller: null,
 }
 
-
 Page({
     data: {
-        checkPoints: [[3, 3], [3, 4], [4, 5], [4, 6], [5, 7], [5, 8], [6, 9], [6, 10]],
-        examMatrix: [],
-        targetList: [],
+        //
+        entrance: "training",
+        examState: EXECUTE,
         canInteraction: false,
-        examState: START,
-        errorCount: 0,
-        correctCount: 0,
-        currentCheckpoint: 0,
-        currentChance: 3,
         currentTime: 0,
         maxTime: 10000,
         readyState: false,
         readyTime: 3,
-        entrance: "training",
+        lastScore: "",
+        //
+        checkPoints: [[3, 3], [3, 4], [4, 5], [4, 6], [5, 7], [5, 8], [6, 9], [6, 10]],
+        examMatrix: [],
+        targetList: [],
+        errorCount: 0,
+        correctCount: 0,
+        currentCheckpoint: 0,
+        currentChance: 3,
         lastCheckPoint: 0,
-        lastScore: ""
     },
 
     onLoad: function (options) {
@@ -46,6 +48,9 @@ Page({
             console.log(data)
         })
         this.initCheckpoint(this.data.checkPoints[0][0], this.data.checkPoints[0][1])
+        this.setData({
+            examState: START,
+        })
     },
 
     onUnload: function () {
@@ -67,6 +72,7 @@ Page({
         this.initExamItem(0)
     },
 
+    //
     initExamItem: function (currentCheckpoint) {
         let that = this
         clearInterval(countDownTimer)
@@ -179,30 +185,36 @@ Page({
             }
         }
     },
+    //
 
     settle: function (level) {
         clearInterval(countDownTimer)
-        let score = ""
-        if (level === 8) score = "A"
-        else if (level >= 6) score = "B"
-        else if (level >= 4) score = "C"
-        else if (level >= 2) score = "D"
-        else if (level >= 0) score = "F"
+        Toast.success({
+            message: '测试完成',
+            onClose: () => {
+                let score = ""
+                if (level === 8) score = "A"
+                else if (level >= 6) score = "B"
+                else if (level >= 4) score = "C"
+                else if (level >= 2) score = "D"
+                else if (level >= 0) score = "F"
 
-        if (this.data.entrance === "training") {
-            this.setData({
-                lastScore: score,
-                lastCheckPoint: level,
-                examState: "AGAIN",
-            })
-        } else if (this.data.entrance === "exam") {
-            let pages = getCurrentPages();
-            let prevPage = pages[pages.length - 2];
-            prevPage.setData({
-                ['examinations[4].score']: score
-            })
-            wx.navigateBack()
-        }
+                if (this.data.entrance === "exam") {
+                    let pages = getCurrentPages();
+                    let prevPage = pages[pages.length - 2];
+                    prevPage.setData({
+                        ['examinations[4].score']: score
+                    })
+                    wx.navigateBack()
+                } else if (this.data.entrance === "training") {
+                    this.setData({
+                        lastScore: score,
+                        lastCheckPoint: level,
+                        examState: AGAIN,
+                    })
+                }
+            }
+        })
     },
 
     countDown: function () {
@@ -376,6 +388,8 @@ Page({
 
     stopDemo: function () {
         clearTimeout(demoOp.controller)
+        clearTimeout(subOp)
+        this.setData({readyState: false})
         Toast.clear()
         this.setData({
             examState: START

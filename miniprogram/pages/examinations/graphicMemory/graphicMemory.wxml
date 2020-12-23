@@ -10,6 +10,7 @@
     <van-button plain block type="primary" bind:tap="startExam">开始测试</van-button>
   </view>
 </van-popup>
+
 <van-popup show="{{examState==='AGAIN'}}" position="bottom" round
            custom-class="exam-controller">
   <view class="settlement-info">
@@ -28,6 +29,7 @@
     <van-button plain block type="primary" bind:tap="">退出测试</van-button>
   </view>
 </van-popup>
+
 <van-toast id="van-toast"/>
 <van-popup show="{{readyState}}" overlay-style="background: transparent;" custom-class="ready">{{readyTime}}</van-popup>
 <van-overlay show="{{examState==='DEMO'}}" z-index="2000" custom-style="background-color: transparent;"
@@ -38,21 +40,23 @@
                border="{{false}}" custom-style="background-color: transparent;"/>
   <van-nav-bar wx:else title="图形记忆" custom-style="background-color: transparent;" border="{{false}}"/>
   <view class="header">
+    <van-image class="background-image" height="100%" width="100%" fit="cover" src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/userInfo_back.png"></van-image>
     <view class="info">
-      <view>
-        <view>关卡: {{currentCheckpoint + 1}}</view>
-        <view class="life-tags">
-          <block wx:for="{{currentChance}}" wx:key="*this">
-            <iconfont name="heart" size="64"/>
-          </block>
-        </view>
-        <view>剩余方块: {{checkPoints[currentCheckpoint][1] - correctCount}}</view>
+      <view>关卡: {{currentCheckpoint + 1}}</view>
+      <view class="life-tags">
+        <block wx:for="{{3}}" wx:key="*this">
+          <iconfont name="{{currentChance>=index+1?'heart-fill':'heart'}}" size="56"/>
+        </block>
       </view>
-      <van-image width="100%" height="100%" fit="cover"
-                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/graphic_memory_life_3.png"/>
+      <view>剩余方块: {{checkPoints[currentCheckpoint][1] - correctCount}}</view>
     </view>
-    <custom-progress custom-class="progress" percent="{{currentTime * 100 / maxTime}}"/>
+    <view class="life-image-container">
+      <van-image wx:for="{{4}}" wx:key="*this" style="{{index === currentChance ? 'width: 100%; height: 100%;': ''}}"
+                 class="life-image" width="120%" height="120%" fit="cover"
+                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/graphic_memory_life_{{index}}.png"/>
+    </view>
   </view>
+  <custom-progress custom-class="progress" percent="{{currentTime * 100 / maxTime}}"/>
   <view class="main">
     <view wx:for="{{examMatrix}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">
       <view wx:for="{{rowItem}}" wx:for-item="cellItem" wx:for-index="cellIdx" class="cell" wx:key="cellItem"

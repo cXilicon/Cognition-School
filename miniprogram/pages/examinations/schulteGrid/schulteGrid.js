@@ -1,33 +1,39 @@
-//index.js
-import area from "../../../utils/area";
-
-let init;
+import util from "../../../utils/util";
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
-import Notify from '../../../miniprogram_npm/@vant/weapp/notify/notify';
-import Dialog from "../../../miniprogram_npm/@vant/weapp/dialog/dialog";
+
+const START = "START"
+const DEMO = 'DEMO'
+const EXECUTE = 'EXECUTE'
+const AGAIN = 'AGAIN'
+
+let timer = null
+let subOp = null
+let demoOp = {
+    steps: null,
+    controller: null,
+}
 
 Page({
     data: {
-        entrance: null,
-        ruleState: false,
-        examState: false,
-        demoState: false,
-        againState: false,
-        array: [], // 用于生成方块的数组
+        //
+        entrance: "training",
+        examState: "",
+        canInteraction: false,
+        currentTime: 0,
+        maxTime: 90000,
+        readyState: false,
+        readyTime: 3,
+        lastScore: "",
+        showNum: false,
+
+        grid: [], // 用于生成方块的数组
         flag: 0, // 标记已选方块
-        timeCount: "0:00", // 计时器文字
-        second: 0, // 计时器 - 秒
-        millisecond: 0, // 计时器 - 毫秒
-        startCountDownState: false,
-        startCountDown: 3,
+
         highlight: 0,
-        percent: 0,
-        lastScore: '',
-        lastTimeCount: '',
+        lastTimeCount: "",
     },
 
     onLoad: function () { // 页面加载
-        this.initGame();
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('entrance', data => {
             this.setData({
@@ -35,159 +41,131 @@ Page({
             })
             console.log(data)
         })
-    },
-
-    onUnload() { // 页面退出 - 清空计时器
-        clearInterval(init);
-    },
-
-    startExam: function () {
-        this.prepare()
+        this.initExam()
         this.setData({
-            ruleState: false,
-            againState: false,
+            examState: START,
         })
     },
 
-    initGame: function () { // 游戏初始化
-        clearInterval(init);
+    onUnload: function () {
+        clearInterval(timer)
+        this.stopDemo()
+    },
+
+    startExam: function () {
+        this.initExam()
+        this.ready()
+        this.setData({examState: EXECUTE})
+    },
+
+    initExam: function () {
+        clearInterval(timer);
         let num = [];
-        let list = [];
+        let grid = [];
         for (let i = 0; i < 25; i++) {
             num.push(i + 1);
         }
-        for (let i = 0; i < 5; i++) { // 随机打乱方块数组
+        for (let i = 0; i < 5; i++) {
             let tmp = [];
             for (let j = 0; j < 5; j++) {
                 let idx = Math.floor(Math.random() * (25 - 5 * i - j));
                 tmp.push(num[idx]);
                 num.splice(idx, 1);
             }
-            list.push(tmp);
+            grid.push(tmp);
         }
         this.setData({ // 更新数据
-            examState: false,
-            demoState: false,
-            ruleState: true,
-            timeCount: "0:00",
-            array: list,
+            grid: grid,
             flag: 0,
-            percent: 0,
+            currentTime: 0,
+            showNum: false,
         })
     },
 
-    tapNum: function (e) { // 方块点击事件
-        if (this.data.examState) {
+    tapCell: function (e) { // 方块点击事件
+        if (this.data.canInteraction && this.data.examState) {
             let num = e.currentTarget.dataset.num - 1;
             this.triggerNum(num)
         }
     },
 
-    prepare: function () {
-        let that = this
+    triggerNum: function (num) {
+        if (this.data.flag === num) { // 确认该方块可以被点击
+            if (num === 24) { // 点击最后一个方块停止游戏并记录时间
+                clearInterval(timer);
+                if (this.data.examState === EXECUTE) {
+                    this.setData({canInteraction: false,})
+                    this.settle(this.data.currentTime)
+                }
+            }
+            this.setData({
+                flag: this.data.flag + 1,
+            })
+        }
+    },
+
+    ready: function () {
+        let second = 3;
         this.setData({
-            startCountDown: 3,
-            startCountDownState: true
-        })
-        const countdown = setInterval(() => {
-            if (that.data.startCountDown - 1) {
-                that.setData({
-                    startCountDown: that.data.startCountDown - 1,
-                });
+            readyState: true,
+            readyTime: second,
+        });
+        subOp = setInterval(() => {
+            second--;
+            if (second) {
+                this.setData({readyTime: second});
             } else {
-                that.setData({
-                    startCountDownState: false,
-                    examState: true,
-                    millisecond: 0,
-                    second: 0,
-                    percent: 100,
-                    countTime: 90,
-                });
-                clearInterval(init);
-                init = setInterval(that.timer, 10);
-                clearInterval(countdown);
+                this.setData({readyState: false, showNum: true});
+                if (this.data.examState === EXECUTE){
+                    this.timer();
+                    this.setData({
+                        canInteraction: true,
+                    })
+                }
+                clearInterval(subOp);
             }
         }, 1000);
     },
 
-    triggerNum: function (num) {
-        if (this.data.flag === num) { // 确认该方块可以被点击
-            if (num === 24) { // 点击最后一个方块停止游戏并记录时间
-                clearInterval(init);
-                this.finishExam()
-            }
-            this.setData({
-                flag: this.data.flag + 1,
-
-            })
-        }
-    },
-
-    finishExam: function () {
-        if (!this.data.demoState)
-            this.settle()
-        else {
-            Notify.clear()
-            Toast.success({
-                message: '演示完成',
-                forbidClick: true,
-                onClose: () => {
-                    this.initGame()
-                }
-            });
-        }
-    },
-
-    // 计时器
     timer: function () {
-        const targetTime = 90 * 100;
-        let percent = 100 * (this.data.millisecond + this.data.second * 100 + 1) / targetTime
-        this.setData({
-            millisecond: this.data.millisecond + 1,
-            percent: percent
-        })
-
-        if (this.data.millisecond >= 100) {
+        timer = setInterval(() => {
             this.setData({
-                millisecond: 0,
-                second: this.data.second + 1,
+                currentTime: this.data.currentTime + 10
             })
-        }
-        this.setData({
-            timeCount: this.data.second + ":" + (this.data.millisecond < 10 ? "0" + this.data.millisecond : this.data.millisecond),
-        })
-        if (this.data.second * 100 >= targetTime) {
-            clearInterval(init);
-            this.finishExam()
-        }
+            if (this.data.currentTime >= this.data.maxTime) {
+                clearInterval(timer)
+                this.settle(this.data.currentTime)
+            }
+        }, 10)
     },
 
-
-    // 查看演示
     viewDemo: function () {
         let that = this
+        this.initExam()
+        clearTimeout(subOp)
+        clearInterval(subOp)
         this.setData({
-            ruleState: false,
-            demoState: true,
+            examState: DEMO,
         })
-        let stepIdx = 0
-        let steps = [{
+        demoOp.steps = [{
             func: () => {
                 Toast('等待提示结束后开始测试');
-                setTimeout(() => {
-                    that.prepare()
-                }, 2000)
-            }, playtime: 5000
+            }, playtime: 2500
         }, {
             func: () => {
+                that.ready()
+            }, playtime: 3000
+        }, {
+            func: () => {
+                that.timer()
                 Toast('点击含有数字1的方块');
-            }, playtime: 2000
+            }, playtime: 2500
         }, {
             func: () => {
                 that.setData({
                     highlight: 1,
                 })
-                setTimeout(() => {
+                subOp = setTimeout(() => {
                     that.setData({
                         highlight: 0,
                     })
@@ -198,7 +176,7 @@ Page({
                 that.setData({
                     highlight: 1,
                 })
-                setTimeout(() => {
+                subOp = setTimeout(() => {
                     that.setData({
                         highlight: 0,
                     })
@@ -211,13 +189,13 @@ Page({
         }, {
             func: () => {
                 Toast('点击含有数字2的方块');
-            }, playtime: 2000
+            }, playtime: 2500
         }, {
             func: () => {
                 that.setData({
                     highlight: 2,
                 })
-                setTimeout(() => {
+                subOp = setTimeout(() => {
                     that.setData({
                         highlight: 0,
                     })
@@ -228,7 +206,7 @@ Page({
                 that.setData({
                     highlight: 2,
                 })
-                setTimeout(() => {
+                subOp = setTimeout(() => {
                     that.setData({
                         highlight: 0,
                     })
@@ -241,7 +219,7 @@ Page({
         }, {
             func: () => {
                 Toast('依次点击剩下的数字方块');
-            }, playtime: 2000
+            }, playtime: 2500
         }, {
             func: () => {
                 let numNow = 2;
@@ -252,31 +230,50 @@ Page({
                         clearInterval(tapControl)
                     }
                 }, 300)
-            }, playtime: 3500
-        }]
-        setTimeout(function play() {
-            if (stepIdx < steps.length) {
-                steps[stepIdx].func()
-                setTimeout(play, steps[stepIdx++].playtime);
-            }
-        }, 0);
+            }, playtime: 7500
+        }, {
+            func: () => {
+                Toast('点击最后一个数字后测试结束')
+            }, playtime: 2500
+        }, {
+            func: () => {
+                Toast.success({
+                    message: '演示完成',
+                    onClose: () => {
+                        that.setData({
+                            examState: START,
+                        })
+                    }
+                })
+            }, playtime: 0
+        },]
+        util.syncOperation(demoOp)
     },
 
+    stopDemo: function () {
+        clearTimeout(demoOp.controller)
+        clearTimeout(subOp)
+        clearInterval(subOp)
+        this.setData({readyState: false})
+        Toast.clear()
+        this.setData({
+            examState: START
+        })
+    },
 
-    // 结算
-    settle: function () {
+    settle: function (second) {
         let that = this
         Toast.success({
             message: '测试完成',
             forbidClick: true,
             onClose: () => {
-                let second = that.data.second
                 let score;
                 if (second < 20) score = 'A'
                 else if (second < 35) score = 'B'
                 else if (second < 50) score = 'C'
                 else if (second < 60) score = 'D'
                 else score = 'F'
+
                 if (that.data.entrance === 'exam') {
                     let pages = getCurrentPages();
                     let prevPage = pages[pages.length - 2];
@@ -285,12 +282,12 @@ Page({
                     })
                     wx.navigateBack()
                 } else {
+                    let lastTimeCount = Math.floor(second / 1000)
                     that.setData({
-                        againState: true,
                         lastScore: score,
-                        lastTimeCount: that.data.timeCount
+                        lastTimeCount: lastTimeCount + "s",
+                        examState: AGAIN,
                     })
-                    that.initGame()
                 }
             }
         });
@@ -299,8 +296,4 @@ Page({
     exitExamination: function () {
         wx.navigateBack()
     },
-
-    // activeCell: function(){
-
-    // }
 })

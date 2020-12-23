@@ -1,3 +1,6 @@
+.page {
+  background-color: #eeeeee;
+}
 
 .exam-controller {
   padding: 20px;
@@ -56,25 +59,40 @@
   background-color: rgba(0, 0, 0, .7) !important;
 }
 
-.page {
-  background-color: #eeeeee;
+
+.header {
+  position: relative;
+  flex: 1;
+  display: flex;
+  box-sizing: border-box;
+  width: 90%;
+  min-height: 240rpx;
+  max-height: 400rpx;
+  margin: 20rpx auto;
+  padding: 20rpx;
+  border: 8px solid #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #ccc;
+  color: #fff;
+  overflow: hidden;
 }
 
-.header{
-  padding: 0 40rpx;
+.background-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .info {
-  display: flex;
-}
-
-.info > view {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 0 10px;
   font-size: 18px;
+  z-index: 1;
 }
 
 .life-tags {
@@ -88,14 +106,24 @@
   margin-right: 6px;
 }
 
-.info > van-image {
+.life-image-container {
+  position: relative;
   align-self: center;
-  width: 40%;
-  height: 300rpx;
+  height: 100%;
+  width: 32%;
+  overflow: hidden;
+}
+
+.life-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0;
+  height: 0;
 }
 
 .progress {
-  margin: 0 20rpx;
+  margin: 0 60rpx;
 }
 
 .main {

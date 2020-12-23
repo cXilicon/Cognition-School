@@ -1,26 +1,36 @@
 Page({
     data: {
-        matrixItems: []
+        matrixItems: [],
+        optionItems: []
     },
 
     onLoad: function () {
-        let query = wx.createSelectorQuery()
-        for (let i = 0; i < 9; i++) {
-            query.select('#matrix-' + i).fields({node: true, size: true})
-        }
-        let matrixItems = []
-        query.exec(res => {
+        let matrixItems = [],
+            optionItems = [],
+            matrixQuery = wx.createSelectorQuery(),
+            optionQuery = wx.createSelectorQuery();
+        for (let i = 0; i < 9; i++)
+            matrixQuery.select('#matrix-' + i).fields({node: true, size: true})
+        for (let i = 0; i < 3; i++)
+            optionQuery.select('#option-' + i).fields({node: true, size: true})
+        matrixQuery.exec(res => {
             for (let i = 0; i < 9; i++) {
-                matrixItems.push(new MatrixItem(res[i]))
+                matrixItems.push(new Graph(res[i]))
+            }
+        })
+        optionQuery.exec(res => {
+            for (let i = 0; i < 3; i++) {
+                optionItems.push(new Graph(res[i]))
             }
         })
         this.setData({
-            matrixItems: matrixItems
+            matrixItems: matrixItems,
+            optionItems: optionItems
         })
     },
 
     show: function () {
-        let matrix = new Matrix(this.data.matrixItems)
+        let matrix = new Matrix(this.data.matrixItems, this.data.optionItems)
         matrix.generateComb()
     },
 
@@ -29,14 +39,18 @@ Page({
         for (let matrixItem of matrixItems) {
             matrixItem.clear()
         }
+    },
+
+    test: function () {
+        console.log(this.data)
     }
 })
 
-function MatrixItem(target) {
+function Graph(target) {
     [this.ctx, this.canvas] = this.init(target)
 }
 
-Object.assign(MatrixItem.prototype, {
+Object.assign(Graph.prototype, {
     init: function (target) {
         const canvas = target.node
         const ctx = canvas.getContext('2d')
@@ -68,17 +82,10 @@ Object.assign(MatrixItem.prototype, {
             this.ctx.beginPath();
             this.ctx.moveTo(60, 60);
             this.ctx.lineTo(middle[desc.gap][0], middle[desc.gap][1])
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 3; i++)
                 this.ctx.lineTo(corner[(desc.gap + i) % 4][0], corner[(desc.gap + i) % 4][1])
-            }
             this.ctx.lineTo(middle[(desc.gap + 3) % 4][0], middle[(desc.gap + 3) % 4][1])
-
-            // this.ctx.lineTo(60, 0)      //120, 60
-            // this.ctx.lineTo(120, 0)     //120, 120
-            // this.ctx.lineTo(120, 120)   //0, 120
-            // this.ctx.lineTo(0, 120)     //0, 0
-            // this.ctx.lineTo(0, 60)      //60, 0
-            this.ctx.lineTo(60, 60)     //60, 60
+            this.ctx.lineTo(60, 60)
             this.ctx.clip();
         }
         this.ctx.beginPath();
@@ -110,8 +117,9 @@ Object.assign(MatrixItem.prototype, {
     },
 })
 
-function Matrix(items) {
-    this.items = items
+function Matrix(matrix, options) {
+    this.matrix = matrix
+    this.options = options
     this.axis = 3
     this.graphDim = {
         color: {
@@ -127,15 +135,19 @@ function Matrix(items) {
             value: []
         },
         gap: {
-            active: false,
+            active: true,
             bias: [-1, 1, 0],
             set: [0, 1, 2, 3],
             value: []
         }
     }
-    this.generateGraph = function () {
-        let items = this.items
+
+    this.generateMatrix = function () {
         let that = this
+        let matrix = this.matrix
+        let options = this.options
+        let answer = [];
+
         for (let [dim, attr] of Object.entries(this.graphDim)) {
             if (attr.active) {
                 let set = attr.set
@@ -148,12 +160,19 @@ function Matrix(items) {
             }
         }
 
-        function setGraphs(axis, label) {
+        function setMatrix(axis, label) {
             if (axis === 0) {
-                let item = items[label[1] * 3 + label[0]]
+                let item = matrix[label[1] * 3 + label[0]]
                 let style = {color: null,}
                 let graph = {shape: null, gap: null, pos: null,}
                 if (label.length >= 3) graph.pos = {scale: 0.6, x: label[2] * 40, y: label[2] * 40}
+
+
+                let answerFlag = false
+                if (label[0] === 2 && label[1] === 2) {
+                    answer = true
+                }
+
                 for (let [dim, attr] of Object.entries(that.graphDim)) {
                     if (attr.active) {
                         let idx = 0
@@ -166,20 +185,31 @@ function Matrix(items) {
                         else if (dim === "gap") graph.gap = attr.value[idx]
                     }
                 }
+
                 item.ctx.save()
                 item.setStyle(style)
                 item.setGraph(graph)
                 item.ctx.restore()
             } else {
                 for (let i = 0; i < 3; i++) {
-                    setGraphs(axis - 1, Array.prototype.concat([i], label))
+                    setMatrix(axis - 1, Array.prototype.concat([i], label))
                 }
             }
         }
 
-        setGraphs(this.axis, [])
+        setMatrix(this.axis, [])
+
+        for (let option of options){
+            console.log(option)
+        }
+
+        options[2].ctx.save()
+        options[2].setStyle(answer.style)
+        options[2].setGraph(answer.graph)
+        options[2].restore()
     }
+
     this.generateComb = function () {
-        this.generateGraph()
+        this.generateMatrix()
     }
 }

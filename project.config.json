@@ -83,8 +83,8 @@
                     "scene": null
                 },
                 {
-                    "name": "pages/examinations/schulte_grid/schulte_grid",
-                    "pathName": "pages/examinations/schulte_grid/schulte_grid",
+                    "name": "pages/examinations/schulteGrid/schulteGrid",
+                    "pathName": "pages/examinations/schulteGrid/schulteGrid",
                     "query": "",
                     "scene": null
                 },

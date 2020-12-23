@@ -155,7 +155,7 @@ Page({
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
                 if (true) {
                     let examId = event.currentTarget.dataset.swiperId
-                    if (examId <= 4) {
+                    if (examId <= 4 || examId === 6) {
                         wx.navigateTo({
                             url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
                             success: res => {

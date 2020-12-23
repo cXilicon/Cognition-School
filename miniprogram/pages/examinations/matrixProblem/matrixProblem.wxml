@@ -4,14 +4,19 @@
     <van-button bind:tap="onLoad">onLoad</van-button>
     <van-button bind:tap="show">show</van-button>
     <van-button bind:tap="clear">clear</van-button>
+    <van-button bind:tap="test">test</van-button>
   </view>
 
   <view class="main">
     <view wx:for="{{[[0, 1, 2], [3, 4, 5], [6, 7, 8]]}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">
+      <view wx:for="{{rowItem}}" wx:for-item="cellItem" wx:for-index="cellIdx" class="cell" wx:key="cellItem">
+        <canvas class="cell-content matrix" type="2d" id="matrix-{{cellItem}}"></canvas>
+      </view>
+    </view>
+    <view wx:for="{{[[0, 1, 2]]}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">
       <view wx:for="{{rowItem}}" wx:for-item="cellItem" wx:for-index="cellIdx" class="cell" wx:key="cellItem"
             bind:tap="activeCell">
-
-        <canvas class="cell-content matrix" type="2d" id="matrix-{{cellItem}}"></canvas>
+        <canvas class="cell-content matrix" type="2d" id="option-{{cellItem}}"></canvas>
       </view>
     </view>
   </view>
