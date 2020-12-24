@@ -47,6 +47,10 @@
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+.incompleteTag{
+  filter: grayscale(1);
+}
+
 .training-item > van-image {
   height: 100%;
   width: 160rpx;

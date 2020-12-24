@@ -153,7 +153,7 @@ Page({
                 Toast('该测试已完成');
             } else {
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
-                if (true) {
+                if (false) {
                     let examId = event.currentTarget.dataset.swiperId
                     if (examId <= 4 || examId === 6) {
                         wx.navigateTo({

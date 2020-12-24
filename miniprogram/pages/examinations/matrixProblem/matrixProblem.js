@@ -43,6 +43,10 @@ Page({
 
     test: function () {
         console.log(this.data)
+    },
+
+    exitExamination: function () {
+        wx.navigateBack()
     }
 })
 
@@ -65,7 +69,6 @@ Object.assign(Graph.prototype, {
     },
 
     setStyle: function (style) {
-        this.ctx.lineJoin = "round"
         if (style.color)
             this.ctx.fillStyle = style.color
     },
@@ -120,7 +123,7 @@ Object.assign(Graph.prototype, {
 function Matrix(matrix, options) {
     this.matrix = matrix
     this.options = options
-    this.axis = 3
+    this.axis = 2
     this.graphDim = {
         color: {
             active: true,
@@ -146,8 +149,9 @@ function Matrix(matrix, options) {
         let that = this
         let matrix = this.matrix
         let options = this.options
-        let answer = [];
-
+        let answer = {
+            color: [], shape: [], gap: [], pos: [],
+        }
         for (let [dim, attr] of Object.entries(this.graphDim)) {
             if (attr.active) {
                 let set = attr.set
@@ -165,12 +169,11 @@ function Matrix(matrix, options) {
                 let item = matrix[label[1] * 3 + label[0]]
                 let style = {color: null,}
                 let graph = {shape: null, gap: null, pos: null,}
-                if (label.length >= 3) graph.pos = {scale: 0.6, x: label[2] * 40, y: label[2] * 40}
+                let answerFlag = label[0] === 2 && label[1] === 2
 
-
-                let answerFlag = false
-                if (label[0] === 2 && label[1] === 2) {
-                    answer = true
+                if (label.length >= 3) {
+                    graph.pos = {scale: 0.6, x: label[2] * 40, y: label[2] * 40}
+                    if (answerFlag) answer.pos.push({scale: 0.6, x: label[2] * 40, y: label[2] * 40})
                 }
 
                 for (let [dim, attr] of Object.entries(that.graphDim)) {
@@ -180,12 +183,18 @@ function Matrix(matrix, options) {
                             idx += attr.bias[index] * element
                         })
                         idx = (idx % 3 + 3) % 3
-                        if (dim === "color") style.color = attr.value[idx]
-                        else if (dim === "shape") graph.shape = attr.value[idx]
-                        else if (dim === "gap") graph.gap = attr.value[idx]
+                        if (dim === "color") {
+                            style.color = attr.value[idx]
+                            if (answerFlag) answer.color.push(idx)
+                        } else if (dim === "shape") {
+                            graph.shape = attr.value[idx]
+                            if (answerFlag) answer.shape.push(idx)
+                        } else if (dim === "gap") {
+                            graph.gap = attr.value[idx]
+                            if (answerFlag) answer.gap.push(idx)
+                        }
                     }
                 }
-
                 item.ctx.save()
                 item.setStyle(style)
                 item.setGraph(graph)
@@ -197,17 +206,37 @@ function Matrix(matrix, options) {
             }
         }
 
-        setMatrix(this.axis, [])
-
-        for (let option of options){
-            console.log(option)
+        function setOption(axis, answer) {
+            if (axis === 2) {
+                for (let i = 0; i < 3; i++) {
+                    let option = that.options[i]
+                    console.log(option)
+                    let style = {color: null,}
+                    let graph = {shape: null, gap: null, pos: null,}
+                    for (let [dim, attr] of Object.entries(that.graphDim)) {
+                        let idx = answer[dim][0]
+                        if (dim === "color") {
+                            style.color = attr.value[idx]
+                        } else if (dim === "shape") {
+                            graph.shape = attr.value[idx]
+                        } else if (dim === "gap") {
+                            graph.gap = attr.value[idx]
+                        }
+                    }
+                    option.ctx.save()
+                    option.setStyle(style)
+                    option.setGraph(graph)
+                    option.ctx.restore()
+                }
+            }
         }
 
-        options[2].ctx.save()
-        options[2].setStyle(answer.style)
-        options[2].setGraph(answer.graph)
-        options[2].restore()
+        setMatrix(this.axis, [])
+        console.log(answer)
+        setOption(2, answer)
+
     }
+
 
     this.generateComb = function () {
         this.generateMatrix()

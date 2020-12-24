@@ -20,7 +20,7 @@ Page({
         examState: "",
         canInteraction: false,
         currentTime: 0,
-        maxTime: 90000,
+        maxTime: 120000,
         readyState: false,
         readyTime: 3,
         lastScore: "",
@@ -116,7 +116,7 @@ Page({
                 this.setData({readyTime: second});
             } else {
                 this.setData({readyState: false, showNum: true});
-                if (this.data.examState === EXECUTE){
+                if (this.data.examState === EXECUTE) {
                     this.timer();
                     this.setData({
                         canInteraction: true,
@@ -252,6 +252,7 @@ Page({
 
     stopDemo: function () {
         clearTimeout(demoOp.controller)
+        clearTimeout(timer)
         clearTimeout(subOp)
         clearInterval(subOp)
         this.setData({readyState: false})
@@ -261,17 +262,18 @@ Page({
         })
     },
 
-    settle: function (second) {
+    settle: function (millisecond) {
         let that = this
+        let second = Math.floor(millisecond / 1000)
         Toast.success({
             message: '测试完成',
             forbidClick: true,
             onClose: () => {
                 let score;
-                if (second < 20) score = 'A'
-                else if (second < 35) score = 'B'
-                else if (second < 50) score = 'C'
-                else if (second < 60) score = 'D'
+                if (second < 30) score = 'A'
+                else if (second < 45) score = 'B'
+                else if (second < 60) score = 'C'
+                else if (second < 90) score = 'D'
                 else score = 'F'
 
                 if (that.data.entrance === 'exam') {
@@ -282,7 +284,7 @@ Page({
                     })
                     wx.navigateBack()
                 } else {
-                    let lastTimeCount = Math.floor(second / 1000)
+                    let lastTimeCount = Math.floor(second)
                     that.setData({
                         lastScore: score,
                         lastTimeCount: lastTimeCount + "s",

@@ -29,7 +29,7 @@
 }
 
 .logo {
-  margin-top: 240rpx;
+  margin-top: 30%;
   margin-bottom: auto;
   color: #ffffff;
   font-size: 96rpx;
