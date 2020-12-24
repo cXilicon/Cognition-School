@@ -151,7 +151,7 @@ Page({
                 }).then(res => {
                     console.log(res)
                     wx.request({
-                        url: 'http://xiangxc.ink:8080/user/add',
+                        url: 'https://hsaeno.space:8080/user/modify',
                         method: 'POST',
                         data: {
                             area: user.information.area,
@@ -189,6 +189,31 @@ Page({
                     console.log('更新失败')
                     this.setData({
                         posting: false
+                    })
+                })
+
+                wx.cloud.callFunction({
+                    name: 'login',
+                }).then(res => {
+                    console.log(res)
+                    wx.request({
+                        url: 'https://hsaeno.space:8080/user/modify',
+                        method: 'POST',
+                        data: {
+                            area: user.information.area,
+                            birthday: dateFormat(user.information.birth, "yyyy-mm-dd"),
+                            education: user.information.edu,
+                            openID: res.result.openid,
+                            sex: user.information.gender,
+                            sign: '',
+                            userName: user.information.userName,
+                        },
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded' // 默认值
+                        },
+                        success: res => {
+                            console.log(res.data)
+                        }
                     })
                 })
             }

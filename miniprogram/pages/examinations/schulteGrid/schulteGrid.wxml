@@ -32,27 +32,27 @@
 </van-popup>
 
 <van-toast id="van-toast"/>
-<van-popup show="{{readyState}}" overlay-style="background: transparent;" custom-class="ready">{{readyTime}}</van-popup>
+<van-popup show="{{readyState}}" overlay-style="background: transparent;" custom-class="ready" z-index="1">
+  {{readyTime}}
+</van-popup>
 <van-overlay show="{{examState==='DEMO'}}" z-index="2000" custom-style="background-color: transparent;"
              bind:click="stopDemo"/>
 
 <view class="page">
-  <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="图形记忆"
-               bind:click-left="exitExamination"
-               border="{{false}}" custom-style="background-color: transparent;"/>
-  <van-nav-bar wx:else title="舒尔特方块" custom-style="background-color: transparent;" border="{{false}}"/>
+  <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="舒尔特方块"
+               bind:click-left="exitExamination" fixed="{{true}}"
+               border="{{false}}" custom-style="background-color: #eeeeee;"/>
+  <van-nav-bar wx:else title="舒尔特方块" custom-style="background-color: #eeeeee;" border="{{false}}" fixed="{{true}}"/>
   <van-image class="exam-illus" height="100%" width="100%" fit="cover"
              src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png"/>
   <custom-progress custom-class="progress" percent="{{currentTime * 100 / maxTime}}"/>
   <view class="grid">
     <view class="row" wx:for="{{grid}}" wx:for-item="row" wx:key="*this">
-      <view class="cell {{examState==='DEMO'&&num===flag?'cell-clicked':''}}  {{num!==highlight?'':'highlight'}}"
+      <view class="cell {{num===flag?'cell-clicked':''}} {{num!==highlight?'':'highlight'}}"
             wx:for="{{row}}" wx:for-item="num" wx:key="*this" bind:tap="tapCell" data-num="{{num}}">
         <view class="cell-num">{{showNum ? num : ''}}</view>
         <view class="cell-bottom"></view>
       </view>
     </view>
   </view>
-  <view class="next-target-title">目标数字</view>
-  <view class="next-target">{{flag < 25 ? flag + 1 : 25}}</view>
 </view>
