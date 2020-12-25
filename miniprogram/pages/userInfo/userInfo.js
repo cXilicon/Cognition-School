@@ -151,7 +151,8 @@ Page({
                 }).then(res => {
                     console.log(res)
                     wx.request({
-                        url: 'https://hsaeno.space:8080/user/modify',
+                        // url: 'https://api.hsaeno.space/user/add',
+                        url: 'https://hsaeno.space:443/user/add',
                         method: 'POST',
                         data: {
                             area: user.information.area,
@@ -167,6 +168,9 @@ Page({
                         },
                         success: res => {
                             console.log(res.data)
+                        },
+                        fail: res => {
+                            console.log(res)
                         }
                     })
                 })
@@ -197,13 +201,13 @@ Page({
                 }).then(res => {
                     console.log(res)
                     wx.request({
-                        url: 'https://hsaeno.space:8080/user/modify',
+                        url: 'https://hsaeno.space:443/user/modify',
                         method: 'POST',
                         data: {
                             area: user.information.area,
                             birthday: dateFormat(user.information.birth, "yyyy-mm-dd"),
                             education: user.information.edu,
-                            openID: res.result.openid,
+                            openid: res.result.openid,
                             sex: user.information.gender,
                             sign: '',
                             userName: user.information.userName,
@@ -218,8 +222,6 @@ Page({
                 })
             }
         }
-
-
     },
 
     backToLaunch: function () {

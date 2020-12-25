@@ -96,7 +96,7 @@ Page({
             }).then(res => {
                 console.log(res)
                 wx.request({
-                    url: 'https://hsaeno.space:8080//usertotest/add',
+                    url: 'https://hsaeno.space:443/usertotest/add',
                     method: 'POST',
                     data: {
                         finishTime: dateFormat(data.finishTime, "yyyy-mm-dd HH:MM"),
