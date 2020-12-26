@@ -229,14 +229,9 @@ clickNumber:function(e){
     }else  if(this.data.tips>=30){ 
       finMessage= '本次得分:'+that.data.tips+'\n再接再厉！';
       score="D";
-    }else if(this.data.tips>=10){ 
-      finMessage= '本次得分:'+that.data.tips+'\n继续努力！';
-      score="E";
-   
-    }else{ 
+    }else{
       finMessage= '本次得分:'+that.data.tips+'\n继续努力！';
       score="F";
-   
     }
 
 

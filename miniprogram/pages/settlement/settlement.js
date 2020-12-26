@@ -30,7 +30,9 @@ Page({
     onLoad: function (option) {
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('reportData', data => {
+            console.log(data)
             let totalScore = 0
+            let scoreList = []
             reportDataOption.dataset.source = [
                 ["计划", 0, 20],
                 ["注意", 0, 20],
@@ -39,6 +41,7 @@ Page({
             ]
             for (let key in data.score) {
                 let item = data.score[key]
+                scoreList.push(item.score)
                 totalScore += item.score
                 switch (item.category) {
                     case "plan":
@@ -86,6 +89,27 @@ Page({
                 console.log('测试记录已上传')
             }).catch(res => {
                 console.log('上传失败')
+            })
+
+            wx.cloud.callFunction({
+                name: 'login',
+            }).then(res => {
+                console.log(res)
+                wx.request({
+                    url: 'https://hsaeno.space:443/usertotest/add',
+                    method: 'POST',
+                    data: {
+                        finishTime: dateFormat(data.finishTime, "yyyy-mm-dd HH:MM"),
+                        scores: scoreList,
+                        userOpenID: res.result.openid,
+                    },
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded' // 默认值
+                    },
+                    success: res => {
+                        console.log(res.data)
+                    }
+                })
             })
         })
     }

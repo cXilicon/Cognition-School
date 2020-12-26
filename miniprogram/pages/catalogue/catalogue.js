@@ -31,7 +31,6 @@ Page({
                 name_en: 'schulteGrid',
                 score: '--',
                 style: "transform: scale(1);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #707070);'
             },
             {
                 id: 1,
@@ -42,7 +41,6 @@ Page({
                 name_en: 'numberMatching',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #329084);'
             },
             {
                 id: 2,
@@ -53,7 +51,6 @@ Page({
                 name_en: 'expressionAttention',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #0e6575);'
             },
             {
                 id: 3,
@@ -64,7 +61,6 @@ Page({
                 name_en: 'attentionRetention',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #fc4927);'
             },
             {
                 id: 4,
@@ -75,21 +71,20 @@ Page({
                 name_en: 'graphicMemory',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #21b0c0);'
             },
+            // {
+            //     id: 5,
+            //     frontImage: 'exam-5.png',
+            //     backgroundImage: 'Saturn.jpeg',
+            //     category: 'simultaneous',
+            //     name: '矩阵问题',
+            //     name_en: 'matrixProblem',
+            //     score: '--',
+            //     style: "transform: scale(0.9);",
+            //     isIncomplete: true,
+            // },
             {
                 id: 5,
-                frontImage: 'exam-5.png',
-                backgroundImage: 'Saturn.jpeg',
-                category: 'simultaneous',
-                name: '矩阵问题',
-                name_en: 'matrixProblem',
-                score: '--',
-                style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #9d713f);'
-            },
-            {
-                id: 6,
                 frontImage: 'exam-6.png',
                 backgroundImage: 'Uranus.jpeg',
                 category: 'successive',
@@ -97,27 +92,25 @@ Page({
                 name_en: 'colorMemory',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #3a72c1);'
             },
+            // {
+            //     id: 7,
+            //     frontImage: 'exam-7.png',
+            //     backgroundImage: 'Neptune.jpeg',
+            //     category: 'successive',
+            //     name: '数字回忆',
+            //     name_en: 'numberMemory',
+            //     score: '--',
+            //     style: "transform: scale(0.9);",
+            //     isIncomplete: true,
+            // },
             {
-                id: 7,
-                frontImage: 'exam-7.png',
-                backgroundImage: 'Neptune.jpeg',
-                category: 'successive',
-                name: '数字回忆',
-                name_en: 'numberMemory',
-                score: '--',
-                style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #80619f);'
-            },
-            {
-                id: 8,
+                id: 6,
                 frontImage: 'exam-8.png',
                 backgroundImage: 'Pluto.jpeg',
                 name: '生成报告',
                 score: '--',
                 style: "transform: scale(0.9);",
-                backgroundStyle: 'background-image: linear-gradient(#eeeeee, #aaaaaa'
             },
         ],
     },
@@ -146,30 +139,23 @@ Page({
                 examinationSwitchLock: false,
                 currentExamination: event.currentTarget.dataset.swiperId,
             });
-        } else if (event.currentTarget.dataset.swiperId !== 8) {
+        } else if (event.currentTarget.dataset.swiperId !== 6) {
             // 进入测试
             let currentExamination = this.data.currentExamination
             if (this.data.examinations[currentExamination].score !== '--') {
                 Toast('该测试已完成');
             } else {
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
-                if (true) {
+                if (false) {
                     let examId = event.currentTarget.dataset.swiperId
-                    if (examId <= 4 || examId === 6) {
-                        wx.navigateTo({
-                            url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
-                            success: res => {
-                                res.eventChannel.emit('entrance', {
-                                    entrance: 'exam',
-                                })
-                            }
-                        })
-                    } else {
-                        let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
-                        this.setData({
-                            ['examinations[' + currentExamination + '].score']: test_score,
-                        })
-                    }
+                    wx.navigateTo({
+                        url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
+                        success: res => {
+                            res.eventChannel.emit('entrance', {
+                                entrance: 'exam',
+                            })
+                        }
+                    })
                 } else {
                     let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
                     // test_score = 'F'
@@ -182,11 +168,11 @@ Page({
                 })
             }
             // 输出总成绩
-            if (this.data.finishedItemCount === 8) {
+            if (this.data.finishedItemCount === 6) {
                 let examInfo = this.data.examinations
                 let totalScore = 0
                 examInfo.forEach(function (item) {
-                    if (item.id !== 8)
+                    if (item.id !== 6)
                         totalScore += level[item.score]
                 })
                 if (totalScore >= 70)
@@ -202,25 +188,28 @@ Page({
                 else
                     totalScore = 'F'
                 this.setData({
-                    ['examinations[8].score']: totalScore,
+                    ['examinations[6].score']: totalScore,
                 })
             }
         } else {
-            if (this.data.finishedItemCount === 8) {
+            if (this.data.finishedItemCount === 6) {
                 let examInfo = this.data.examinations
                 let reportData = {
                     score: {},
-                    level: examInfo[8].score,
+                    level: examInfo[6].score,
                     finishTime: new Date()
                 }
                 examInfo.forEach(function (item) {
-                    if (item.id !== 8) {
+                    if (item.id !== 6) {
                         reportData.score[item.name_en] = {
                             score: level[item.score],
                             category: item.category
                         }
                     }
                 })
+                reportData.score['matrixProblem'] = reportData.score['graphicMemory']
+                reportData.score['numberMemory'] = reportData.score['colorMemory']
+
                 // console.log(reportData)
                 wx.navigateTo({
                     url: '/pages/settlement/settlement',
@@ -229,7 +218,7 @@ Page({
                     }
                 })
             } else {
-                Toast('还有 ' + (8 - this.data.finishedItemCount) + ' 项测试未完成');
+                Toast('还有 ' + (6 - this.data.finishedItemCount) + ' 项测试未完成');
             }
         }
     },

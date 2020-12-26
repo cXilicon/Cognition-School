@@ -10,7 +10,6 @@ Page({
                 tag: '计划',
                 name: '舒尔特方格',
                 name_en: 'schulteGrid',
-                score: 'A',
             },
             {
                 id: 1,
@@ -18,7 +17,6 @@ Page({
                 tag: '计划',
                 name: '数字匹配',
                 name_en: 'numberMatching',
-                score: '-',
             },
             {
                 id: 2,
@@ -26,7 +24,6 @@ Page({
                 tag: '注意',
                 name: '表达性注意',
                 name_en: 'expressionAttention',
-                score: '-'
             },
             {
                 id: 3,
@@ -34,7 +31,6 @@ Page({
                 tag: '注意',
                 name: '注意力保持',
                 name_en: 'attentionRetention',
-                score: '-',
             },
             {
                 id: 4,
@@ -42,31 +38,13 @@ Page({
                 tag: '同时性加工',
                 name: '图形记忆',
                 name_en: 'graphicMemory',
-                score: '-',
             },
             {
                 id: 5,
-                image: 'Saturn.svg',
-                tag: '同时性加工',
-                name: '矩阵问题',
-                name_en: 'matrixProblem',
-                score: '-',
-            },
-            {
-                id: 6,
                 image: 'Uranus.svg',
                 tag: '继时性加工',
                 name: '颜色记忆',
                 name_en: 'colorMemory',
-                score: '-',
-            },
-            {
-                id: 7,
-                image: 'Neptune.svg',
-                tag: '继时性加工',
-                name: '数字回忆',
-                name_en: 'numberMemory',
-                score: '-',
             },
         ],
         isTested: false,
@@ -108,8 +86,6 @@ Page({
                     })
                 }
             })
-        } else {
-
         }
     }
 })

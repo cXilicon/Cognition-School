@@ -29,7 +29,9 @@ Page({
         readyTime: 3,
         lastScore: "",
         //
-        checkPoints: [[3, 3], [3, 4], [4, 5], [4, 6], [5, 7], [5, 8], [6, 9], [6, 10]],
+        checkPoints: [[3, 3], [4, 4], [5, 5], [5, 6], [5, 7], [5, 8], [6, 9], [6, 10]],
+        bgHeightRate: 40,
+        containerHeight: 0,
         examMatrix: [],
         targetList: [],
         errorCount: 0,
@@ -39,7 +41,7 @@ Page({
         lastCheckPoint: 0,
     },
 
-    onLoad: function (options) {
+    onReady: function (options) {
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('entrance', data => {
             this.setData({
@@ -51,6 +53,25 @@ Page({
         this.setData({
             examState: START,
         })
+    },
+
+    initBackground: function () {
+        let bgHeight = 0
+        let containerHeight = 0
+        wx.createSelectorQuery().select(".info-background")
+            .boundingClientRect(rect => {
+                bgHeight = rect.height;
+                console.log(bgHeight)
+            })
+            .select(".info-background-container")
+            .boundingClientRect(rect => {
+                containerHeight = rect.height;
+                this.setData({
+                    bgHeightRate: Math.ceil(containerHeight / bgHeight * 100),
+                })
+                console.log(containerHeight)
+                console.log(Math.ceil(containerHeight / bgHeight * 100))
+            }).exec()
     },
 
     onUnload: function () {
@@ -72,6 +93,9 @@ Page({
         this.initExamItem(0)
     },
 
+    test: function () {
+        this.initExamItem(5);
+    },
     //
     initExamItem: function (currentCheckpoint) {
         let that = this
@@ -79,14 +103,14 @@ Page({
         that.setData({canInteraction: false, currentTime: 0})
         initExamItemOp.steps = [{
             func: () => {
-            }, playtime: 2000
-        }, {
-            func: () => {
                 that.setData({
                     currentCheckpoint: currentCheckpoint,
                     correctCount: 0,
                     errorCount: 0,
                 })
+            }, playtime: 2000
+        }, {
+            func: () => {
                 that.initCheckpoint(this.data.checkPoints[currentCheckpoint][0], this.data.checkPoints[currentCheckpoint][1])
             }, playtime: 2000
         }, {
@@ -105,7 +129,7 @@ Page({
             func: () => {
                 that.setData({canInteraction: true})
                 that.countDown()
-            }, playtime: 3000
+            }, playtime: 0
         },]
         util.syncOperation(initExamItemOp)
     },
@@ -113,16 +137,23 @@ Page({
     initCheckpoint: function (matrixSize, targetNum) {
         let examMatrix = [];
         let targetList = [];
+        let randomSeq = [];
         let targetSeq = [];
         for (let i = 0; i < matrixSize * matrixSize; i++) {
-            targetSeq.push(i)
+            randomSeq.push(i)
         }
-        let randomTag = targetSeq.length
+        let banList = [1, -1, matrixSize, -matrixSize]
         for (let i = 0; i < targetNum; i++) {
-            let target = Math.floor(Math.random() * randomTag--);
-            [targetSeq[randomTag], targetSeq[target]] = [targetSeq[target], targetSeq[randomTag]]
+            let targetIdx = Math.floor(Math.random() * randomSeq.length);
+            let target = randomSeq[targetIdx];
+            randomSeq.splice(targetIdx, 1);
+            targetSeq.push(target);
+            for (let j = 0; j < 2; j++) {
+                let ban = randomSeq.indexOf(target + banList[Math.floor(Math.random() * banList.length)]);
+                if (ban !== -1) randomSeq.splice(ban, 1);
+            }
         }
-        targetSeq = targetSeq.splice(randomTag)
+        console.log(targetSeq)
         for (let i = 0; i < matrixSize; i++) {
             let examLine = []
             for (let j = 0; j < matrixSize; j++) {
@@ -194,9 +225,9 @@ Page({
             onClose: () => {
                 let score = ""
                 if (level === 8) score = "A"
-                else if (level >= 6) score = "B"
-                else if (level >= 4) score = "C"
-                else if (level >= 2) score = "D"
+                else if (level >= 7) score = "B"
+                else if (level >= 5) score = "C"
+                else if (level >= 3) score = "D"
                 else if (level >= 0) score = "F"
 
                 if (this.data.entrance === "exam") {
@@ -249,6 +280,8 @@ Page({
 
     viewDemo: function () {
         let that = this
+        clearTimeout(subOp)
+        clearInterval(subOp)
         this.setData({
             examState: DEMO,
         })
@@ -303,8 +336,6 @@ Page({
             }, playtime: 2500
         }, {
             func: () => {
-                clearTimeout(subOp)
-                clearInterval(subOp)
                 let cnt = 0
                 for (let [x, examLine] of that.data.examMatrix.entries()) {
                     for (let [y, targetItem] of examLine.entries()) {
@@ -333,8 +364,6 @@ Page({
             }, playtime: 2000
         }, {
             func: () => {
-                clearTimeout(subOp)
-                clearInterval(subOp)
                 for (let rowItem of that.data.targetList) {
                     that.switchCellState(rowItem.x, rowItem.y, true)
                 }
@@ -353,8 +382,6 @@ Page({
         }, {
             func: () => {
                 let cnt = 0
-                clearTimeout(subOp)
-                clearInterval(subOp)
                 subOp = setInterval(() => {
                     let targetItem = that.data.targetList[cnt++]
                     that.switchCellState(targetItem.x, targetItem.y, true)

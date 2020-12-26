@@ -2,7 +2,7 @@
            custom-class="exam-controller">
   <view class="exam-rule">
     <text>测试规则</text>
-    <text>在尽可能短的时间内依次点击数字</text>
+    <text>在规定的时间内记忆短暂出现的图形组合</text>
   </view>
   <view class="exam-control-container">
     <van-button plain block type="primary" bind:tap="viewDemo">查看演示</van-button>
@@ -26,12 +26,12 @@
   <view class="exam-control-container">
     <van-button plain block type="primary" bind:tap="startExam">再来一次</van-button>
     <view style="width: 10px"></view>
-    <van-button plain block type="primary" bind:tap="">退出测试</van-button>
+    <van-button plain block type="primary" bind:tap="exitExamination">退出测试</van-button>
   </view>
 </van-popup>
 
 <van-toast id="van-toast"/>
-<van-popup show="{{readyState}}" overlay-style="background: transparent;" custom-class="ready">{{readyTime}}</van-popup>
+<van-popup show="{{readyState}}" z-index="1" overlay-style="background: transparent;" custom-class="ready">{{readyTime}}</van-popup>
 <van-overlay show="{{examState==='DEMO'}}" z-index="2000" custom-style="background-color: transparent;"
              bind:click="stopDemo"/>
 <view class="page">
@@ -40,7 +40,11 @@
                border="{{false}}" custom-style="background-color: transparent;"/>
   <van-nav-bar wx:else title="图形记忆" custom-style="background-color: transparent;" border="{{false}}"/>
   <view class="header">
-    <van-image class="background-image" height="100%" width="100%" fit="cover" src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/userInfo_back.png"></van-image>
+    <view class="info-background-container">
+      <van-image class="info-background" height="100%" width="100%" fit="widthFix" load="initBackground"
+                 style="transform: translate(0, {{(1-currentCheckpoint/8)  * (bgHeightRate-100)}}%);"
+                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/userInfo_back.png"/>
+    </view>
     <view class="info">
       <view>关卡: {{currentCheckpoint + 1}}</view>
       <view class="life-tags">
