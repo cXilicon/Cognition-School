@@ -186,10 +186,9 @@ clickNumber:function(e){
   },
 
   testSubmit:function(){
-   
-   
+
       var score=0;
-      for(var i=0;i<this.data.question;i++){
+      for(var i=0;i<this.data.question.length;i++){
         if(this.data.question[i].style=="numberText-active")
         {
           if(this.data.array.indexOf(this.data.question[i].number[0])-this.data.array.indexOf(this.data.question[i].number[1])==26){
@@ -279,8 +278,25 @@ clickNumber:function(e){
   // 查看演示
  viewDemo: function () {
   let that = this;
-  var index=0;
+  var index=[];
   var index2=0;
+
+  for(var i=0;i<that.data.datatemp.length;i++){
+    if(that.data.array.indexOf(this.data.datatemp[i].number[0])-that.data.array.indexOf(this.data.datatemp[i].number[1])==26){
+          index.push(i);
+          if(index.length==20)
+          break;
+    }
+  }
+  
+  for(var i=0;i<that.data.datatemp.length;i++){
+    if(that.data.array.indexOf(that.data.datatemp[i].number[0])-that.data.array.indexOf(that.data.datatemp[i].number[1])!=26){
+          index2=i;
+          break;
+    }
+  }
+
+
 
   this.setData({
       ruleState: false,
@@ -295,44 +311,27 @@ clickNumber:function(e){
        
           }, 2000)
       },
-      playtime: 5000
+      playtime: 5500
   }
   let step1 = {
     
       func: () => {
       
-          Toast('点击一个相同字母大小写组合的方块,例如: Aa');
+          Toast('点击一个相同字母大小写组合的方块,例如: '+this.data.question[index[0]].number);
       },
       playtime: 2000
   }
 
-  let stepSelect={
-    func:()=>{
-      for(var i=0;i<that.data.question.length;i++){
-        if(that.data.array.indexOf(this.data.question[i].number[0])-that.data.array.indexOf(this.data.question[i].number[1])==26){
-              index=i;
-              break;
-        }
-      }
-    
-      for(var i=0;i<that.data.question.length;i++){
-        if(that.data.array.indexOf(that.data.question[i].number[0])-that.data.array.indexOf(that.data.question[i].number[1])!=26){
-              index2=i;
-              break;
-        }
-      }
-    
-    }
-  }
+  
   let step2 = {
       func: () => {
-
+         
           that.setData({
-            [`question[${index}].style`] : "numberText-tips",
+            [`question[${index[0]}].style`] : "numberText-tips",
           })
           setTimeout(() => {
                   that.setData({
-                    [`question[${index}].style`] : "numberText",
+                    [`question[${index[0]}].style`] : "numberText",
                   })
               }
               , 400
@@ -343,7 +342,7 @@ clickNumber:function(e){
   let step3 = {
       func: () => {
         that.setData({
-          [`question[${index}].style`] : "numberText-active",
+          [`question[${index[0]}].style`] : "numberText-active",
         })
       },
       playtime: 1000
@@ -403,25 +402,23 @@ let step9 = {
 
 let step10 = {
   func: () => {
-    var sum=0;
+   
     let time=setInterval(() => {
-      for(var i=index+1;i<that.data.question.length;i++){
-        if(that.data.array.indexOf(this.data.question[i].number[0])-that.data.array.indexOf(this.data.question[i].number[1])==26){
-          that.setData({
-            [`question[${i}].style`] : "numberText-active",
-            })
-            index=i;
-            sum++;
-            break;
-        }
 
-        if(sum==19){
-          clearInterval(time);
-        }
-      }
-    }, 300)
+        var click=index[i];
+          that.setData({
+            [`question[${click}].style`] : "numberText-active",
+            })
+            if(i==19)
+            {
+              clearInterval(time)
+              
+            }
+            i++;
+    }, 500)
+   
 },
-playtime: 6000
+playtime: 10000
 }
 let step11 = {
   func: () => {
@@ -491,12 +488,8 @@ let step16 = {
   playtime: 2000
 }
 
-
-
-
-
   let stepIdx = 0
-  let steps = [step0, step1,stepSelect, step2,step2,  step3, step4, step5, step5, step6, step7, step8,step9,step10,step11,step12,step12,step13,step14,step14,step15,step16]
+  let steps = [step0, step1, step2,step2,  step3, step4, step5, step5, step6, step7, step8,step9,step10,step11,step12,step12,step13,step14,step14,step15,step16]
   setTimeout(function play() {
       if (stepIdx < steps.length) {
           steps[stepIdx].func()
