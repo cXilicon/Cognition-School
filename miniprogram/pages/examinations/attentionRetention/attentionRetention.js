@@ -108,7 +108,7 @@ initGame: function () { // 游戏初始化
    
   }
   var site=0;
- 
+ var selectedtemp=[];
   for(var i=0;i<this.data.syn;i++){
     site=Math.floor(Math.random()*(this.data.height*this.data.width));
     while(this.data.array.indexOf(questionTemp[site].number[0])-this.data.array.indexOf(questionTemp[site].number[1])==26)
@@ -117,12 +117,13 @@ initGame: function () { // 游戏初始化
     }
     var fl=Math.floor(Math.random()*26+26);
     questionTemp[site].number=(this.data.array[fl]+this.data.array[fl-26]);
+    selectedtemp.push(site);
   }
 
   this.setData({
     
-    datatemp:questionTemp
-   
+    datatemp:questionTemp,
+   selected:selectedtemp
 });
 
 },
@@ -156,7 +157,7 @@ exitExamination: function () {
                  
               });
               clearInterval(init);
-              init = setInterval(that.timer, 500);
+              init = setInterval(that.timer, 1000);
               clearInterval(countdown);
           }
       }, 1000);
@@ -260,9 +261,9 @@ clickNumber:function(e){
 
     timer: function () {
       const targetTime = 60 * 100;
-      let percent = 100 * (this.data.millisecond   + 50) / targetTime
+      let percent = 100 * (this.data.millisecond   + 100) / targetTime
       this.setData({
-          millisecond: this.data.millisecond + 50,
+          millisecond: this.data.millisecond + 100,
           percent: percent
       })
     
@@ -278,16 +279,10 @@ clickNumber:function(e){
   // 查看演示
  viewDemo: function () {
   let that = this;
-  var index=[];
+  var index=this.data.selected;
   var index2=0;
 
-  for(var i=0;i<that.data.datatemp.length;i++){
-    if(that.data.array.indexOf(this.data.datatemp[i].number[0])-that.data.array.indexOf(this.data.datatemp[i].number[1])==26){
-          index.push(i);
-          if(index.length==20)
-          break;
-    }
-  }
+  
   
   for(var i=0;i<that.data.datatemp.length;i++){
     if(that.data.array.indexOf(that.data.datatemp[i].number[0])-that.data.array.indexOf(that.data.datatemp[i].number[1])!=26){
@@ -311,7 +306,7 @@ clickNumber:function(e){
        
           }, 2000)
       },
-      playtime: 5500
+      playtime: 6000
   }
   let step1 = {
     

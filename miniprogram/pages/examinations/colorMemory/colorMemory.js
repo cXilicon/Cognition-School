@@ -261,7 +261,7 @@ Page({
                 testNum:2,
                 timeNow:0,
                 percent:0,
-                qNum:3
+                qNum:4
             })
         } else if (this.data.indexq==2) {
             this.setData({ // 更新数据
@@ -269,7 +269,7 @@ Page({
                 testNum:2,
                 timeNow:0,
                 percent:0,
-                qNum:4
+                qNum:5
             })
         } else if (this.data.indexq==3) {
             this.setData({ // 更新数据
@@ -277,7 +277,7 @@ Page({
                 testNum:2,
                 timeNow:0,
                 percent:0,
-                qNum:5
+                qNum:6
             })
         } else {
             this.setData({ // 更新数据
@@ -285,7 +285,7 @@ Page({
                 testNum:3,
                 timeNow:0,
                 percent:0,
-                qNum:5
+                qNum:6
              })
         }
 
