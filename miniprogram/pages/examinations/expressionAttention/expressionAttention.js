@@ -66,7 +66,7 @@ Page({
                             clearInterval(init);
                             that.setData({
                                 percent: 0,
-                                timeTarget: this.data.timeTarget+2000,
+                                timeTarget: this.data.timeTarget+3000,
                                 timeNow: 0,
                                 show: false,
                                 showq: true,
@@ -118,7 +118,7 @@ Page({
                                             score = "C"
                                         } else if (that.data.right === 2) {
                                             score = "D"
-                                        } else if(that.data.right === 2){
+                                        } else if(that.data.right === 1){
                                             score = "E"
                                         } else {
                                             score = "F"
@@ -196,17 +196,31 @@ Page({
     },
 
     testStart: function () {
-        if (this.data.indexq < 2) {
+        if (this.data.indexq == 0 ) {
             this.setData({ // 更新数据
                 ruleState: false,
                 timeTarget:4000,
                 timeNow:0,
                 percent:0,
             })
-        } else if (this.data.indexq < 4) {
+        }  else if (this.data.indexq == 1) {
             this.setData({ // 更新数据
                 ruleState: false,
-                timeTarget:3000,
+                timeTarget:3500,
+                timeNow:0,
+                percent:0,
+            })
+        }else if (this.data.indexq == 2) {
+            this.setData({ // 更新数据
+                ruleState: false,
+                timeTarget:2500,
+                timeNow:0,
+                percent:0,
+            })
+        }else if (this.data.indexq == 3) {
+            this.setData({ // 更新数据
+                ruleState: false,
+                timeTarget:2000,
                 timeNow:0,
                 percent:0,
             })
@@ -214,7 +228,7 @@ Page({
             this.setData({ // 更新数据
               
                 ruleState: false,
-                timeTarget:2000,
+                timeTarget:1000,
                 timeNow:0,
                 percent:0,
             })
@@ -233,7 +247,7 @@ Page({
         let choosetemp = [];
         let qindex = Math.floor(Math.random() * 2);
         if (qindex === 0) {
-            for (let i = 0; i < 4;) {
+            for (let i = 0; i < 5;) {
                 let num = Math.floor(Math.random() * 8);
                 let f = 0;
                 for (let j = 0; j < choosetemp.length; j++) {
@@ -259,11 +273,11 @@ Page({
                 number: colortemp[0],
                 style: "item"
             }
-            let c = Math.floor(Math.random() * 4);
-            let d = Math.floor(Math.random() * 4);
+            let c = Math.floor(Math.random() * 5);
+            let d = Math.floor(Math.random() * 5);
             while (c === d) {
-                c = Math.floor(Math.random() * 4);
-                d = Math.floor(Math.random() * 4);
+                c = Math.floor(Math.random() * 5);
+                d = Math.floor(Math.random() * 5);
             }
             choosetemp[c] = key1;
             choosetemp[d] = key2;
@@ -271,7 +285,7 @@ Page({
                 ans: texttemp[0],
             });
         } else if (qindex === 1) {
-            for (let i = 0; i < 4;) {
+            for (let i = 0; i < 5;) {
                 let num = Math.floor(Math.random() * 8);
                 let f = 0;
                 for (let j = 0; j < choosetemp.length; j++) {
@@ -297,11 +311,11 @@ Page({
                 number: colortemp[0],
                 style: "item"
             }
-            let c = Math.floor(Math.random() * 4);
-            let d = Math.floor(Math.random() * 4);
+            let c = Math.floor(Math.random() * 5);
+            let d = Math.floor(Math.random() * 5);
             while (c === d) {
-                c = Math.floor(Math.random() * 4);
-                d = Math.floor(Math.random() * 4);
+                c = Math.floor(Math.random() * 5);
+                d = Math.floor(Math.random() * 5);
             }
             choosetemp[c] = key1;
             choosetemp[d] = key2;
@@ -467,7 +481,7 @@ Page({
 
         let step10 = {
             func: () => {
-                for (let i = 0; i < 4; i++) {
+                for (let i = 0; i < 5; i++) {
                     if (that.data.choose[i].number === this.data.ans) {
                         index = i;
                         break;

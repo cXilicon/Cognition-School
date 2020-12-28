@@ -36,7 +36,7 @@ Page({
     height:14,
     width:7,
     syn:20,
-
+    datatemp:[],
     tips:0,
     entrance:'',
     lastScore: '',
@@ -70,18 +70,62 @@ onLoad: function () { // 页面加载
 initGame: function () { // 游戏初始化
   clearInterval(init);
   this.setData({ // 更新数据
-      ruleState: true,
+    
       dis:false,
       demoState: false,
       question:[],
+      datatemp:[],
       timershow:"timer",
       selected:[],
       second: 0,
       millisecond: 0,
       percent: 0,
       demoShow:false,
+      ruleState: true,
   })
- 
+
+  var i;
+  var questionTemp=[];
+  var upper;
+  var lower;
+
+
+  for(i=0;i<this.data.height*this.data.width;i++){
+    var flag=0;
+    while(flag==0){
+        upper=Math.floor(Math.random()*26+26);
+        lower=Math.floor(Math.random()*26);
+        if(upper-lower!=26){
+          flag=1;
+        }
+    }
+    var temp={
+      number:this.data.array[upper]+this.data.array[lower],
+      style:"numberText"
+    }
+    questionTemp.push(temp);
+    
+   
+  }
+  var site=0;
+ var selectedtemp=[];
+  for(var i=0;i<this.data.syn;i++){
+    site=Math.floor(Math.random()*(this.data.height*this.data.width));
+    while(this.data.array.indexOf(questionTemp[site].number[0])-this.data.array.indexOf(questionTemp[site].number[1])==26)
+    {
+      site=Math.floor(Math.random()*(this.data.height*this.data.width));
+    }
+    var fl=Math.floor(Math.random()*26+26);
+    questionTemp[site].number=(this.data.array[fl]+this.data.array[fl-26]);
+    selectedtemp.push(site);
+  }
+
+  this.setData({
+    
+    datatemp:questionTemp,
+   selected:selectedtemp
+});
+
 },
 
 
@@ -92,49 +136,15 @@ exitExamination: function () {
  //测试开始
   testStart:function() {
 
-    var i;
-    var questionTemp=[];
-    var upper;
-    var lower;
-  
-
     //随机生成数值并存入函数
-    for(i=0;i<this.data.height*this.data.width;i++){
-      var flag=0;
-      while(flag==0){
-          upper=Math.floor(Math.random()*26+26);
-          lower=Math.floor(Math.random()*26);
-          if(upper-lower!=26){
-            flag=1;
-          }
-      }
-      var temp={
-        number:this.data.array[upper]+this.data.array[lower],
-        style:"numberText"
-      }
-      questionTemp.push(temp);
-      
-     
-    }
-    var site=0;
    
-    for(var i=0;i<this.data.syn;i++){
-      site=Math.floor(Math.random()*(this.data.height*this.data.width));
-      while(this.data.array.indexOf(questionTemp[site].number[0])-this.data.array.indexOf(questionTemp[site].number[1])==26)
-      {
-        site=Math.floor(Math.random()*(this.data.height*this.data.width));
-      }
-      var fl=Math.floor(Math.random()*26+26);
-      questionTemp[site].number=(this.data.array[fl]+this.data.array[fl-26]);
-    }
-
         this.setData({
           againState: false,
           ruleState: false,
           startCountDown: 3,
           startCountDownState: true
       })
-      var that=this;
+      let that=this;
       const countdown = setInterval(() => {
           if (that.data.startCountDown - 1) {
               that.setData({
@@ -143,11 +153,11 @@ exitExamination: function () {
           } else {
               that.setData({
                   startCountDownState: false,
-                  question:questionTemp,
+                  question:that.data.datatemp,
                  
               });
               clearInterval(init);
-              init = setInterval(that.timer, 10);
+              init = setInterval(that.timer, 1000);
               clearInterval(countdown);
           }
       }, 1000);
@@ -158,41 +168,38 @@ exitExamination: function () {
 clickNumber:function(e){
   //获取点击数值的结构体
   var index=e.currentTarget.dataset.click;
-  var selectedTemp=this.data.selected;
+  
   //黑体数值则将背景变为橙色
   if(!this.data.dis){
     if(this.data.question[index].style!="numberText-active"){
       this.setData({
         [`question[${index}].style`] : "numberText-active",
       });
-      selectedTemp.push(index);
+      
     }else{
       this.setData({
         [`question[${index}].style`] : "numberText",
       });
-      selectedTemp.splice(selectedTemp.indexOf(index),1);
-  
-      this.setData({
-       selected:selectedTemp
-      });
+
     }
   }
   
   },
 
   testSubmit:function(){
-    var selectedTemp=this.data.selected;
-   
-      var score=0;
-      for(var i=0;i<selectedTemp.length;i++){
-        if(this.data.array.indexOf(this.data.question[selectedTemp[i]].number[0])-this.data.array.indexOf(this.data.question[selectedTemp[i]].number[1])==26){
-            score+=5;
 
-        }else{
-          score-=5;
-          
+      var score=0;
+      for(var i=0;i<this.data.question.length;i++){
+        if(this.data.question[i].style=="numberText-active")
+        {
+          if(this.data.array.indexOf(this.data.question[i].number[0])-this.data.array.indexOf(this.data.question[i].number[1])==26){
+              score+=5;
+          }else{
+              score-=5;
+          }
         }
       }
+
       if(score<0)
       {
         score=0;
@@ -250,29 +257,19 @@ clickNumber:function(e){
           })
         }
     }})
-
-
-
     },
 
     timer: function () {
       const targetTime = 60 * 100;
-      let percent = 100 * (this.data.millisecond + this.data.second * 100 + 1) / targetTime
+      let percent = 100 * (this.data.millisecond   + 100) / targetTime
       this.setData({
-          millisecond: this.data.millisecond + 1,
+          millisecond: this.data.millisecond + 100,
           percent: percent
       })
     
-      if (this.data.millisecond >= 100) {
-          this.setData({
-              millisecond: 0,
-              second: this.data.second + 1,
-          })
-      }
-     
-      if (this.data.second * 100 >= targetTime) {
+    
+      if (this.data.millisecond  >= targetTime) {
           clearInterval(init);
-           
           this.testSubmit();
       }
     },
@@ -282,8 +279,19 @@ clickNumber:function(e){
   // 查看演示
  viewDemo: function () {
   let that = this;
-  var index=0;
+  var index=this.data.selected;
   var index2=0;
+
+  
+  
+  for(var i=0;i<that.data.datatemp.length;i++){
+    if(that.data.array.indexOf(that.data.datatemp[i].number[0])-that.data.array.indexOf(that.data.datatemp[i].number[1])!=26){
+          index2=i;
+          break;
+    }
+  }
+
+
 
   this.setData({
       ruleState: false,
@@ -298,44 +306,27 @@ clickNumber:function(e){
        
           }, 2000)
       },
-      playtime: 5000
+      playtime: 6000
   }
   let step1 = {
     
       func: () => {
       
-          Toast('点击一个相同字母大小写组合的方块,例如: Aa');
+          Toast('点击一个相同字母大小写组合的方块,例如: '+this.data.question[index[0]].number);
       },
       playtime: 2000
   }
 
-  let stepSelect={
-    func:()=>{
-      for(var i=0;i<that.data.question.length;i++){
-        if(that.data.array.indexOf(this.data.question[i].number[0])-that.data.array.indexOf(this.data.question[i].number[1])==26){
-              index=i;
-              break;
-        }
-      }
-    
-      for(var i=0;i<that.data.question.length;i++){
-        if(that.data.array.indexOf(that.data.question[i].number[0])-that.data.array.indexOf(that.data.question[i].number[1])!=26){
-              index2=i;
-              break;
-        }
-      }
-    
-    }
-  }
+  
   let step2 = {
       func: () => {
-
+         
           that.setData({
-            [`question[${index}].style`] : "numberText-tips",
+            [`question[${index[0]}].style`] : "numberText-tips",
           })
           setTimeout(() => {
                   that.setData({
-                    [`question[${index}].style`] : "numberText",
+                    [`question[${index[0]}].style`] : "numberText",
                   })
               }
               , 400
@@ -346,7 +337,7 @@ clickNumber:function(e){
   let step3 = {
       func: () => {
         that.setData({
-          [`question[${index}].style`] : "numberText-active",
+          [`question[${index[0]}].style`] : "numberText-active",
         })
       },
       playtime: 1000
@@ -406,25 +397,23 @@ let step9 = {
 
 let step10 = {
   func: () => {
-    var sum=0;
+   
     let time=setInterval(() => {
-      for(var i=index+1;i<that.data.question.length;i++){
-        if(that.data.array.indexOf(this.data.question[i].number[0])-that.data.array.indexOf(this.data.question[i].number[1])==26){
-          that.setData({
-            [`question[${i}].style`] : "numberText-active",
-            })
-            index=i;
-            sum++;
-            break;
-        }
 
-        if(sum==19){
-          clearInterval(time);
-        }
-      }
-    }, 300)
+        var click=index[i];
+          that.setData({
+            [`question[${click}].style`] : "numberText-active",
+            })
+            if(i==19)
+            {
+              clearInterval(time)
+              
+            }
+            i++;
+    }, 500)
+   
 },
-playtime: 6000
+playtime: 10000
 }
 let step11 = {
   func: () => {
@@ -494,12 +483,8 @@ let step16 = {
   playtime: 2000
 }
 
-
-
-
-
   let stepIdx = 0
-  let steps = [step0, step1,stepSelect, step2,step2,  step3, step4, step5, step5, step6, step7, step8,step9,step10,step11,step12,step12,step13,step14,step14,step15,step16]
+  let steps = [step0, step1, step2,step2,  step3, step4, step5, step5, step6, step7, step8,step9,step10,step11,step12,step12,step13,step14,step14,step15,step16]
   setTimeout(function play() {
       if (stepIdx < steps.length) {
           steps[stepIdx].func()
