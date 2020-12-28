@@ -118,7 +118,7 @@ Page({
                 for (let rowItem of that.data.targetList) {
                     that.switchCellState(rowItem.x, rowItem.y, true)
                 }
-            }, playtime: 1500
+            }, playtime: 2000
         }, {
             func: () => {
                 for (let rowItem of that.data.targetList) {
@@ -309,7 +309,7 @@ Page({
             }, playtime: 2500
         }, {
             func: () => {
-                Toast('他们会在 1.5 秒后合上')
+                Toast('他们会在 2 秒后合上')
             }, playtime: 2500
         }, {
             func: () => {
@@ -416,6 +416,8 @@ Page({
     stopDemo: function () {
         clearTimeout(demoOp.controller)
         clearTimeout(subOp)
+        clearInterval(subOp)
+        clearTimeout(countDownTimer)
         this.setData({readyState: false})
         Toast.clear()
         this.setData({

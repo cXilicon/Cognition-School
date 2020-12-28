@@ -72,19 +72,19 @@ Page({
                 score: '--',
                 style: "transform: scale(0.9);",
             },
-            // {
-            //     id: 5,
-            //     frontImage: 'exam-5.png',
-            //     backgroundImage: 'Saturn.jpeg',
-            //     category: 'simultaneous',
-            //     name: '矩阵问题',
-            //     name_en: 'matrixProblem',
-            //     score: '--',
-            //     style: "transform: scale(0.9);",
-            //     isIncomplete: true,
-            // },
             {
                 id: 5,
+                frontImage: 'exam-5.png',
+                backgroundImage: 'Saturn.jpeg',
+                category: 'simultaneous',
+                name: '矩阵问题',
+                name_en: 'matrixProblem',
+                score: '--',
+                style: "transform: scale(0.9);",
+                isIncomplete: true,
+            },
+            {
+                id: 6,
                 frontImage: 'exam-6.png',
                 backgroundImage: 'Uranus.jpeg',
                 category: 'successive',
@@ -93,19 +93,19 @@ Page({
                 score: '--',
                 style: "transform: scale(0.9);",
             },
-            // {
-            //     id: 7,
-            //     frontImage: 'exam-7.png',
-            //     backgroundImage: 'Neptune.jpeg',
-            //     category: 'successive',
-            //     name: '数字回忆',
-            //     name_en: 'numberMemory',
-            //     score: '--',
-            //     style: "transform: scale(0.9);",
-            //     isIncomplete: true,
-            // },
             {
-                id: 6,
+                id: 7,
+                frontImage: 'exam-7.png',
+                backgroundImage: 'Neptune.jpeg',
+                category: 'successive',
+                name: '数字回忆',
+                name_en: 'numberMemory',
+                score: '--',
+                style: "transform: scale(0.9);",
+                isIncomplete: true,
+            },
+            {
+                id: 8,
                 frontImage: 'exam-8.png',
                 backgroundImage: 'Pluto.jpeg',
                 name: '生成报告',
@@ -139,7 +139,7 @@ Page({
                 examinationSwitchLock: false,
                 currentExamination: event.currentTarget.dataset.swiperId,
             });
-        } else if (event.currentTarget.dataset.swiperId !== 6) {
+        } else if (event.currentTarget.dataset.swiperId !== 8) {
             // 进入测试
             let currentExamination = this.data.currentExamination
             if (this.data.examinations[currentExamination].score !== '--') {
@@ -168,11 +168,11 @@ Page({
                 })
             }
             // 输出总成绩
-            if (this.data.finishedItemCount === 6) {
+            if (this.data.finishedItemCount === 8) {
                 let examInfo = this.data.examinations
                 let totalScore = 0
                 examInfo.forEach(function (item) {
-                    if (item.id !== 6)
+                    if (item.id !== 8)
                         totalScore += level[item.score]
                 })
                 if (totalScore >= 70)
@@ -188,27 +188,25 @@ Page({
                 else
                     totalScore = 'F'
                 this.setData({
-                    ['examinations[6].score']: totalScore,
+                    ['examinations[8].score']: totalScore,
                 })
             }
         } else {
-            if (this.data.finishedItemCount === 6) {
+            if (this.data.finishedItemCount === 8) {
                 let examInfo = this.data.examinations
                 let reportData = {
                     score: {},
-                    level: examInfo[6].score,
+                    level: examInfo[8].score,
                     finishTime: new Date()
                 }
                 examInfo.forEach(function (item) {
-                    if (item.id !== 6) {
+                    if (item.id !== 8) {
                         reportData.score[item.name_en] = {
                             score: level[item.score],
                             category: item.category
                         }
                     }
                 })
-                reportData.score['matrixProblem'] = reportData.score['graphicMemory']
-                reportData.score['numberMemory'] = reportData.score['colorMemory']
 
                 // console.log(reportData)
                 wx.navigateTo({
@@ -218,7 +216,7 @@ Page({
                     }
                 })
             } else {
-                Toast('还有 ' + (6 - this.data.finishedItemCount) + ' 项测试未完成');
+                Toast('还有 ' + (8 - this.data.finishedItemCount) + ' 项测试未完成');
             }
         }
     },

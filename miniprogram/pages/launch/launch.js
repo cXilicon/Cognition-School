@@ -8,6 +8,7 @@ Page({
     data: {
         hasUserInfo: true
     },
+
     onLoad: function (options) {
         let that = this
         wx.getSetting({

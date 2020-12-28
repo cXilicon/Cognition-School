@@ -1,4 +1,4 @@
-<view class="page">
+<view hidden="{{hasUserInfo}}" class="page">
   <van-image height="100%" width="100%" fit="cover"
              src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/index_back_1.jpg"></van-image>
   <view class="logo">

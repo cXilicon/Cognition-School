@@ -1,34 +1,196 @@
-.page{
+.page {
   background-color: #eeeeee;
 }
 
+.exam-controller {
+  padding: 20px;
+}
+
+.exam-rule > text:first-child {
+  display: block;
+  margin-bottom: 10px;
+  color: #aaaaaa;
+}
+
+.exam-rule {
+  margin-bottom: 10px;
+}
+
+.exam-control-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.exam-control-container > van-button {
+  flex: 1;
+}
+
+.settlement-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.settlement-info > view {
+  text-align: center;
+}
+
+.settlement-info > view > text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settlement-info > view > text:first-child {
+  color: #888888;
+}
+
+.settlement-info > view > text:last-child {
+  font-size: 24px;
+}
+
+.ready {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240rpx;
+  height: 240rpx;
+  color: #fff;
+  font-size: 96rpx;
+  border-radius: 16rpx;
+  background-color: rgba(0, 0, 0, .7) !important;
+}
+
 .main {
-  padding: 0 40rpx;
+  /*padding: 0 60rpx;*/
 }
 
 .row {
   display: flex;
-  justify-content: space-between;
-  margin: 10px 0
+  justify-content: center;
 }
 
 .cell {
   position: relative;
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 10rpx;
-  border-radius: 16px;
+  margin: 12rpx;
+  border: solid 4rpx #333333;
+  border-radius: 16rpx;
   background-color: #ffffff;
 }
 
-.cell:before{
+.cell:before {
   content: '';
   padding-top: 100%;
 }
 
 .cell-content {
-  width: 200rpx;
-  height: 200rpx;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.progress {
+  margin: 0 100rpx;
+}
+
+
+.option-container {
+  padding: 0 40rpx;
+}
+
+.options-swiper-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.options {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 10rpx 100rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 0 10rpx #ccc;
+  background-color: #ffffff;
+}
+
+.option {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10rpx;
+  border-radius: 24rpx;
+  z-index: 1;
+  /*transition: all .5s;*/
+}
+
+.option-selected {
+  background-color: #0d84ff;
+}
+
+.option-content {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.layer-tags {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 10rpx 100rpx;
+  border-radius: 24rpx;
+  background-color: #ffffff;
+}
+
+.layer-tag {
+  flex: 1;
+  margin: 10rpx;
+  padding: 10rpx;
+  border-radius: 24rpx;
+  z-index: 1;
+  text-align: center;
+  transition: all .5s;
+}
+
+.highlight {
+  background-color: #f0cf1a;
+  transition: none;
+}
+
+.commit {
+  position: relative;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  margin: 10rpx 100rpx;
+  border: solid 4rpx #333333;
+  border-radius: 16rpx;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 12rpx 0 #0d84ff;
+  transition: all .3s;
+}
+
+.commit:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 24rpx;
+  top: 72rpx;
+  border: solid 4rpx #333333;
+  border-top: none;
+  border-radius: 0 0 16rpx 16rpx;
+  transition: all .3s;
+}
+
+.commit-active {
+  top: 6rpx;
+  box-shadow: 0 6rpx 0 #0d84ff;
+}
+
+.commit-active:after {
+  height: 18rpx;
 }

@@ -53,11 +53,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
+  width: 240rpx;
+  height: 240rpx;
   color: #fff;
-  font-size: 48px;
-  border-radius: 8px;
+  font-size: 96rpx;
+  border-radius: 16rpx;
   background-color: rgba(0, 0, 0, .7) !important;
 }
 

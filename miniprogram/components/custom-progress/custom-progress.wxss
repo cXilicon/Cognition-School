@@ -8,7 +8,8 @@
 .progress:after {
   content: '';
   position: absolute;
-  width: 100%;
+  left: 0;
+  right: 0;
   height: 30rpx;
   border: 4rpx solid #333333;
   border-radius: 10rpx;
