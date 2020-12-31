@@ -101,7 +101,7 @@ button[disabled]{
   text-align: center;
   background-color: #ffffff;
   overflow: hidden;
-  transition: all .1s ease-in;
+  
   
  
 }
@@ -117,7 +117,7 @@ button[disabled]{
   border-top: none;
 
   border-radius: 4px;
-  transition: all .1s ease-in;
+ 
 }
 
 .cell-bottom {
@@ -137,15 +137,11 @@ button[disabled]{
   width: 90rpx;
   margin: 3rpx 3rpx;
   border: 2px solid #333333;
-  
   border-radius: 4px;
   font-size: 36rpx;
   text-align: center;
-
   overflow: hidden;
-  transition: all .1s ease-in;
   margin-top: 5rpx;
-
   background-color: #cccccc;
 }
 .numberText-tips{
@@ -156,15 +152,12 @@ button[disabled]{
   height: 65rpx;
   width: 90rpx;
   margin: 3rpx 3rpx;
-
   border: 2px solid #333333;
   border-radius: 4px;
   font-size: 36rpx;
   text-align: center;
   background-color: #ffffff;
   overflow: hidden;
-  transition: all .1s ease-in;
- 
   background-color: #f0cf1a;
 }
 

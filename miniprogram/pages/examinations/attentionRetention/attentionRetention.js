@@ -260,10 +260,10 @@ clickNumber:function(e){
     },
 
     timer: function () {
-      const targetTime = 60 * 100;
-      let percent = 100 * (this.data.millisecond   + 100) / targetTime
+      const targetTime = 60 * 10;
+      let percent =100 *  (this.data.millisecond   + 10) / targetTime
       this.setData({
-          millisecond: this.data.millisecond + 100,
+          millisecond: this.data.millisecond + 10,
           percent: percent
       })
     
