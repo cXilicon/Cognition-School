@@ -95,14 +95,14 @@
                     "scene": null
                 },
                 {
-                    "name": "pages/examinations/graphicMemory/graphicMemory",
-                    "pathName": "pages/examinations/graphicMemory/graphicMemory",
+                    "name": "pages/examinations/matrixProblem/matrixProblem",
+                    "pathName": "pages/examinations/matrixProblem/matrixProblem",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "name": "pages/examinations/matrixProblem/matrixProblem",
-                    "pathName": "pages/examinations/matrixProblem/matrixProblem",
+                    "name": "pages/examinations/numberMemory/numberMemory",
+                    "pathName": "pages/examinations/numberMemory/numberMemory",
                     "query": "",
                     "scene": null
                 }
