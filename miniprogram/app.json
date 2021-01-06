@@ -12,8 +12,6 @@
     "pages/examinations/graphicMemory/graphicMemory",
     "pages/training/training",
     "pages/userInfo/userInfo",
-    "pages/test/test",
-    "pages/detailed/detailed",
     "pages/examinations/matrixProblem/matrixProblem",
     "pages/examinations/numberMemory/numberMemory"
   ],

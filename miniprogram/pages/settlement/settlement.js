@@ -9,11 +9,16 @@ Page({
         age: '',
         finishDate: '',
         finishTime: '',
+        mode: true,
         totalScore: 0,
         ecBar: {
             disableTouch: true,
             onInit: null
         },
+        plan: 0,
+        attention: 0,
+        simultaneous: 0,
+        successive: 0,
     },
 
     onInit: function initChart(canvas, width, height, dpr) {
@@ -27,7 +32,7 @@ Page({
         return barChart;
     },
 
-    onLoad: function (option) {
+    onLoad: function () {
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('reportData', data => {
             console.log(data)
@@ -69,6 +74,10 @@ Page({
                     disableTouch: true,
                     onInit: this.onInit
                 },
+                plan: reportDataOption.dataset.source[0][1],
+                attention: reportDataOption.dataset.source[1][1],
+                simultaneous: reportDataOption.dataset.source[2][1],
+                successive: reportDataOption.dataset.source[3][1]
             })
 
             let examRecord = {
@@ -111,6 +120,12 @@ Page({
                     }
                 })
             })
+        })
+    },
+
+    switchMode: function () {
+        this.setData({
+            mode: !this.data.mode
         })
     }
 });

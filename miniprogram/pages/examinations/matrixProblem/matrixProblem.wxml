@@ -22,6 +22,10 @@
       <text>正确数</text>
       <text>{{lastCorrectNum}}</text>
     </view>
+    <view>
+      <text>用时</text>
+      <text>{{lastTimeUse}}s</text>
+    </view>
   </view>
   <view class="exam-control-container">
     <van-button plain block type="primary" bind:tap="startExam">再来一次</van-button>
@@ -38,9 +42,10 @@
              bind:click="stopDemo"/>
 
 <view class="page">
-  <van-nav-bar left-arrow left-text="返回" title="矩阵问题"
+  <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="矩阵问题"
                bind:click-left="exitExamination"
                border="{{false}}" custom-style="background-color: transparent;"/>
+  <van-nav-bar wx:else title="矩阵问题" custom-style="background-color: transparent;" border="{{false}}"/>
 
   <view class="main">
     <view wx:for="{{[[0, 1, 2], [3, 4, 5], [6, 7, 8]]}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row"

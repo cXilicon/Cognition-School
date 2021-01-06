@@ -105,6 +105,18 @@
                     "pathName": "pages/examinations/numberMemory/numberMemory",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "pages/detailed/detailed",
+                    "pathName": "pages/detailed/detailed",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/settlement/settlement",
+                    "pathName": "pages/settlement/settlement",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

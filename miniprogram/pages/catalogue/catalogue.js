@@ -146,7 +146,7 @@ Page({
                 Toast('该测试已完成');
             } else {
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
-                if (false) {
+                if (true) {
                     let examId = event.currentTarget.dataset.swiperId
                     wx.navigateTo({
                         url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
@@ -237,13 +237,9 @@ Page({
         let absOffset =
             Math.abs(offset) - Math.abs(currentExamination - lastExamination);
         let slideOutContent =
-            "transform: scale(" +
-            (1 - 0.1 * absOffset) +
-            "); "
+            "transform: scale(" + (1 - 0.1 * absOffset) + "); "
         let slideInContent =
-            "transform: scale(" +
-            (0.9 + 0.1 * absOffset) +
-            "); "
+            "transform: scale(" + (0.9 + 0.1 * absOffset) + "); "
         if (slideInId < 0 || slideInId > this.data.examinations.length - 1) {
             this.setData({
                 currentDotsIdx: Math.round(lastExamination + offset),

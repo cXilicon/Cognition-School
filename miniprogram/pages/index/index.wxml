@@ -3,7 +3,7 @@
   <van-image height="100%" width="100%" fit="cover"
              src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/index_back_1.jpg"></van-image>
   <view class="logo">
-    <text>认知\n学堂</text>
+    <text>认知\n学园</text>
   </view>
   <van-button block round custom-class="exam-button" bind:tap="startExamination">
     <view class="exam-button-content">

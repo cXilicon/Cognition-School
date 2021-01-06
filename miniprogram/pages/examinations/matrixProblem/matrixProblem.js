@@ -8,10 +8,6 @@ const AGAIN = 'AGAIN'
 
 let countDownTimer = null
 let subOp = null
-let initExamItemOp = {
-    steps: null,
-    controller: null,
-}
 let demoOp = {
     steps: null,
     controller: null,
@@ -32,7 +28,7 @@ Page({
         matrixItems: [],
         axis: 2,
         currentLayer: 0,
-        checkPoints: [[2, 2, 0, 20], [2, 2, 1, 20], [2, 3, 1, 30], [2, 3, 2, 30], [3, 3, 2, 40]],
+        checkPoints: [[2, 2, 0], [2, 2, 1], [2, 3, 1], [2, 3, 2], [3, 3, 2]],
         currentCheckPoint: 3,
         layerCount: 1,
         dimCount: 2,
@@ -69,6 +65,7 @@ Page({
             }],
         correctCount: 0,
         lastCorrectNum: 0,
+        lastTimeUse: 0,
     },
 
     onLoad: function () {
@@ -94,7 +91,6 @@ Page({
                 this.data.checkPoints[this.data.currentCheckPoint][0],
                 this.data.checkPoints[this.data.currentCheckPoint][1],
                 this.data.checkPoints[this.data.currentCheckPoint][2],
-                this.data.checkPoints[this.data.currentCheckPoint][3],
             )
         })
     },
@@ -105,7 +101,8 @@ Page({
             currentCheckPoint: 0,
             correctCount: 0,
             currentTime: 0,
-            dimCount: 2
+            dimCount: 2,
+            maxTime: 360000,
         })
         this.data.matrixItems.forEach((item, index) => {
             item.clear()
@@ -121,15 +118,13 @@ Page({
         })
     },
 
-    initCheckpoint: function (axis, dim, bias, timeLimit) {
+    initCheckpoint: function (axis, dim, bias) {
         clearInterval(countDownTimer)
         this.setData({
             axis: axis,
             layerCount: axis === 2 ? 1 : 3,
             dimCount: dim,
             currentLayer: 0,
-            currentTime: 0,
-            maxTime: timeLimit * 1000,
         })
 
         // 决定维度在其他轴上的偏移
@@ -196,14 +191,13 @@ Page({
             })
             if (flag) this.setData({correctCount: this.data.correctCount + 1})
             if (this.data.currentCheckPoint === 4)
-                this.settle(this.data.correctCount)
+                this.settle(this.data.correctCount, this.data.currentTime)
             else {
                 this.setData({currentCheckPoint: this.data.currentCheckPoint + 1})
                 this.initCheckpoint(
                     this.data.checkPoints[this.data.currentCheckPoint][0],
                     this.data.checkPoints[this.data.currentCheckPoint][1],
                     this.data.checkPoints[this.data.currentCheckPoint][2],
-                    this.data.checkPoints[this.data.currentCheckPoint][3],
                 )
             }
         }
@@ -372,15 +366,22 @@ Page({
         })
     },
 
-    settle: function (correct) {
+    settle: function (correct, time) {
+        time /= 1000
         Toast.success({
             message: '测试完成',
             onClose: () => {
                 let score = ""
-                if (correct === 5) score = "A"
-                else if (correct >= 4) score = "B"
-                else if (correct >= 3) score = "C"
-                else if (correct >= 2) score = "D"
+                let total = correct * 20;
+                if (time <= 120) total *= 1.2
+                else if (time <= 180) total *= 1.1
+                else if (time <= 240) total *= 1.0
+                else if (time <= 300) total *= 0.9
+                else total *= 0.8
+                if (total >= 90) score = "A"
+                else if (total >= 80) score = "B"
+                else if (total >= 70) score = "C"
+                else if (total >= 60) score = "D"
                 else score = "F"
                 if (this.data.entrance === "exam") {
                     let pages = getCurrentPages();
@@ -393,6 +394,7 @@ Page({
                     this.setData({
                         lastScore: score,
                         lastCorrectNum: correct,
+                        lastTimeUse: time,
                         examState: AGAIN,
                     })
                 }
@@ -408,7 +410,7 @@ Page({
             if (this.data.currentTime >= this.data.maxTime) {
                 clearInterval(countDownTimer)
                 if (this.data.examState === EXECUTE)
-                    this.commit()
+                    this.settle(this.data.correctCount, this.data.currentTime)
             }
         }, 50)
     },
@@ -452,7 +454,7 @@ Page({
         }, {
             func: () => {
                 Toast('九宫格中会出现 8 个图案')
-                that.initCheckpoint(2, 2, 0, 30)
+                that.initCheckpoint(2, 2, 0)
             }, playtime: 2500
         }, {
             func: () => {
@@ -526,7 +528,7 @@ Page({
         }, {
             func: () => {
                 Toast('随着难度的增大，你会见到如下题目')
-                that.initCheckpoint(3, 3, 2, 30)
+                that.initCheckpoint(3, 3, 2)
             }, playtime: 2500
         }, {
             func: () => {
