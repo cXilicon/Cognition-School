@@ -15,6 +15,7 @@
     <view class="finish-date">
       <text>{{finishDate + '\n' + finishTime}}</text>
     </view>
+    
   </view>
   <custom-tab-bar></custom-tab-bar>
 </view>

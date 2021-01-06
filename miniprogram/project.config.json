@@ -143,6 +143,12 @@
         {
           "name": "pages/examinations/expressionAttention/expressionAttention",
           "pathName": "pages/examinations/expressionAttention/expressionAttention",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/detailed/detailed",
+          "pathName": "pages/detailed/detailed",
           "scene": null
         }
       ]
