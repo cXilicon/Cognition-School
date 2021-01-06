@@ -63,49 +63,49 @@
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test1)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
             <el-form-item label="数字匹配"
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test2)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
             <el-form-item label="表达性注意"
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test3)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
             <el-form-item label="注意力保持"
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test4)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
             <el-form-item label="图形记忆"
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test5)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
             <el-form-item label="矩阵问题"
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test6)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
             <el-form-item label="颜色记忆"
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test7)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
             <el-form-item label="数字回忆"
                           label-width="150px">
               <el-input :disabled="true"
                         :placeholder="(findResult.test8)"
-                        style="width: 30% "></el-input>
+                        style="width: 50% "></el-input>
             </el-form-item>
           </el-form>
           <el-button type="primary"
@@ -155,7 +155,7 @@ export default {
 
   methods: {
     handleLook (number) {
-      this.$axios.get('http://localhost:8080/usertotest/findbyuseropenidandtestnumber', {
+      this.$axios.get('https://www.hsaeno.space:443/usertotest/findbyuseropenidandtestnumber', {
         params: {
           testNumber: number,
           userOpenID: this.userid
@@ -185,7 +185,7 @@ export default {
 
     // 获取分页数据
     findPage: function () {
-      this.$axios.get('http://localhost:8080/usertotest/findbyuseropenid', {
+      this.$axios.get('https://www.hsaeno.space:443/usertotest/findbyuseropenid', {
         params: {
           page: this.pageRequest.pageNum,
           size: this.pageRequest.pageSize,
@@ -200,7 +200,7 @@ export default {
         })
     },
     findLatest: function () {
-      this.$axios.get('http://localhost:8080/usertotest/findlatestbyuseropenid', {
+      this.$axios.get('https://www.hsaeno.space:443/usertotest/findlatestbyuseropenid', {
         params: {
           userOpenID: this.$route.query.userid,
         }, headers: {
@@ -269,7 +269,7 @@ export default {
         })
     },
     handleCurrentChange (val) {
-      this.$axios.get('http://localhost:8080/usertotest/findbyuseropenidandtestnumber', {
+      this.$axios.get('https://www.hsaeno.space:443/usertotest/findbyuseropenidandtestnumber', {
         params: {
           testNumber: val.testNumber,
           userOpenID: this.$route.query.userid,
@@ -287,7 +287,7 @@ export default {
           let myChart2 = echarts.init(document.getElementById('chart_2'));
           let option = {
             title: {
-              text: 'PASS雷达图'
+              text: 'PASS雷达图',
             },
             tooltip: {},
             radar: {
@@ -322,7 +322,7 @@ export default {
         })
     },
     defaultShow () {
-      this.$axios.get('http://localhost:8080/usertotest/findbyuseropenidandlatesttestnumber', {
+      this.$axios.get('https://www.hsaeno.space:443/usertotest/findbyuseropenidandlatesttestnumber', {
         params: {
           userOpenID: this.$route.query.userid,
         }, headers: {
@@ -390,12 +390,15 @@ export default {
 .pagination {
   flex: 1;
   margin-top: 10px;
-  margin-left: 20%;
+  position: relative;
+  text-align: right;
+  right: 30%;
 }
 .container {
   position: relative;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 .left {
   flex: 1;
@@ -409,7 +412,9 @@ export default {
   flex-direction: column;
 }
 .tips {
-  margin-left: 20%;
+  position: relative;
+  text-align: right;
+  right: 30%;
   flex: 1;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }

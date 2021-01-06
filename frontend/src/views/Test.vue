@@ -82,7 +82,7 @@ export default {
     // 获取分页数据
     findPage: function () {
 
-      this.$axios.get('http://localhost:8080/test/findall', {
+      this.$axios.get('https://www.hsaeno.space:443/test/findall', {
         params: {
         }, headers: {
           "Content-Type": "application/json;charset=utf-8" //头部信息
@@ -116,7 +116,8 @@ export default {
 }
 .pagination {
   position: relative;
-  left: 36.6%;
+  text-align: right;
+  right: 10%;
   margin-top: 10px;
 }
 </style>

@@ -19,11 +19,12 @@
       </el-form>
     </div>
     <!--表格内容栏-->
-    <div class="myTable">
+    <div>
       <el-table :data="pageResult"
                 highlight-current-row
                 border
-                style="width: 80%">
+                style="width: 80%"
+                class="myTable">
         <el-table-column prop="id"
                          label="用户ID"
                          align="center"></el-table-column>
@@ -82,7 +83,7 @@ export default {
       filters: {
         name: ''
       },
-      pageRequest: { pageNum: 1, pageSize: 8 },
+      pageRequest: { pageNum: 1, pageSize: 6 },
       pageResult: [],
       totalPage: 0,
 
@@ -118,7 +119,7 @@ export default {
     // 获取分页数据
     findPage: function () {
 
-      this.$axios.get('http://localhost:8080/user/findbypage', {
+      this.$axios.get('https://www.hsaeno.space:443/user/findbypage', {
         params: {
           page: this.pageRequest.pageNum,
           size: this.pageRequest.pageSize,
@@ -153,17 +154,21 @@ export default {
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
+  left: 5%;
 }
 .toolbar {
-  position: relative;
-  right: 36.5%;
-}
-.pagination {
-  margin: 20px 160px 20px;
-  text-align: right;
+  padding: 16px 0px !important;
+  text-align: left;
 }
 .myTable {
   position: relative;
-  left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.pagination {
+  margin-top: 10px;
+  text-align: right;
+  position: relative;
+  right: 19.5%;
 }
 </style>

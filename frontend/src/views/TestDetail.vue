@@ -52,7 +52,7 @@ export default {
   methods: {
 
     detailFind (number) {
-      this.$axios.get('http://localhost:8080/usertotest/findtestcount', {
+      this.$axios.get('https://www.hsaeno.space:443/usertotest/findtestcount', {
         params: {
           testID: this.testid
         }, headers: {

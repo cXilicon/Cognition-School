@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     login () {
-      this.$axios.get('http://101.37.64.59:8080/admin/login', {
+      this.$axios.get('https://hsaeno.space:443/admin/login', {
         params: {
           adminAccount: this.loginForm.adminAccount,
           adminPassword: this.loginForm.adminPassword,
