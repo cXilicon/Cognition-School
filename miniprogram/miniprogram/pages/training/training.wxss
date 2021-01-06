@@ -1,0 +1,86 @@
+/* pages/training/training.wxss */
+.page {
+  height: 100vh;
+  padding-bottom: 120rpx;
+  box-sizing: border-box;
+}
+
+.page > van-image {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: -10;
+}
+
+.nav-bar {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.lock-tag{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 300rpx;
+  width: 300rpx;
+  padding: 20rpx;
+  color: #ffffff;
+  text-align: center;
+  background-color: #000000 !important;
+  opacity: 0.8;
+  z-index: 10;
+}
+
+.main {
+  flex: 1;
+  height: 1px;
+  box-sizing: border-box;
+}
+
+.training-item {
+  display: flex;
+  flex-direction: row;
+  height: 180rpx;
+  margin: 40rpx;
+  border-radius: 10rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.incompleteTag{
+  filter: grayscale(1);
+}
+
+.training-item > van-image {
+  height: 100%;
+  width: 160rpx;
+}
+
+.training-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 32rpx 16rpx;
+}
+
+.item-title {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.item-tag {
+  margin-right: 6px;
+  border-radius: 6rpx;
+  padding: 2rpx 8rpx;
+  color: #ec6666;
+  font-size: 24rpx;
+  background-color: #f3eac2;
+}
+
+.training-score {
+  display: flex;
+  align-items: center;
+  padding: 48rpx;
+  font-size: 48rpx;
+}

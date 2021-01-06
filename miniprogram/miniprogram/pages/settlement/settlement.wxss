@@ -1,0 +1,95 @@
+.container {
+  flex: 1;
+  height: 1px;
+  margin: 40rpx 0rpx 160rpx;
+  padding: 0 40rpx;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: justify;
+  padding: 20rpx;
+  height: 100%;
+  border: solid 20rpx #3d3d63;
+  border-radius: 50rpx;
+  box-shadow: 0 10rpx 20rpx 10rpx #aaaaaa;
+}
+
+.report-title {
+  margin: 20rpx 0;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.header-information {
+  width: 100%;
+  height: 300rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.user-information-container {
+  width: 50%;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-information {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user-information:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: -5rpx;
+  height: 0;
+  border: 10px solid #eeeeee;
+  border-radius: 10px;
+}
+
+.settlement-illus {
+  width: 40%;
+}
+
+.data-chart {
+  flex: 1;
+  width: 100%;
+}
+
+.addition-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 40rpx;
+  font-size: 14px;
+  text-align: right;
+}
+
+.ability-title {
+  align-self: flex-start;
+  margin: 20rpx 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ability-analysis {
+  text-indent: 2em;
+  font-size: 16px;
+  line-height: 24px
+}

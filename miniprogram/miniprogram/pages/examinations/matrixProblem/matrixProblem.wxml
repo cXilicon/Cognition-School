@@ -1,0 +1,81 @@
+<van-popup show="{{examState==='START'}}" position="bottom" round
+           custom-class="exam-controller">
+  <view class="exam-rule">
+    <text>测试规则</text>
+    <text>在规定的时间内记忆短暂出现的图形组合</text>
+  </view>
+  <view class="exam-control-container">
+    <van-button plain block type="primary" bind:tap="viewDemo">查看演示</van-button>
+    <view style="width: 10px"></view>
+    <van-button plain block type="primary" bind:tap="startExam">开始测试</van-button>
+  </view>
+</van-popup>
+
+<van-popup show="{{examState==='AGAIN'}}" position="bottom" round
+           custom-class="exam-controller">
+  <view class="settlement-info">
+    <view>
+      <text>得分</text>
+      <text>{{lastScore}}</text>
+    </view>
+    <view>
+      <text>正确数</text>
+      <text>{{lastCorrectNum}}</text>
+    </view>
+    <view>
+      <text>用时</text>
+      <text>{{lastTimeUse}}s</text>
+    </view>
+  </view>
+  <view class="exam-control-container">
+    <van-button plain block type="primary" bind:tap="startExam">再来一次</van-button>
+    <view style="width: 10px"></view>
+    <van-button plain block type="primary" bind:tap="exitExamination">退出测试</van-button>
+  </view>
+</van-popup>
+
+<van-toast id="van-toast"/>
+<van-popup show="{{readyState}}" z-index="1" overlay-style="background: transparent;" custom-class="ready">
+  {{readyTime}}
+</van-popup>
+<van-overlay show="{{examState==='DEMO'}}" z-index="2000" custom-style="background-color: transparent;"
+             bind:click="stopDemo"/>
+
+<view class="page">
+  <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="矩阵问题"
+               bind:click-left="exitExamination"
+               border="{{false}}" custom-style="background-color: transparent;"/>
+  <van-nav-bar wx:else title="矩阵问题" custom-style="background-color: transparent;" border="{{false}}"/>
+
+  <view class="main">
+    <view wx:for="{{[[0, 1, 2], [3, 4, 5], [6, 7, 8]]}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row"
+          wx:key="rowIdx" id="matrix">
+      <view wx:for="{{rowItem}}" wx:for-item="cellItem" wx:for-index="cellIdx"
+            class="cell {{cellItem!==8&&highlight==='matrix'?'highlight':''}} {{cellItem===8&&highlight==='target'?'highlight':''}}"
+            wx:key="cellItem">
+        <canvas class="cell-content" type="2d" id="matrix-{{cellItem}}"></canvas>
+      </view>
+    </view>
+  </view>
+  <custom-progress custom-class="progress" percent="{{currentTime * 100 / maxTime}}"></custom-progress>
+  <swiper class="options-swiper" style="height: {{dimCount*120}}rpx;" circular="{{true}}"
+          model:current="{{currentLayer}}">
+    <block wx:for="{{layerCount}}" wx:for-index="layerIdx" wx:key="*this">
+      <swiper-item class="options-swiper-item">
+        <view wx:for="{{matrixDims}}" wx:if="{{dim.active}}" wx:for-item="dim" wx:for-index="dimIdx"
+              class="options">
+          <view wx:for="{{dim.value}}" wx:for-index="optionIdx" id="option-{{dim.name}}"
+                class="option {{dim.selected[layerIdx]===optionIdx?'option-selected':''}} {{highlight==='options'?'highlight':''}}"
+                bind:tap="selectOption" data-dim="{{dimIdx}}" data-option="{{optionIdx}}" data-layer="{{layerIdx}}">
+            <canvas class="option-content" type="2d" id="option-{{dim.name}}-{{layerIdx}}-{{optionIdx}}"></canvas>
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="layer-tags">
+    <view wx:for="{{layerCount}}" class="layer-tag {{currentLayer===index?'option-selected':''}}"></view>
+  </view>
+<!--  <van-button class="commit" custom-class="commit" block bind:tap="commit">提交</van-button>-->
+  <view class="commit {{highlight==='commit'?'commit-active':''}}" hover-class="commit-active" bind:tap="commit">提交</view>
+</view>

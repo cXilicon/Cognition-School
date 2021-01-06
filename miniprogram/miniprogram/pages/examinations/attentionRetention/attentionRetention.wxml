@@ -1,0 +1,93 @@
+<!--  
+      作者：张帅
+      完成日期：2020/11/1
+      attentionTest-3.wxml
+-->
+<van-popup show="{{ruleState}}" position="bottom"
+           round close-on-click-overlay="{{false}}">
+  <view class="popup-content">
+    <view class="exam-rule-title">
+      测试规则
+    </view>
+    <view>
+      规定时间内，找出所有相同大写字母和小写字母的组合
+    </view>
+    <view class="exam-control">
+      <van-button plain block type="primary" bind:tap="viewDemo">查看演示</van-button>
+      <view style="width: 20rpx"></view>
+      <van-button plain block type="primary" bind:tap="testStart">开始测试</van-button>
+    </view>
+  </view>
+</van-popup>
+
+<van-overlay show="{{startCountDownState}}" custom-style="background-color: transparent">
+  <view class="wrapper">
+    <view class="countdown">{{startCountDown}}</view>
+  </view>
+</van-overlay>
+
+<van-overlay show="{{demoState}}" custom-style="background-color: transparent">
+</van-overlay>
+
+<van-popup show="{{againState}}" position="bottom"
+           round close-on-click-overlay="{{false}}">
+  <view class="popup-content">
+    <view class="settlement-info">
+      <view>
+        <text>等级</text>
+        <text>{{lastScore}}</text>
+      </view>
+      <view>
+        <text>得分</text>
+        <text>{{lastTimeCount}}</text>
+      </view>
+    </view>
+    <view class="exam-control">
+      <van-button plain block type="primary" bind:tap="testStart">再来一次</van-button>
+      <view style="width: 20rpx"></view>
+      <van-button plain block type="primary" bind:tap="exitExamination">退出测试</van-button>
+    </view>
+  </view>
+</van-popup>
+
+<van-notify id="van-notify" />
+
+<van-toast id="van-toast"/>
+<van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="注意力保持"
+               bind:click-left="exitExamination" 
+               border="{{false}}"/>
+  <van-nav-bar wx:else title="注意力保持" border="{{false}}"/>
+<view class="container">
+   
+     <view class="header" >
+        <van-image class="background-image" height="100%" width="100%" fit="cover"
+               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/schulte_back.png">
+        </van-image>
+        <button bindtap="testSubmit" class="{{btnShow}}" disabled="{{dis}}" id="but">
+          <view class="btn-num">提交</view>
+          <view class="btn-bottom"></view>
+        </button>
+      </view>
+   
+      <view class="progress-container">
+        <view class="progress">
+            <view class="{{timershow}}" style="width: {{percent}}%;"></view>
+            <van-image class="progress-arrow" style="left: {{percent}}%;" height="100%" width="100%"
+                     fit="cover"
+                     src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/ufo.png"></van-image>
+        </view>
+      </view>
+    
+      <view>
+            <!--渲染4*5的表格，填入生成的随机生成的数值-->
+            <view wx:for="{{height}}" wx:for-index="bindIndex1" wx:key="bindIndex1" class="tableLine">
+                  <view  wx:for="{{width}}" wx:for-index="bindIndex2" wx:key="bindIndex2" class="{{question[bindIndex1*width+bindIndex2].style}}?{{question[bindIndex1*width+bindIndex2].style}}:numberText"  bindtap="clickNumber" data-click="{{bindIndex1*width+bindIndex2}}"> 
+                    <view class="cell-num">{{question[bindIndex1*width+bindIndex2].number}}</view>
+                      <view class="cell-bottom"></view>
+                  </view>
+            </view>
+      </view>
+
+     
+    
+</view>

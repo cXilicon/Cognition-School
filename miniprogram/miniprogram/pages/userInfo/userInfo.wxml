@@ -1,0 +1,75 @@
+<van-popup show="{{areaSelector}}" position="bottom" round>
+  <van-area title="地区"
+            area-list="{{areaList}}"
+            columns-num="{{2}}"
+            visible-item-count="5"
+            bind:confirm="selectArea"
+            data-selector="areaSelector"
+            bind:cancel="changeSelectorState"
+            value="{{userInfo.areaValue}}"
+  />
+</van-popup>
+<van-popup show="{{eduSelector}}" position="bottom" round>
+  <van-picker show-toolbar
+              title="学历"
+              columns="{{eduList}}"
+              visible-item-count="5"
+              data-selector="eduSelector"
+              bind:confirm="selectEdu"
+              bind:cancel="changeSelectorState"
+  />
+</van-popup>
+<van-popup show="{{birthSelector}}" position="bottom" round>
+  <van-datetime-picker value="{{userInfo.birthValue}}"
+                       type="date"
+                       min-date="{{minDate}}"
+                       max-date="{{maxDate}}"
+                       visible-item-count="5"
+                       data-selector="birthSelector"
+                       bind:confirm="selectBirth"
+                       bind:cancel="changeSelectorState"
+  />
+</van-popup>
+<view class="page">
+  <van-nav-bar left-arrow title="{{isSignUp?'注册':'个人信息'}}" left-text="返回" fixed="{{true}}" placeholder="{{true}}"
+               bind:click-left="backToLaunch"/>
+  <van-cell-group class="info-form">
+    <van-cell title="头像" center>
+      <van-image slot="extra"
+                 round
+                 width="120rpx"
+                 height="120rpx"
+                 custom-class="avatar"
+                 src="{{userInfo.avatarUrl}}"
+      />
+    </van-cell>
+    <van-field label-class="font-color"
+               value="{{userInfo.userName}}"
+               label="昵称"
+               input-align="right"
+               bind:change="editUserName"
+    />
+    <van-cell title="性别" center>
+      <view slot="extra">
+        <van-radio-group value="{{userInfo.gender}}" bind:change="selectGender">
+          <van-radio name="male">男</van-radio>
+          <van-radio name="female">女</van-radio>
+          <van-radio name="none">其他</van-radio>
+        </van-radio-group>
+      </view>
+    </van-cell>
+    <van-cell title="地区" value="{{userInfo.areaView}}" is-link
+              data-selector="areaSelector"
+              bind:tap="changeSelectorState"/>
+    <van-cell title="学历" value="{{userInfo.edu}}" is-link
+              data-selector="eduSelector"
+              bind:tap="changeSelectorState"/>
+    <van-cell title="出生年月" value="{{userInfo.birthView}}" is-link
+              data-selector="birthSelector"
+              bind:tap="changeSelectorState"/>
+  </van-cell-group>
+  <van-button disabled="{{posting}}" class="submit" custom-style="border-radius: 16px !important;" type="primary" block
+              bind:tap="commitData">
+    {{isSignUp ? '提交' : '修改'}}
+  </van-button>
+</view>

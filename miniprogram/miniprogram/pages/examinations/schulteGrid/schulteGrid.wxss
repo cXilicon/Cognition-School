@@ -1,0 +1,136 @@
+/**index.wxss**/
+.page {
+  background-color: #eeeeee;
+  justify-content: center;
+}
+
+.exam-controller {
+  padding: 20px;
+}
+
+.exam-rule > text:first-child {
+  display: block;
+  margin-bottom: 10px;
+  color: #aaaaaa;
+}
+
+.exam-rule {
+  margin-bottom: 10px;
+}
+
+.exam-control-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.exam-control-container > van-button {
+  flex: 1;
+}
+
+.settlement-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.settlement-info > view {
+  text-align: center;
+}
+
+.settlement-info > view > text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settlement-info > view > text:first-child {
+  color: #888888;
+}
+
+.settlement-info > view > text:last-child {
+  font-size: 24px;
+}
+
+.ready {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240rpx;
+  height: 240rpx;
+  color: #fff;
+  font-size: 96rpx;
+  border-radius: 16rpx;
+  background-color: rgba(0, 0, 0, .7) !important;
+}
+
+.exam-illus {
+  display: block;
+  height: 200rpx;
+  width: 320rpx;
+  margin: 0 auto;
+}
+
+.progress {
+  margin: 0 60rpx;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40rpx;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 116rpx;
+  width: 120rpx;
+  margin: 8rpx 10rpx;
+  border: 4rpx solid #333333;
+  border-top: none;
+  border-radius: 8rpx;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition: all .1s ease-in;
+}
+
+.cell-num {
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 4rpx solid #333333;
+  border-radius: 8rpx;
+  font-size: 48rpx;
+  transition: all .1s ease-in;
+}
+
+.cell-bottom {
+  flex: 1;
+  width: 100%;
+  background-color: #e3a92e;
+}
+
+.cell:active {
+  height: 110rpx;
+  background-color: #cccccc;
+}
+
+.cell-clicked {
+  height: 110rpx;
+  background-color: #cccccc;
+}
+
+.highlight {
+  background-color: #f0cf1a;
+}

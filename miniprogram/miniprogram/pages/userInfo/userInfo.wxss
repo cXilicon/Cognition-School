@@ -1,0 +1,41 @@
+.page {
+  background-color: #eeeeee;
+}
+
+.header {
+  height: 240rpx;
+  margin: 32rpx 32rpx 0 32rpx;
+  border-radius: 16px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.info-form {
+  display: flex;
+  flex-direction: column;
+  margin: 32rpx;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+van-cell van-radio-group {
+  display: flex;
+  flex-direction: row;
+}
+
+van-cell van-radio-group van-radio {
+  margin-left: 20rpx;
+}
+
+.avatar {
+  display: block !important;
+}
+
+.submit {
+  margin: auto 32rpx 32rpx;
+  border-radius: 16px !important;
+}
+
+.font-color {
+  color: #333333 !important;
+}

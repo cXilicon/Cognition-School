@@ -1,0 +1,56 @@
+/* pages/index/index.wxss */
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding-bottom: 120rpx;
+}
+
+.custom-tab-bar:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,0.2);
+  margin: -30rpx;
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.page > van-image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.logo {
+  margin-top: 30%;
+  margin-bottom: auto;
+  color: #ffffff;
+  font-size: 96rpx;
+  font-weight: bold;
+  letter-spacing: 8rpx;
+  font-family: 幼圆, sans-serif;
+}
+
+.exam-button{
+  width: 360rpx !important;
+  height: 120rpx !important;
+  margin-bottom: 80rpx;
+}
+
+.exam-button-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42rpx;
+}
+
+.exam-button-content > text{
+  margin-left: 20rpx;
+}

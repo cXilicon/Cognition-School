@@ -1,0 +1,73 @@
+<van-popup show="{{examState==='START'}}" position="bottom" round
+           custom-class="exam-controller">
+  <view class="exam-rule">
+    <text>测试规则</text>
+    <text>在规定的时间内记忆短暂出现的图形组合</text>
+  </view>
+  <view class="exam-control-container">
+    <van-button plain block type="primary" bind:tap="viewDemo">查看演示</van-button>
+    <view style="width: 10px"></view>
+    <van-button plain block type="primary" bind:tap="startExam">开始测试</van-button>
+  </view>
+</van-popup>
+
+<van-popup show="{{examState==='AGAIN'}}" position="bottom" round
+           custom-class="exam-controller">
+  <view class="settlement-info">
+    <view>
+      <text>得分</text>
+      <text>{{lastScore}}</text>
+    </view>
+    <view>
+      <text>通过关卡数</text>
+      <text>{{lastCheckPoint}}</text>
+    </view>
+  </view>
+  <view class="exam-control-container">
+    <van-button plain block type="primary" bind:tap="startExam">再来一次</van-button>
+    <view style="width: 10px"></view>
+    <van-button plain block type="primary" bind:tap="exitExamination">退出测试</van-button>
+  </view>
+</van-popup>
+
+<van-toast id="van-toast"/>
+<van-popup show="{{readyState}}" z-index="1" overlay-style="background: transparent;" custom-class="ready">{{readyTime}}</van-popup>
+<van-overlay show="{{examState==='DEMO'}}" z-index="2000" custom-style="background-color: transparent;"
+             bind:click="stopDemo"/>
+<view class="page">
+  <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="图形记忆"
+               bind:click-left="exitExamination"
+               border="{{false}}" custom-style="background-color: transparent;"/>
+  <van-nav-bar wx:else title="图形记忆" custom-style="background-color: transparent;" border="{{false}}"/>
+  <view class="header">
+    <view class="info-background-container">
+      <van-image class="info-background" height="100%" width="100%" fit="widthFix" load="initBackground"
+                 style="transform: translate(0, {{(1-currentCheckpoint/8)  * (bgHeightRate-100)}}%);"
+                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/userInfo_back.png"/>
+    </view>
+    <view class="info">
+      <view>关卡: {{currentCheckpoint + 1}}</view>
+      <view class="life-tags">
+        <block wx:for="{{3}}" wx:key="*this">
+          <iconfont name="{{currentChance>=index+1?'heart-fill':'heart'}}" size="56"/>
+        </block>
+      </view>
+      <view>剩余方块: {{checkPoints[currentCheckpoint][1] - correctCount}}</view>
+    </view>
+    <view class="life-image-container">
+      <van-image wx:for="{{4}}" wx:key="*this" style="{{index === currentChance ? 'width: 100%; height: 100%;': ''}}"
+                 class="life-image" width="120%" height="120%" fit="cover"
+                 src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/graphic_memory_life_{{index}}.png"/>
+    </view>
+  </view>
+  <custom-progress custom-class="progress" percent="{{currentTime * 100 / maxTime}}"/>
+  <view class="main">
+    <view wx:for="{{examMatrix}}" wx:for-item="rowItem" wx:for-index="rowIdx" class="row" wx:key="rowIdx">
+      <view wx:for="{{rowItem}}" wx:for-item="cellItem" wx:for-index="cellIdx" class="cell" wx:key="cellItem"
+            data-x="{{rowIdx}}" data-y="{{cellIdx}}" bind:tap="activeCell">
+        <view class="cell-content {{cellItem.isActive?(cellItem.isTarget?'target-cell':'other-cell'):''}}">
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

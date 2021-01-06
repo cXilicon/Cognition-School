@@ -1,0 +1,249 @@
+.popup-content {
+  padding: 40rpx;
+}
+
+.exam-rule-title {
+  margin-bottom: 10rpx;
+  color: #aaaaaa;
+  font-size: 28rpx;
+}
+
+.exam-control {
+  display: flex;
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+.exam-control van-button{
+  flex: 1;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+  font-size: 96rpx;
+  color: #ffffff;
+  background-color: #000000;
+  opacity: 0.7;
+}
+
+
+/*标题*/
+.title{
+  font-size: 50rpx;
+  margin: 30rpx;
+}
+/*题目*/
+.question{
+  margin: 50rpx;
+  font-size: 100rpx;
+  font-weight: 800;
+}
+.container {
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} 
+/*表格内每一格*/
+.numberText{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100rpx;
+  width: 110rpx;
+  margin: 8rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 40rpx;
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all .1s ease-in;
+}
+
+.popup-content {
+  padding: 40rpx;
+}
+
+.exam-rule-title {
+  margin-bottom: 10rpx;
+  color: #aaaaaa;
+  font-size: 16px;
+}
+
+.exam-control {
+  display: flex;
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+.exam-control van-button {
+  flex: 1;
+}
+
+.settlement-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.settlement-info > view {
+  text-align: center;
+}
+
+.settlement-info > view > text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settlement-info > view > text:first-child {
+  font-size: 16px;
+  color: #888888;
+}
+
+.settlement-info > view > text:last-child {
+  font-size: 24px;
+}
+
+.last-score {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 36px;
+}
+
+.cell-num {
+  height: 85rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 2px solid #333333;
+  border-top: none;
+
+  border-radius: 4px;
+  transition: all .1s ease-in;
+}
+
+.cell-bottom {
+  flex: 1;
+  width: 100%;
+  background-color: #e3a92e;
+}
+
+.numberText-active{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 40rpx;
+  text-align: center;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  margin: 18rpx 8rpx 8rpx;
+  height: 95rpx;
+  background-color: #cccccc;
+}
+
+.progress-container{
+  width: 100%;
+  margin: 20rpx 0;
+}
+
+.progress {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  margin: 0 10rpx;
+}
+
+.progress:after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38rpx;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  z-index: -1;
+}
+
+.timer{
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: wheat;
+}
+
+.timer-tips {
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #f0cf1a;
+}
+
+.progress-arrow {
+  position: absolute;
+  left: 80%;
+  transform: translate(-50%);
+  height: 80rpx;
+  width: 10%;
+}
+
+.numberText-tips{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100rpx;
+  width: 110rpx;
+  margin: 8rpx 8rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 40rpx;
+  text-align: center;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  background-color: #f0cf1a;
+}
+
+/*表格-行*/
+.tableLine{
+  flex-direction: row;
+  height: 100rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  height: 240rpx;
+}
+
+.background-image {
+  height: 100%;
+  width: 360rpx;
+}

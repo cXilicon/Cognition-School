@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/launch/launch",
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/catalogue/catalogue",
+    "pages/settlement/settlement",
+    "pages/examinations/numberMatching/numberMatching",
+    "pages/examinations/attentionRetention/attentionRetention",
+    "pages/examinations/expressionAttention/expressionAttention",
+    "pages/examinations/schulteGrid/schulteGrid",
+    "pages/examinations/graphicMemory/graphicMemory",
+    "pages/training/training",
+    "pages/userInfo/userInfo",
+    "pages/examinations/matrixProblem/matrixProblem",
+    "pages/examinations/numberMemory/numberMemory"
+  ],
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/training/training"
+      },
+      {
+        "pagePath": "pages/index/index"
+      },
+      {
+        "pagePath": "pages/mine/mine"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "认知学堂",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "ec-canvas": "components/ec-canvas/ec-canvas",
+    "iconfont": "components/iconfont/iconfont",
+    "custom-tab-bar": "components/custom-tab-bar/custom-tab-bar",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-notify": "@vant/weapp/notify/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-area": "@vant/weapp/area/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "custom-progress": "components/custom-progress/custom-progress"
+  }
+}

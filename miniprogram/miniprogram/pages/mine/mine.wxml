@@ -1,0 +1,82 @@
+<!--pages/mine/mine.wxml-->
+<van-popup show="{{ examinationDetailShow }}" custom-class="examination-detail" bind:close="closeExamDetail">
+  <view class="report-title">PASS 测试报告</view>
+  <view class="user-information">
+    <view>姓名: {{userInfo.nickName}}</view>
+    <view>年龄: {{userInfo.age}}</view>
+    <view>总分: {{detail.total}} / 80</view>
+  </view>
+  <view class="user-score">
+    <view class="user-score-item">
+      <view class="score-item-icon" style="background-color: #ec524b;"></view>
+      <view class="score-item-label">计划</view>
+      <view class="score-item-score">{{detail.plan}}/20</view>
+    </view>
+    <view class="user-score-item">
+      <view class="score-item-icon" style="background-color: #f5b461;"></view>
+      <view class="score-item-label">注意</view>
+      <view class="score-item-score">{{detail.attention}}/20</view>
+    </view>
+    <view class="user-score-item">
+      <view class="score-item-icon" style="background-color: #f3eac2;"></view>
+      <view class="score-item-label">同时性加工</view>
+      <view class="score-item-score">{{detail.simultaneous}}/20</view>
+    </view>
+    <view class="user-score-item">
+      <view class="score-item-icon" style="background-color: #9ad3bc;"></view>
+      <view class="score-item-label">继时性加工</view>
+      <view class="score-item-score">{{detail.successive}}/20</view>
+    </view>
+  </view>
+  <view class="finish-date">
+    <text>{{detail.finishDate}}</text>
+  </view>
+</van-popup>
+
+<view class="page">
+  <scroll-view class="main" scroll-y="{{true}}">
+    <van-image width="100%" height="480rpx" fit="cover" custom-class="header"
+               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/mine_back_1.jpg">
+    </van-image>
+    <view class="account-info">
+      <text class="account-title">个人信息</text>
+      <view class="account-content" hover-class="account-content-hover" bind:tap="editUserInfo">
+        <van-image round
+                   width="120rpx"
+                   height="120rpx"
+                   custom-class="account-avatar"
+                   src="{{userInfo.avatarUrl}}"
+        />
+        <view class="account-description">
+          <text class="account-id">{{userInfo.nickName}}</text>
+          <text
+                  class="account-tags"
+                  space="false"
+          >{{userInfo.tags}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="card">
+      <text class="card-title">最近测试</text>
+      <ec-canvas wx:if="{{history.length!==0}}" class="data-chart" ec="{{ ecBar }}"></ec-canvas>
+      <view wx:else class="chart-placeholder">未进行过测试</view>
+    </view>
+    <view class="card">
+      <text class="card-title">历史测试</text>
+      <view class="history-form">
+        <view class="history-form-row">
+          <view class="history-form-cell history-form-cell-time">测试时间</view>
+          <view class="history-form-cell history-form-cell-score">成绩</view>
+        </view>
+        <block wx:for="{{history}}">
+          <view class="history-form-row" data-exam="{{item}}" hover-class="history-form-row-tap"
+                bind:tap="showExaminationDetail">
+            <view class="history-form-cell history-form-cell-time">{{item.date}}</view>
+            <view class="history-form-cell history-form-cell-score">{{item.totalScore}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+  <custom-tab-bar custom-class="custom-tab-bar"></custom-tab-bar>
+</view>

@@ -1,0 +1,334 @@
+
+
+
+.btn{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:110rpx;
+  width:180rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  
+  margin-left:160rpx; 
+ 
+}
+
+
+.btn-num {
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180rpx;
+  height:90rpx;
+  font-weight: 800;
+  border: 2px solid #333333;
+  border-top: none;
+  border-radius: 4px;
+  transition: all .1s ease-in;
+}
+
+.btn-bottom {
+  flex: 1;
+  width: 180rpx;
+  background-color: #e3a92e;
+}
+
+.btn-tips{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:110rpx;
+  width:180rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  
+  text-align: center;
+  background-color: #e3a92e!important;
+  overflow: hidden;
+  transition: all .1s ease-in;
+  
+  margin-left:160rpx; 
+ 
+}
+
+button[disabled]{
+  color:#000!important;
+  
+}
+
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+} 
+/*标题*/
+.title{
+  font-size: 50rpx;
+  margin: 30rpx;
+}
+/*题目*/
+.question{
+  margin: 50rpx;
+  font-size: 100rpx;
+  font-weight: 800;
+}
+/*表格内每一格*/
+.numberText{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 65rpx;
+  width: 90rpx;
+  margin: 3rpx 3rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 36rpx;
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  
+  
+ 
+}
+
+.cell-num {
+  height: 55rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 800;
+  border: 2px solid #333333;
+  border-top: none;
+
+  border-radius: 4px;
+ 
+}
+
+.cell-bottom {
+  flex: 1;
+  width: 100%;
+  background-color: #e3a92e;
+}
+
+
+
+.numberText-active{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60rpx;
+  width: 90rpx;
+  margin: 3rpx 3rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 36rpx;
+  text-align: center;
+  overflow: hidden;
+  margin-top: 5rpx;
+  background-color: #cccccc;
+}
+.numberText-tips{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 65rpx;
+  width: 90rpx;
+  margin: 3rpx 3rpx;
+  border: 2px solid #333333;
+  border-radius: 4px;
+  font-size: 36rpx;
+  text-align: center;
+  background-color: #ffffff;
+  overflow: hidden;
+  background-color: #f0cf1a;
+}
+
+/*表格-行*/
+.tableLine{
+  height: 70rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.header{
+
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content:space-between;
+  align-items: center;
+}
+
+
+.timer{
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: wheat;
+}
+
+.timer-tips {
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #f0cf1a;
+}
+
+
+.popup-content {
+  padding: 40rpx;
+}
+
+.exam-rule-title {
+  margin-bottom: 10rpx;
+  color: #aaaaaa;
+  font-size: 28rpx;
+}
+
+.exam-control {
+  display: flex;
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+.exam-control van-button{
+  flex: 1;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+  font-size: 96rpx;
+  color: #ffffff;
+  background-color: #000000;
+  opacity: 0.7;
+}
+
+
+.background-image {
+  height: 220rpx;
+  width: 360rpx;
+}
+.progress-container{
+  width: 90%;
+}
+
+.progress {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  margin: 0 10rpx;
+}
+
+.progress:after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38rpx;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  z-index: -1;
+}
+
+.progress-content {
+  height: 30rpx;
+  margin: 10rpx 0;
+  border: 2px solid #333333;
+  border-radius: 10rpx;
+  background-color: wheat;
+}
+
+.progress-arrow {
+  position: absolute;
+  left: 80%;
+  transform: translate(-50%);
+  height: 80rpx;
+  width: 10%;
+}
+
+
+.popup-content {
+  padding: 40rpx;
+}
+
+.exam-rule-title {
+  margin-bottom: 10rpx;
+  color: #aaaaaa;
+  font-size: 16px;
+}
+
+.exam-control {
+  display: flex;
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+.exam-control van-button {
+  flex: 1;
+}
+
+.settlement-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.settlement-info > view {
+  text-align: center;
+}
+
+.settlement-info > view > text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.settlement-info > view > text:first-child {
+  font-size: 16px;
+  color: #888888;
+}
+
+.settlement-info > view > text:last-child {
+  font-size: 24px;
+}
+
+.last-score {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 36px;
+}
