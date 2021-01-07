@@ -1,7 +1,7 @@
 <view class="page">
-  <van-nav-bar wx:if="{{mode}}" title="成绩单" fixed="{{true}}" placeholder="{{true}}"/>
+  <van-nav-bar wx:if="{{mode}}" title="成绩单" fixed="{{true}}" placeholder="{{true}}" />
   <van-nav-bar wx:else="{{mode}}" title="成绩单" fixed="{{true}}" placeholder="{{true}}" left-arrow left-text="返回"
-               bind:click-left="switchMode"/>
+    bind:click-left="switchMode" />
 
   <view class="container">
     <view wx:if="{{mode}}" class="main">
@@ -13,7 +13,7 @@
           <view class="user-information">得分: {{totalScore}} / 80</view>
         </view>
         <van-image class="settlement-illus" height="100%" width="100%" fit="cover"
-                   src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/settlement_illus.png"/>
+          src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/settlement_illus.png" />
       </view>
       <ec-canvas class="data-chart" ec="{{ ecBar }}"></ec-canvas>
       <view class="addition-info">
@@ -22,7 +22,7 @@
       </view>
     </view>
     <scroll-view wx:else class="main" enable-flex="{{true}}" scroll-y="{{true}}" enhanced="{{true}}"
-                 show-scrollbar="{{false}}">
+      show-scrollbar="{{false}}">
       <view class="report-title">PASS 分析建议</view>
       <view>根据测试结果，你的能力发展情况如下</view>
       <view class="ability-title">1. 计划能力：{{plan}}</view>
@@ -80,7 +80,7 @@
       <view class="ability-analysis">
         <view>继时性加工需要我们对文本信息有一定的建模能力以及语言和逻辑信息的提取能力。左脑优势的个体表现为继时性加工的风格。</view>
         <block wx:if="{{successive >= 10}}">
-          <view>计划能力强的人往往有一个很清晰的目标，对自己未来一段时间的要完成的事件有着明确的规划和认知。这样的人做事情有条不紊，生活学习都很有规律。</view>
+          <view>继时性加工需要我们对文本信息有一定的建模能力以及语言和逻辑信息的提取能力。左脑优势的个体表现为继时性加工的风格。</view>
         </block>
         <block wx:else>
           <view>对于继时性加工相对欠缺的人，我们给出一些建议：</view>
@@ -91,5 +91,5 @@
       </view>
     </scroll-view>
   </view>
-  <custom-tab-bar/>
+  <custom-tab-bar />
 </view>
