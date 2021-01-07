@@ -118,9 +118,7 @@ Page({
                                             score = "C"
                                         } else if (that.data.right === 2) {
                                             score = "D"
-                                        } else if(that.data.right === 1){
-                                            score = "E"
-                                        } else {
+                                        }  else {
                                             score = "F"
                                         }
                                         if (that.data.entrance === 'exam') {

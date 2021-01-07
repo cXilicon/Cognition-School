@@ -283,7 +283,7 @@ Page({
                         else if (alltime < 100)
                             score = "D"
                         else
-                            score = "E"
+                            score = "F"
                         if (that.data.entrance === 'exam') {
                             let pages = getCurrentPages();
                             let prevPage = pages[pages.length - 2];

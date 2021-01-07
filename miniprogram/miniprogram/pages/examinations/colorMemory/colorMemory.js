@@ -196,8 +196,6 @@ Page({
                             score = "C"
                         } else if (that.data.right >=3) {
                             score = "D"
-                        } else if(that.data.right >=1){
-                            score = "E"
                         } else {
                             score = "F"
                         }
