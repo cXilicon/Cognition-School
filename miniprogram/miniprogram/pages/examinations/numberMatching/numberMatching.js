@@ -3,15 +3,35 @@
 *   完成日期：2020/11/1
 *   attentionTest-3.js
 */
-
+import util from "../../../utils/util";
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 //获取应用实例
 const app = getApp();
 //计时器初始化文件
 let init;
+
+const START = "START"
+const DEMO = 'DEMO'
+const EXECUTE = 'EXECUTE'
+const AGAIN = 'AGAIN'
+
+
+let subOp = null
+let demoOp = {
+    steps: null,
+    controller: null,
+}
+
+
+
 Page({
     data: {
+
+        examState: "",
+        canInteraction: false,
+
+
         //页面显示参数
         timershow: "timer",
         showTable: true,
@@ -51,6 +71,10 @@ Page({
             console.log(data)
         })
 
+        this.setData({
+            examState: START,
+        })
+
 
     },
     initGame: function () { // 游戏初始化
@@ -78,6 +102,7 @@ Page({
     },
     onUnload() { // 页面退出 - 清空计时器
         clearInterval(init);
+        this.stopDemo()
     },
 
 
@@ -201,13 +226,14 @@ Page({
             startCountDownState: true
         })
         var that = this;
-        const countdown = setInterval(() => {
+        subOp = setInterval(() => {
             if (that.data.startCountDown - 1) {
                 that.setData({
                     startCountDown: that.data.startCountDown - 1,
                 });
             } else {
                 that.setData({
+                    examState: EXECUTE,
                     startCountDownState: false,
                     question: allnumber,
                     showTable: true,
@@ -217,13 +243,30 @@ Page({
                 });
                 clearInterval(init);
                 init = setInterval(that.timer, 10);
-                clearInterval(countdown);
+                clearInterval( subOp);
 
             }
         }, 1000);
         //开始计时
 
     },
+
+
+    stopDemo: function () {
+        clearTimeout(demoOp.controller)
+        clearTimeout(init)
+        clearTimeout(subOp)
+        clearInterval(subOp)
+
+        this.setData({ruleState: true, startCountDownState: false,  demoShow: false,})
+        Toast.clear()
+        this.setData({
+            examState: START
+        })
+      
+    },
+
+
 
 //点击数字
     clickNumber: function (e) {
@@ -370,74 +413,81 @@ Page({
     // 查看演示
     viewDemo: function () {
         let that = this
+        this.initGame();
         this.setData({
             ruleState: false,
             fin: [1, 1, 1, 1, 1, 1, 1],
             demoShow: true,
         })
-        let step0 = {
+        
 
+        clearTimeout(subOp)
+        clearInterval(subOp)
+        this.setData({
+            examState: DEMO,
+        })
+    
+        demoOp.steps = [{
             func: () => {
                 var that = this;
-                Toast('等待提示结束后开始测试');
-                setTimeout(() => {
-                    that.setData({
-                        ruleState: false,
-                        startCountDown: 3,
-                        startCountDownState: true,
-
-                    })
-                    var tempNumber = [1, 2, 1, 3, 4, 1, 1, 3, 2, 4, 5, 3, 2, 5, 1, 7, 5, 3, 5, 1];
-                    var allnumber = [];
-                    for (var i = 0; i < 4; i++) {
-                        var line = [];
-                        for (var j = 0; j < 5; j++) {
-                            var t = {
-                                number: tempNumber[i * 5 + j],
-                                style: "numberText"
-                            }
-
-                            line.push(t);
-                        }
-                        allnumber.push(line);
-                    }
-
-
-                    const countdown = setInterval(() => {
-                        if (that.data.startCountDown - 1) {
-                            that.setData({
-                                startCountDown: that.data.startCountDown - 1,
-                            });
-                        } else {
-                            that.setData({
-                                startCountDownState: false,
-                                question: allnumber,
-                                showTable: true,
-                                percent: 100,
-
-                                second: 0,
-                                millisecond: 0,
-                                countTime: 90,
-                            });
-                            clearInterval(init);
-                            init = setInterval(that.timer, 10);
-                            clearInterval(countdown);
-
-
-                        }
-                    }, 1000);
-                    //开始计时
-                }, 2000)
+                Toast('等待倒计时结束后开始测试');
+            
             },
-            playtime: 5000
-        }
-        let step1 = {
+            playtime: 2000
+        }, {
+            func: () => {
+                that.setData({
+                    ruleState: false,
+                    startCountDown: 3,
+                    startCountDownState: true,
+
+                })
+                var tempNumber = [1, 2, 1, 3, 4, 1, 1, 3, 2, 4, 5, 3, 2, 5, 1, 7, 5, 3, 5, 1];
+                var allnumber = [];
+                for (var i = 0; i < 4; i++) {
+                    var line = [];
+                    for (var j = 0; j < 5; j++) {
+                        var t = {
+                            number: tempNumber[i * 5 + j],
+                            style: "numberText"
+                        }
+
+                        line.push(t);
+                    }
+                    allnumber.push(line);
+                }
+
+                subOp = setInterval(() => {
+                    if (that.data.startCountDown - 1) {
+                        that.setData({
+                            startCountDown: that.data.startCountDown - 1,
+                        });
+                    } else {
+                        that.setData({
+                            startCountDownState: false,
+                            question: allnumber,
+                            showTable: true,
+                            percent: 100,
+
+                            second: 0,
+                            millisecond: 0,
+                            countTime: 90,
+                        });
+                        clearInterval(init);
+                        init = setInterval(that.timer, 10);
+                        clearInterval(subOp);
+                    }
+                }, 1000);
+
+
+            },playtime:3500
+
+        },{
             func: () => {
                 Toast('点击一个含有数字的方块');
             },
             playtime: 2000
-        }
-        let step2 = {
+        }, {
             func: () => {
                 that.setData({
                     [`question[0][2].style`]: "numberText-tips",
@@ -451,22 +501,33 @@ Page({
                 )
             },
             playtime: 800
-        }
-        let step3 = {
+        }, {
+            func: () => {
+                that.setData({
+                    [`question[0][2].style`]: "numberText-tips",
+                })
+                setTimeout(() => {
+                        that.setData({
+                            [`question[0][2].style`]: "numberText",
+                        })
+                    }
+                    , 400
+                )
+            },
+            playtime: 800
+        },{
             func: () => {
                 that.setData({
                     [`question[0][2].style`]: "numberText-active",
                 })
             },
             playtime: 1000
-        }
-        let step4 = {
+        }, {
             func: () => {
                 Toast('点击一行中数字相同的方块');
             },
             playtime: 2000
-        }
-        let step5 = {
+        }, {
             func: () => {
                 that.setData({
                     [`question[0][0].style`]: "numberText-tips",
@@ -479,37 +540,44 @@ Page({
                 )
             },
             playtime: 800
-        }
-        let step6 = {
+        }, {
+            func: () => {
+                that.setData({
+                    [`question[0][0].style`]: "numberText-tips",
+                })
+                setTimeout(() => {
+                        that.setData({
+                            [`question[0][0].style`]: "numberText",
+                        })
+                    }, 400
+                )
+            },
+            playtime: 800
+        }, {
             func: () => {
                 that.setData({
                     [`question[0][0].style`]: "numberText-active",
                 })
             },
             playtime: 1000
-        }
-        let step7 = {
+        }, {
             func: () => {
                 Toast('当你选择的一个不想选中的方块');
             },
             playtime: 2000
-        }
-        let step8 = {
+        },{
             func: () => {
                 that.setData({
                     [`question[3][0].style`]: "numberText-active",
                 })
             },
             playtime: 1000
-        }
-
-        let step9 = {
+        } , {
             func: () => {
                 Toast('再次点击取消选中');
             },
             playtime: 2000
-        }
-        let step10 = {
+        }, {
             func: () => {
                 that.setData({
                     [`question[3][0].style`]: "numberText-tips",
@@ -522,17 +590,19 @@ Page({
                 )
             },
             playtime: 800
-        }
-
-        let step12 = {
+        },{
+            func: () => {
+                that.setData({
+                    [`question[3][0].style`]: "numberText",
+                })
+            },
+            playtime: 1000
+        } ,{
             func: () => {
                 Toast('选出每行中数字相同的两个方块过关');
             },
             playtime: 2000
-        }
-
-
-        let step13 = {
+        }, {
             func: () => {
 
                 that.setData({
@@ -542,10 +612,7 @@ Page({
             },
 
             playtime: 800
-        }
-
-
-        let step14 = {
+        },{
             func: () => {
 
                 that.setData({
@@ -555,10 +622,7 @@ Page({
             },
 
             playtime: 1000
-        }
-
-
-        let step15 = {
+        },{
             func: () => {
 
                 that.setData({
@@ -568,15 +632,12 @@ Page({
             },
 
             playtime: 1000
-        }
-        let step16 = {
+        },{
             func: () => {
                 Toast('你必须在规定的时间内完成测试');
             },
             playtime: 2000
-        }
-
-        let step17 = {
+        },{
             func: () => {
                 that.setData({
                     timershow: "timer-tips",
@@ -589,18 +650,26 @@ Page({
                 )
             },
             playtime: 800
-        }
-
-        let step18 = {
+        },{
+            func: () => {
+                that.setData({
+                    timershow: "timer-tips",
+                })
+                setTimeout(() => {
+                        that.setData({
+                            timershow: "timer",
+                        })
+                    }, 400
+                )
+            },
+            playtime: 800
+        },{
             func: () => {
                 Toast('当时间归0你本次测试将不得分');
 
             },
             playtime: 3000
-        }
-
-
-        let step19 = {
+        },{
             func: () => {
                 Toast.success({
                     message: '演示完成！',
@@ -612,28 +681,8 @@ Page({
                 });
             },
             playtime: 2000
-        }
-
-
-        let step11 = {
-            func: () => {
-                that.setData({
-                    [`question[3][0].style`]: "numberText",
-                })
-            },
-            playtime: 1000
-        }
-
-
-        let stepIdx = 0
-        let steps = [step0, step1, step2, step2, step3, step4, step5, step5, step6, step7, step8, step9, step10, step11, step12, step13, step14, step15, step16, step17, step17, step18, step19]
-        setTimeout(function play() {
-            if (stepIdx < steps.length) {
-                steps[stepIdx].func()
-                setTimeout(play, steps[stepIdx++].playtime);
-            }
-        }, 0);
-
+        },]
+        util.syncOperation(demoOp)
 
     },
 

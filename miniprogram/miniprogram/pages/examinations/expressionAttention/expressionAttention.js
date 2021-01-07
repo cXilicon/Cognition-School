@@ -1,12 +1,33 @@
 //index.js
 //获取应用实例
 const app = getApp()
+
+import util from "../../../utils/util";
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 
 let init;
+const START = "START"
+const DEMO = 'DEMO'
+const EXECUTE = 'EXECUTE'
+const AGAIN = 'AGAIN'
+
+let timer = null
+let subOp = null
+let demoOp = {
+    steps: null,
+    controller: null,
+}
+
+
 Page({
     data: {
+
+        examState: "",
+        canInteraction: false,
+
+
+
         entrance:'',
         lastScore: '',
         lastTimeCount: '',
@@ -46,8 +67,33 @@ Page({
     },
 
     onUnload() { // 页面退出 - 清空计时器
-        clearInterval(init);
+          clearInterval(init);
+        this.stopDemo()
     },
+
+
+    stopDemo: function () {
+        clearTimeout(demoOp.controller)
+        clearTimeout(init)
+        clearTimeout(subOp)
+        clearInterval(subOp)
+        clearInterval(timer)
+
+        this.setData({ruleState: true, startCountDownState: false,  demoShow: false})
+        this.setData({
+            timeNow:0,
+             percent:0,
+             show: false,
+             showq: false
+         })
+        Toast.clear()
+        this.setData({
+            examState: START
+        })
+      
+    },
+
+
 
 
     start: function () {
@@ -159,6 +205,11 @@ Page({
             })
             console.log(data)
         })
+
+        this.setData({
+            examState: START,
+        })
+
      
 
     },
@@ -245,13 +296,20 @@ Page({
         let choosetemp = [];
         let qindex = Math.floor(Math.random() * 2);
         if (qindex === 0) {
+          
             for (let i = 0; i < 5;) {
                 let num = Math.floor(Math.random() * 8);
+                while( num === texttemp[0] || num === colortemp[0])
+                {
+                    num = Math.floor(Math.random() * 8);
+                }
                 let f = 0;
                 for (let j = 0; j < choosetemp.length; j++) {
-                    if (choosetemp[j].number === num || num === texttemp[0] || num === colortemp[0]) {
+                   
+                    if (choosetemp[j].number === num) {
                         f = 1;
                         break;
+                  
                     }
                 }
                 if (f === 0) {
@@ -260,9 +318,11 @@ Page({
                         style: "item"
                     }
                     choosetemp.push(t);
+                 
                     i++;
                 }
             }
+           
             let key1 = {
                 number: texttemp[0],
                 style: "item"
@@ -279,15 +339,20 @@ Page({
             }
             choosetemp[c] = key1;
             choosetemp[d] = key2;
+        
             this.setData({
                 ans: texttemp[0],
             });
         } else if (qindex === 1) {
             for (let i = 0; i < 5;) {
                 let num = Math.floor(Math.random() * 8);
+                while( num === texttemp[0] || num === colortemp[0])
+                {
+                    num = Math.floor(Math.random() * 8);
+                }
                 let f = 0;
                 for (let j = 0; j < choosetemp.length; j++) {
-                    if (choosetemp[j].number === num || num === texttemp[0] || num === colortemp[0]) {
+                    if (choosetemp[j].number === num ) {
                         f = 1;
                         break;
                     }
@@ -298,9 +363,11 @@ Page({
                         style: "item"
                     }
                     choosetemp.push(t);
+                  
                     i++;
                 }
             }
+        
             let key1 = {
                 number: texttemp[0],
                 style: "item"
@@ -317,6 +384,7 @@ Page({
             }
             choosetemp[c] = key1;
             choosetemp[d] = key2;
+      
             this.setData({
               
                 ans: colortemp[0],
@@ -336,7 +404,7 @@ Page({
                 startCountDownState: true,
            
             })
-        const countdown = setInterval(() => {
+            subOp = setInterval(() => {
             if (that.data.startCountDown - 1) {
                 that.setData({
                     startCountDown: that.data.startCountDown - 1,
@@ -351,7 +419,7 @@ Page({
                     startCountDownState:false
                 });
                 this.start();
-                clearInterval(countdown);
+                clearInterval( subOp);
 
             }
         }, 1000);
@@ -377,38 +445,43 @@ Page({
             demoShow:true
         })
 
-        let step0 = {
+        clearTimeout(subOp)
+        clearInterval(subOp)
+        that.setData({
+            examState: DEMO,
+        })
+
+
+        demoOp.steps = [
+
+        {
             func: () => {
                 Toast('本测试需要你记忆看到的内容');
               
             }, playtime: 2500
-        }
-
-
-        let stepCount = {
+        }, {
             func: () => {
                 Toast('等待提示结束后开始测试');
-                setTimeout(() => {
+              timer =   setTimeout(() => {
                     that.testStart();
                 }, 2000)
             }, playtime: 5500
-        }
-
-        let step1 = {
+        }, {
             func: () => {
+                clearInterval(timer)
+                that.setData({
+                    examState: DEMO,
+                })
+        
                 Toast('例如本题中，记住' + that.data.alltext[that.data.color[0]] + "的文字" + that.data.alltext[that.data.text[0]]);
             },
             playtime: 3000
-        }
-
-        let step2 = {
+        },{
             func: () => {
               this.stop();
                 Toast('进度条表示你剩余的时间');
             }, playtime: 2000
-        }
-
-        let step3 = {
+        }, {
             func: () => {
                 that.setData({
                     timershow:"timer-tips",
@@ -419,14 +492,22 @@ Page({
                     })
                 }, 400)
             }, playtime: 800
-        }
-
-
-        let step4 = {
+        }, {
+            func: () => {
+                that.setData({
+                    timershow:"timer-tips",
+                })
+                setTimeout(() => {
+                    that.setData({
+                        timershow:"timer",
+                    })
+                }, 400)
+            }, playtime: 800
+        },{
             func: () => {
                 let targetTime = that.data.timeTarget;
                 Toast('进度条充满则开始答题');
-                setTimeout(() => {
+        timer =  setTimeout(() => {
                     that.setData({
                        timeNow:0,
                        timeTarget: targetTime + 2000,
@@ -438,19 +519,15 @@ Page({
                 }, 2000)
             
             }, playtime: 3000
-        }
-
-        let step6 = {
+        },{
          
             func: () => {
-             
+                clearInterval(timer)
                 clearInterval(init);
                 Toast('你答题的时间也是有限的');
             },
             playtime: 2000
-        }
-
-        let step7 = {
+        }, {
             func: () => {
                 that.setData({
                     timershow:"timer-tips",
@@ -462,22 +539,27 @@ Page({
                 }, 400)
              
             }, playtime: 800
-        }
-
-
-        let step8 = {
+        },{
+            func: () => {
+                that.setData({
+                    timershow:"timer-tips",
+                })
+                setTimeout(() => {
+                    that.setData({
+                        timershow:"timer",
+                    })
+                }, 400)
+             
+            }, playtime: 800
+        },{
             func: () => {
                 Toast('如果进度条充满，则你答题失败');
             }, playtime: 3500
-        }
-
-        let step9 = {
+        }, {
             func: () => {
                 Toast('如果你找到正确答案,按下按钮');
             }, playtime: 2000
-        }
-
-        let step10 = {
+        }, {
             func: () => {
                 for (let i = 0; i < 5; i++) {
                     if (that.data.choose[i].number === this.data.ans) {
@@ -495,13 +577,25 @@ Page({
                 }, 400)
             },
             playtime: 800
-        }
-
-
-
-     
-
-        let step13 = {
+        }, {
+            func: () => {
+                for (let i = 0; i < 5; i++) {
+                    if (that.data.choose[i].number === this.data.ans) {
+                        index = i;
+                        break;
+                    }
+                }
+                that.setData({
+                    [`choose[${index}].style`]: "item-tips",
+                })
+                setTimeout(() => {
+                    that.setData({
+                        [`choose[${index}].style`]: "item",
+                    })
+                }, 400)
+            },
+            playtime: 800
+        },{
             func: () => {
                 Toast.success({
                     message: '演示完成！',
@@ -512,16 +606,10 @@ Page({
                 });
             },
             playtime: 2000
-        }
+        }],
+        util.syncOperation(demoOp);
 
-        let stepIdx = 0
-        let steps = [step0, stepCount,step1, step2, step3, step3, step4, step6, step7, step7, step8, step9, step10, step10, step13]
-        setTimeout(function play() {
-            if (stepIdx < steps.length) {
-                steps[stepIdx].func()
-                setTimeout(play, steps[stepIdx++].playtime);
-            }
-        }, 0);
+   
     },
 
     click: function (e) {
@@ -580,9 +668,7 @@ Page({
                         score = "C"
                     } else if (this.data.right === 2) {
                         score = "D"
-                    } else if (this.data.right === 1){
-                        score = "E"
-                    }else{
+                    } else{
                         score = "F"
                     }
                     if (that.data.entrance === 'exam') {

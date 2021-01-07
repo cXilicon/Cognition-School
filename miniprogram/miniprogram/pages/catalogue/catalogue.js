@@ -146,7 +146,7 @@ Page({
                 Toast('该测试已完成');
             } else {
                 console.log('进入' + this.data.examinations[currentExamination].name + '测试');
-                if (false) {
+                if (true) {
                     let examId = event.currentTarget.dataset.swiperId
                     wx.navigateTo({
                         url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
