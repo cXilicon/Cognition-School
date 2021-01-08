@@ -40,7 +40,7 @@
   <van-nav-bar wx:if="{{entrance==='training'}}" left-arrow left-text="返回" title="数字回忆"
                bind:click-left="exitExamination"
                border="{{false}}" custom-style="background-color: transparent;"/>
-  <van-nav-bar wx:else title="图形记忆" custom-style="background-color: transparent;" border="{{false}}"/>
+  <van-nav-bar wx:else title="数字回忆" custom-style="background-color: transparent;" border="{{false}}"/>
   <view class="header"></view>
   <view class="main">
     <movable-area class="main-area" style="height: {{areaHeight}}rpx">
@@ -64,7 +64,7 @@
         <view class="option-layer">
           <movable-view wx:for="{{option}}" x="{{item.x}}" y="{{item.y}}" class="number-grid"
                         direction="all" id="option-{{index}}" disabled="{{!optionState && canInteraction}}"
-                        bind:touchend="moveOption" data-index="{{index}}" animation="{{true}}">
+                        bind:touchend="moveOption" data-index="{{index}}" animation="{{false}}">
             <view hidden="{{!optionState}}" class="number-block option">
               {{item.num}}
             </view>

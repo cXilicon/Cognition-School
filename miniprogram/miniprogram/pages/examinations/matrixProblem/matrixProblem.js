@@ -387,7 +387,7 @@ Page({
                     let pages = getCurrentPages();
                     let prevPage = pages[pages.length - 2];
                     prevPage.setData({
-                        ['examinations[4].score']: score
+                        ['examinations[5].score']: score
                     })
                     wx.navigateBack()
                 } else if (this.data.entrance === "training") {

@@ -4,14 +4,34 @@
 *   attentionTest-3.js
 */
 
+
+let timer = null
+let subOp = null
+let demoOp = {
+    steps: null,
+    controller: null,
+}
+
+const START = "START"
+const DEMO = 'DEMO'
+const EXECUTE = 'EXECUTE'
+const AGAIN = 'AGAIN'
+
+
 //获取应用实例
 const app = getApp()  
+import util from "../../../utils/util";
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
 
 //计时器初始化文件
 let init;
 Page({
   data:{
+    examState: "",
+    canInteraction: false,
+
+
+
     //页面显示参数
     timershow:"timer",
     selected:[],
@@ -52,8 +72,24 @@ Page({
 
   onUnload() { // 页面退出 - 清空计时器
     clearInterval(init);
+    this.stopDemo()
 },
 
+
+stopDemo: function () {
+  clearTimeout(demoOp.controller)
+  clearTimeout(init)
+  clearTimeout(subOp)
+  clearInterval(subOp)
+  clearInterval(timer)
+
+  this.setData({ruleState: true, startCountDownState: false,  demoShow: false})
+  Toast.clear()
+  this.setData({
+      examState: START
+  })
+
+},
 
 onLoad: function () { // 页面加载
     this.initGame();
@@ -65,6 +101,10 @@ onLoad: function () { // 页面加载
         })
         console.log(data)
     })
+
+    this.setData({
+      examState: START,
+  })
    
 },
 initGame: function () { // 游戏初始化
@@ -145,7 +185,7 @@ exitExamination: function () {
           startCountDownState: true
       })
       let that=this;
-      const countdown = setInterval(() => {
+      subOp = setInterval(() => {
           if (that.data.startCountDown - 1) {
               that.setData({
                   startCountDown: that.data.startCountDown - 1,
@@ -158,7 +198,7 @@ exitExamination: function () {
               });
               clearInterval(init);
               init = setInterval(that.timer, 1000);
-              clearInterval(countdown);
+              clearInterval(  subOp);
           }
       }, 1000);
         //开始计时
@@ -278,12 +318,23 @@ clickNumber:function(e){
 
   // 查看演示
  viewDemo: function () {
+
   let that = this;
   var index=this.data.selected;
   var index2=0;
 
-  
-  
+  this.setData({
+    ruleState: false,
+    dis:true,
+    demoShow:true,
+})
+clearTimeout(subOp)
+clearInterval(subOp)
+this.setData({
+    examState: DEMO,
+})
+ 
+
   for(var i=0;i<that.data.datatemp.length;i++){
     if(that.data.array.indexOf(that.data.datatemp[i].number[0])-that.data.array.indexOf(that.data.datatemp[i].number[1])!=26){
           index2=i;
@@ -292,113 +343,106 @@ clickNumber:function(e){
   }
 
 
-
-  this.setData({
-      ruleState: false,
-      dis:true,
-      demoShow:true,
-  })
-  let step0 = {
-      func: () => {
-          Toast('等待提示结束后开始测试');
-          setTimeout(() => {
-            this.testStart();
-       
-          }, 2000)
-      },
-      playtime: 6000
-  }
-  let step1 = {
-    
-      func: () => {
+  demoOp.steps = [{
+    func: () => {
+      Toast('等待提示结束后开始测试');
+      setTimeout(() => {
+        this.testStart();
+   
+      }, 2000)
+  },
+  playtime: 6000
+}, {
+  func: () => {
       
-          Toast('点击一个相同字母大小写组合的方块,例如: '+this.data.question[index[0]].number);
-      },
-      playtime: 2000
-  }
+    Toast('点击一个相同字母大小写组合的方块,例如: '+this.data.question[index[0]].number);
+},
+playtime: 2000
 
-  
-  let step2 = {
-      func: () => {
+
+},{
+  func: () => {
          
-          that.setData({
-            [`question[${index[0]}].style`] : "numberText-tips",
-          })
-          setTimeout(() => {
-                  that.setData({
-                    [`question[${index[0]}].style`] : "numberText",
-                  })
-              }
-              , 400
-          )
-      },
-      playtime: 800
-  }
-  let step3 = {
-      func: () => {
-        that.setData({
-          [`question[${index[0]}].style`] : "numberText-active",
-        })
-      },
-      playtime: 1000
-  }
-  
-  let step4 = {
-      func: () => {
-          Toast('当你选择的一个不想选中的方块');
-      },
-      playtime: 2000
-  }
-  let step5 = {
-    func: () => {
-      that.setData({
-        [`question[${index2}].style`] : "numberText-active",
-        })
-    },
-    playtime: 1000
-  }
-
-  let step6 = {
-    func: () => {
-        Toast('再次点击取消选中');
-    },
-    playtime: 2000
-}
-  let step7 = {
-    func: () => {
-      that.setData({
-        [`question[${index2}].style`] : "numberText-tips",
-      })
-        setTimeout(() => {
-          that.setData({
-            [`question[${index2}].style`] : "numberText-active",
+    that.setData({
+      [`question[${index[0]}].style`] : "numberText-tips",
+    })
+    setTimeout(() => {
+            that.setData({
+              [`question[${index[0]}].style`] : "numberText",
             })
+        }
+        , 400
+    )
+},
+playtime: 800
+}, {
+  func: () => {
+         
+    that.setData({
+      [`question[${index[0]}].style`] : "numberText-tips",
+    })
+    setTimeout(() => {
+            that.setData({
+              [`question[${index[0]}].style`] : "numberText",
+            })
+        }
+        , 400
+    )
+},
+playtime: 800
+}, {
+  func: () => {
+    that.setData({
+      [`question[${index[0]}].style`] : "numberText-active",
+    })
+  },
+  playtime: 1000
+},{
+  func: () => {
+    Toast('当你选择的一个不想选中的方块');
+},
+playtime: 2000
+}, {
+  func: () => {
+    that.setData({
+      [`question[${index2}].style`] : "numberText-active",
+      })
+  },
+  playtime: 1000
+}, {
+  func: () => {
+    Toast('再次点击取消选中');
+},
+playtime: 2000
+}, {
+    func: () => {
+        that.setData({
+            [`question[${index2}].style`]: "numberText-tips",
+        })
+        setTimeout(() => {
+                that.setData({
+                    [`question[${index2}].style`]: "numberText",
+                })
             }, 400
         )
     },
     playtime: 800
-}
-
-let step8 = {
+}, {
   func: () => {
     that.setData({
       [`question[${index2}].style`] : "numberText",
       })
   },
   playtime: 1000
-}
-
-let step9 = {
+},{
   func: () => {
-      Toast('点击所有相同字母大小写组合的方块');
-  },
-  playtime: 2000
-}
-
-let step10 = {
+    Toast('点击所有相同字母大小写组合的方块');
+},
+playtime: 2000
+} ,{
   func: () => {
    
-    let time=setInterval(() => {
+    timer=setInterval(() => {
 
         var click=index[i];
           that.setData({
@@ -406,7 +450,7 @@ let step10 = {
             })
             if(i==19)
             {
-              clearInterval(time)
+              clearInterval(timer)
               
             }
             i++;
@@ -414,15 +458,12 @@ let step10 = {
    
 },
 playtime: 10000
-}
-let step11 = {
+}, {
   func: () => {
-      Toast('选出所有符合条件的方块后提交你的答案');
-  },
-  playtime: 2000
-}
-
-let step12 = {
+    Toast('选出所有符合条件的方块后提交你的答案');
+},
+playtime: 2000
+},{
   func: () => {
     that.setData({
       btnShow : "btn-tips",
@@ -435,16 +476,25 @@ let step12 = {
       )
   },
   playtime: 800
-}
-
-let step13 = {
+},{
   func: () => {
-      Toast('你必须在规定的时间内完成测试');
+    that.setData({
+      btnShow : "btn-tips",
+    })
+      setTimeout(() => {
+        that.setData({
+          btnShow : "btn",
+          })
+          }, 400
+      )
   },
-  playtime: 2000
-}
-
-let step14 = {
+  playtime: 800
+},{
+  func: () => {
+    Toast('你必须在规定的时间内完成测试');
+},
+playtime: 2000
+},{
   func: () => {
     that.setData({
       timershow : "timer-tips",
@@ -457,18 +507,26 @@ let step14 = {
       )
   },
   playtime: 800
-}
-
-let step15 = {
+},{
   func: () => {
-      Toast('当时间归0，系统将自动提交你的选择');
-   
+    that.setData({
+      timershow : "timer-tips",
+    })
+      setTimeout(() => {
+        that.setData({
+          timershow : "timer",
+          })
+          }, 400
+      )
   },
-  playtime: 3000
-}
-
-
-let step16 = {
+  playtime: 800
+},{
+  func: () => {
+    Toast('当时间归0，系统将自动提交你的选择');
+ 
+},
+playtime: 3000
+},{
   func: () => {
     
     Toast.success({
@@ -481,17 +539,9 @@ let step16 = {
   });
   },
   playtime: 2000
-}
+},]
+util.syncOperation(demoOp)
 
-  let stepIdx = 0
-  let steps = [step0, step1, step2,step2,  step3, step4, step5, step5, step6, step7, step8,step9,step10,step11,step12,step12,step13,step14,step14,step15,step16]
-  setTimeout(function play() {
-      if (stepIdx < steps.length) {
-          steps[stepIdx].func()
-          setTimeout(play, steps[stepIdx++].playtime);
-      }
-  }, 0);
-  
 
 },
 

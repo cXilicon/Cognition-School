@@ -1,6 +1,5 @@
-import util, {shuffle} from "../../../utils/util";
+import util, { shuffle } from "../../../utils/util";
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast';
-import area from "../../../utils/area";
 
 const START = "START"
 const DEMO = 'DEMO'
@@ -9,10 +8,6 @@ const AGAIN = 'AGAIN'
 
 let countDownTimer = null
 let subOp = null
-let initExamItemOp = {
-    steps: null,
-    controller: null,
-}
 let demoOp = {
     steps: null,
     controller: null,
@@ -30,7 +25,7 @@ Page({
         lastScore: "",
 
         lastCorrectCount: 0,
-        checkPoints: [[6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [11, 1], [12, 1]],
+        checkPoints: [[5, 1], [6, 1], [7, 1], [8,  1], [9, 1], [10, 1]],
         currentCheckPoint: 0,
         correctCount: 0,
         optionState: false,
@@ -61,7 +56,7 @@ Page({
             })
             console.log(data)
         })
-        this.setData({examState: START,})
+        this.setData({ examState: START, })
     },
 
     showData: function () {
@@ -101,12 +96,12 @@ Page({
         let bottom = Math.pow(10, digitNum - 1)
         let top = Math.pow(10, digitNum)
         for (let i = 0; i < seqLength; i++) {
-            answer.push({num: Math.floor(Math.random() * (top - bottom)) + bottom, option: -1})
+            answer.push({ num: Math.floor(Math.random() * (top - bottom)) + bottom, option: -1 })
         }
 
         let option = []
         for (let i = 0; i < seqLength; i++) {
-            option.push({num: answer[i].num, x: 0, y: 0, pos: -1})
+            option.push({ num: answer[i].num, x: 0, y: 0, pos: -1 })
         }
 
         shuffle(option)
@@ -115,7 +110,6 @@ Page({
             answer: answer,
             areaHeight: Math.ceil(seqLength / this.data.colNum) < 2 ? 400 : Math.ceil(seqLength / this.data.colNum) * 200
         })
-
 
         this.getRect('#answer-area')
             .then(res => {
@@ -163,7 +157,7 @@ Page({
                         let areaBias = [this.data.optionAreaLeft - this.data.ansAreaLeft, this.data.optionAreaTop - this.data.ansAreaTop]
                         let optionBlankBias = [this.data.gridWidth * (index % this.data.colNum), this.data.gridHeight * Math.floor(index / this.data.colNum)]
                         let ansBlankBias = [this.data.gridWidth * (targetPos % this.data.colNum), this.data.gridHeight * Math.floor(targetPos / this.data.colNum)]
-
+                        console.log(areaBias, optionBlankBias, ansBlankBias)
                         xOff = 0 - areaBias[0] - optionBlankBias[0] + ansBlankBias[0]
                         yOff = 0 - areaBias[1] - optionBlankBias[1] + ansBlankBias[1]
                         if (pos !== -1) {
@@ -236,10 +230,10 @@ Page({
             message: '测试完成',
             onClose: () => {
                 let score = ""
-                if (correctCount === 56) score = "A"
-                else if (correctCount >= 48) score = "B"
-                else if (correctCount >= 32) score = "C"
-                else if (correctCount >= 16) score = "D"
+                if (correctCount >= 40) score = "A"
+                else if (correctCount >= 36) score = "B"
+                else if (correctCount >= 28) score = "C"
+                else if (correctCount >= 20) score = "D"
                 else score = "F"
 
                 if (this.data.entrance === "exam") {
@@ -294,9 +288,9 @@ Page({
             subOp = setInterval(() => {
                 second--;
                 if (second) {
-                    this.setData({readyTime: second});
+                    this.setData({ readyTime: second });
                 } else {
-                    this.setData({readyState: false});
+                    this.setData({ readyState: false });
                     clearInterval(subOp);
                     resolve()
                 }
@@ -351,7 +345,7 @@ Page({
                 Toast.success({
                     message: '演示完成',
                     onClose: () => {
-                        that.setData({examState: START})
+                        that.setData({ examState: START })
                     }
                 })
             }, playtime: 0
@@ -364,7 +358,7 @@ Page({
         clearTimeout(subOp)
         clearInterval(subOp)
         clearTimeout(countDownTimer)
-        this.setData({readyState: false})
+        this.setData({ readyState: false })
         Toast.clear()
         this.setData({
             examState: START

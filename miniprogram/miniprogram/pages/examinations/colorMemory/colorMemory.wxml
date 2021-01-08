@@ -15,6 +15,8 @@
     </view>
   </view>
 </van-popup>
+<van-overlay show="{{examState==='DEMO'}}" z-index="2000" custom-style="background-color: transparent;"
+             bind:click="stopDemo"/>
 <van-popup show="{{againState}}" position="bottom"
            round close-on-click-overlay="{{false}}">
   <view class="popup-content">

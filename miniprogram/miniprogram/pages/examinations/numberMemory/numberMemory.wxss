@@ -98,7 +98,7 @@
   border-radius: 0 0 12rpx 12rpx;
   background-color: #333333;
   z-index: 1;
-  transition: height 1s;
+  /*transition: height 1s;*/
 }
 
 .main-area {
@@ -108,7 +108,7 @@
   width: 100%;
   background-color: #ffffff;
   border-radius: 4rpx;
-  transition: height 1s;
+  /*transition: height 1s;*/
   overflow: hidden;
 }
 
