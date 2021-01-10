@@ -240,7 +240,8 @@ Page({
                     let pages = getCurrentPages();
                     let prevPage = pages[pages.length - 2];
                     prevPage.setData({
-                        ['examinations[7].score']: score
+                        ['examinations[7].score']: score,
+                        finishedItemCount: prevPage.data.finishedItemCount += 1
                     })
                     wx.navigateBack()
                 } else if (this.data.entrance === "training") {
@@ -316,7 +317,7 @@ Page({
         }, {
             func: () => {
                 that.initExamItem(0)
-                clearInterval(countDownTimer)
+                // clearInterval(countDownTimer)
                 Toast('你需要在一定时间内记住数字')
             }, playtime: 6000
         }, {
@@ -333,7 +334,7 @@ Page({
             func: () => {
                 let xOff = this.data.optionAreaLeft - this.data.ansAreaLeft
                 let yOff = this.data.optionAreaTop - this.data.ansAreaTop
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < 5; i++) {
                     this.setData({
                         ['option[' + i + '].x']: -xOff,
                         ['option[' + i + '].y']: -yOff,

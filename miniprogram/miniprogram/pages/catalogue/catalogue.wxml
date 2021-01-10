@@ -20,8 +20,10 @@
               <van-image height="100%" width="100%" fit="cover" class="examination-items-image"
                          src="{{'cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/' + item.frontImage}}">
               </van-image>
-              <view class="examination-items-score-label">评分</view>
-              <view class="examination-items-score">{{item.score}}</view>
+              <block wx:if="{{index !== 8}}">
+                <view class="examination-items-score-label">评分</view>
+                <view class="examination-items-score">{{item.score}}</view>
+              </block>
             </view>
           </swiper-item>
         </block>

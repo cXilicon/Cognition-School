@@ -32,6 +32,10 @@ Page({
         return barChart;
     },
 
+    onUnload: function () {
+        wx.switchTab({url: "/pages/index/index"})
+    },
+
     onLoad: function () {
         const eventChannel = this.getOpenerEventChannel()
         eventChannel.on('reportData', data => {

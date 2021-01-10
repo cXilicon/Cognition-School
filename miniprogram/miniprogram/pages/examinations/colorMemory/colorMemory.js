@@ -252,7 +252,8 @@ Page({
                             let pages = getCurrentPages();
                             let prevPage = pages[pages.length - 2];
                             prevPage.setData({
-                                ['examinations[6].score']: score
+                                ['examinations[6].score']: score,
+                                finishedItemCount: prevPage.data.finishedItemCount += 1
                             })
                            wx.navigateBack()
                           }else{

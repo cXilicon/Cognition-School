@@ -157,39 +157,27 @@ Page({
                         }
                     })
                 } else {
-                    let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
-                    // test_score = 'F'
+                    let examId = event.currentTarget.dataset.swiperId
+                    if (examId === -1) {
+                        wx.navigateTo({
+                            url: '/pages/examinations/' + this.data.examinations[examId].name_en + '/' + this.data.examinations[examId].name_en,
+                            success: res => {
+                                res.eventChannel.emit('entrance', {
+                                    entrance: 'exam',
+                                })
+                            }
+                        })
+                    } else {
+                        let test_score = ['A', 'B', 'C', 'D', 'F'][Math.floor(Math.random() * 5)]
+                        this.setData({
+                            ['examinations[' + currentExamination + '].score']: test_score,
+                        })
+                    }
                     this.setData({
-                        ['examinations[' + currentExamination + '].score']: test_score,
+                        finishedItemCount: this.data.finishedItemCount += 1
                     })
                 }
-                this.setData({
-                    finishedItemCount: this.data.finishedItemCount += 1
-                })
-            }
-            // 输出总成绩
-            if (this.data.finishedItemCount === 8) {
-                let examInfo = this.data.examinations
-                let totalScore = 0
-                examInfo.forEach(function (item) {
-                    if (item.id !== 8)
-                        totalScore += level[item.score]
-                })
-                if (totalScore >= 70)
-                    totalScore = 'S'
-                else if (totalScore >= 60)
-                    totalScore = 'A'
-                else if (totalScore >= 50)
-                    totalScore = 'B'
-                else if (totalScore >= 30)
-                    totalScore = 'C'
-                else if (totalScore >= 20)
-                    totalScore = 'D'
-                else
-                    totalScore = 'F'
-                this.setData({
-                    ['examinations[8].score']: totalScore,
-                })
+
             }
         } else {
             if (this.data.finishedItemCount === 8) {

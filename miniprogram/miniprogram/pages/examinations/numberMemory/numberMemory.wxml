@@ -64,7 +64,7 @@
         <view class="option-layer">
           <movable-view wx:for="{{option}}" x="{{item.x}}" y="{{item.y}}" class="number-grid"
                         direction="all" id="option-{{index}}" disabled="{{!optionState && canInteraction}}"
-                        bind:touchend="moveOption" data-index="{{index}}" animation="{{false}}">
+                        bind:touchend="moveOption" data-index="{{index}}" animation="{{examState==='DEMO'}}">
             <view hidden="{{!optionState}}" class="number-block option">
               {{item.num}}
             </view>
