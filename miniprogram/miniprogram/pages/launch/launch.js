@@ -6,10 +6,15 @@ const app = getApp()
 
 Page({
     data: {
-        hasUserInfo: true
+        hasUserInfo: true,
+        flag:true
     },
 
     onLoad: function (options) {
+
+
+
+
         let that = this
         wx.getSetting({
             success: res => {
@@ -21,6 +26,7 @@ Page({
                             that.setData({
                                 hasUserInfo: false
                             })
+
                         })
                         .catch(() => {
                             console.log('数据库读取错误')
@@ -33,12 +39,22 @@ Page({
                     that.setData({
                         hasUserInfo: false
                     })
+            
                 }
             }
         })
     },
 
+   
+      conceal: function () {
+        this.setData({ flag: false })
+      },
+
+
+
+
     signUp: function (e) {
+        let that=this
         if (e.detail.userInfo) {
             console.log('用户完成授权')
             console.log(e.detail)
@@ -60,6 +76,7 @@ Page({
                 })
         } else
             console.log('用户取消授权')
+        
     },
 
     // 查询数据库
