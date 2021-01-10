@@ -9,10 +9,10 @@
   
   <view class="container"  wx:if="{{flag==true}}">
     <view  class="main">
-      <view class="report-title">PASS认知评测介绍</view>
+      <view class="report-title">加入PASS评测平台</view>
   
       <view  class="ability-analysis">
-        PASS认知评测是基于智力PASS模型(Plan Attention Simultaneous Successive Processing Model)构建的，以PASS能力测试为主体功能，辅之以能力训练的模块的PASS能力测试训练小程序。您可以通过PASS认知测试小程序测试自己的PASS认知能力，得到权威的分析报告，并且通过训练提升自己的能力薄弱项。
+        PASS认知评测是基于智力PASS模型(Plan Attention Simultaneous Successive Processing Model)构建的，以PASS能力测试为主体功能，辅之以能力训练的模块的PASS能力测试训练小程序。您可以通过微信一键授权注册我们的测试平台，之后通过PASS认知测试小程序测试自己的PASS认知能力，得到权威的分析报告，并且通过训练提升自己的能力薄弱项。
       </view>
       <van-button block round custom-class="exam-button" bind:tap="conceal">
           <view class="exam-button-content">
@@ -30,7 +30,7 @@
   <van-button block custom-class="login-button" type="primary" lang="zh_CN" open-type="getUserInfo" bind:getuserinfo="signUp">
     <view class="login-button-content">
       <iconfont name="wechat" size="64"></iconfont>
-      <text>一键登陆</text>
+      <text>一键注册</text>
     </view>
   </van-button>
 
