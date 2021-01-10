@@ -49,10 +49,10 @@
 
 
 .container {
-
+  height: 75%;
   margin: 40rpx 0rpx 160rpx;
-  padding: 200rpx 40rpx;
-  position: fixed;
+  padding: 200rpx 40rpx 100rpx;
+  position:fixed;
   z-index: 100;
 }
 
@@ -136,6 +136,8 @@
 
 .main {
   display: flex;
+  flex-flow: column;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
