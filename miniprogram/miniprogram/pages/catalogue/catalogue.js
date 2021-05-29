@@ -4,6 +4,7 @@ import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
 let dateFormat = require('dateformat');
 let systemInfo = wx.getSystemInfoSync();
+let app = getApp()
 
 let level = {
     A: 10,
@@ -21,8 +22,7 @@ Page({
         examinationSwitchLock: true,
         countdownMillisecond: 0,
         finishedItemCount: 0,
-        examinations: [
-            {
+        examinations: [{
                 id: 0,
                 frontImage: 'exam-0.png',
                 backgroundImage: 'Mercury.jpeg',
@@ -115,6 +115,33 @@ Page({
         ],
     },
 
+    onShow: function () {
+        if (this.data.finishedItemCount === 8) {
+            console.log(this.data.examinations);
+            let examInfo = this.data.examinations
+            let totalScore = 0
+            examInfo.forEach(function (item) {
+                if (item.id !== 8)
+                    totalScore += level[item.score]
+            })
+            if (totalScore >= 70)
+                totalScore = 'S'
+            else if (totalScore >= 60)
+                totalScore = 'A'
+            else if (totalScore >= 50)
+                totalScore = 'B'
+            else if (totalScore >= 30)
+                totalScore = 'C'
+            else if (totalScore >= 20)
+                totalScore = 'D'
+            else
+                totalScore = 'F'
+            this.setData({
+                ['examinations[8].score']: totalScore,
+            })
+        }
+    },
+
     examinationSwiperChanged: function (event) {
         if (event.detail.source === "touch") {
             this.setData({
@@ -163,34 +190,11 @@ Page({
                         ['examinations[' + currentExamination + '].score']: test_score,
                     })
                 }
-                this.setData({
-                    finishedItemCount: this.data.finishedItemCount += 1
-                })
+                // this.setData({
+                //     finishedItemCount: this.data.finishedItemCount += 1
+                // })
             }
             // 输出总成绩
-            if (this.data.finishedItemCount === 8) {
-                let examInfo = this.data.examinations
-                let totalScore = 0
-                examInfo.forEach(function (item) {
-                    if (item.id !== 8)
-                        totalScore += level[item.score]
-                })
-                if (totalScore >= 70)
-                    totalScore = 'S'
-                else if (totalScore >= 60)
-                    totalScore = 'A'
-                else if (totalScore >= 50)
-                    totalScore = 'B'
-                else if (totalScore >= 30)
-                    totalScore = 'C'
-                else if (totalScore >= 20)
-                    totalScore = 'D'
-                else
-                    totalScore = 'F'
-                this.setData({
-                    ['examinations[8].score']: totalScore,
-                })
-            }
         } else {
             if (this.data.finishedItemCount === 8) {
                 let examInfo = this.data.examinations
@@ -209,12 +213,19 @@ Page({
                 })
 
                 // console.log(reportData)
-                wx.navigateTo({
-                    url: '/pages/settlement/settlement',
-                    success: function (res) {
-                        res.eventChannel.emit("reportData", reportData)
-                    }
-                })
+                if (app.globalData.userInfo) {
+                    wx.navigateTo({
+                        url: '/pages/settlement/settlement',
+                        success: function (res) {
+                            res.eventChannel.emit("reportData", reportData)
+                        }
+                    })
+                } else {
+                    wx.switchTab({
+                        url: "/pages/index/index"
+                    })
+                }
+
             } else {
                 Toast('还有 ' + (8 - this.data.finishedItemCount) + ' 项测试未完成');
             }
@@ -228,9 +239,9 @@ Page({
             event.detail.dx /
             (systemInfo.windowWidth - (80 / 375) * systemInfo.windowWidth);
         let currentExamination =
-            offset > 0
-                ? Math.floor(lastExamination + offset)
-                : Math.ceil(lastExamination + offset);
+            offset > 0 ?
+            Math.floor(lastExamination + offset) :
+            Math.ceil(lastExamination + offset);
         let slideInId = offset > 0 ? currentExamination + 1 : currentExamination - 1;
         let slideIn = "examinations[" + slideInId + "].style";
         let slideOut = "examinations[" + currentExamination + "].style";
@@ -254,18 +265,17 @@ Page({
         }
     },
 
-    onLoad: function (option) {
-    },
 
     exitExamination: function () {
         Dialog.confirm({
             title: '是否终止测试',
             selector: '#van-dialog',
         }).then(() => {
-            wx.switchTab({url: "/pages/index/index"})
+            wx.switchTab({
+                url: "/pages/index/index"
+            })
         }).catch(() => {
             Dialog.close()
         })
     }
 });
-

@@ -3,8 +3,7 @@ let app = getApp()
 
 Page({
     data: {
-        examinations: [
-            {
+        examinations: [{
                 id: 0,
                 image: 'Mercury.svg',
                 tag: '计划',
@@ -72,12 +71,18 @@ Page({
             db.collection('user').where({
                 _openid: '{openid}',
             }).get().then(res => {
-                let history = res.data[0].history
-                if (history.length !== 0) {
-                    that.setData({
-                        isTested: true,
-                        lockShow: false
-                    })
+                if (res.data.length !== 0) {
+                    let history = res.data[0].history
+                    if (history.length !== 0) {
+                        that.setData({
+                            isTested: true,
+                            lockShow: false
+                        })
+                    } else {
+                        that.setData({
+                            lockShow: true,
+                        })
+                    }
                 } else {
                     that.setData({
                         lockShow: true,

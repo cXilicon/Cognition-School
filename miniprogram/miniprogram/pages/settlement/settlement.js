@@ -65,8 +65,8 @@ Page({
             }
 
             this.setData({
-                name: app.globalData.user.information.userName,
-                age: app.globalData.user.information.age,
+                name: app.globalData.userInfo.information.userName,
+                age: app.globalData.userInfo.information.age,
                 totalScore: totalScore,
                 finishDate: dateFormat(data.finishTime, "yyyy-mm-dd"),
                 finishTime: dateFormat(data.finishTime, "HH:MM"),
@@ -98,27 +98,6 @@ Page({
                 console.log('测试记录已上传')
             }).catch(res => {
                 console.log('上传失败')
-            })
-
-            wx.cloud.callFunction({
-                name: 'login',
-            }).then(res => {
-                console.log(res)
-                wx.request({
-                    url: 'https://hsaeno.space:443/usertotest/add',
-                    method: 'POST',
-                    data: {
-                        finishTime: dateFormat(data.finishTime, "yyyy-mm-dd HH:MM"),
-                        scores: scoreList,
-                        userOpenID: res.result.openid,
-                    },
-                    header: {
-                        'content-type': 'application/x-www-form-urlencoded' // 默认值
-                    },
-                    success: res => {
-                        console.log(res.data)
-                    }
-                })
             })
         })
     },
@@ -221,5 +200,5 @@ let reportDataOption = {
         },
         barGap: "-100%",
         z: -10,
-    },]
+    }, ]
 };

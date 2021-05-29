@@ -116,6 +116,7 @@ Page({
             let user = {
                 information: {
                     userName: that.data.userInfo.userName,
+                    avatarUrl: that.data.userInfo.avatarUrl,
                     gender: that.data.userInfo.gender,
                     birth: new Date(that.data.userInfo.birthValue),
                     edu: that.data.userInfo.edu,
@@ -132,46 +133,22 @@ Page({
                     console.log('数据已上传')
                     user.information['avatarUrl'] = that.data.userInfo.avatarUrl
                     user.information['age'] = new Date(new Date().getTime() - user.information.birth.getTime()).getFullYear() - 1970
-                    app.globalData.user = user
+                    app.globalData.userInfo = user
                     this.setData({
                         posting: false
                     })
+                    let pages = getCurrentPages();
+                    let prevPage = pages[pages.length - 2];
+                    prevPage.setData({
+                        hasUserInfo: true
+                    })
                     wx.switchTab({
-                        url: '/pages/index/index'
+                        url: '/pages/mine/mine'
                     })
                 }).catch(() => {
                     console.log('上传失败')
                     this.setData({
                         posting: false
-                    })
-                })
-
-                wx.cloud.callFunction({
-                    name: 'login',
-                }).then(res => {
-                    console.log(res)
-                    wx.request({
-                        // url: 'https://api.hsaeno.space/user/add',
-                        url: 'https://hsaeno.space:443/user/add',
-                        method: 'POST',
-                        data: {
-                            area: user.information.area,
-                            birthday: dateFormat(user.information.birth, "yyyy-mm-dd"),
-                            education: user.information.edu,
-                            openID: res.result.openid,
-                            sex: user.information.gender,
-                            sign: '',
-                            userName: user.information.userName,
-                        },
-                        header: {
-                            'content-type': 'application/x-www-form-urlencoded' // 默认值
-                        },
-                        success: res => {
-                            console.log(res.data)
-                        },
-                        fail: res => {
-                            console.log(res)
-                        }
                     })
                 })
             } else {
@@ -185,7 +162,7 @@ Page({
                     console.log('更新成功')
                     user.information['avatarUrl'] = that.data.userInfo.avatarUrl
                     user.information['age'] = new Date(new Date().getTime() - user.information.birth.getTime()).getFullYear() - 1970
-                    app.globalData.user = user
+                    app.globalData.userInfo = user
                     this.setData({
                         posting: false
                     })
@@ -193,31 +170,6 @@ Page({
                     console.log('更新失败')
                     this.setData({
                         posting: false
-                    })
-                })
-
-                wx.cloud.callFunction({
-                    name: 'login',
-                }).then(res => {
-                    console.log(res)
-                    wx.request({
-                        url: 'https://hsaeno.space:443/user/modify',
-                        method: 'POST',
-                        data: {
-                            area: user.information.area,
-                            birthday: dateFormat(user.information.birth, "yyyy-mm-dd"),
-                            education: user.information.edu,
-                            openid: res.result.openid,
-                            sex: user.information.gender,
-                            sign: '',
-                            userName: user.information.userName,
-                        },
-                        header: {
-                            'content-type': 'application/x-www-form-urlencoded' // 默认值
-                        },
-                        success: res => {
-                            console.log(res.data)
-                        }
                     })
                 })
             }

@@ -36,23 +36,22 @@
 <view class="page">
   <scroll-view class="main" scroll-y="{{true}}">
     <van-image width="100%" height="480rpx" fit="cover" custom-class="header"
-               src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/mine_back_1.jpg">
+      src="cloud://cognition-school-3f9w80x22b0d491.636f-cognition-school-3f9w80x22b0d491-1304404556/assets/images/mine_back_1.jpg">
     </van-image>
     <view class="account-info">
       <text class="account-title">个人信息</text>
-      <view class="account-content" hover-class="account-content-hover" bind:tap="editUserInfo">
-        <van-image round
-                   width="120rpx"
-                   height="120rpx"
-                   custom-class="account-avatar"
-                   src="{{userInfo.avatarUrl}}"
-        />
+      <view wx:if="{{hasUserInfo}}" class="account-content" hover-class="account-content-hover" bind:tap="editUserInfo">
+        <van-image round width="120rpx" height="120rpx" custom-class="account-avatar" src="{{userInfo.avatarUrl}}" />
         <view class="account-description">
           <text class="account-id">{{userInfo.nickName}}</text>
-          <text
-                  class="account-tags"
-                  space="false"
-          >{{userInfo.tags}}</text>
+          <text class="account-tags" space="false">{{userInfo.tags}}</text>
+        </view>
+      </view>
+      <view wx:else class="account-content" hover-class="account-content-hover" bind:tap="signUp">
+        <van-image round width="120rpx" height="120rpx" custom-class="account-avatar" />
+        <view class="account-description">
+          <view plain class="account-id">点击登录</view>
+          <text class="account-tags" space="false">解锁测试记录与分析功能</text>
         </view>
       </view>
     </view>
@@ -70,7 +69,7 @@
         </view>
         <block wx:for="{{history}}">
           <view class="history-form-row" data-exam="{{item}}" hover-class="history-form-row-tap"
-                bind:tap="showExaminationDetail">
+            bind:tap="showExaminationDetail">
             <view class="history-form-cell history-form-cell-time">{{item.date}}</view>
             <view class="history-form-cell history-form-cell-score">{{item.totalScore}}</view>
           </view>

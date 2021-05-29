@@ -7,10 +7,10 @@ App({
         });
 
         const db = wx.cloud.database()
-        // 查询当前用户所有的 counters
         db.collection('user').where({
             _openid: '{openid}',
         }).get().then(res => {
+            console.log(res);
             this.globalData.userInfo = res.data[0]
         })
     },

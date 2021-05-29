@@ -284,7 +284,8 @@ clickNumber:function(e){
           let pages = getCurrentPages();
           let prevPage = pages[pages.length - 2];
           prevPage.setData({
-              ['examinations[3].score']: score
+              ['examinations[3].score']: score,
+              ['finishedItemCount']: prevPage.data.finishedItemCount += 1
           })
          wx.navigateBack()
         }else{

@@ -1,124 +1,125 @@
 {
-    "miniprogramRoot": "miniprogram/",
-    "cloudfunctionRoot": "cloudfunctions/",
-    "description": "项目配置文件",
-    "packOptions": {
-        "ignore": []
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": true,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
     },
-    "setting": {
-        "urlCheck": true,
-        "es6": true,
-        "enhance": false,
-        "postcss": true,
-        "preloadBackgroundData": false,
-        "minified": true,
-        "newFeature": false,
-        "coverView": true,
-        "nodeModules": true,
-        "autoAudits": false,
-        "showShadowRootInWxmlPanel": true,
-        "scopeDataCheck": false,
-        "uglifyFileName": false,
-        "checkInvalidKey": true,
-        "checkSiteMap": true,
-        "uploadWithSourceMap": true,
-        "compileHotReLoad": true,
-        "useMultiFrameRuntime": false,
-        "useApiHook": true,
-        "babelSetting": {
-            "ignore": [],
-            "disablePlugins": [],
-            "outputPath": ""
-        },
-        "enableEngineNative": false,
-        "bundle": false,
-        "useIsolateContext": true,
-        "useCompilerModule": true,
-        "userConfirmedUseCompilerModuleSwitch": false,
-        "userConfirmedBundleSwitch": true,
-        "packNpmManually": false,
-        "packNpmRelationList": [],
-        "minifyWXSS": true
+    "enableEngineNative": false,
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.17.0",
+  "appid": "wx1eb7867aa42efe8e",
+  "projectname": "miniprogram",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "scripts": {},
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {
+    "plugin": {
+      "list": []
     },
-    "compileType": "miniprogram",
-    "libVersion": "2.14.0",
-    "appid": "wx1eb7867aa42efe8e",
-    "projectname": "miniprogram",
-    "debugOptions": {
-        "hidedInDevtools": []
+    "game": {
+      "list": []
     },
-    "scripts": {},
-    "isGameTourist": false,
-    "simulatorType": "wechat",
-    "simulatorPluginLibVersion": {},
-    "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-    "condition": {
-        "plugin": {
-            "list": []
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/userInfo/userInfo",
+          "pathName": "pages/userInfo/userInfo",
+          "query": "",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "name": "pages/test/test",
+          "pathName": "pages/test/test",
+          "query": "",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
+        {
+          "name": "pages/launch/launch",
+          "pathName": "pages/launch/launch",
+          "query": "",
+          "scene": null
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "pages/userInfo/userInfo",
-                    "pathName": "pages/userInfo/userInfo",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/test/test",
-                    "pathName": "pages/test/test",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/launch/launch",
-                    "pathName": "pages/launch/launch",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/schulteGrid/schulteGrid",
-                    "pathName": "pages/examinations/schulteGrid/schulteGrid",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/catalogue/catalogue",
-                    "pathName": "pages/catalogue/catalogue",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/matrixProblem/matrixProblem",
-                    "pathName": "pages/examinations/matrixProblem/matrixProblem",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/examinations/numberMemory/numberMemory",
-                    "pathName": "pages/examinations/numberMemory/numberMemory",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/detailed/detailed",
-                    "pathName": "pages/detailed/detailed",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/settlement/settlement",
-                    "pathName": "pages/settlement/settlement",
-                    "query": "",
-                    "scene": null
-                }
-            ]
+        {
+          "name": "pages/examinations/schulteGrid/schulteGrid",
+          "pathName": "pages/examinations/schulteGrid/schulteGrid",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/catalogue/catalogue",
+          "pathName": "pages/catalogue/catalogue",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/examinations/matrixProblem/matrixProblem",
+          "pathName": "pages/examinations/matrixProblem/matrixProblem",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/examinations/numberMemory/numberMemory",
+          "pathName": "pages/examinations/numberMemory/numberMemory",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/detailed/detailed",
+          "pathName": "pages/detailed/detailed",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/settlement/settlement",
+          "pathName": "pages/settlement/settlement",
+          "query": "",
+          "scene": null
         }
+      ]
     }
+  }
 }

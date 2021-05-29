@@ -11,6 +11,7 @@ Page({
             onInit: null
         },
         examinationDetailShow: false,
+        hasUserInfo: false,
         userInfo: {
             avatarUrl: null,
             nickName: null,
@@ -40,8 +41,14 @@ Page({
     },
 
     onShow: function () {
+        if (this.data.hasUserInfo) {
+            this.getInfo()
+        }
+    },
+
+    getInfo: function () {
         let that = this
-        let userInfo = app.globalData.user.information
+        let userInfo = app.globalData.userInfo.information
         let age = userInfo.age
         let edu = userInfo.edu
         let tags = [age + '岁', '学历: ' + edu].join(' | ')
@@ -61,22 +68,24 @@ Page({
         }).get().then(res => {
             console.log('成功获取记录', res.data[0])
             let history = res.data[0].history
-            let recent = history[0]
-            for (let key in recent.score) {
-                let item = recent.score[key]
-                switch (item.category) {
-                    case "plan":
-                        getAbilityChart.dataset.source[0][1] += item.score;
-                        break;
-                    case "attention":
-                        getAbilityChart.dataset.source[1][1] += item.score;
-                        break;
-                    case "simultaneous":
-                        getAbilityChart.dataset.source[2][1] += item.score;
-                        break;
-                    case "successive":
-                        getAbilityChart.dataset.source[3][1] += item.score;
-                        break;
+            if (history.length !== 0) {
+                let recent = history[0]
+                for (let key in recent.score) {
+                    let item = recent.score[key]
+                    switch (item.category) {
+                        case "plan":
+                            getAbilityChart.dataset.source[0][1] += item.score;
+                            break;
+                        case "attention":
+                            getAbilityChart.dataset.source[1][1] += item.score;
+                            break;
+                        case "simultaneous":
+                            getAbilityChart.dataset.source[2][1] += item.score;
+                            break;
+                        case "successive":
+                            getAbilityChart.dataset.source[3][1] += item.score;
+                            break;
+                    }
                 }
             }
             that.setData({
@@ -86,8 +95,8 @@ Page({
                 },
                 history: history
             })
-        }).catch(() => {
-            console.log('获取失败')
+        }).catch((res) => {
+            console.log('获取失败', res)
         })
     },
 
@@ -141,11 +150,59 @@ Page({
             success: res => {
                 res.eventChannel.emit('wxUserInfo', {
                     type: 'edit',
-                    userInfo: app.globalData.user.information,
+                    userInfo: app.globalData.userInfo.information,
                 })
             }
         })
-    }
+    },
+
+    onLoad: function () {
+        let that = this
+        const db = wx.cloud.database()
+        db.collection('user').where({
+            _openid: '{openid}',
+        }).get().then(res => {
+            console.log(res)
+            if (res.data.length !== 0) {
+                let user = res.data[0]
+                user.information['avatarUrl'] = user.information.avatarUrl
+                user.information['age'] = new Date(new Date().getTime() - user.information.birth.getTime()).getFullYear() - 1970
+                app.globalData.userInfo = user
+                that.setData({
+                    hasUserInfo: true
+                })
+                this.getInfo()
+            } else {
+                console.log('未查询到数据');
+                that.setData({
+                    hasUserInfo: false
+                })
+            }
+        }).catch(res => {
+            console.log('数据库读取错误', res)
+            that.setData({
+                hasUserInfo: false
+            })
+        })
+    },
+
+    signUp: function (e) {
+        wx.getUserProfile({
+            desc: '用于完善用户资料',
+            lang: 'zh_CN'
+        }).then((data) => {
+            console.log(data);
+            wx.navigateTo({
+                url: '/pages/userInfo/userInfo',
+                success: res => {
+                    res.eventChannel.emit('wxUserInfo', {
+                        type: 'signUp',
+                        userInfo: data.userInfo,
+                    })
+                }
+            })
+        })
+    },
 });
 
 let colorList = ["#ec524b", "#f5b461", "#f3eac2", "#9ad3bc"];
@@ -185,8 +242,7 @@ let getAbilityChart = {
         radius: [10, "100%"],
         center: ["75%", "50%"],
     },
-    series: [
-        {
+    series: [{
             //上层的圆环
             type: "bar",
             encode: {
